@@ -417,3 +417,7 @@ input{
   }
 
 }
+
+.carousel-item{
+  min-height: 280px;
+}
