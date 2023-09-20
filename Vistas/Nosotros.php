@@ -15,7 +15,7 @@
         <link rel="icon" href="img/odontopolis.png">
         <link rel="stylesheet" type="text/css" href="./Css/style.css">
 
-        <title> Odontopolis RD </title>
+        <title>Nosotros</title>
 
     </head>   
 
@@ -36,7 +36,7 @@
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="img/ejemplo.jpg" class="d-block w-100" alt="Slide 1">
+                            <img src="../Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="Slide 1">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>First slide label</h5>
                                 <p>Some demonstrative placeholder content for the first slide.</p>
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="carousel-item">
-                            <img src="img/ejemplo.jpg" class="d-block w-100" alt="Slide 2">
+                            <img src="../Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="Slide 2">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Second slide label</h5>
                                 <p>Some demonstrative placeholder content for the second slide.</p>
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="carousel-item">
-                            <img src="img/ejemplo.jpg" class="d-block w-100" alt="Slide 3">
+                            <img src="../Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="Slide 3">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Third slide label</h5>
                                 <p>Some demonstrative placeholder content for the third slide.</p>
@@ -69,36 +69,62 @@
                     </a>
 
                 </div>
-            
+                    <br>
+                   
             </div>
+               
+                <br>
 
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card text-center ">
                             <div class="card-body shadow">
+                      <div class="container">
+                            <div class="row ">
+
+                                <div class="col-md-6">
+                                <img src="../Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="">
+                                   
+                                </div>
+
+                                <div class="col-md-6">
+                              
+                                    <p> Doña Hilda Tapas & Grill es un encantador restaurante culinario que abrió sus puertas el 26 de septiembre de 2021 con el objetivo de honrar las tradiciones gastronómicas de la República Dominicana, y los sabores españoles, creando un espacio donde la comunidad pueda disfrutar de sabores auténticos y únicos. Inspirado en el legado culinario de la señora Hilda, madre de la dueña del restaurante. Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por la cocina según las tradiciones familiares.</p>
+                                </div>
+                            </div>
+                        </div>
+                 </div>
+                <br>
+
                                 <p class="lead fw-normal mb-0 me-3 text-center">
-                                    Somos una clínica odontológica comprometida con el bienestar y la satisfacción de nuestros pacientes
+                                
                                 </p>
                                 <p class="lead fw-normal mb-0 me-3 text-center">
                                     Visitanos en:
                                 </p>
                                 <div class="container">
+                        
                                     <div class="row justify-content-center">
+                                   
                                         <div class="col-md-6">
-                                            <p class="card-texttext-center"> <b> Odontópolis RD (Gazcue) </b></p>
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15137.525808602295!2d-69.9102256!3d18.466373!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eaf8987bfdb7eaf%3A0x8306f0d2c9928bb!2sOdont%C3%B3polis%20RD%20(Gazcue)!5e0!3m2!1ses!2sdo!4v1686253846668!5m2!1ses!2sdo" 
-                                            width="500" height="300" style="border:0;" allowfullscreen="" 
-                                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                            </iframe>
+                                            <p class="card-text text-center">
+                                                
+                                            <img src="../Imagenes/LOGO.jpeg" alt="">
+                                            <b> Doña Hilda Tapas and Grill </b>
+
+                                            <br>
+                                            
+                                            Doña Hilda Tapas & Grill es un encantador restaurante culinario que abrió sus puertas el 26 de septiembre de 2021 con el objetivo de honrar las tradiciones gastronómicas de la República Dominicana, y los sabores españoles, creando un espacio donde la comunidad pueda disfrutar de sabores auténticos y únicos. Inspirado en el legado culinario de la señora Hilda, madre de la dueña del restaurante. Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por la cocina según las tradiciones familiares
+                                        </p>
+                                            
                                         </div>
+                                        <br>
                                         <div class="col-md-6">
-                                            <p class="card-text text-center"> <b> Odontópolis RD (Bani) </b></p>
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7577.012582364594!2d-70.34201381938549!3d18.27844067560724!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54da70f8e3329%3A0x29b96f5d5b3139ed!2sOdont%C3%B3polis%20RD%20(Bani)!5e0!3m2!1ses!2sdo!4v1686253679875!5m2!1ses!2sdo" 
-                                            width="500" height="300" style="border:0;" allowfullscreen="" 
-                                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                            </iframe>
+                                            <p class="card-text text-center"> <b> Doña Hilda Tapas and Grill </b></p>
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3788.5348962410844!2d-70.33613252481427!3d18.27713088276977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses-419!2sdo!4v1695172393991!5m2!1ses-419!2sdo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
