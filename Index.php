@@ -18,12 +18,12 @@
                 <nav class="navbar">
                     <ul>
                        
-                        <li> <a href="Nosotros.html">Nosotros</a></li>
+                        <li> <a href="./Vistas/Nosotros.php">Nosotros</a></li>
                        
-                        <li><a href="Contacto.html">Contacto</a></li>
+                        <li><a href="./Vistas/Contacto.php">Contacto</a></li>
                         <li><a href="#" class="logo"><img src="LOGO.jpeg" alt=""></a></li>
-                        <li><a href="Menu.html">Menu</a></li>
-                        <li><a href="Reservas.html">Reservas</a></li>
+                        <li><a href="./Vistas/Menu.php">Menu</a></li>
+                        <li><a href="./Vistas/Reservas.php">Reservas</a></li>
                     </ul>
                 </nav>
             </div>
