@@ -14,14 +14,52 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="icon" href="img/odontopolis.png">
         <link rel="stylesheet" type="text/css" href="./Css/style.css">
+        <link rel="icon" href="../Imagenes/Logo.png">
 
         <title>Nosotros</title>
 
     </head>   
 
-    <body>
+    <body style="background-color:#D5D5D5">
 
-        <article style="padding-top: 100px" id ="Inicio"> 
+    <header style="position: fixed; width: 100%; z-index: 999">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!-- Container wrapper -->
+                <div class="container" >
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand me-2" href="../index.php">
+                        <img src="../Imagenes/Logo.png" height="60" width ="60" style="margin-top: -1px;" />
+                    </a>
+                    <!-- Toggle button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation" >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                        <!-- Left links -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 350px;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../index.php"> Inicio </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Menu.php"> Menu </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Reservas.php"> Reserva </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Contacto.php"> Contacto </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Collapsible wrapper -->
+                </div>
+                <!-- Container wrapper -->
+            </nav>
+        </header>
+
+        <article style="padding-top:  90px"> 
 
             <div class="container-lg my-15">
 
@@ -79,52 +117,33 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card text-center ">
-                            <div class="card-body shadow">
-                      <div class="container">
-                            <div class="row ">
-
-                                <div class="col-md-6">
-                                <img src="../Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="">
-                                   
-                                </div>
-
-                                <div class="col-md-6">
-                              
-                                    <p> Doña Hilda Tapas & Grill es un encantador restaurante culinario que abrió sus puertas el 26 de septiembre de 2021 con el objetivo de honrar las tradiciones gastronómicas de la República Dominicana, y los sabores españoles, creando un espacio donde la comunidad pueda disfrutar de sabores auténticos y únicos. Inspirado en el legado culinario de la señora Hilda, madre de la dueña del restaurante. Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por la cocina según las tradiciones familiares.</p>
-                                </div>
-                            </div>
-                        </div>
-                 </div>
-                <br>
-
-                                <p class="lead fw-normal mb-0 me-3 text-center">
-                                
-                                </p>
-                                <p class="lead fw-normal mb-0 me-3 text-center">
-                                    Visitanos en:
-                                </p>
+                            <div class="card-body shadow" style="background-color:#FFEC6F">
                                 <div class="container">
-                        
-                                    <div class="row justify-content-center">
-                                   
+                                    <div class="row ">
                                         <div class="col-md-6">
-                                            <p class="card-text text-center">
-                                                
-                                            <img src="../Imagenes/LOGO.jpeg" alt="">
-                                            <b> Doña Hilda Tapas and Grill </b>
-
+                                            <img src="../Imagenes/LOGO.png" class="d-block w-100" alt="">
+                                        </div>
+                                    
+                                        <div class="col-md-6">
                                             <br>
-                                            
-                                            Doña Hilda Tapas & Grill es un encantador restaurante culinario que abrió sus puertas el 26 de septiembre de 2021 con el objetivo de honrar las tradiciones gastronómicas de la República Dominicana, y los sabores españoles, creando un espacio donde la comunidad pueda disfrutar de sabores auténticos y únicos. Inspirado en el legado culinario de la señora Hilda, madre de la dueña del restaurante. Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por la cocina según las tradiciones familiares
-                                        </p>
-                                            
+                                            <br>
+                                            <p> 
+                                                <strong> 
+                                                    Doña Hilda Tapas & Grill
+                                                </strong>
+                                            </p>
+                                            <br>
+                                            <p class="lead" style="text-align: justify;"> <b> Es un encantador restaurante culinario 
+                                                que abrió sus puertas el 26 de septiembre de 2021 con el objetivo 
+                                                de honrar las tradiciones gastronómicas de la República Dominicana, 
+                                                y los sabores españoles, creando un espacio donde la comunidad pueda 
+                                                disfrutar de sabores auténticos y únicos. Inspirado en el legado 
+                                                culinario de la señora Hilda, madre de la dueña del restaurante. 
+                                                Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por 
+                                                la cocina según las tradiciones familiares. </b>
+                                            </p>
+
                                         </div>
-                                        <br>
-                                        <div class="col-md-6">
-                                            <p class="card-text text-center"> <b> Doña Hilda Tapas and Grill </b></p>
-                                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3788.5348962410844!2d-70.33613252481427!3d18.27713088276977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses-419!2sdo!4v1695172393991!5m2!1ses-419!2sdo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                        </div>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +151,137 @@
                     </div>
                 </div>
             </div>     
-      
+            <br>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card text-center ">
+                            <div class="card-body shadow" style="background-color:#D5D5D5">
+                                <div class="container">
+                                    <div class="row ">
+                                        <div class="col-md-4">
+                                            <br>
+                                            <br>
+                                            <p> 
+                                                <strong> 
+                                                    Misión
+                                                </strong>
+                                            </p>
+                                            <br>
+                                            <p class="lead" style="text-align: justify;"> <b> Es un encantador restaurante culinario 
+                                                que abrió sus puertas el 26 de septiembre de 2021 con el objetivo 
+                                                de honrar las tradiciones gastronómicas de la República Dominicana, 
+                                                y los sabores españoles, creando un espacio donde la comunidad pueda 
+                                                disfrutar de sabores auténticos y únicos. </b>
+                                            </p>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <br>
+                                            <br>
+                                            <p> 
+                                                <strong> 
+                                                    Visión
+                                                </strong>
+                                            </p>
+                                            <br>
+                                            <p class="lead" style="text-align: justify;"> <b> Es un encantador restaurante culinario 
+                                                que abrió sus puertas el 26 de septiembre de 2021 con el objetivo 
+                                                de honrar las tradiciones gastronómicas de la República Dominicana, 
+                                                y los sabores españoles, creando un espacio donde la comunidad pueda 
+                                                disfrutar de sabores auténticos y únicos. </b>
+                                            </p>
+
+                                        </div>
+                                    
+                                        <div class="col-md-4">
+                                            <br>
+                                            <br>
+                                            <p> 
+                                                <strong> 
+                                                    Valores
+                                                </strong>
+                                            </p>
+                                            <br>
+                                            <p class="lead" style="text-align: justify;"> <b> Es un encantador restaurante culinario 
+                                                que abrió sus puertas el 26 de septiembre de 2021 con el objetivo 
+                                                de honrar las tradiciones gastronómicas de la República Dominicana, 
+                                                y los sabores españoles, creando un espacio donde la comunidad pueda 
+                                                disfrutar de sabores auténticos y únicos. </b>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+            <br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card text-center ">
+                            <div class="card-body shadow" style="background-color:#FFEC6F">
+                                <div class="container">
+                                    <div class="row ">
+                                        <p> 
+                                            <strong> 
+                                                Visitanos en:
+                                            </strong>
+                                        </p>
+                                        <div class="col-md-6 mapa-responsive">
+                                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+            <br>
         </article>
+
+        <!-- Footer -->
+        <footer class="text-center text-white" style="background-color:#000000">
+            <!-- Grid container -->
+            <div class="container p-4">
+
+                <!-- Section: Text -->
+                <section class="mb-4">
+                    <p>
+                        Eslogan
+                    </p>
+                    </section>
+                    <!-- Section: Text -->
+                <!-- Section: Social media -->
+                <section class="mb-4">
+
+                <!-- Facebook -->
+                <a href="#!" role="button"><i class="fa fa-facebook-square" style="font-size:36px; background-color: #FFFFFF;"></i
+                ></a>
+
+                <!-- Instagram -->
+                <a href="#!" role="button"><i class="fa fa-instagram" style="font-size:36px; background-color: #FFFFFF;"></i
+                ></a>
+
+                </section>
+                <!-- Section: Social media -->
+
+
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: #000000;">
+                © 2023 Copyright: Doña Hilda
+            </div>
+            <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
     </body>
 </html>
