@@ -247,7 +247,7 @@
         </article>
 
         <!-- Footer -->
-        <footer class="text-center text-white" style="background-color:#000000">
+        <footer class="text-center text-white" style="background-color:#FFFFFF">
             <!-- Grid container -->
             <div class="container p-4">
 
@@ -266,9 +266,7 @@
                 ></a>
                 
                  <!-- WhatsApp -->
-                 <img src="../Imagenes/image.svg" alt="">
-                <a href="#!" role="button"><i class="fa fa-whatsapp" style="font-size:36px; background-color: #FFFFFF;"></i
-                ></a>
+                <a href="#!" role="button"><i class="fa fa-whatsapp" style="font-size:36px; background-color: #FFFFFF;"></i ></a>
                 
                 <!-- Instagram -->
                 <a href="#!" role="button"><i class="fa fa-instagram" style="font-size:36px; background-color: #FFFFFF;"></i
@@ -283,8 +281,9 @@
             <!-- Grid container -->
 
             <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: #000000;">
-                © 2023 Copyright: Doña Hilda
+            <div class="text-center p-3" style="background-color: #D5D5D5;">
+                 
+               <P style= "text-color:black">© 2023 Copyright: Doña Hilda  </P>
             </div>
             <!-- Copyright -->
             </footer>
