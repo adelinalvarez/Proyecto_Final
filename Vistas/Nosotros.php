@@ -20,7 +20,7 @@
 
     </head>   
 
-    <body style="background-color:#D5D5D5">
+    
 
     <header style="position: fixed; width: 100%; z-index: 999">
             <!-- Navbar -->
@@ -264,11 +264,17 @@
                 <!-- Facebook -->
                 <a href="#!" role="button"><i class="fa fa-facebook-square" style="font-size:36px; background-color: #FFFFFF;"></i
                 ></a>
-
+                
+                 <!-- WhatsApp -->
+                 <img src="../Imagenes/image.svg" alt="">
+                <a href="#!" role="button"><i class="fa fa-whatsapp" style="font-size:36px; background-color: #FFFFFF;"></i
+                ></a>
+                
                 <!-- Instagram -->
                 <a href="#!" role="button"><i class="fa fa-instagram" style="font-size:36px; background-color: #FFFFFF;"></i
                 ></a>
-
+                
+               
                 </section>
                 <!-- Section: Social media -->
 
