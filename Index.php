@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Restaurante Doña Hilda</title>
-    <link rel="stylesheet" href="Css/style.css">
+    <head>
 
-</head>
-<body>
-     <header class="header">
-             <div class="menu container">
-                
-                <label for="menu">
-                <img src="images/menu.png" class="menu-icono" alt="menu">
-                </label>
-                <nav class="navbar">
+        <title>Doña Hilda Tapas and Grill</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <!-- Vendor CSS Files -->
+        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <!-- Template Main CSS File -->
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link rel="icon" href="Imagenes/Logo.png">
+
+    </head>
+
+    <body>
+        <br>
+        <!-- ======= Header ======= -->
+        <header id="header" class="fixed-top " style="background-color: #FFEC6F">
+            <div class="container d-flex align-items-center">
+                <h1 class="logo me-auto"><a href="index.html"> <img src="Imagenes/Logo.png"></a></h1>
+                <nav id="navbar" class="navbar">
                     <ul>
-                       
-                        <li> <a href="./Vistas/Nosotros.php">Nosotros</a></li>
-                       
-                        <li><a href="./Vistas/Contacto.php">Contacto</a></li>
-                        <li><a href="#" class="logo"><img src="LOGO.jpeg" alt=""></a></li>
-                        <li><a href="./Vistas/Menu.php">Menu</a></li>
-                        <li><a href="./Vistas/Reservas.php">Reservas</a></li>
+                        <li><a class="nav-link scrollto" href="Index.php">Inicio</a></li>
+                        <li><a class="nav-link scrollto" href="Vistas/Nosotros.php">Nosotros</a></li>
+                        <li><a class="nav-link scrollto" href="Vistas/Menu.php">Menu</a></li>
+                        <li><a class="nav-link scrollto" href="Vistas/Reservas.php">Reserva</a></li>
+                        <li><a class="nav-link   scrollto" href="Vistas/Contacto.php">Contacto</a></li>
+                        <li><a class="getstarted scrollto" href="#about">Iniciar Sesión</a></li>
                     </ul>
-                </nav>
-            </div>
-            <br>
-            
-            <div class="header-content container">
-                <div class="header-img">
-                    <img src="" alt="">
-                </div>
-                <div class="header-txt">
-                    <h1>Doña Hilda</h1>
-                    <p>Doña Hilda Tapas & Grill es un encantador restaurante culinario que abrió sus puertas el 26 de septiembre de 2021 con el objetivo de honrar las tradiciones gastronómicas de la República Dominicana, y los sabores españoles, creando un espacio donde la comunidad pueda disfrutar de sabores auténticos y únicos. Inspirado en el legado culinario de la señora Hilda, madre de la dueña del restaurante. Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por la cocina según las tradiciones familiares.</p>
-                </div>
-               
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
             </div>
         </header>
+        <!-- End Header -->
 
         <section class="popular">
 

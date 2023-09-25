@@ -2,13 +2,9 @@
 <html lang="en">
 
     <head>
-        <title>Contacto</title>
+        <title>Doña Hilda Tapas and Grill</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
-
-        <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -30,29 +26,24 @@
 
     <body>
         <br>
-
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top " style="background-color: #FFEC6F">
             <div class="container d-flex align-items-center">
-
-            <h1 class="logo me-auto"><a href="index.html"> <img src="../Imagenes/Logo.png"></a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-            <nav id="navbar" class="navbar">
-                <ul>
-                <li><a class="nav-link scrollto" href="#hero">Inicio</a></li>
-                <li><a class="nav-link scrollto" href="Nosotros.php">Nosotros</a></li>
-                <li><a class="nav-link scrollto" href="#about">Menu</a></li>
-                <li><a class="nav-link scrollto" href="#services">Reserva</a></li>
-                <li><a class="nav-link   scrollto" href="#portfolio">Contacto</a></li>
-                <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
+                <h1 class="logo me-auto"><a href="index.html"> <img src="../Imagenes/Logo.png"></a></h1>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="../Index.php">Inicio</a></li>
+                        <li><a class="nav-link scrollto" href="Nosotros.php">Nosotros</a></li>
+                        <li><a class="nav-link scrollto" href="Menu.php">Menu</a></li>
+                        <li><a class="nav-link scrollto" href="Reservas.php">Reserva</a></li>
+                        <li><a class="nav-link   scrollto" href="Contacto.php">Contacto</a></li>
+                        <li><a class="getstarted scrollto" href="#about">Iniciar Sesión</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav><!-- .navbar -->
             </div>
-        </header><!-- End Header -->
+        </header>
+        <!-- End Header -->
 
         <main id="main">
 
@@ -138,9 +129,9 @@
                         <h4>Our Social Networks</h4>
                         <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
                         <div class="social-links mt-3">
-                        <a href="#" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
-                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bx bxl-instagram"></i></a>
                         </div>
                     </div>
 
@@ -154,10 +145,11 @@
 
             <div class="container footer-bottom clearfix">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>
                 </div>
             </div>
-        </footer><!-- End Footer -->
+        </footer>
+        <!-- End Footer -->
 
         <!-- Vendor JS Files -->
         <script src="../assets/vendor/aos/aos.js"></script>
