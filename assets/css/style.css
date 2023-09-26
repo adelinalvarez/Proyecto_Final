@@ -1812,4 +1812,7 @@ section {
     padding-top: 4px;
   }
 }
+.carousel-item{
+  min-height: 280px;
+}
 
