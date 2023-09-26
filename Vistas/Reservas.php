@@ -46,33 +46,85 @@
             <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact">
                 <div class="container" data-aos="fade-up">
+                    <br>
+                    <div class="section-title">
+                      <h2>Reserva</h2>
+                    </div>
                     <div class="row">
                         <div class="col-lg-15 mt-5 mt-lg-0 d-flex align-items-stretch">
                             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                                 <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="name">Nombre</label>
-                                        <input type="text" name="name" class="form-control" id="name" required>
+                                    <div class="form-group col-md-4">
+                                        <label for="name"><b>Nombre Completo:</b></label>
+                                        <input type="text" name="name" class="form-control" id="name" required Placeholder="Ingrese su nombre">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="name">Correo</label>
-                                        <input type="email" class="form-control" name="email" id="email" required>
+                                    <div class="form-group col-md-4">
+                                        <label for="name"><b>Correo:</b></label>
+                                        <input type="email" class="form-control" name="email" id="email" required Placeholder="Ingrese su correo electronico">
                                     </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="name"><b>Celular:</b></label>
+                                        <input type="email" class="form-control" name="email" id="email" required  Placeholder="Ingresar numero de celular">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="name"><b>Cantidad de personas:</b></label>
+                                        <input type="number" class="form-control" name="email" id="email" required  Placeholder="Ingresar cantidad de personas">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="name"><b>Fecha:</b></label>
+                                        <input type="date" class="form-control" name="fecha" id="fecha" required  Placeholder="dd/mm/aa">
+                                        
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="name"><b>Hora:</b></label>
+                                        <select class="form-control" name="Hora" id="Hora" required>
+                                            <option value="" >Seleccione la hora</option >
+                                            <option value="10:00 AM" >10:00 AM </option >
+                                            <option value="11:00 AM">11:00 AM </option >
+                                            <option value="12:00 PM">12:00 PM </option >
+                                            <option value="01:00 PM">01:00 PM </option >
+                                            <option value="02:00 PM">02:00 PM </option >
+                                            <option value="03:00 PM">03:00 PM </option >
+                                            <option value="04:00 PM">04:00 PM </option >
+                                            <option value="05:00 PM">05:00 PM </option >
+                                            <option value="06:00 PM">06:00 PM </option >
+                                            <option value="07:00 PM">07:00 PM </option >
+                                            <option value="08:00 PM">08:00 PM </option >
+                                            <option value="09:00 PM">09:00 PM </option >
+                                            <option value="10:00 PM">10:00 PM </option >
+                                        </select>
+  
+                                </div>
+                                <div class="form-group col-md-6">
+                                        <label for="name"><b>Tipo de Evento:</b></label>
+                                        <select class="form-control" name="Hora" id="Hora" required>
+                                            <option value="" >Seleccione el tipo de evento</option>
+                                            <option value="Reservar normal" >Reservar normal </option>
+                                            <option value="Cumpleaños">Cumpleaños </option>
+                                            <option value="Boda">Boda </option>
+                                            <option value="Reunion">Reunion</option >
+                                        </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                        <label for="name"><b>Area de reservacion:</b></label>
+                                        <select class="form-control" name="Hora" id="Hora" required>
+                                            <option value="" >Seleccione area de reservacion</option>
+                                            <option value="Sala VIP" >Sala VIP </option>
+                                            <option value="Terraza">Terraza</option>
+
+                                        </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Asunto</label>
-                                    <input type="text" class="form-control" name="subject" id="subject" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Mensaje</label>
-                                    <textarea class="form-control" name="message" rows="10" required></textarea>
+                                    <label for="name"><b>Descripcion de la reservacion</b></label>
+                                    <textarea class="form-control" name="message" rows="10" required Placeholder="Ingresar la descripcion de la reserva"></textarea>
                                 </div>
                                 <div class="my-3">
                                     <div class="loading">Cargando</div>
                                     <div class="error-message"></div>
-                                    <div class="sent-message">Enviado correctamente</div>
+                                    <div class="sent-message">Solicitud de reserva enviada</div>
                                 </div>
-                                <div class="text-center" ><button type="submit" style="background-color: #FFEC6F; color: black">Enviar</button></div>
+                                <div class="text-center" ><button type="submit" style="background-color: #FFEC6F; color: black"><b>Reservar</b></button></div>
+                                
                             </form>
                         </div>
 

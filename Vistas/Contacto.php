@@ -29,6 +29,7 @@
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top " style="background-color: #FFEC6F">
             <div class="container d-flex align-items-center">
+                
                 <h1 class="logo me-auto"><a href="index.html"> <img src="../Imagenes/Logo.png"></a></h1>
                 <nav id="navbar" class="navbar">
                     <ul>
@@ -50,7 +51,10 @@
             <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact">
                 <div class="container" data-aos="fade-up">
-
+                    <br>
+                    <div class="section-title">
+                      <h2>Contáctanos</h2>
+                    </div>
 
                     <div class="row">
 
@@ -82,20 +86,20 @@
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                         <div class="row">
                             <div class="form-group col-md-6">
-                            <label for="name">Nombre</label>
+                            <label for="name"><b>Nombre Completo:</b></label>
                             <input type="text" name="name" class="form-control" id="name" required>
                             </div>
                             <div class="form-group col-md-6">
-                            <label for="name">Correo</label>
+                            <label for="name"><b>Correo:</b></label>
                             <input type="email" class="form-control" name="email" id="email" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="name">Asunto</label>
+                            <label for="name"><b>Asunto:</b></label>
                             <input type="text" class="form-control" name="subject" id="subject" required>
                         </div>
                         <div class="form-group">
-                            <label for="name">Mensaje</label>
+                            <label for="name"><b>Mensaje:</b></label>
                             <textarea class="form-control" name="message" rows="10" required></textarea>
                         </div>
                         <div class="my-3">
@@ -103,7 +107,7 @@
                             <div class="error-message"></div>
                             <div class="sent-message">Enviado correctamente</div>
                         </div>
-                        <div class="text-center" ><button type="submit" style="background-color: #FFEC6F; color: black">Enviar</button></div>
+                        <div class="text-center" ><button type="submit" style="background-color: #FFEC6F; color: black"><b>Enviar</b></button></div>
                         </form>
                     </div>
 
