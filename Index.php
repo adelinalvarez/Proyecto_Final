@@ -41,7 +41,25 @@
             </div>
         </header>
         <!-- End Header -->
+  <!--Video Section-->
 
+    <section class="content-section video-section fables-after-overlay">
+        <div class="pattern-overlay">
+            <video width="100%" controls autoplay>
+                <source src="../Video_inicio.mp4">
+                Tu navegador no soporta la reproducción de video.
+            </video>
+            <div class="container position-relative z-index">
+                <div class="fables-video-caption text-center wow zoomIn" data-wow-delay="1s" data-wow-duration="2s">
+                    <h1 class="white-color font-weight-bold mt-6">Somos una agencia de productos digitales de servicio completo</h1>  
+                    <p class="fables-fifth-text-color mt-3 mb-4 font-18">
+                        Somos una agencia de productos digitales de servicio completo
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--Video Section Ends Here--> 
         <section class="popular">
 
             <div class="popular-content container">
