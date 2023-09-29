@@ -1815,28 +1815,8 @@ section {
   min-height: 280px;
 }
 
-.video-section .pattern-overlay {
-  padding: 10px 0 50px;
-}
-.fables-video-caption {
-  margin-top: 0;
-}
-.fables-iconplay:before {
-  content: "\e93a";
-}
-.video-section {
-  position: relative;
-  width: 100%;
-  height: 600px; /* Ajusta la altura según tus necesidades */
-  overflow: hidden;
-}
 
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
+.carousel{
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* Coloca el video detrás del contenido */
+  height: 100vh; /* Esto hace que el carrusel ocupe toda la altura de la ventana (viewport) */
 }
