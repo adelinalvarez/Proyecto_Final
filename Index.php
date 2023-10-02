@@ -8,6 +8,18 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="icon" href="Imagenes/Logo.png">
         <link href="assets/css/style.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <!-- Template Main CSS File -->
+        <link href="assets/css/main.css" rel="stylesheet">
+        <!-- Vendor CSS Files -->
+        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    
 
     </head>
     <body>
@@ -67,35 +79,52 @@
         <!-- End Carousel -->   
 
         <main id="main">
-            <!-- ======= About Us Section ======= -->
-            <section id="about" class="about">
+
+            <!-- ======= Gallery Section ======= -->
+            <section id="gallery" class="gallery section-bg">
                 <div class="container" data-aos="fade-up">
-                    <div class="section-title">
-                        <h2>Doña Hilda Tapas & Grill</h2>
+
+                    <div class="section-header">
+                    <h2>gallery</h2>
+                    <p>Check <span>Our Gallery</span></p>
                     </div>
-                    <div class="row content">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-12">
-                                    ..
-                                </div>
-                            </div>
-                        </div> 
+
+                    <div class="gallery-slider swiper">
+                    <div class="swiper-wrapper align-items-center">
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-1.jpg"><img src="assets/galeria/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-2.jpg"><img src="assets/galeria/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-3.jpg"><img src="assets/galeria/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-4.jpg"><img src="assets/galeria/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-5.jpg"><img src="assets/galeria/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-6.jpg"><img src="assets/galeria/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-7.jpg"><img src="assets/galeria/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
+                        <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/galeria/gallery/gallery-8.jpg"><img src="assets/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
                     </div>
+                    <div class="swiper-pagination"></div>
+                    </div>
+
                 </div>
             </section>
-            <!-- End About Us Section -->
+            <!-- End Gallery Section -->
 
-            <!-- ======= Frequently Asked Questions Section ======= -->
-            <section id="faq" class="faq section-bg">
-                <div class="container" data-aos="fade-up">
-                    <div class="section-title">
-                        <h2>Preguntas Frecuentes</h2>
-                        
-                    </div>
 
-                </div>
-            </section><!-- End Frequently Asked Questions Section -->
+            <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right" data-aos-delay="100">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+
+          </div>
+          <div class="col-lg-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="#">Call To Action</a>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Cta Section -->
+
 
         </main>
         <!-- End #main -->
@@ -145,6 +174,5 @@
         <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
         <script src="assets/vendor/php-email-form/validate.js"></script>
         <script src="assets/js/main.js"></script>
-    
     </body>
 </html>
