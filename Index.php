@@ -1,69 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
-
         <title>Doña Hilda Tapas and Grill</title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-        <!-- Vendor CSS Files -->
-        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <!-- Carrusel -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-        <link href="assets/css/style.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="icon" href="Imagenes/Logo.png">
-        <style>
-        /* Estilos para el carrusel */
-        .carousel {
-            width: 100%;
-            height: 100vh; /* Pantalla completa */
-        }
+        <link href="assets/css/style.css" rel="stylesheet">
 
-        .carousel-inner {
-            height: 100%;
-        }
-
-        .carousel-item {
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            margin:0;
-            padding:0;
-          
-        }
-
-        /* Estilos para el contenido de las diapositivas */
-        .carousel-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        
-        }
-       
-
-        h2 {
-            font-size: 2.5rem;
-        }
-
-        p {
-            font-size: 1.5rem;
-        }
-    </style>
-    
     </head>
-
     <body>
-        <br>
+
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top " style="background-color: #FFEC6F">
             <div class="container d-flex align-items-center">
@@ -82,173 +30,121 @@
             </div>
         </header>
         <!-- End Header -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Diapositivas del Carrusel -->
-        <div class="carousel-inner">
-            <!-- Diapositiva 1 -->
-            <div class="carousel-item active">
-                <img src="Imagenes/Local/Nosotros.jpeg" class="d-block w-100" alt="Slide 1">
-                <div class="carousel-content">
-                    <h2>Diapositiva 1</h2>
-                    <p>Contenido de la primera diapositiva.</p>
+
+        <!-- ======= Carousel Section ======= -->
+        <section style="background-size: 100% 100%; background-repeat: no-repeat; min-height: 600px;">
+            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="Imagenes/Local/Privado2.jpg" alt="Los Angeles" class="d-block" style="width:100%">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="Imagenes/Local/Privado2.jpg" alt="Chicago" class="d-block" style="width:100%">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="Imagenes/Local/Privado2.jpg" alt="New York" class="d-block" style="width:100%">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            
+        </section>
+        <!-- End Carousel -->   
+
+        <main id="main">
+            <!-- ======= About Us Section ======= -->
+            <section id="about" class="about">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-title">
+                        <h2>Doña Hilda Tapas & Grill</h2>
+                    </div>
+                    <div class="row content">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    ..
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </section>
+            <!-- End About Us Section -->
+
+            <!-- ======= Frequently Asked Questions Section ======= -->
+            <section id="faq" class="faq section-bg">
+                <div class="container" data-aos="fade-up">
+                    <div class="section-title">
+                        <h2>Preguntas Frecuentes</h2>
+                        
+                    </div>
+
+                </div>
+            </section><!-- End Frequently Asked Questions Section -->
+
+        </main>
+        <!-- End #main -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 footer-contact">
+                    <h3>Doña Hilda Tapas and Grill</h3>
+                    <p>
+                    A108 Adam Street <br>
+                    New York, NY 535022<br>
+                    United States <br><br>
+                    <strong>Phone:</strong> +1 5589 55488 55<br>
+                    <strong>Email:</strong> info@example.com<br>
+                    </p>
+                </div>
+                                
+                <div class="col-lg-6 col-md-6 footer-links">
+                    <h4>Our Social Networks</h4>
+                    <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <div class="social-links mt-3">
+                    <a href="https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bx bxl-instagram"></i></a>
                 </div>
             </div>
 
-            <!-- Diapositiva 2 -->
-            <div class="carousel-item">
-                <img src="Imagenes/Local/Nosotros.jpeg" class="d-block w-100" alt="Slide 2">
-                <div class="carousel-content">
-                    <h2>Diapositiva 2</h2>
-                    <p>Contenido de la segunda diapositiva.</p>
-                </div>
-            </div>
-
-            <!-- Diapositiva 3 -->
-            <div class="carousel-item">
-                <img src="Imagenes/Local/Nosotros.jpeg" class="d-block w-100" alt="Slide 3">
-                <div class="carousel-content">
-                    <h2>Diapositiva 3</h2>
-                    <p>Contenido de la tercera diapositiva.</p>
-                </div>
             </div>
         </div>
 
-        <!-- Controles del Carrusel -->
-        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
-        </a>
-    </div>
-
-    <!-- Scripts de Bootstrap y jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- JavaScript para carrusel automático -->
-    <script>
-        $(document).ready(function() {
-            // Iniciar el carrusel y configurar la transición
-            $('#myCarousel').carousel({
-                interval: 5000, // Cambia la imagen cada 5 segundos (5000 ms)
-                pause: false, // No pausar en interacción del usuario
-                wrap: true // Vuelve al principio después de la última diapositiva
-            });
-        });
-    </script>
-
-    </script>
-        <section class="popular">
-
-            <div class="popular-content container">
-                <h2>Un espacio para compratir  y pasar lindos momentos</h2>
-
-                <p>Doña Hilda Tapas and Grill, cuenta con una terraza al aire libre y también con un espacio más privado con un área cerrada con aire acondicionado brinda comodidad sin sacrificar la atmósfera con luces tenues y la decoración cuidadosamente elegida que crean un ambiente elegante y acogedor, este lugar es perfecto para cenas más formales, reuniones especiales, también tiene la opción de bufé y la opción a la carta inspiradas en la cocina dominicana y sabores españoles. también cuenta con el mini bar ofrece una selección de cócteles y bebidas para acompañar la experiencia. !</p>
-                <div class="popular-pl">
-                    <div class="popular-1">
-                        <img src="Doña Hilda/Local/Airelibre.jpeg" alt="">
-                        <h3>Al aire libre</h3>
-                        <p>
-                            ipsum, dolor sit amet consectetur ad
-                        </p>
-                    </div>
-
-                    <div class="popular-1">
-                        <img src="Doña Hilda/Local/Privado.jpeg" alt="">
-                        <h3>Un espacio mas privado</h3>
-                        <p>
-                            ipsum, dolor sit amet consectetur adi
-                        </p>
-                    </div>
-
-                    <div class="popular-1">
-                        <img src="Doña Hilda/Local/HildaExpress.jpeg" alt="">
-                        <h3>Hilda Express </h3>
-                        <p>
-                            ipsum, dolor sit amet consectetur ad
-                        </p>
-                    </div>
-
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+            <div class="container footer-bottom clearfix">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>
                 </div>
             </div>
-        </section>
+        </footer><!-- End Footer -->
+        <!-- Footer -->
 
-        <section class="about">
-
-            
-
-            <div class="about-content container">
-                <div class="about-img">
-                    <img src="Doña Hilda/Local/Nosotros.jpeg" alt="">
+        <!-- Vendor JS Files -->
+        <script src="assets/vendor/aos/aos.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+        <script src="assets/vendor/php-email-form/validate.js"></script>
+        <script src="assets/js/main.js"></script>
     
-                </div>
-    
-                <div class="about-txt">
-                    <h2>Nosotros</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam et exercitationem soluta ab neque omnis rerum temporibus nobis, quaerat cum tenetur, quae aliquid velit laudantium labore quisquam, consequuntur molestias excepturi?</p>
-                    <a href="#" class="btn-1">Informacion</a>
-    
-                </div>
-            </div>
-            
-            
-        </section>
-
-        <section class="number">
-
-            <div class="number-container container">
-                <h2>Menu</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, maiores adipisci ab minima eius obcaecati totam cum quasi sint animi numquam iste recusandae eos odit molestiae eaque cupiditate aliquid fugit.</p>
-
-                <div class="number-box">
-                    <div class="number-circle">
-                    
-                        <a href="Menu.html"> A la carta</a>
-                    </div>
-
-                    <div class="number-circle">
-                        <a href="Menu.html">Bebidas</a>
-                      
-                    </div>
-
-                    <div class="number-circle">
-                        <a href="Menu.html">Buffet</a>
-                       
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="contact">
-
-            <div class="contact-content container">
-                <h2>Contacto</h2>
-                <p>Lorem ip.</p>
-
-                <form>
-                    <input type="text" placeholder="Escriba su correo aqui">
-                    <input type="submit" value="Enviar" class="btn-2">
-                </form>
-            </div>
-        </section>
-        <footer class="footer">
-            <div class="footer-content container">
-                <div class="link">
-                    <h3>Redes sociales</h3>
-                    <ul>
-                        <li><a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==">Instagram</a></li>
-                        <li><a href="https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0
-                            ">WhatsApp</a></li>
-                        <li><a href="https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL">Facebook</a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
-</body>
+    </body>
 </html>
