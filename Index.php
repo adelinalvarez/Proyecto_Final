@@ -15,10 +15,51 @@
         <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
         <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
         <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <!-- Template Main CSS File -->
+        <!-- Carrusel -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
         <link href="assets/css/style.css" rel="stylesheet">
         <link rel="icon" href="Imagenes/Logo.png">
+        <style>
+        /* Estilos para el carrusel */
+        .carousel {
+            width: 100%;
+            height: 100vh; /* Pantalla completa */
+        }
 
+        .carousel-inner {
+            height: 100%;
+        }
+
+        .carousel-item {
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            margin:0;
+            padding:0;
+          
+        }
+
+        /* Estilos para el contenido de las diapositivas */
+        .carousel-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        
+        }
+       
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+        }
+    </style>
+    
     </head>
 
     <body>
@@ -41,55 +82,67 @@
             </div>
         </header>
         <!-- End Header -->
-        <article style="padding-top:  90px"> 
-            <div class="section-title">
-                <h2>Nosotros</h2>
-            </div>
-            <div class="container-lg my-15">
-                <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-                        <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-                        <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-                    </ol>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="Slide 1">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
-                                <p>Some demonstrative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="Slide 2">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some demonstrative placeholder content for the second slide.</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="Imagenes/Local/Airelibre.jpeg" class="d-block w-100" alt="Slide 3">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some demonstrative placeholder content for the third slide.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel controls -->
-                    <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Diapositivas del Carrusel -->
+        <div class="carousel-inner">
+            <!-- Diapositiva 1 -->
+            <div class="carousel-item active">
+                <img src="Imagenes/Local/Nosotros.jpeg" class="d-block w-100" alt="Slide 1">
+                <div class="carousel-content">
+                    <h2>Diapositiva 1</h2>
+                    <p>Contenido de la primera diapositiva.</p>
                 </div>
-                <br>
             </div>
-                 
-        </article>
+
+            <!-- Diapositiva 2 -->
+            <div class="carousel-item">
+                <img src="Imagenes/Local/Nosotros.jpeg" class="d-block w-100" alt="Slide 2">
+                <div class="carousel-content">
+                    <h2>Diapositiva 2</h2>
+                    <p>Contenido de la segunda diapositiva.</p>
+                </div>
+            </div>
+
+            <!-- Diapositiva 3 -->
+            <div class="carousel-item">
+                <img src="Imagenes/Local/Nosotros.jpeg" class="d-block w-100" alt="Slide 3">
+                <div class="carousel-content">
+                    <h2>Diapositiva 3</h2>
+                    <p>Contenido de la tercera diapositiva.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles del Carrusel -->
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+
+    <!-- Scripts de Bootstrap y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript para carrusel automático -->
+    <script>
+        $(document).ready(function() {
+            // Iniciar el carrusel y configurar la transición
+            $('#myCarousel').carousel({
+                interval: 5000, // Cambia la imagen cada 5 segundos (5000 ms)
+                pause: false, // No pausar en interacción del usuario
+                wrap: true // Vuelve al principio después de la última diapositiva
+            });
+        });
+    </script>
+
+    </script>
         <section class="popular">
 
             <div class="popular-content container">
