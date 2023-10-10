@@ -63,7 +63,7 @@
 
 
         <!-- ======= Hero Section ======= -->
-        <section id="hero" class="d-flex align-items-center" style="background-image: url('../assets/Imagenes/Comida/Prueba-comida.jpeg'); background-size: 100% 100%; background-repeat: no-repeat; min-height: 600px;">
+        <section id="hero" class="d-flex align-items-center" style="background-image: url(' '); background-size: 100% 100%; background-repeat: no-repeat; min-height: 600px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
@@ -83,50 +83,22 @@
         <!-- End Hero -->
 
         <main id="main">
-            <!-- ======= About Us Section ======= -->
-            <section id="about" class="about">
-                <div class="container" data-aos="fade-up">
-                    <div class="section-title">
-                        <h2>Doña Hilda Tapas & Grill</h2>
-                    </div>
-                    <div class="row content">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-12">
-                                    <div class="card text-center ">
-                                        <div class="card-body shadow" style="background-color:#FFEC6F">
-                                            <div class="container">
-                                                <div class="row ">
-                                                    <div class="col-md-6">
-                                                        <img src="../assets/Imagenes/LOGO.png" class="d-block w-100" alt="">
-                                                    </div>
-                                    
-                                                    <div class="col-md-6">
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <p class="lead" style="text-align: justify;"> <b> Es un encantador restaurante culinario 
-                                                            que abrió sus puertas el 26 de septiembre de 2021 con el objetivo 
-                                                            de honrar las tradiciones gastronómicas de la República Dominicana, 
-                                                            y los sabores españoles, creando un espacio donde la comunidad pueda 
-                                                            disfrutar de sabores auténticos y únicos. Inspirado en el legado 
-                                                            culinario de la señora Hilda, madre de la dueña del restaurante. 
-                                                            Doña Hilda Tapas and Grill fue creado con una visión audaz y pasión por 
-                                                            la cocina según las tradiciones familiares. </b>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </section>
-            <!-- End About Us Section -->
+                  <!-- ======= Hero Section ======= -->
+      <section class="text-center" style="background-color: withe;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Doña Hilda Tapas & Grill</h2>
+            </div>
+            <div class="card text-center ">
+            <div class="card-body shadow" style="background-color:#FFEC6F;  width: 400px; height: 400px;">
+            <img src="../assets/Imagenes/LOGO.png" style="width: 350px; height: 350px;">
+
+            </div>
+            </div>
+            
+        </div>
+      </section>
+      <!-- End Hero Section -->
 
             <!-- ======= Frequently Asked Questions Section ======= -->
             <section id="faq" class="faq section-bg">

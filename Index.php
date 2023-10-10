@@ -111,10 +111,9 @@
             </div>
             <div class="swiper-pagination"></div>
           </div>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
             <a href="#book-a-table" class="btn-book-a-table "> Ver Menu </a>
           </div>
-
         </div>
       </section>
       <!-- End Gallery Section -->
