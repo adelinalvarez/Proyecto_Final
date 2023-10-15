@@ -45,12 +45,13 @@
           </ul>
         </nav><!-- .navbar -->
 
-        <a class="btn-book-a-table" href="#book-a-table">Iniciar Sesión</a>
+        <a class="btn-book-a-table" href="Vistas/login.php">Iniciar Sesión</a>
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
       </div>
-    </header><!-- End Header -->
+    </header>
+    <!-- End Header -->
 
     <!-- ======= Carousel Section ======= -->
       <section style="background-size: 100% 100%; background-repeat: no-repeat; min-height: 600px;">

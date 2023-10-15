@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                             <label for="name"><b>Nombre Completo:</b></label>
-                            <input type="text" name="name" class="form-control" id="name" required>
+                            <input type="text" style="border-radius: 20px;" name="name" class="form-control" id="name" required>
                             </div>
                             <div class="form-group col-md-6">
                             <label for="name"><b>Correo:</b></label>
