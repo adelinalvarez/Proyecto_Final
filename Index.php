@@ -95,20 +95,20 @@
         <div class="container" data-aos="fade-up">
 
           <div class="section-header">
-            <h2>gallery</h2>
-            <p>Check <span>Our Gallery</span></p>
+            <h2>Platillos</h2>
+            <p>Ver <span>Nuestro Menu</span></p>
           </div>
 
           <div class="gallery-slider swiper">
             <div class="swiper-wrapper align-items-center">
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Prueba-comida.jpeg"><img src="assets/Imagenes/Comida/Prueba-comida.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Mero.jpeg"><img src="assets/Imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Plato_del_dia1.jpeg"><img src="assets/Imagenes/Comida/Plato_del_dia1.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Candita_de_lambi.jpeg"><img src="assets/Imagenes/Comida/Candita_de_lambi.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Canasticas1.jpeg"><img src="assets/Imagenes/Comida/Canasticas1.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Pollo_Relleno.jpeg"><img src="assets/Imagenes/Comida/Pollo_Relleno.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Salmon_blanco.jpeg"><img src="assets/Imagenes/Comida/Salmon_blanco.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Mofonguitos.jpeg"><img src="assets/Imagenes/Comida/Mofonguitos.jpeg" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="assets/Imagenes/Comida/Salmon.jpeg"><img src="assets/Imagenes/Comida/Salmon.jpeg" class="img-fluid" alt=""></a></div>
             </div>
             <div class="swiper-pagination"></div>
           </div>
@@ -127,10 +127,10 @@
               <img src="assets/Imagenes/reserve.jpeg" style="width: 350px; height: 350px;">
             </div>
             <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-              <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
-              <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+              <h2 data-aos="fade-up">Ven y comparte<br>Reserva Ahora</h2>
+              <p data-aos="fade-up" data-aos-delay="100">Realiza tus reservaciones para esos eventos importantes...</p>
               <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                <a href="#book-a-table" class="btn-book-a-table">Book a Table</a>
+                <a href="#book-a-table" class="btn-book-a-table">Reservar</a>
               </div>
             </div>
             
@@ -147,10 +147,10 @@
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
             </div>
             <div class="col-lg-5 order-1 order-lg-2 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-              <h2 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h2>
-              <p data-aos="fade-up" data-aos-delay="100">Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+              <h2 data-aos="fade-up">Conctate con Nosotros<br></h2>
+              <p data-aos="fade-up" data-aos-delay="100">Estamos Ubicados en la calle Santome, esquina 16 de agosto, En Baní Provincia Peravia.</p>
               <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                <a href="#book-a-table" class="btn-book-a-table">Book a Table</a>
+                <a href="#book-a-table" class="btn-book-a-table">Contactos</a>
               </div>
             </div>
             
@@ -166,14 +166,16 @@
     <footer id="footer" class="footer">
 
       <div class="container">
+      
         <div class="row gy-3">
           <div class="col-lg-3 col-md-6 d-flex">
             <i class="bi bi-geo-alt icon"></i>
+            
             <div>
-              <h4>Address</h4>
+              <h4>Direccion</h4>
               <p>
-                A108 Adam Street <br>
-                New York, NY 535022 - US<br>
+                Santome #49 <br>
+                Esq. 16 de Agosto, Baní Peravia<br>
               </p>
             </div>
 
@@ -182,10 +184,10 @@
           <div class="col-lg-3 col-md-6 footer-links d-flex">
             <i class="bi bi-telephone icon"></i>
             <div>
-              <h4>Reservations</h4>
+              <h4>Reservaciones</h4>
               <p>
-                <strong>Phone:</strong> +1 5589 55488 55<br>
-                <strong>Email:</strong> info@example.com<br>
+                <strong>Telefono:</strong> +1 809-522-5146<br>
+                <strong>Email:</strong> Donahildabani@gmail.com<br>
               </p>
             </div>
           </div>
@@ -193,20 +195,22 @@
           <div class="col-lg-3 col-md-6 footer-links d-flex">
             <i class="bi bi-clock icon"></i>
             <div>
-              <h4>Opening Hours</h4>
+              <h4>Horarios</h4>
               <p>
-                <strong>Mon-Sat: 11AM</strong> - 23PM<br>
-                Sunday: Closed
+                <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+               
               </p>
             </div>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Follow Us</h4>
+            <h4>Siguenos</h4>
             <div class="social-links d-flex">
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+              <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+       
+ 
 
             </div>
           </div>
@@ -216,15 +220,9 @@
 
       <div class="container">
         <div class="copyright">
-          &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
         </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+
       </div>
 
     </footer><!-- End Footer -->

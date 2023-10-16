@@ -76,19 +76,19 @@
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Ubicación:</h4>
-                                <p>16 De Agosto Esq, Baní 94000</p>
+                                <p>Santome, Esq. 16 De Agosto, Baní 94000</p>
                             </div>
 
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Correo:</h4>
-                                <p>info@example.com</p>
+                                <p>donahildabani@gmail.com</p>
                             </div>
 
                             <div class="Telefono">
                                 <i class="bi bi-phone"></i>
                                 <h4>Telefono:</h4>
-                                <p>+1 809-522-4151</p>
+                                <p>+1 809-522-5146</p>
                             </div>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
                         </div>
@@ -130,74 +130,71 @@
             </section><!-- End Contact Section -->
 
         </main><!-- End #main -->
+            <!-- ======= Footer ======= -->
+            <footer id="footer" class="footer">
 
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+                <div class="container">
 
-<div class="container">
-<div class="row gy-3">
-    <div class="col-lg-3 col-md-6 d-flex">
-    <i class="bi bi-geo-alt icon"></i>
-    <div>
-        <h4>Address</h4>
-        <p>
-        A108 Adam Street <br>
-        New York, NY 535022 - US<br>
-        </p>
-    </div>
+                <div class="row gy-3">
+                    <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    
+                    <div>
+                        <h4>Direccion</h4>
+                        <p>
+                        Santome #49 <br>
+                        Esq. 16 de Agosto, Baní Peravia<br>
+                        </p>
+                    </div>
 
-    </div>
+                    </div>
 
-    <div class="col-lg-3 col-md-6 footer-links d-flex">
-    <i class="bi bi-telephone icon"></i>
-    <div>
-        <h4>Reservations</h4>
-        <p>
-        <strong>Phone:</strong> +1 5589 55488 55<br>
-        <strong>Email:</strong> info@example.com<br>
-        </p>
-    </div>
-    </div>
+                    <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4>Reservaciones</h4>
+                        <p>
+                        <strong>Telefono:</strong> +1 809-522-5146<br>
+                        <strong>Email:</strong> Donahildabani@gmail.com<br>
+                        </p>
+                    </div>
+                    </div>
 
-    <div class="col-lg-3 col-md-6 footer-links d-flex">
-    <i class="bi bi-clock icon"></i>
-    <div>
-        <h4>Opening Hours</h4>
-        <p>
-        <strong>Mon-Sat: 11AM</strong> - 23PM<br>
-        Sunday: Closed
-        </p>
-    </div>
-    </div>
+                    <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4>Horarios</h4>
+                        <p>
+                        <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+                        
+                        </p>
+                    </div>
+                    </div>
 
-    <div class="col-lg-3 col-md-6 footer-links">
-    <h4>Follow Us</h4>
-    <div class="social-links d-flex">
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Siguenos</h4>
+                    <div class="social-links d-flex">
+                        <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                
 
-    </div>
-    </div>
 
-</div>
-</div>
+                    </div>
+                    </div>
 
-<div class="container">
-<div class="copyright">
-    &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
-</div>
-<div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-</div>
-</div>
+                </div>
+                </div>
 
-</footer><!-- End Footer -->
-<!-- End Footer -->
+                <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                </div>
+
+                </div>
+
+            </footer><!-- End Footer -->
+                <!-- End Footer -->
 
 
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
