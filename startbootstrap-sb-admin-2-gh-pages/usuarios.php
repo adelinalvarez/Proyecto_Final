@@ -1,3 +1,9 @@
+<?php
+require_once ("../includes/_db.php");
+session_start();
+error_reporting(0);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +37,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: black;">
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -92,7 +98,7 @@
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="usuarios.html">
+                    <a class="nav-link" href="usuarios.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Usuarios</span></a>
                 </li>
@@ -326,15 +332,34 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Productos</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
                         <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
                             For more information about DataTables, please visit the <a target="_blank"
                                 href="https://datatables.net">official DataTables documentation</a>.</p>
 
                         <!-- DataTales Example -->
+                        <?php
+                            $conexion=$GLOBALS['conex'];  
+                            $where="";
+                            if(isset($_GET['enviar'])){
+                            $busqueda = $_GET['busqueda'];
+                            if (isset($_GET['busqueda'])) {
+                                $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
+                            }
+                            }
+                        ?>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800"></h1>
+                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#createuser">
+                            <span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario &nbsp <i class="fa fa-plus"></i> </a>
+                        </button>
+                        </div>
+
+                        
+
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tablas de Productos</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tabla de usuarios</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -343,49 +368,31 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nombre</th>
-                                                <th>Description</th>
-                                                <th>Categoria</th>
-                                                <th>Cantidad</th>
-                                                <th>Precio</th>
+                                                <th>Correo</th>
+                                                <th>Contraseña</th>
+                                                <th>Cargo</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Description</th>
-                                                <th>Categoria</th>
-                                                <th>Cantidad</th>
-                                                <th>Precio</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>61</td>
-                                                <td>2011/07/25</td>
-                                            </tr>
                                             
+                                            <?php
+                                                $conexion=$GLOBALS['conex'];                
+                                                $SQL=mysqli_query($conexion,"SELECT users.Id, users.Nombres, users.Correo, users.Contraseña, users.Cargo FROM users");
+                                                while($fila=mysqli_fetch_assoc($SQL)):
+                                            ?>
                                             <tr>
-                                                <td>Cara Stevens</td>
-                                                <td>Sales Assistant</td>
-                                                <td>New York</td>
-                                                <td>46</td>
-                                                <td>61</td>
-                                                <td>2011/12/06</td>
+                                                <td><?php echo $fila['Id']; ?></td>
+                                                <td><?php echo $fila['Nombres']; ?></td>
+                                                <td><?php echo $fila['Correo']; ?></td>
+                                                <td><?php echo $fila['Contraseña']; ?></td>
+                                                <td><?php echo $fila['Cargo']; ?></td>
+                                                <td>
+                                                    <a class="btn bg-success" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit" style="color: white"></i></a>
+                                                    <a class="btn btn-danger btn-del" href="acciones/eliminar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-trash"></i></a>
+                                                </td>
                                             </tr>
-                                        
+                                            <?php endwhile;?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -420,21 +427,47 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="createuser" tabindex="-1" role="dialog" aria-labelledby="createuserLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="createuserLabel">Añadir nuevo usuario</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    <div class="modal-body">
+
+                        <form  action="../includes/validarusuario.php" method="POST">
+                            <div class="form-group">
+                                <input type="text"  id="Nombres" name="Nombres" class="css-input btn-block" style= " display: block; width: 100%;" required placeholder="Nombre Completo">
+                            </div>
+                            <br>
+                            
+                            <div class="form-group">
+                                <input type="email" name="Correo" id="Correo" class="css-input btn-block" style= " display: block; width: 100%;" placeholder="Correo Institucional">
+                            </div> 
+                            <br>
+                            
+                                <div class="form-group">
+                                <input type="password" name="Contraseña" id="Contraseña" class="css-input btn-block" style= " display: block; width: 100%;" placeholder="Contraseña" required >
+                            </div> 
+                            <br>
+
+                            <div class="form-group">
+                                <select name="Cargo" id="Cargo" class="css-input btn-block" style= " display: block; width: 100%;"> 
+                                <option value="" hidden selected >Cargo</option>
+                                    <option value="Chef">Chef</option>
+                                    <option value="Hola">Hola</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <input type="submit" value="Guardar" id="register" class="btn btn-success" name="registrar">
+                        </form> 
+
                     </div>
+                    
                 </div>
             </div>
         </div>
