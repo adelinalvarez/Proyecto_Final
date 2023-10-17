@@ -85,34 +85,27 @@ header('Location: ../Views/user.php');
 
 
 function acceso_user() {
-    $correo = $_POST['correo'];
-    $password = $_POST['password'];
+    $Correo = $_POST['Correo'];
+    $Contraseña = $_POST['Contraseña'];
 
     session_start();
-    $_SESSION['correo'] = $correo;
+    $_SESSION['Correo'] = $Correo;
 
     $conexion = $GLOBALS['conex']; 
-    $consulta = "SELECT * FROM user WHERE correo='$correo' AND password='$password'";
+    $consulta = "SELECT * FROM users WHERE Correo='$Correo' AND Contraseña='$Contraseña'";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
         $filas = mysqli_fetch_array($resultado);
-        $rol = $filas['rol'];
-        $recinto = $filas['recinto'];
+        $Cargo = $filas['Cargo'];
 
-        $_SESSION['rol'] = $rol;
-        $_SESSION['recinto'] = $recinto;
+        $_SESSION['Cargo'] = $Cargo;
 
-        if($filas['rol'] == 1){ //admin
+        if($filas['Cargo'] == "Chef"){ //admin
 
-            header('Location: ../views/user.php');
+            header('Location: ../startbootstrap-sb-admin-2-gh-pages/index.php');
     
-        }else if($filas['rol'] == 2){//lector
-            
-            header('Location: ../views/participantes.php');
-    
-        }
-        else{
+        }else{
             header("location: ../index.php?fallo=true");
             session_destroy();
     

@@ -63,13 +63,22 @@ error_reporting(0);
                     <div class="align-items-start d-flex">
                         <label for="correo"> <b> Usuario: <b> </label>
                     </div>
-                    <input type="text" class="form-control" placeholder="Ingrese su usuario" required>
+                    <input type="email" id="Correo" class="form-control" name="Correo" required placeholder="Ingrese su usuario" />
+                    
                     <div class="align-items-start d-flex">
                         <label for="contraseña"> <b> Contraseña: <b> </label>
                     </div>
+                    <input type="password" name="Contraseña" id="Contraseña" class="form-control" required placeholder="Ingrese su contraseña">
+                    <input type="hidden" name="accion" value="acceso_user"> 
 
-                    <input type="password" class= "form-control" name="accion" value="acceso_user">
                     <button type="submit" class="btn-login mb-2">Ingresar</button>
+
+                    <?php
+                        if(isset($_GET["fallo"]) && $_GET["fallo"] == 'true')
+                        {
+                        echo "<div style='color:red'> Usuario o contraseña incorrecta </div>";
+                        }
+                    ?>
                 </form>
             </div>
         </div>

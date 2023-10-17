@@ -4795,16 +4795,16 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #000;
+  border-color: #000;
 }
 
 .page-item.disabled .page-link {
-  color: #858796;
+  color: #fff;
   pointer-events: none;
   cursor: auto;
-  background-color: #fff;
-  border-color: #dddfeb;
+  background-color: #000;
+  border-color: #000;
 }
 
 .pagination-lg .page-link {

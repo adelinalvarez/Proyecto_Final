@@ -2,6 +2,15 @@
 require_once ("../includes/_db.php");
 session_start();
 error_reporting(0);
+
+$validarusuario = $_SESSION['Correo'];
+
+if( $validarusuario == null || $validarusuario = ''){
+
+  header("Location: ../index.php");
+  die();
+  
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +24,8 @@ error_reporting(0);
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>SB Admin 2 - Tables</title>
+        <title>Doña Hilda Tapas and Grill</title>
+        <link rel="icon" href="../assets/Imagenes/Logo.png">
 
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,6 +35,9 @@ error_reporting(0);
 
         <!-- Custom styles for this template -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="css/dashboard.css" rel="stylesheet">
+
+
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -37,22 +50,21 @@ error_reporting(0);
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: black;">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <!--<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                     <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
+                        <img src="../assets/Imagenes/Logo.png" width="100px" alt="">
                     </div>
-                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-                </a>
+                </a> -->
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="index.php">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -62,19 +74,19 @@ error_reporting(0);
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Addons
+                    Administrar
                 </div>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="pedidos.html">
+                    <a class="nav-link" href="pedidos.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Pedidos</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="productos.html">
+                    <a class="nav-link" href="productos.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Productos</span>
                     </a>
@@ -82,7 +94,7 @@ error_reporting(0);
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="reservas.html">
+                    <a class="nav-link" href="reservas.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Reservas</span>
                     </a>
@@ -90,7 +102,7 @@ error_reporting(0);
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="contactos.html">
+                    <a class="nav-link" href="contactos.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Contactos</span>
                     </a>
@@ -123,7 +135,7 @@ error_reporting(0);
                 <div id="content">
 
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <nav class="navbar navbar-expand navbar-light nav-dashboard topbar mb-4 static-top shadow">
 
                         <!-- Sidebar Toggle (Topbar) -->
                         <form class="form-inline">
@@ -132,163 +144,8 @@ error_reporting(0);
                             </button>
                         </form>
 
-                        <!-- Topbar Search -->
-                        <form
-                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                    aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
-
-                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                            <li class="nav-item dropdown no-arrow d-sm-none">
-                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </a>
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                    aria-labelledby="searchDropdown">
-                                    <form class="form-inline mr-auto w-100 navbar-search">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Search for..." aria-label="Search"
-                                                aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        Alerts Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fas fa-donate text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
-                                            $290.29 has been deposited into your account!
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending for your account.
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </li>
-
-                            <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
-                                </a>
-                                <!-- Dropdown - Messages -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="messagesDropdown">
-                                    <h6 class="dropdown-header">
-                                        Message Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                                alt="...">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                                problem I've been having.</div>
-                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                                alt="...">
-                                            <div class="status-indicator"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">I have the photos that you ordered last month, how
-                                                would you like them sent to you?</div>
-                                            <div class="small text-gray-500">Jae Chun · 1d</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                                alt="...">
-                                            <div class="status-indicator bg-warning"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">Last month's report looks great, I am very happy with
-                                                the progress so far, keep up the good work!</div>
-                                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                                alt="...">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div>
-                                            <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                                told me that people say this to all dogs, even if they aren't good...</div>
-                                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                                </div>
-                            </li>
 
                             <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -296,7 +153,7 @@ error_reporting(0);
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                    <span class="mr-2 d-none d-lg-inline text-white-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
                                     <img class="img-profile rounded-circle"
                                         src="img/undraw_profile.svg">
                                 </a>
@@ -305,21 +162,18 @@ error_reporting(0);
                                     aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
+                                        Perfil
                                     </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
+                                
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
+                                        Informe
                                     </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="acciones/cerrarSesion.php">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Cerrar Sesión
                                     </a>
+                                    
                                 </div>
                             </li>
 
@@ -332,39 +186,37 @@ error_reporting(0);
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
-                        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                            For more information about DataTables, please visit the <a target="_blank"
-                                href="https://datatables.net">official DataTables documentation</a>.</p>
+                        <h1 class="h3 mb-2 text-gray-800">Incorpora nuevos usuarios a tu panel de control</h1>
+                        <p class="mb-4">Permitiéndoles administrar los datos.</p>
 
                         <!-- DataTales Example -->
                         <?php
                             $conexion=$GLOBALS['conex'];  
                             $where="";
                             if(isset($_GET['enviar'])){
-                            $busqueda = $_GET['busqueda'];
-                            if (isset($_GET['busqueda'])) {
-                                $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
-                            }
+                                $busqueda = $_GET['busqueda'];
+                                if (isset($_GET['busqueda'])) {
+                                    $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
+                                }
                             }
                         ?>
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800"></h1>
-                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#createuser">
-                            <span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario &nbsp <i class="fa fa-plus"></i> </a>
-                        </button>
+                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-agregar shadow-sm" data-toggle="modal" data-target="#createuser">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario &nbsp <i class="fa fa-plus"></i> </a>
+                            </button>
                         </div>
 
                         
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tabla de usuarios</h6>
+                                <h6 class="m-0 font-weight-bold text-black">Tabla de usuarios</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
+                                        <thead  style="color: white; text-align: center; background-color:black">
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nombre</th>
@@ -374,7 +226,7 @@ error_reporting(0);
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="color: black;">
                                             
                                             <?php
                                                 $conexion=$GLOBALS['conex'];                
@@ -388,8 +240,9 @@ error_reporting(0);
                                                 <td><?php echo $fila['Contraseña']; ?></td>
                                                 <td><?php echo $fila['Cargo']; ?></td>
                                                 <td>
-                                                    <a class="btn bg-success" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit" style="color: white"></i></a>
-                                                    <a class="btn btn-danger btn-del" href="acciones/eliminar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-trash"></i></a>
+                                                    <a class="btn" href="acciones/mostrar.php?id=<?php echo $fila['id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
+                                                    <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
+                                                    <a class="btn btn-del" href="acciones/eliminar_usuario.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
                                                 </td>
                                             </tr>
                                             <?php endwhile;?>
@@ -405,15 +258,70 @@ error_reporting(0);
                 </div>
                 <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
+                <!-- ======= Footer ======= -->
+                <footer id="footer" class="footer">
+
+                <div class="container">
+
+                <div class="row gy-3">
+                    <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    
+                    <div>
+                        <h4>Direccion</h4>
+                        <p>
+                        Santome #49 <br>
+                        Esq. 16 de Agosto, Baní Peravia<br>
+                        </p>
                     </div>
-                </footer>
-                <!-- End of Footer -->
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4>Reservaciones</h4>
+                        <p>
+                        <strong>Telefono:</strong> +1 809-522-5146<br>
+                        <strong>Email:</strong> Donahildabani@gmail.com<br>
+                        </p>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4>Horarios</h4>
+                        <p>
+                        <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+                        
+                        </p>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Siguenos</h4>
+                    <div class="social-links d-flex">
+                        <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook" ></i></a>
+                        <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="fa fa-instagram"></i></a>
+                        <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+                
+
+
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+
+                <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                </div>
+
+                </div>
+
+                </footer><!-- End Footer -->
 
             </div>
             <!-- End of Content Wrapper -->
@@ -426,9 +334,8 @@ error_reporting(0);
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="createuser" tabindex="-1" role="dialog" aria-labelledby="createuserLabel"
-            aria-hidden="true">
+        <!-- Crear Modal-->
+        <div class="modal fade" id="createuser" tabindex="-1" role="dialog" aria-labelledby="createuserLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -440,30 +347,32 @@ error_reporting(0);
                     <div class="modal-body">
 
                         <form  action="../includes/validarusuario.php" method="POST">
-                            <div class="form-group">
-                                <input type="text"  id="Nombres" name="Nombres" class="css-input btn-block" style= " display: block; width: 100%;" required placeholder="Nombre Completo">
+                            <div>
+                                <label for="Nombres" class="css-label"> Nombre Completo: </label>
+                                <input type="text" id="Nombres" name="Nombres" class="css-input" style= " display: block; width: 100%;" required >
                             </div>
-                            <br>
                             
-                            <div class="form-group">
-                                <input type="email" name="Correo" id="Correo" class="css-input btn-block" style= " display: block; width: 100%;" placeholder="Correo Institucional">
-                            </div> 
-                            <br>
-                            
-                                <div class="form-group">
-                                <input type="password" name="Contraseña" id="Contraseña" class="css-input btn-block" style= " display: block; width: 100%;" placeholder="Contraseña" required >
-                            </div> 
-                            <br>
+                            <div>
+                                <label for="Correo" class="css-label"> Correo:</label>
+                                <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
 
-                            <div class="form-group">
-                                <select name="Cargo" id="Cargo" class="css-input btn-block" style= " display: block; width: 100%;"> 
-                                <option value="" hidden selected >Cargo</option>
+                                                
+                            <div>
+                                <label for="Contraseña" class="css-label">Contraseña:</label>
+                                <input type="text" id="Contraseña" name="Contraseña" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+
+                            <div>
+                                <label for="Cargo" class="css-label"> Cargo: </label>
+                                <select name="Cargo" id="Cargo" class="css-input" style= " display: block; width: 100%;" required> 
                                     <option value="Chef">Chef</option>
                                     <option value="Hola">Hola</option>
                                 </select>
                             </div>
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <input type="submit" value="Guardar" id="register" class="btn btn-success" name="registrar">
+                            <br>
+
+                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
                         </form> 
 
                     </div>
@@ -490,5 +399,37 @@ error_reporting(0);
         <script src="js/demo/datatables-demo.js"></script>
 
     </body>
+
+<script>
+    $('.btn-del').on('click', function(e){
+      e.preventDefault();
+      const href = $(this).attr('href')
+      Swal.fire({
+        title: '¿Estas seguro de eliminar este usuario?',
+        text: "¡No podrás revertir esto!!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!', 
+        cancelButtonText: 'Cancelar!', 
+      }).then((result)=>{
+        if(result.value){
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Eliminado!',
+              'El usuario fue eliminado.',
+              'success'
+            )
+          }
+          document.location.href= href;
+        }   
+      })
+    })
+  </script>
+
+    <!-- <div id="paginador" class=""></div>-->
+    <script src="../package/dist/sweetalert2.all.js"></script>
+  <script src="../package/dist/sweetalert2.all.min.js"></script>
 
 </html>
