@@ -25,13 +25,12 @@
 .css-label {
     color: #525252;
 }
-.nav-dashboard{
-    background-color:black;
-    color: #fff;
-}
-  /*--------------------------------------------------------------
-  # Footer
-  --------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
 .footer {
   font-size: 14px;
   background-color: #1f1f24;
@@ -173,14 +172,4 @@
   height: 36px;
   transition: 0.3s;
   margin-right: 10px;
-}
-
-
-.contact .php-email-form {
-  width: 100%;
-  border-top: 3px solid #000000;
-  border-bottom: 3px solid #000000;
-  padding: 30px;
-  background: #fff;
-  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
 }
