@@ -16,7 +16,7 @@ error_reporting(0);
 
         <title>Doña Hilda Tapas and Grill</title>
         <link rel="icon" href="../assets/Imagenes/Logo.png">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <!-- Custom fonts for this template -->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -24,36 +24,7 @@ error_reporting(0);
         <!-- Custom styles for this template -->
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/dashboard.css" rel="stylesheet">
-        <style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
+        
     </head>
 
     <body id="page-top">
@@ -65,13 +36,14 @@ body {
                 <!-- Main Content -->
                 <div id="content">
 
-
             </div>
 
                     
                     
             <!-- ======= Contact Section ======= -->
             <section id="contact" class="contact">
+            <br>
+
                 <div class="container" data-aos="fade-up">
                     <div class="row">
 
@@ -187,9 +159,9 @@ body {
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Siguenos</h4>
                         <div class="social-links d-flex">
-                            <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook" ></i></a>
-                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="fa fa-instagram"></i></a>
-                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+                            <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
+                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
                         </div>
                     </div>
 

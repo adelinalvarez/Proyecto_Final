@@ -23,7 +23,8 @@
     border-radius: 10px;
 }
 .css-label {
-    color: #525252;
+    color: #000000;
+    font-weight: bold;
 }
 
 
@@ -173,3 +174,4 @@
   transition: 0.3s;
   margin-right: 10px;
 }
+

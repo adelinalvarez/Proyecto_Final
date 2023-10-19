@@ -197,7 +197,7 @@ if( $validarusuario == null || $validarusuario = ''){
                         if(isset($_GET['enviar'])){
                             $busqueda = $_GET['busqueda'];
                             if (isset($_GET['busqueda'])) {
-                                $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
+                                $where="WHERE contactos.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
                             }
                         }
                     ?>

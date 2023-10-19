@@ -58,14 +58,14 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="pedidos.html">
+                <a class="nav-link" href="pedidos.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Pedidos</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="productos.html">
+                <a class="nav-link" href="productos.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Productos</span>
                 </a>
@@ -73,7 +73,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="reservas.html">
+                <a class="nav-link" href="reservas.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Reservas</span>
                 </a>
@@ -81,7 +81,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="contactos.html">
+                <a class="nav-link" href="contactos.php">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Contactos</span>
                 </a>

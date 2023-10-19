@@ -35,6 +35,9 @@ if( $validarusuario == null || $validarusuario = ''){
 
         <!-- Custom styles for this template -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="css/dashboard.css" rel="stylesheet">
+
+
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -132,7 +135,7 @@ if( $validarusuario == null || $validarusuario = ''){
                 <div id="content">
 
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <nav class="navbar navbar-expand navbar-light nav-dashboard topbar mb-4 static-top shadow">
 
                         <!-- Sidebar Toggle (Topbar) -->
                         <form class="form-inline">
@@ -150,7 +153,7 @@ if( $validarusuario == null || $validarusuario = ''){
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
+                                    <span class="mr-2 d-none d-lg-inline text-white-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
                                     <img class="img-profile rounded-circle"
                                         src="img/undraw_profile.svg">
                                 </a>
@@ -159,21 +162,18 @@ if( $validarusuario == null || $validarusuario = ''){
                                     aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
+                                        Perfil
                                     </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
+                                
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
+                                        Informe
                                     </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="acciones/cerrarSesion.php">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Cerrar Sesión
                                     </a>
+                                    
                                 </div>
                             </li>
 
@@ -186,20 +186,29 @@ if( $validarusuario == null || $validarusuario = ''){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Reservas</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="https://datatables.net">official DataTables documentation</a>.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Supervisa las solicitudes de reservas</h1>
+                    <p class="mb-4">Da seguimiento a posibles clientes</p>
 
                     <!-- DataTales Example -->
+
+                    <?php
+                        $conexion=$GLOBALS['conex'];  
+                        $where="";
+                        if(isset($_GET['enviar'])){
+                            $busqueda = $_GET['busqueda'];
+                            if (isset($_GET['busqueda'])) {
+                                $where="WHERE reservas.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
+                            }
+                        }
+                    ?>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tabla de Reservas</h6>
+                            <h6 class="m-0 font-weight-bold text-black">Tabla de Reservas</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                                    <thead style="color: white; text-align: center; background-color:black">
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
@@ -211,143 +220,31 @@ if( $validarusuario == null || $validarusuario = ''){
                                             <th>Evento</th>
                                             <th>Area</th>
                                             <th>Descripcion</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <tbody style="color: black;">
+                                        <?php
+                                            $conexion=$GLOBALS['conex'];                
+                                            $SQL=mysqli_query($conexion,"SELECT reservas.Id, reservas.Nombre, reservas.Correo, reservas.Celular, reservas.Cantidad, reservas.Fecha, reservas.Hora, reservas.Evento, reservas.Area, reservas.Descripcion FROM reservas");
+                                            while($fila=mysqli_fetch_assoc($SQL)):
+                                        ?>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Nombre</th>
-                                            <th>Correo</th>
-                                            <th>Celular</th>
-                                            <th>Cantidad</th>
-                                            <th>Fecha</th>
-                                            <th>Hora</th>
-                                            <th>Evento</th>
-                                            <th>Area</th>
-                                            <th>Descripcion</th>
+                                            <td><?php echo $fila['Id']; ?></td>
+                                            <td><?php echo $fila['Nombre']; ?></td>
+                                            <td><?php echo $fila['Correo']; ?></td>
+                                            <td><?php echo $fila['Celular']; ?></td>
+                                            <td><?php echo $fila['Cantidad']; ?></td>
+                                            <td><?php echo $fila['Fecha']; ?></td>
+                                            <td><?php echo $fila['Hora']; ?></td>
+                                            <td><?php echo $fila['Evento']; ?></td>
+                                            <td><?php echo $fila['Area']; ?></td>
+                                            <td><?php echo $fila['Descripcion']; ?></td>
+                                            <td>
+                                                <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
+                                            </td>
                                         </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jennifer Acosta</td>
-                                            <td>Junior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>43</td>
-                                            <td>2013/02/01</td>
-                                            <td>$75,650</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cara Stevens</td>
-                                            <td>Sales Assistant</td>
-                                            <td>New York</td>
-                                            <td>46</td>
-                                            <td>2011/12/06</td>
-                                            <td>$145,600</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Hermione Butler</td>
-                                            <td>Regional Director</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2011/03/21</td>
-                                            <td>$356,250</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lael Greer</td>
-                                            <td>Systems Administrator</td>
-                                            <td>London</td>
-                                            <td>21</td>
-                                            <td>2009/02/27</td>
-                                            <td>$103,500</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jonas Alexander</td>
-                                            <td>Developer</td>
-                                            <td>San Francisco</td>
-                                            <td>30</td>
-                                            <td>2010/07/14</td>
-                                            <td>$86,500</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shad Decker</td>
-                                            <td>Regional Director</td>
-                                            <td>Edinburgh</td>
-                                            <td>51</td>
-                                            <td>2008/11/13</td>
-                                            <td>$183,000</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Michael Bruce</td>
-                                            <td>Javascript Developer</td>
-                                            <td>Singapore</td>
-                                            <td>29</td>
-                                            <td>2011/06/27</td>
-                                            <td>$183,000</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                            <td>New York</td>
-                                            <td>27</td>
-                                            <td>2011/01/25</td>
-                                            <td>$112,000</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                        <?php endwhile;?>
                                     </tbody>
                                 </table>
                             </div>
@@ -360,15 +257,70 @@ if( $validarusuario == null || $validarusuario = ''){
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- ======= Footer ======= -->
+            <footer id="footer" class="footer">
+
+<div class="container">
+
+<div class="row gy-3">
+    <div class="col-lg-3 col-md-6 d-flex">
+    <i class="bi bi-geo-alt icon"></i>
+    
+    <div>
+        <h4>Direccion</h4>
+        <p>
+        Santome #49 <br>
+        Esq. 16 de Agosto, Baní Peravia<br>
+        </p>
+    </div>
+
+    </div>
+
+    <div class="col-lg-3 col-md-6 footer-links d-flex">
+    <i class="bi bi-telephone icon"></i>
+    <div>
+        <h4>Reservaciones</h4>
+        <p>
+        <strong>Telefono:</strong> +1 809-522-5146<br>
+        <strong>Email:</strong> Donahildabani@gmail.com<br>
+        </p>
+    </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 footer-links d-flex">
+    <i class="bi bi-clock icon"></i>
+    <div>
+        <h4>Horarios</h4>
+        <p>
+        <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+        
+        </p>
+    </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6 footer-links">
+    <h4>Siguenos</h4>
+    <div class="social-links d-flex">
+        <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook" ></i></a>
+        <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="fa fa-instagram"></i></a>
+        <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+
+
+
+    </div>
+    </div>
+
+</div>
+</div>
+
+<div class="container">
+<div class="copyright">
+    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+</div>
+
+</div>
+
+</footer><!-- End Footer -->
 
         </div>
         <!-- End of Content Wrapper -->

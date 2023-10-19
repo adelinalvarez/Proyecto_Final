@@ -35,6 +35,9 @@ if( $validarusuario == null || $validarusuario = ''){
 
         <!-- Custom styles for this template -->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="css/dashboard.css" rel="stylesheet">
+
+
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -61,7 +64,7 @@ if( $validarusuario == null || $validarusuario = ''){
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="index.php">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -132,7 +135,7 @@ if( $validarusuario == null || $validarusuario = ''){
                 <div id="content">
 
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <nav class="navbar navbar-expand navbar-light nav-dashboard topbar mb-4 static-top shadow">
 
                         <!-- Sidebar Toggle (Topbar) -->
                         <form class="form-inline">
@@ -150,7 +153,7 @@ if( $validarusuario == null || $validarusuario = ''){
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
+                                    <span class="mr-2 d-none d-lg-inline text-white-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
                                     <img class="img-profile rounded-circle"
                                         src="img/undraw_profile.svg">
                                 </a>
@@ -159,21 +162,18 @@ if( $validarusuario == null || $validarusuario = ''){
                                     aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
+                                        Perfil
                                     </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
+                                
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Activity Log
+                                        Informe
                                     </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="acciones/cerrarSesion.php">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
+                                        Cerrar Sesión
                                     </a>
+                                    
                                 </div>
                             </li>
 
@@ -186,66 +186,64 @@ if( $validarusuario == null || $validarusuario = ''){
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Productos</h1>
-                        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                            For more information about DataTables, please visit the <a target="_blank"
-                                href="https://datatables.net">official DataTables documentation</a>.</p>
+                        <h1 class="h3 mb-2 text-gray-800">Incorpora nuevos platos al menu</h1>
+                        <p class="mb-4"> Administra el menu e incorora nuevo etc etc</p>
 
                         <!-- DataTales Example -->
+                        <?php
+                            $conexion=$GLOBALS['conex'];  
+                            $where="";
+                            if(isset($_GET['enviar'])){
+                                $busqueda = $_GET['busqueda'];
+                                if (isset($_GET['busqueda'])) {
+                                    $where="WHERE productos.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
+                                }
+                            }
+                        ?>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800"></h1>
+                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-agregar shadow-sm" data-toggle="modal" data-target="#createproductos">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar algo nuevo &nbsp <i class="fa fa-plus"></i> </a>
+                            </button>
+                        </div>
+
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tablas de Productos</h6>
+                                <h6 class="m-0 font-weight-bold text-black">Tabla de productos</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
+                                        <thead  style="color: white; text-align: center; background-color:black">
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nombre</th>
-                                                <th>Description</th>
+                                                <th>Descripcion</th>
                                                 <th>Categoria</th>
-                                                <th>Cantidad</th>
                                                 <th>Precio</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Description</th>
-                                                <th>Categoria</th>
-                                                <th>Cantidad</th>
-                                                <th>Precio</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>61</td>
-                                                <td>2011/07/25</td>
-                                            </tr>
+                                        <tbody style="color: black;">
                                             
+                                            <?php
+                                                $conexion=$GLOBALS['conex'];                
+                                                $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio FROM productos");
+                                                while($fila=mysqli_fetch_assoc($SQL)):
+                                            ?>
                                             <tr>
-                                                <td>Cara Stevens</td>
-                                                <td>Sales Assistant</td>
-                                                <td>New York</td>
-                                                <td>46</td>
-                                                <td>61</td>
-                                                <td>2011/12/06</td>
+                                                <td><?php echo $fila['Id']; ?></td>
+                                                <td><?php echo $fila['Nombre']; ?></td>
+                                                <td><?php echo $fila['Descripcion']; ?></td>
+                                                <td><?php echo $fila['Categoria']; ?></td>
+                                                <td><?php echo $fila['Precio']; ?></td>
+                                                <td>
+                                                    <a class="btn" href="acciones/mostrar.php?id=<?php echo $fila['id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
+                                                    <a class="btn" href="acciones/editar_productos.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
+                                                    <a class="btn btn-del" href="acciones/eliminar_productos.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
+                                                </td>
                                             </tr>
-                                        
+                                            <?php endwhile;?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -258,15 +256,70 @@ if( $validarusuario == null || $validarusuario = ''){
                 </div>
                 <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
+                <!-- ======= Footer ======= -->
+                <footer id="footer" class="footer">
+
+                <div class="container">
+
+                <div class="row gy-3">
+                    <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    
+                    <div>
+                        <h4>Direccion</h4>
+                        <p>
+                        Santome #49 <br>
+                        Esq. 16 de Agosto, Baní Peravia<br>
+                        </p>
                     </div>
-                </footer>
-                <!-- End of Footer -->
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4>Reservaciones</h4>
+                        <p>
+                        <strong>Telefono:</strong> +1 809-522-5146<br>
+                        <strong>Email:</strong> Donahildabani@gmail.com<br>
+                        </p>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4>Horarios</h4>
+                        <p>
+                        <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+                        
+                        </p>
+                    </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Siguenos</h4>
+                    <div class="social-links d-flex">
+                        <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook" ></i></a>
+                        <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="fa fa-instagram"></i></a>
+                        <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+                
+
+
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+
+                <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                </div>
+
+                </div>
+
+                </footer><!-- End Footer -->
 
             </div>
             <!-- End of Content Wrapper -->
@@ -279,22 +332,46 @@ if( $validarusuario == null || $validarusuario = ''){
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <!-- Crear Modal-->
+        <div class="modal fade" id="createproductos" tabindex="-1" role="dialog" aria-labelledby="createproductosLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title" id="createproductosLabel">Añadir nuevo producto</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    <div class="modal-body">
+
+                        <form  action="../includes/validarproductos.php" method="POST">
+                            <div>
+                                <label for="Nombre" class="css-label"> Nombre: </label>
+                                <input type="text" id="Nombre" name="Nombre" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+                            
+                            <div>
+                                <label for="Descripcion" class="css-label"> Descripcion:</label>
+                                <input type="text" id="Descripcion" name="Descripcion" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+
+                                                
+                            <div>
+                                <label for="Categoria" class="css-label">Categoria:</label>
+                                <input type="text" id="Categoria" name="Categoria" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+
+                            <div>
+                                <label for="Precio" class="css-label">Precio:</label>
+                                <input type="text" id="Precio" name="Precio" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+                            <br>
+
+                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
+                        </form> 
+
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -317,5 +394,37 @@ if( $validarusuario == null || $validarusuario = ''){
         <script src="js/demo/datatables-demo.js"></script>
 
     </body>
+
+<script>
+    $('.btn-del').on('click', function(e){
+      e.preventDefault();
+      const href = $(this).attr('href')
+      Swal.fire({
+        title: '¿Estas seguro de eliminar este usuario?',
+        text: "¡No podrás revertir esto!!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!', 
+        cancelButtonText: 'Cancelar!', 
+      }).then((result)=>{
+        if(result.value){
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Eliminado!',
+              'El usuario fue eliminado.',
+              'success'
+            )
+          }
+          document.location.href= href;
+        }   
+      })
+    })
+  </script>
+
+    <!-- <div id="paginador" class=""></div>-->
+    <script src="../package/dist/sweetalert2.all.js"></script>
+  <script src="../package/dist/sweetalert2.all.min.js"></script>
 
 </html>
