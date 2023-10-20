@@ -3,6 +3,7 @@ require_once ("../includes/_db.php");
 session_start();
 error_reporting(0);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,28 +39,32 @@ error_reporting(0);
 
                     <!-- Navbar -->
                     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
-                            <div class="container-fluid">
+                            <div class="d-flex justify-content-start">
                                 <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
                                 <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li>
                                             <a class="nav-link" href="../Index.php">Inicio</a></li>
-                                            <a class="nav-link" href="Nosotros.php">Nosotros</a>
-                                            <a class="nav-link" href="Menu.php">Menu</a>
-                                            <a class="nav-link" href="Reservas.php">Reserva</a>
-                                            <a class="nav-link" href="Contacto.php">Contacto</a>
+                                        <a class="nav-link" href="Nosotros.php">Nosotros</a>
+                                        <a class="nav-link" href="Menu.php">Menu</a>
+                                        <a class="nav-link" href="Reservas.php">Reserva</a>
+                                        <a class="nav-link" href="Contacto.php">Contacto</a>
                                         </li>
-                                        
+
                                     </ul>
 
                                     <a class="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;">Iniciar Sesión</a>
-                                    
+
                                 </div>
                             </div>
+
                         </nav>
                         <!-- Navbar -->
                         <br>
@@ -67,15 +72,25 @@ error_reporting(0);
                         <br>
                     <!-- ======= Menu Section ======= -->
                     <section id="Menu" class="Menu">
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                      <h1> HOLA</h1>
-                        
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 d-flex align-items-center" style="">
+                            <?php
+                            $conexion=$GLOBALS['conex'];
+                            $fila = null;
+                            $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio, productos.Imagen FROM productos");
+                            while($fila=mysqli_fetch_assoc($SQL)):
+                                ?>
+                                   <div class="col p-2">
+                                       <div class="card ml-4" style="width: 18rem;">
+                                           <img src="<?php echo $fila['Imagen']?>" class="card-img-top" alt="...">
+                                           <div class="card-body">
+                                               <h5 class="card-title"><?php echo $fila['Nombre']?></h5>
+                                               <p class="card-text"><?php echo $fila['Descripcion']?></p>
+                                               <a href="#" class="btn btn-primary">Añadir al Carrito</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                            <?php endwhile;?>
+                        </div>
                     </section>
                     <!-- End Menu Section -->
 
