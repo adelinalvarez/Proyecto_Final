@@ -5,7 +5,7 @@ error_reporting(0);
 
 $validarusuario = $_SESSION['Correo'];
 
-if( $validarusuario == null || $validarusuario = ''){
+if ($validarusuario == null || $validarusuario == '') {
 
   header("Location: ../index.php");
   die();
@@ -37,11 +37,9 @@ if( $validarusuario == null || $validarusuario = ''){
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/dashboard.css" rel="stylesheet">
 
-        <script src="acciones/cargarImagen.js"></script>
-
-
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 
     </head>
 
@@ -218,6 +216,7 @@ if( $validarusuario == null || $validarusuario = ''){
                                         <thead  style="color: white; text-align: center; background-color:black">
                                             <tr>
                                                 <th>ID</th>
+                                                <th>Imagen</th>
                                                 <th>Nombre</th>
                                                 <th>Descripcion</th>
                                                 <th>Categoria</th>
@@ -229,12 +228,12 @@ if( $validarusuario == null || $validarusuario = ''){
                                             
                                             <?php
                                                 $conexion=$GLOBALS['conex'];                
-                                                $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio FROM productos");
+                                                $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Imagen, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio FROM productos");
                                                 while($fila=mysqli_fetch_assoc($SQL)):
                                             ?>
                                             <tr>
                                                 <td><?php echo $fila['Id']; ?></td>
-                                                <td><?php echo $fila['Nombre']; ?></td>
+                                                <td> <img src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>" alt="Imagen del producto" style="max-width: 100px;"></td>                                            <td><?php echo $fila['Nombre']; ?></td>
                                                 <td><?php echo $fila['Descripcion']; ?></td>
                                                 <td><?php echo $fila['Categoria']; ?></td>
                                                 <td><?php echo $fila['Precio']; ?></td>
@@ -345,19 +344,15 @@ if( $validarusuario == null || $validarusuario = ''){
                     </div>
                     <div class="modal-body">
 
-                        <form  action="../includes/validarproductos.php" method="POST">
+                        <form  action="../includes/validarproductos.php" method="POST" enctype="multipart/form-data">
                             <div>
                                 <label class="css-label" for="customFile">Agregar Imagen</label>
-                                <input type="file" name="Imagen" id="Imagen" class="css-input" style="display: none;" required />
-                                <button onclick="seleccionarImagen()"  class="css-input">Seleccionar Imagen</button>
-                                <div id="vistaPrevia">
-
+                                <input type="file" name="Imagen" id="Imagen" class="css-input" style= "display: block; width: 100%;"/>
                             </div>
-
-                            </div>
+                            
                             <div>
                                 <label for="Nombre" class="css-label"> Nombre: </label>
-                                <input type="text" id="Nombre" name="Nombre" class="css-input" style= " display: block; width: 100%;" required >
+                                <input type="text" id="Nombre" name="Nombre" class="css-input" style= "display: block; width: 100%;" required >
                             </div>
                             
                             <div>
