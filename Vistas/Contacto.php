@@ -36,76 +36,101 @@ error_reporting(0);
                 <!-- Main Content -->
                 <div id="content">
 
-            </div>
+                    <!-- Navbar -->
+                    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
+                            <div class="container-fluid">
+                                <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
+                                <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li>
+                                            <a class="nav-link" href="../Index.php">Inicio</a></li>
+                                            <a class="nav-link" href="Nosotros.php">Nosotros</a>
+                                            <a class="nav-link" href="Menu.php">Menu</a>
+                                            <a class="nav-link" href="Reservas.php">Reserva</a>
+                                            <a class="nav-link" href="Contacto.php">Contacto</a>
+                                        </li>
+                                        
+                                    </ul>
 
-                    
-                    
-            <!-- ======= Contact Section ======= -->
-            <section id="contact" class="contact">
-            <br>
-
-                <div class="container" data-aos="fade-up">
-                    <div class="row">
-
-                        <div class="col-lg-5 d-flex align-items-stretch">
-                            <div class="info">
-                                <div class="address">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <h4>Ubicación:</h4>
-                                    <p>Santome, Esq. 16 De Agosto, Baní 94000</p>
-                                </div>
-
-                                <div class="email">
-                                    <i class="bi bi-envelope"></i>
-                                    <h4>Correo:</h4>
-                                    <p>donahildabani@gmail.com</p>
-                                </div>
-
-                                <div class="Telefono">
-                                    <i class="bi bi-phone"></i>
-                                    <h4>Telefono:</h4>
-                                    <p>+1 809-522-5146</p>
-                                </div>
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                            <div class="info">
-
-                                <form  action="../includes/validarcontacto.php" method="POST">
-                                    <div>
-                                        <label for="Nombre" class="css-label"> Nombre Completo: </label>
-                                        <input type="text" id="Nombre" name="Nombre" class="css-input" style= " display: block; width: 100%;" required >
-                                    </div>
+                                    <a class="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;">Iniciar Sesión</a>
                                     
-                                    <div>
-                                        <label for="Correo" class="css-label"> Correo:</label>
-                                        <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required >
-                                    </div>
-
-                                                        
-                                    <div>
-                                        <label for="Asunto" class="css-label">Asunto:</label>
-                                        <input type="text" id="Asunto" name="Asunto" class="css-input" style= " display: block; width: 100%;" required >
-                                    </div>
-                                    <div>
-                                        <label for="Mensaje" class="css-label">Mensaje:</label>
-                                        <textarea id="Mensaje" name="Mensaje" rows="10" class="css-input form-control" required> </textarea>
-                                    </div>
-
-                                    <br>
-
-                                    <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
-                                </form> 
+                                </div>
                             </div>
+                        </nav>
+                        <!-- Navbar -->
+                        <br>
+                        <br>
+                        <br>
+                    <!-- ======= Contact Section ======= -->
+                    <section id="contact" class="contact">
+
+                        <div class="container" data-aos="fade-up">
+                            <div class="row">
+
+                                <div class="col-lg-5 d-flex align-items-stretch">
+                                    <div class="info">
+                                        <div class="address">
+                                            <i class="bi bi-geo-alt"></i>
+                                            <h4>Ubicación:</h4>
+                                            <p>Santome, Esq. 16 De Agosto, Baní 94000</p>
+                                        </div>
+
+                                        <div class="email">
+                                            <i class="bi bi-envelope"></i>
+                                            <h4>Correo:</h4>
+                                            <p>donahildabani@gmail.com</p>
+                                        </div>
+
+                                        <div class="Telefono">
+                                            <i class="bi bi-phone"></i>
+                                            <h4>Telefono:</h4>
+                                            <p>+1 809-522-5146</p>
+                                        </div>
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                                    <div class="info">
+
+                                        <form  action="../includes/validarcontacto.php" method="POST">
+                                            <div>
+                                                <label for="Nombre" class="css-label"> Nombre Completo: </label>
+                                                <input type="text" id="Nombre" name="Nombre" class="css-input" style= " display: block; width: 100%;" required >
+                                            </div>
+                                            
+                                            <div>
+                                                <label for="Correo" class="css-label"> Correo:</label>
+                                                <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required >
+                                            </div>
+
+                                                                
+                                            <div>
+                                                <label for="Asunto" class="css-label">Asunto:</label>
+                                                <input type="text" id="Asunto" name="Asunto" class="css-input" style= " display: block; width: 100%;" required >
+                                            </div>
+                                            <div>
+                                                <label for="Mensaje" class="css-label">Mensaje:</label>
+                                                <textarea id="Mensaje" name="Mensaje" rows="10" class="css-input form-control" required> </textarea>
+                                            </div>
+
+                                            <br>
+
+                                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
+                                        </form> 
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
-
-                    </div>
-
-                </div>
-            </section><!-- End Contact Section -->
+                    </section>
+                    <!-- End Contact Section -->
 
                 </div>
                 <!-- End of Main Content -->
@@ -175,9 +200,6 @@ error_reporting(0);
             </div>
 
         </footer><!-- End Footer -->
-
-
-        <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <div id="preloader"></div>
 

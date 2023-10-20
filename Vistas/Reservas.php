@@ -36,6 +36,35 @@ error_reporting(0);
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
+                                        <!-- Navbar -->
+                                        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
+                            <div class="container-fluid">
+                                <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
+                                <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li>
+                                            <a class="nav-link" href="../Index.php">Inicio</a></li>
+                                            <a class="nav-link" href="Nosotros.php">Nosotros</a>
+                                            <a class="nav-link" href="Menu.php">Menu</a>
+                                            <a class="nav-link" href="Reservas.php">Reserva</a>
+                                            <a class="nav-link" href="Contacto.php">Contacto</a>
+                                        </li>
+                                        
+                                    </ul>
+
+                                    <a class="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;">Iniciar Sesión</a>
+                                    
+                                </div>
+                            </div>
+                        </nav>
+                        <!-- Navbar -->
+                        <br>
+                        <br>
+                        <br>
                     
                     <!-- ======= Contact Section ======= -->
                     <section id="contact" class="contact">
@@ -190,9 +219,6 @@ error_reporting(0);
             </div>
 
         </footer><!-- End Footer -->
-
-
-        <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <div id="preloader"></div>
 

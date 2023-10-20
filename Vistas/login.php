@@ -9,6 +9,8 @@ error_reporting(0);
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width">
+        <link rel="icon" href="../assets/Imagenes/Logo.png">
+
 
         <title>Login</title>
         <style>
