@@ -363,7 +363,20 @@ if ($validarusuario == null || $validarusuario == '') {
                                                 
                             <div>
                                 <label for="Categoria" class="css-label">Categoria:</label>
-                                <input type="text" id="Categoria" name="Categoria" class="css-input" style= " display: block; width: 100%;" required >
+                                <select name="Categoria" id="Categoria" class="css-input" style= " display: block; width: 100%;" required> 
+                                    <option value="Tapas">Tapas</option>
+                                    <option value="Paella">Paella</option>
+                                    <option value="Pa Compartir">Pa Compartir</option>
+                                    <option value="Hamburger">Hamburger </option>
+                                    <option value="Mofongos">Mofongos</option>
+                                    <option value="Mar">Mar</option>
+                                    <option value="Pasta">Pasta</option>
+                                    <option value="Pa Compaña">Pa Compaña</option>
+                                    <option value="Pa Los Chiquitines ">Pa Los Chiquitines </option>
+                                    <option value="Pa que te Endulces ">Pa que te Endulces </option>
+                                    <option value="Brunch">Brunch</option>
+
+                                </select>
                             </div>
 
                             <div>
