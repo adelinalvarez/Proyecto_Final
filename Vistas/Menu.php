@@ -72,20 +72,22 @@ error_reporting(0);
                         <br>
                     <!-- ======= Menu Section ======= -->
                     <section id="Menu" class="Menu">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 d-flex align-items-center" style="">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 d-flex align-items-center container-lg my-15" style="">
                             <?php
                             $conexion=$GLOBALS['conex'];
                             $fila = null;
                             $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio, productos.Imagen FROM productos");
                             while($fila=mysqli_fetch_assoc($SQL)):
                                 ?>
-                                   <div class="col p-2">
-                                       <div class="card ml-4" style="width: 18rem;">
+                                   <div class="col p-2 ">
+                                       <div class="card ml-4 shadow" style="width: 18rem;">
                                            <img src="<?php echo $fila['Imagen']?>" class="card-img-top" alt="...">
                                            <div class="card-body">
-                                               <h5 class="card-title"><?php echo $fila['Nombre']?></h5>
-                                               <p class="card-text"><?php echo $fila['Descripcion']?></p>
+                                               <h5 class="card-title css-label text-center"><?php echo $fila['Nombre']?></h5>
+                                               <p class="card-text text-center"><?php echo $fila['Descripcion']?></p>
+                                               <p class="card-text text-center"><?php echo $fila['Precio']?></p>
                                                <a href="#" class="btn btn-primary">Añadir al Carrito</a>
+                                               <a href="#" class="carrito"><i class="bi bi-cart-check-fill"></i></a>
                                            </div>
                                        </div>
                                    </div>

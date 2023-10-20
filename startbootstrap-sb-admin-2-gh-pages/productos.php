@@ -37,6 +37,7 @@ if( $validarusuario == null || $validarusuario = ''){
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/dashboard.css" rel="stylesheet">
 
+        <script src="acciones/cargarImagen.js"></script>
 
 
         <!-- Custom styles for this page -->
@@ -346,6 +347,15 @@ if( $validarusuario == null || $validarusuario = ''){
 
                         <form  action="../includes/validarproductos.php" method="POST">
                             <div>
+                                <label class="css-label" for="customFile">Agregar Imagen</label>
+                                <input type="file" name="Imagen" id="Imagen" class="css-input" style="display: none;" required />
+                                <button onclick="seleccionarImagen()"  class="css-input">Seleccionar Imagen</button>
+                                <div id="vistaPrevia">
+
+                            </div>
+
+                            </div>
+                            <div>
                                 <label for="Nombre" class="css-label"> Nombre: </label>
                                 <input type="text" id="Nombre" name="Nombre" class="css-input" style= " display: block; width: 100%;" required >
                             </div>
@@ -375,7 +385,8 @@ if( $validarusuario == null || $validarusuario = ''){
                 </div>
             </div>
         </div>
-
+        
+                            
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
