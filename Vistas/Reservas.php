@@ -36,10 +36,10 @@ error_reporting(0);
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
-                                        <!-- Navbar -->
-                                        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
+                        <!-- Navbar -->
+                        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
                             <div class="container-fluid">
-                                <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
+                                <img src ="../assets/Imagenes/Logo-Hilda.png" style="width: 28px; height: 25px;">
                                 <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
                                     <span class="navbar-toggler-icon"></span>

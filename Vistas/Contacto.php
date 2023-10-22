@@ -24,22 +24,23 @@ error_reporting(0);
         <!-- Custom styles for this template -->
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/dashboard.css" rel="stylesheet">
+        <link href="../assets/css/veamos.css" rel="stylesheet">
+        
+
         
     </head>
 
     <body id="page-top">
         <!-- Page Wrapper -->
         <div id="wrapper">
-
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
-
                     <!-- Navbar -->
                     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
                             <div class="container-fluid">
-                                <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
+                                <img src ="../assets/Imagenes/Logo-Hilda.png" style="width: 28px; height: 25px;">
                                 <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
                                     <span class="navbar-toggler-icon"></span>
@@ -62,9 +63,12 @@ error_reporting(0);
                             </div>
                         </nav>
                         <!-- Navbar -->
-                        <br>
-                        <br>
-                        <br>
+                    
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+        
                     <!-- ======= Contact Section ======= -->
                     <section id="contact" class="contact">
 

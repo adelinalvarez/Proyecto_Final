@@ -32,12 +32,14 @@
   color: #fff;
 }
 
+
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 .footer {
   font-size: 14px;
-  background-color: #1f1f24;
+  background-color: #000000;
   padding: 50px 0;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -94,7 +96,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 16px;
   color: #fff;
   margin-right: 10px;
@@ -109,7 +111,7 @@
 .footer .copyright {
   text-align: center;
   padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer .credits {
