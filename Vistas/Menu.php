@@ -3,12 +3,12 @@ require_once ("../includes/_db.php");
 session_start();
 error_reporting(0);
 
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,147 +25,143 @@ error_reporting(0);
         <!-- Custom styles for this template -->
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/dashboard.css" rel="stylesheet">
-        
+
     </head>
 
-    <body id="page-top">
-        <!-- Page Wrapper -->
-        <div id="wrapper">
+    <body>
 
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
-                <!-- Main Content -->
-                <div id="content">
+        <header style="position: fixed; width: 100%; z-index: 999">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
+                <div class="d-flex justify-content-start">
+                    <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
+                    <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
 
-                    <!-- Navbar -->
-                    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
-                            <div class="d-flex justify-content-start">
-                                <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
-                                <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                        <li>
-                                            <a class="nav-link" href="../Index.php">Inicio</a></li>
-                                        <a class="nav-link" href="Nosotros.php">Nosotros</a>
-                                        <a class="nav-link" href="Menu.php">Menu</a>
-                                        <a class="nav-link" href="Reservas.php">Reserva</a>
-                                        <a class="nav-link" href="Contacto.php">Contacto</a>
-                                        </li>
-
-                                    </ul>
-
-                                    <a class="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;">Iniciar Sesión</a>
-
-                                </div>
-                            </div>
-
-                        </nav>
-                        <!-- Navbar -->
-
-                    <!-- ======= Menu Section ======= -->
-                    <div style="padding-top: 100px">
-                        <h5 class="css-label text-center"> MENU </h5>
+                <div class="d-flex justify-content-end">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li>
+                                <a class="nav-link" href="../Index.php">Inicio</a></li>
+                                <a class="nav-link" href="Nosotros.php">Nosotros</a>
+                                <a class="nav-link" href="Menu.php">Menu</a>
+                                <a class="nav-link" href="Reservas.php">Reserva</a>
+                                <a class="nav-link" href="Contacto.php">Contacto</a>
+                            </li>
+                        </ul>
+                        <a class="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;">Iniciar Sesión</a>
                     </div>
-                    <div class="card-group align-items-center row-cols-md-3">
-                        <?php
-                        $conexion=$GLOBALS['conex'];
-                        $fila = null;
-                        $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio, productos.Imagen FROM productos");
-                        while($fila=mysqli_fetch_assoc($SQL)):
-                            ?>
-                                <div class="col p-4">
-                                    <div class="card ml-4 shadow" style="width: 20rem;">
-                                        <img src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>" class="card-img-top" alt="..." style="width: 150px ">
-                                        <div class="card-body">
-                                            <h5 class="card-title css-label text-center"><?php echo $fila['Nombre']?></h5>
-                                            <p class="card-text text-center"><?php echo $fila['Descripcion']?></p>
-                                            <p class="card-text text-center"><?php echo $fila['Precio']?></p>
-                                            <a href="#" class="btn btn-primary">Añadir al Carrito</a>
-                                            <a href="#" class="carrito"><i class="bi bi-cart-check-fill"></i></a>
-                                        </div>
+                </div>
+            </nav>
+            <!-- Navbar -->
+
+        </header>
+
+        <article style="padding-top: 90px" id ="Inicio"> 
+
+            <div class="container-lg my-15">
+
+                <!-- cards de servicios-->
+
+                <div style =" scroll-margin-top: 90px;">
+                    <p class="css-label text-center"> Menu </p>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <?php
+                    $conexion=$GLOBALS['conex'];
+                    $fila = null;
+                    $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio, productos.Imagen FROM productos");
+                    while($fila=mysqli_fetch_assoc($SQL)):
+                        ?>
+                            <div class="col">
+                                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:31rem">
+                                    <div class="card-header bg-white border-white">
+                                        <img src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>" class="card-img-top">
+                                    </div>
+
+                                    <div class="card-body bg-white border-white">
+                                        <h5 class="card-title css-label text-center"><?php echo $fila['Nombre']?></h5>
+                                    </div>
+                                    <div class="card-footer bg-white border-white">
+                                        <p class="card-text text-center"><?php echo $fila['Precio']?></p>
+                                        <input type="number" id="Cantidad" name="Cantidad" class="css-input" style= " display: block; width: 100%;" required >
+                                    </div>
+                                    <div class="card-footer bg-white border-white">
+                                        <a class="btn" href="acciones/mostrar.php?id=<?php echo $fila['id']?> "> <i class="bi bi-eye"  style="color: black"> </i></a> 
+                                        <a href="#" class="carrito"><i class="bi bi-cart-check-fill"></i></a>
                                     </div>
                                 </div>
-                        <?php endwhile;?>
+                            </div>
+                    <?php endwhile;?>
                     </div>
-                    <!-- End Menu Section -->
-
-                </div>
-                <!-- End of Main Content -->
-
-            </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- ======= Footer ======= -->
-        <br>
-        <footer id="footer" class="footer">
-
-            <div class="container">
-                <div class="row gy-3">
-                    <div class="col-lg-3 col-md-6 d-flex">
-                        <i class="bi bi-geo-alt icon"></i>
-                    
-                        <div>
-                            <h4>Direccion</h4>
-                            <p>
-                            Santome #49 <br>
-                            Esq. 16 de Agosto, Baní Peravia<br>
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links d-flex">
-                        <i class="bi bi-telephone icon"></i>
-                        <div>
-                            <h4>Reservaciones</h4>
-                            <p>
-                                <strong>Telefono:</strong> +1 809-522-5146<br>
-                                <strong>Email:</strong> Donahildabani@gmail.com<br>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links d-flex">
-                        <i class="bi bi-clock icon"></i>
-                        <div>
-                            <h4>Horarios</h4>
-                            <p>
-                                <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Siguenos</h4>
-                        <div class="social-links d-flex">
-                            <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
-                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
-                        </div>
-                    </div>
-
-                </div>
+              
             </div>
 
-            <div class="container">
-                <div class="copyright">
-                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+            <!-- ======= Footer ======= -->
+            <br>
+            <footer id="footer" class="footer">
+
+                <div class="container">
+                    <div class="row gy-3">
+                        <div class="col-lg-3 col-md-6 d-flex">
+                            <i class="bi bi-geo-alt icon"></i>
+                        
+                            <div>
+                                <h4>Direccion</h4>
+                                <p>
+                                Santome #49 <br>
+                                Esq. 16 de Agosto, Baní Peravia<br>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links d-flex">
+                            <i class="bi bi-telephone icon"></i>
+                            <div>
+                                <h4>Reservaciones</h4>
+                                <p>
+                                    <strong>Telefono:</strong> +1 809-522-5146<br>
+                                    <strong>Email:</strong> Donahildabani@gmail.com<br>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links d-flex">
+                            <i class="bi bi-clock icon"></i>
+                            <div>
+                                <h4>Horarios</h4>
+                                <p>
+                                    <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links">
+                            <h4>Siguenos</h4>
+                            <div class="social-links d-flex">
+                                <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
+                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
 
-        </footer><!-- End Footer -->
+                <div class="container">
+                    <div class="copyright">
+                        &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                    </div>
+                </div>
 
-        <div id="preloader"></div>
-
+            </footer>
+            <!-- End Footer -->     
+        </article>
         <!-- Vendor JS Files -->
         <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/vendor/aos/aos.js"></script>
@@ -175,6 +171,5 @@ error_reporting(0);
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>
-        
-    </body>
+  </body>
 </html>

@@ -381,7 +381,7 @@ if ($validarusuario == null || $validarusuario == '') {
 
                             <div>
                                 <label for="Precio" class="css-label">Precio:</label>
-                                <input type="text" id="Precio" name="Precio" class="css-input" style= " display: block; width: 100%;" required >
+                                <input type="number" id="Precio" name="Precio" class="css-input" style= " display: block; width: 100%;" required >
                             </div>
                             <br>
 
