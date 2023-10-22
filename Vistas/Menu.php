@@ -78,22 +78,61 @@ error_reporting(0);
                     while($fila=mysqli_fetch_assoc($SQL)):
                         ?>
                             <div class="col">
-                                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:31rem">
-                                    <div class="card-header bg-white border-white">
+                                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:26rem">
+                                    <div class="card-body bg-white border-white">
                                         <img src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>" class="card-img-top">
+                                        <h5 class="card-title css-label text-center mt-2"><?php echo $fila['Nombre']?></h5>
+
+
+                                        <p class="card-text text-center">$<?php echo $fila['Precio']?></p>
+                                        <div class="d-flex justify-content-center align-items-center p-2">
+                                            <button
+                                                    class="button-count btn"
+                                                    style="background-color: #f1e645; color: black;"
+                                                    type="button"
+                                                    id="button_sum"
+                                            >
+                                                +
+                                            </button>
+
+                                            <input
+                                                    type="number"
+                                                    id="valor<?php echo $fila['Id']?>"
+                                                    value="1"
+                                                    name="Cantidad"
+                                                    class="css-input ml-2 mr-2"
+                                                    required
+                                                    style="width: 80px"
+                                            />
+
+                                            <button
+                                                    class="button-count btn btn-primary"
+                                                    style="background-color: #f1e645; color: black;"
+                                                    type="button"
+                                                    id="boton_restar"
+                                            >
+                                                -
+                                            </button>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a href="#">
+                                                    <img
+                                                            src="../assets/Imagenes/Menu/eye.svg"
+                                                            alt="eye"
+                                                            style="width: 40px; height: 40px;"
+                                                            class="ml-2"
+                                                    >
+                                                </a>
+                                                <a href="#" class="carrito">
+                                                    <img
+                                                            src="../assets/Imagenes/Menu/cart-check-fill.svg"
+                                                            style="width: 40px; height: 40px;"
+                                                            alt="cart">
+                                                </a>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div class="card-body bg-white border-white">
-                                        <h5 class="card-title css-label text-center"><?php echo $fila['Nombre']?></h5>
-                                    </div>
-                                    <div class="card-footer bg-white border-white">
-                                        <p class="card-text text-center"><?php echo $fila['Precio']?></p>
-                                        <input type="number" id="Cantidad" name="Cantidad" class="css-input" style= " display: block; width: 100%;" required >
-                                    </div>
-                                    <div class="card-footer bg-white border-white">
-                                        <a class="btn" href="acciones/mostrar.php?id=<?php echo $fila['id']?> "> <i class="bi bi-eye"  style="color: black"> </i></a> 
-                                        <a href="#" class="carrito"><i class="bi bi-cart-check-fill"></i></a>
-                                    </div>
                                 </div>
                             </div>
                     <?php endwhile;?>
@@ -162,6 +201,49 @@ error_reporting(0);
             </footer>
             <!-- End Footer -->     
         </article>
+
+        <!-- My Js -->
+
+        <script type="text/javascript">
+
+            const button_rest = document.getElementById("boton_restar");
+            const button_sum = document.getElementById("button_sum");
+            const buttons = document.querySelectorAll(".button-count");
+
+            buttons.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    if (event.target.id === "boton_restar") {
+                        disminuirValor(event);
+                    } else if (event.target.id === "button_sum") {
+                        aumentarValor(event);
+                    }
+                });
+            });
+
+            function aumentarValor(event) {
+                console.log(event?.target?.nextElementSibling?.id);
+                const input = document.getElementById(event?.target?.nextElementSibling?.id);
+                let valorActual = parseInt(input.value);
+                valorActual++;
+                input.value = valorActual;
+            }
+
+            function disminuirValor(event) {
+                const input = document.getElementById(event?.target?.previousElementSibling?.id);
+                let valorActual = parseInt(input.value);
+                if (valorActual === 1) return
+                valorActual-=1;
+                input.value = valorActual;
+            }
+
+            function addEventListeners() {
+
+
+            }
+
+
+        </script>
+
         <!-- Vendor JS Files -->
         <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/vendor/aos/aos.js"></script>
