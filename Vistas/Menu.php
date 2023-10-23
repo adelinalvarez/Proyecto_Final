@@ -25,42 +25,63 @@ error_reporting(0);
         <!-- Custom styles for this template -->
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/dashboard.css" rel="stylesheet">
+        <link href="../assets/css/veamos.css" rel="stylesheet">
+
+        <!-- MDB - Nav -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 
     </head>
 
     <body>
 
-        <header style="position: fixed; width: 100%; z-index: 999">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #1f1f24; position: fixed; width: 100%; z-index: 999">
-                <div class="d-flex justify-content-start">
-                    <img src ="../assets/Imagenes/Logo.png" style="width: 28px; height: 25px;">
-                    <a href="Index.php" class="navbar-brand" style="color: white">Doña Hilda Tapas and Grill</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-black">
+            <!-- Container wrapper -->
+            <div class="container">
+                <!-- Navbar brand -->
+                <a class="navbar-brand me-2" href="../index.php">
+                    <img src="../assets/Imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                </a>
 
-                <div class="d-flex justify-content-end">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li>
-                                <a class="nav-link" href="../Index.php">Inicio</a></li>
-                                <a class="nav-link" href="Nosotros.php">Nosotros</a>
-                                <a class="nav-link" href="Menu.php">Menu</a>
-                                <a class="nav-link" href="Reservas.php">Reserva</a>
-                                <a class="nav-link" href="Contacto.php">Contacto</a>
-                            </li>
-                        </ul>
-                        <a class="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;">Iniciar Sesión</a>
+                <!-- Toggle button -->
+                <button class="navbar-toggler" 
+                    type="button" 
+                    data-mdb-toggle="collapse" 
+                    data-mdb-target="#navbarButtonsExample"
+                    aria-controls="navbarButtonsExample"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars" style="color:white"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                        <a class="nav-link" href="../index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
+
+                    <div class="d-flex align-items-center">
+                        <a class="nav-link" href="../Index.php">Inicio</a>
+                        <a class="nav-link" href="Nosotros.php">Nosotros</a>
+                        <a class="nav-link" href="Menu.php">Menu</a>
+                        <a class="nav-link" href="Reservas.php">Reserva</a>
+                        <a class="nav-link" href="Contacto.php">Contacto</a>
+                        <a type="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
                     </div>
                 </div>
-            </nav>
-            <!-- Navbar -->
-
-        </header>
-
-        <article style="padding-top: 90px" id ="Inicio"> 
+                <!-- Collapsible wrapper -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        <br>
+        <article> 
 
             <div class="container-lg my-15">
 
@@ -82,56 +103,55 @@ error_reporting(0);
                                     <div class="card-body bg-white border-white">
                                         <img src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>" class="card-img-top">
                                         <h5 class="card-title css-label text-center mt-2"><?php echo $fila['Nombre']?></h5>
-
-
                                         <p class="card-text text-center">$<?php echo $fila['Precio']?></p>
-                                        <div class="d-flex justify-content-center align-items-center p-2">
-                                            <button
-                                                    class="button-count btn"
-                                                    style="background-color: #f1e645; color: black;"
-                                                    type="button"
-                                                    id="button_sum"
-                                            >
-                                                +
-                                            </button>
-
-                                            <input
-                                                    type="number"
-                                                    id="valor<?php echo $fila['Id']?>"
-                                                    value="1"
-                                                    name="Cantidad"
-                                                    class="css-input ml-2 mr-2"
-                                                    required
-                                                    style="width: 80px"
-                                            />
-
-                                            <button
-                                                    class="button-count btn btn-primary"
-                                                    style="background-color: #f1e645; color: black;"
-                                                    type="button"
-                                                    id="boton_restar"
-                                            >
-                                                -
-                                            </button>
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <a href="#">
-                                                    <img
-                                                            src="../assets/Imagenes/Menu/eye.svg"
-                                                            alt="eye"
-                                                            style="width: 40px; height: 40px;"
-                                                            class="ml-2"
-                                                    >
-                                                </a>
-                                                <a href="#" class="carrito">
-                                                    <img
-                                                            src="../assets/Imagenes/Menu/cart-check-fill.svg"
-                                                            style="width: 40px; height: 40px;"
-                                                            alt="cart">
-                                                </a>
-                                            </div>
-                                        </div>
-
                                     </div>
+                                    
+                                    <div class="d-flex justify-content-center align-items-center p-1">
+                                        <button
+                                                class="button-count btn"
+                                                style="background-color: #f1e645; color: black;"
+                                                type="button"
+                                                id="button_sum"
+                                            >
+                                            +
+                                        </button>
+
+                                        <input
+                                                type="number"
+                                                id="valor<?php echo $fila['Id']?>"
+                                                value="1"
+                                                name="Cantidad"
+                                                class="css-input ml-2 mr-2"
+                                                required
+                                                style="width: 80px"
+                                        />
+
+                                        <button
+                                                class="button-count btn btn-primary"
+                                                style="background-color: #f1e645; color: black;"
+                                                type="button"
+                                                id="boton_restar"
+                                            >
+                                            -
+                                        </button>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <a href="#">
+                                                <img
+                                                        src="../assets/Imagenes/Menu/eye.svg"
+                                                        alt="eye"
+                                                        style="width: 40px; height: 40px;"
+                                                        class="ml-2"
+                                                >
+                                            </a>
+                                            <a href="#" class="carrito">
+                                                <img
+                                                        src="../assets/Imagenes/Menu/cart-check-fill.svg"
+                                                        style="width: 40px; height: 40px;"
+                                                        alt="cart">
+                                            </a>
+                                        </div>
+                                    </div>
+
 
                                 </div>
                             </div>

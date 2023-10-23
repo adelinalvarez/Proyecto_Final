@@ -21,37 +21,59 @@
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/veamos.css" rel="stylesheet">
+    <!-- MDB - Nav -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
     
   </head>
 
   <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-black">
+      <!-- Container wrapper -->
+      <div class="container">
+          <!-- Navbar brand -->
+          <a class="navbar-brand me-2" href="Index.php">
+              <img src="assets/Imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+          </a>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
-      <div class="container d-flex align-items-center justify-content-between">
-        <a href="index.php" class="logo d-flex align-items-center me-auto me-lg-0">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.png" alt=""> -->
-          <h4 class="logo me-auto"><a href="index.php"> <img src="assets/Imagenes/Logo.png"> Doña Hilda Tapas and Grill </a></h4>
-        </a>
+          <!-- Toggle button -->
+          <button class="navbar-toggler" 
+              type="button" 
+              data-mdb-toggle="collapse" 
+              data-mdb-target="#navbarButtonsExample"
+              aria-controls="navbarButtonsExample"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <i class="fas fa-bars" style="color:white"></i>
+          </button>
 
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto" href="Index.php">Inicio</a></li>
-            <li><a class="nav-link scrollto" href="Vistas/Nosotros.php">Nosotros</a></li>
-            <li><a class="nav-link scrollto" href="Vistas/Menu.php">Menu</a></li>
-            <li><a class="nav-link scrollto" href="Vistas/Reservas.php">Reserva</a></li>
-            <li><a class="nav-link   scrollto" href="Vistas/Contacto.php">Contacto</a></li>
-          </ul>
-        </nav><!-- .navbar -->
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarButtonsExample">
+              <!-- Left links -->
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                  <a class="nav-link" href="Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
+                  </li>
+              </ul>
+              <!-- Left links -->
 
-        <a class="btn-book-a-table" href="Vistas/login.php">Iniciar Sesión</a>
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
+              <div class="d-flex align-items-center">
+                  <a class="nav-link" href="Index.php">Inicio</a>
+                  <a class="nav-link" href="Vistas/Nosotros.php">Nosotros</a>
+                  <a class="nav-link" href="Vistas/Menu.php">Menu</a>
+                  <a class="nav-link" href="Vistas/Reservas.php">Reserva</a>
+                  <a class="nav-link" href="Vistas/Contacto.php">Contacto</a>
+                  <a type="button" href="Vistas/login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
+              </div>
+          </div>
+          <!-- Collapsible wrapper -->
       </div>
-    </header>
-    <!-- End Header -->
+      <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
 
     <!-- ======= Carousel Section ======= -->
       <section style="background-size: 100% 100%; background-repeat: no-repeat; min-height: 600px;">
