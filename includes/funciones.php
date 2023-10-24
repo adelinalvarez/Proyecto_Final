@@ -14,8 +14,8 @@ if (isset($_POST['accion'])){
     
             break;
 
-            case 'editar_participantes';
-            editar_participantes();
+            case 'editar_reservas';
+            editar_reservas();
     
             break;
 
@@ -57,15 +57,15 @@ function eliminar_registro() {
     header('Location: ../Views/user.php');
 
 }
-function editar_participantes() {
+function editar_reservas() {
     $conexion=$GLOBALS['conex']; 
     extract($_POST);
-    $consulta="UPDATE participantes SET recinto = '$recinto',nombre = '$nombre', rol = '$rol', matricula = '$matricula',
-    servicio ='$servicio', tipoprestamo = '$tipoprestamo', tipomaterial = '$tipomaterial', titulo = '$titulo', autor = '$autor', registro = '$registro' WHERE id = '$id' ";
+    $consulta="UPDATE reservas SET Nombre = '$Nombre',Correo = '$Correo', Celular = '$Celular', Evento = '$Evento',
+    Cantidad ='$Cantidad', Fecha = '$Fecha', Hora = '$Hora', Area = '$Area', Descripcion = '$Descripcion', Confirmacion = '$Confirmacion' WHERE Id = '$Id' ";
     mysqli_query($conexion, $consulta);
 
 
-    header('Location: ../Views/user.php');
+    header('Location: ../startbootstrap-sb-admin-2-gh-pages/reservas.php');
 
 }
 

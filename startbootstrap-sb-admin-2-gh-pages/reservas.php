@@ -214,19 +214,16 @@ if( $validarusuario == null || $validarusuario = ''){
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Celular</th>
-                                            <th>Cantidad</th>
                                             <th>Fecha</th>
-                                            <th>Hora</th>
                                             <th>Evento</th>
-                                            <th>Area</th>
-                                            <th>Descripcion</th>
+                                            <th>Confirmación</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody style="color: black;">
                                         <?php
                                             $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT reservas.Id, reservas.Nombre, reservas.Correo, reservas.Celular, reservas.Cantidad, reservas.Fecha, reservas.Hora, reservas.Evento, reservas.Area, reservas.Descripcion FROM reservas");
+                                            $SQL=mysqli_query($conexion,"SELECT reservas.Id, reservas.Nombre, reservas.Correo, reservas.Celular, reservas.Cantidad, reservas.Fecha, reservas.Hora, reservas.Evento, reservas.Area, reservas.Descripcion, reservas.Confirmacion FROM reservas");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
@@ -234,14 +231,12 @@ if( $validarusuario == null || $validarusuario = ''){
                                             <td><?php echo $fila['Nombre']; ?></td>
                                             <td><?php echo $fila['Correo']; ?></td>
                                             <td><?php echo $fila['Celular']; ?></td>
-                                            <td><?php echo $fila['Cantidad']; ?></td>
                                             <td><?php echo $fila['Fecha']; ?></td>
-                                            <td><?php echo $fila['Hora']; ?></td>
                                             <td><?php echo $fila['Evento']; ?></td>
-                                            <td><?php echo $fila['Area']; ?></td>
-                                            <td><?php echo $fila['Descripcion']; ?></td>
+                                            <td><?php echo $fila['Confirmacion']; ?></td>
                                             <td>
-                                                <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
+                                                <a class="btn" href="acciones/mostrar_reservas.php?Id=<?php echo $fila['Id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
+                                                <a class="btn" href="acciones/editar_reservas.php?Id=<?php echo $fila['Id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
                                             </td>
                                         </tr>
                                         <?php endwhile;?>
