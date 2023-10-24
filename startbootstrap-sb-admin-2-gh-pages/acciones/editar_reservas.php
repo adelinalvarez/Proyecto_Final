@@ -1,5 +1,5 @@
 <?php
-require_once ("../includes/_db.php");
+require_once ("../../includes/_db.php");
 session_start();
 error_reporting(0);
 
@@ -7,10 +7,17 @@ $validarusuario = $_SESSION['Correo'];
 
 if( $validarusuario == null || $validarusuario = ''){
 
-  header("Location: ../index.php");
+  header("Location: ../../index.php");
   die();
   
 }
+
+$Id= $_GET['Id'];
+$conexion = $GLOBALS['conex']; 
+$consulta= "SELECT * FROM reservas WHERE Id = $Id";
+$resultado = mysqli_query($conexion, $consulta);
+$usuario = mysqli_fetch_assoc($resultado);
+
 ?>
 
 <!DOCTYPE html>
@@ -28,19 +35,19 @@ if( $validarusuario == null || $validarusuario = ''){
         <link rel="icon" href="../assets/Imagenes/Logo.png">
 
         <!-- Custom fonts for this template -->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        <link href="css/dashboard.css" rel="stylesheet">
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="../css/dashboard.css" rel="stylesheet">
 
 
 
         <!-- Custom styles for this page -->
-        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     </head>
 
@@ -52,19 +59,12 @@ if( $validarusuario == null || $validarusuario = ''){
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: black;">
 
-                <!-- Sidebar - Brand -->
-                <!--<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <img src="../assets/Imagenes/Logo.png" width="100px" alt="">
-                    </div>
-                </a> -->
-
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">
+                    <a class="nav-link" href="../index.php">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -79,14 +79,14 @@ if( $validarusuario == null || $validarusuario = ''){
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="pedidos.php">
+                    <a class="nav-link" href="../pedidos.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Pedidos</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="productos.php">
+                    <a class="nav-link" href="../productos.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Productos</span>
                     </a>
@@ -94,7 +94,7 @@ if( $validarusuario == null || $validarusuario = ''){
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="reservas.php">
+                    <a class="nav-link" href="../reservas.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Reservas</span>
                     </a>
@@ -102,7 +102,7 @@ if( $validarusuario == null || $validarusuario = ''){
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="contactos.php">
+                    <a class="nav-link" href="../contactos.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Contactos</span>
                     </a>
@@ -110,7 +110,7 @@ if( $validarusuario == null || $validarusuario = ''){
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="usuarios.php">
+                    <a class="nav-link" href="../usuarios.php">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Usuarios</span></a>
                 </li>
@@ -155,7 +155,7 @@ if( $validarusuario == null || $validarusuario = ''){
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-white-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
                                     <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
+                                        src="../img/undraw_profile.svg">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -184,72 +184,82 @@ if( $validarusuario == null || $validarusuario = ''){
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
+                        <form  action="../../includes/funciones.php" method="POST">
+                            <div class="card  shadow-custom  mb-5 bg-white rounded">
+                                <div class="card-body"> 
+                                    <p class="text-center fw-bold mx-3 mb-0 TColor" style="text-size:50px"> Detalles de la Reservas </p>
+                                    <br>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-12">
+                                                <div class="d-flex flex-column ">
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Nombre completo: </b> <?php echo $usuario['Nombre'];?></h3>
+                                                    <br>
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Tipo de Evento: </b> <?php echo $usuario['Evento'];?></h3>
+                                                    <br>
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Hora: </b> <?php echo $usuario['Hora'];?></h3>
+                                                    <br>
+                                                </div>
+                                            </div>
 
-                        <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Incorpora nuevos usuarios a tu panel de control</h1>
-                        <p class="mb-4">Permitiéndoles administrar los datos.</p>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="d-flex flex-column ">
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Correo: </b> <?php echo $usuario['Correo'];?></h3>
+                                                    <br>
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Cantidad de Personas: </b> <?php echo $usuario['Cantidad'];?></h3>
+                                                    <br>
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Área: </b> <?php echo $usuario['Area'];?></h3>
+                                                    <br>
+                                                </div>
+                                            </div>
 
-                        <!-- DataTales Example -->
-                        <?php
-                            $conexion=$GLOBALS['conex'];  
-                            $where="";
-                            if(isset($_GET['enviar'])){
-                                $busqueda = $_GET['busqueda'];
-                                if (isset($_GET['busqueda'])) {
-                                    $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
-                                }
-                            }
-                        ?>
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800"></h1>
-                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-agregar shadow-sm" data-toggle="modal" data-target="#createuser">
-                                <span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario &nbsp <i class="fa fa-plus"></i> </a>
-                            </button>
-                        </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="d-flex flex-column ">
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Celular: </b> <?php echo $usuario['Celular'];?></h3>
+                                                    <br>
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Fecha: </b> <?php echo $usuario['Fecha'];?></h3>
+                                                    <br>
+                                                    <h3 style= "font-family: Arial; font-size: 15px;"> <b> Descripción: </b> <?php echo $usuario['Descripcion'];?></h3>
+                                                    <br>
+                                                </div>
+                                            </div>
 
-                        
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="d-flex flex-column ">
+                                                    <br>
+                                                    <input type="submit" value="Guardar" id="Editar" class="btn-guardar" name="Editar">
+                                                </div>
+                                            </div>
 
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-black">Tabla de usuarios</h6>
+                                            <div class="col-lg-4 col-md-6">
+                                                <h3 style= "font-family: Arial; font-size: 15px;"> <b> Confirmacion: </b> <?php echo $usuario['Confirmacion'];?></h3>
+                                                <select class="css-input" style= " display: block; width: 100%;" name="Confirmacion" id="Confirmacion"> 
+                                                    <?php
+                                                    $opciones = array(
+                                                        "Si" => "Si",
+                                                        "No" => "No"                                  );
+                                                    foreach ($opciones as $valor => $texto) {
+                                                        $selected = ($valor == $usuario['Confirmacion']) ? 'selected' : '';
+                                                        echo '<option value="' . $valor . '" ' . $selected . '>' . $texto . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>  
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="d-flex flex-column ">
+                                                    <br>
+                                                    <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">
+                                                    <button type="button" class="btn-guardar" data-mdb-ripple-color="#000000">Anterior</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                                                                                                                        
+                                        </div>
+                                    </div>
+                                </div>              
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead  style="color: white; text-align: center; background-color:black">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Contraseña</th>
-                                                <th>Cargo</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="color: black;">
-                                            
-                                            <?php
-                                                $conexion=$GLOBALS['conex'];                
-                                                $SQL=mysqli_query($conexion,"SELECT users.Id, users.Nombres, users.Correo, users.Contraseña, users.Cargo FROM users");
-                                                while($fila=mysqli_fetch_assoc($SQL)):
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $fila['Id']; ?></td>
-                                                <td><?php echo $fila['Nombres']; ?></td>
-                                                <td><?php echo $fila['Correo']; ?></td>
-                                                <td><?php echo $fila['Contraseña']; ?></td>
-                                                <td><?php echo $fila['Cargo']; ?></td>
-                                                <td>
-                                                    <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
-                                                    <a class="btn btn-del" href="acciones/eliminar_usuario.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
-                                                </td>
-                                            </tr>
-                                            <?php endwhile;?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
 
                     </div>
                     <!-- /.container-fluid -->
@@ -333,69 +343,22 @@ if( $validarusuario == null || $validarusuario = ''){
             <i class="fas fa-angle-up"></i>
         </a>
 
-        <!-- Crear Modal-->
-        <div class="modal fade" id="createuser" tabindex="-1" role="dialog" aria-labelledby="createuserLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createuserLabel">Añadir nuevo usuario</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <form  action="../includes/validarusuario.php" method="POST">
-                            <div>
-                                <label for="Nombres" class="css-label"> Nombre Completo: </label>
-                                <input type="text" id="Nombres" name="Nombres" class="css-input" style= " display: block; width: 100%;" required >
-                            </div>
-                            
-                            <div>
-                                <label for="Correo" class="css-label"> Correo:</label>
-                                <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required >
-                            </div>
-
-                                                
-                            <div>
-                                <label for="Contraseña" class="css-label">Contraseña:</label>
-                                <input type="text" id="Contraseña" name="Contraseña" class="css-input" style= " display: block; width: 100%;" required >
-                            </div>
-
-                            <div>
-                                <label for="Cargo" class="css-label"> Cargo: </label>
-                                <select name="Cargo" id="Cargo" class="css-input" style= " display: block; width: 100%;" required> 
-                                    <option value="Chef">Chef</option>
-                                    <option value="Hola">Hola</option>
-                                </select>
-                            </div>
-                            <br>
-
-                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
-                        </form> 
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
         <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+        <script src="../js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
+        <script src="../js/demo/datatables-demo.js"></script>
 
     </body>
 
@@ -428,7 +391,7 @@ if( $validarusuario == null || $validarusuario = ''){
   </script>
 
     <!-- <div id="paginador" class=""></div>-->
-    <script src="../package/dist/sweetalert2.all.js"></script>
-  <script src="../package/dist/sweetalert2.all.min.js"></script>
+    <script src="../../package/dist/sweetalert2.all.js"></script>
+  <script src="../../package/dist/sweetalert2.all.min.js"></script>
 
 </html>
