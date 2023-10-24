@@ -36,8 +36,27 @@ error_reporting(0);
 
     <body>
 
+    <style>
+
+        @media (max-width: 576px) {
+            .nav-items-responsive{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .nav-height{
+                height: 100px;
+            }
+        }
+
+    </style>
+
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-black">
+        <nav class="navbar navbar-expand-lg navbar-light bg-black nav-height">
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Navbar brand -->
@@ -66,13 +85,20 @@ error_reporting(0);
                     </ul>
                     <!-- Left links -->
 
-                    <div class="d-flex align-items-center">
-                        <a class="nav-link" href="../Index.php">Inicio</a>
-                        <a class="nav-link" href="Nosotros.php">Nosotros</a>
-                        <a class="nav-link" href="Menu.php">Menu</a>
-                        <a class="nav-link" href="Reservas.php">Reserva</a>
-                        <a class="nav-link" href="Contacto.php">Contacto</a>
+                    <div class="d-flex align-items-center justify-content-center w-auto nav-items-responsive">
+                        <a class="nav-link p-2" href="../Index.php">Inicio</a>
+                        <a class="nav-link p-2" href="Nosotros.php">Nosotros</a>
+                        <a class="nav-link p-2" href="Menu.php">Menu</a>
+                        <a class="nav-link p-2" href="Reservas.php">Reserva</a>
+                        <a class="nav-link p-2" href="Contacto.php">Contacto</a>
+
                         <a type="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
+                        <img
+                            src="../assets/Imagenes/Menu/cart-check-fill-white.svg"
+                            alt=""
+                            style="width: 40px; height: 40px;"
+                            class="ml-2"
+                        >
                     </div>
                 </div>
                 <!-- Collapsible wrapper -->
@@ -101,11 +127,15 @@ error_reporting(0);
                             <div class="col">
                                 <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:26rem">
                                     <div class="card-body bg-white border-white">
-                                        <img src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>" class="card-img-top">
+                                        <img
+                                            src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>"
+                                            class="card-img-top img-fluid img-fluid"
+                                            style="width: 100%;"
+                                        >
                                         <h5 class="card-title css-label text-center mt-2"><?php echo $fila['Nombre']?></h5>
                                         <p class="card-text text-center">$<?php echo $fila['Precio']?></p>
                                     </div>
-                                    
+
                                     <div class="d-flex justify-content-center align-items-center p-1">
                                         <button
                                                 class="button-count btn"
