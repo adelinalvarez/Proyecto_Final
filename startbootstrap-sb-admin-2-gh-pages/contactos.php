@@ -9,7 +9,6 @@ if( $validarusuario == null || $validarusuario = ''){
 
   header("Location: ../index.php");
   die();
-  
 }
 ?>
 
@@ -232,6 +231,8 @@ if( $validarusuario == null || $validarusuario = ''){
                                             <td><?php echo $fila['Mensaje']; ?></td>
                                             <td>
                                                 <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
+                                                <a class="btn" href="acciones/mostrar_contacto.php?Id=<?php echo $fila['Id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
+                                                <a class="btn btn-del" href="acciones/eliminar_contacto.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
                                             </td>
                                         </tr>
                                         <?php endwhile;?>
@@ -361,5 +362,34 @@ if( $validarusuario == null || $validarusuario = ''){
     <script src="js/demo/datatables-demo.js"></script>
 
 </body>
+        <script>
+            $('.btn-del').on('click', function(e){
+            e.preventDefault();
+            const href = $(this).attr('href')
+            Swal.fire({
+                title: '¿Estas seguro de eliminar este usuario?',
+                text: "¡No podrás revertir esto!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!', 
+                cancelButtonText: 'Cancelar!', 
+            }).then((result)=>{
+                if(result.value){
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Eliminado!',
+                    'El usuario fue eliminado.',
+                    'success'
+                    )
+                }
+                document.location.href= href;
+                }   
+            })
+            })
+        </script>
+     <script src="../package/dist/sweetalert2.all.js"></script>
+  <script src="../package/dist/sweetalert2.all.min.js"></script>
 
 </html>

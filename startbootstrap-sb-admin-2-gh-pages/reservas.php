@@ -37,8 +37,6 @@ if( $validarusuario == null || $validarusuario = ''){
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
         <link href="css/dashboard.css" rel="stylesheet">
 
-
-
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -236,6 +234,7 @@ if( $validarusuario == null || $validarusuario = ''){
                                             <td><?php echo $fila['Confirmacion']; ?></td>
                                             <td>
                                                 <a class="btn" href="acciones/mostrar_reservas.php?Id=<?php echo $fila['Id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
+                                                <a class="btn btn-del" href="acciones/eliminar_reserva.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
                                                 <a class="btn" href="acciones/editar_reservas.php?Id=<?php echo $fila['Id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
                                             </td>
                                         </tr>
@@ -253,69 +252,69 @@ if( $validarusuario == null || $validarusuario = ''){
             <!-- End of Main Content -->
 
             <!-- ======= Footer ======= -->
-            <footer id="footer" class="footer">
+        <footer id="footer" class="footer">
 
-<div class="container">
+            <div class="container">
 
-<div class="row gy-3">
-    <div class="col-lg-3 col-md-6 d-flex">
-    <i class="bi bi-geo-alt icon"></i>
-    
-    <div>
-        <h4>Direccion</h4>
-        <p>
-        Santome #49 <br>
-        Esq. 16 de Agosto, Baní Peravia<br>
-        </p>
-    </div>
+            <div class="row gy-3">
+                <div class="col-lg-3 col-md-6 d-flex">
+                <i class="bi bi-geo-alt icon"></i>
+                
+                <div>
+                    <h4>Direccion</h4>
+                    <p>
+                    Santome #49 <br>
+                    Esq. 16 de Agosto, Baní Peravia<br>
+                    </p>
+                </div>
 
-    </div>
+                </div>
 
-    <div class="col-lg-3 col-md-6 footer-links d-flex">
-    <i class="bi bi-telephone icon"></i>
-    <div>
-        <h4>Reservaciones</h4>
-        <p>
-        <strong>Telefono:</strong> +1 809-522-5146<br>
-        <strong>Email:</strong> Donahildabani@gmail.com<br>
-        </p>
-    </div>
-    </div>
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                <i class="bi bi-telephone icon"></i>
+                <div>
+                    <h4>Reservaciones</h4>
+                    <p>
+                    <strong>Telefono:</strong> +1 809-522-5146<br>
+                    <strong>Email:</strong> Donahildabani@gmail.com<br>
+                    </p>
+                </div>
+                </div>
 
-    <div class="col-lg-3 col-md-6 footer-links d-flex">
-    <i class="bi bi-clock icon"></i>
-    <div>
-        <h4>Horarios</h4>
-        <p>
-        <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
-        
-        </p>
-    </div>
-    </div>
+                <div class="col-lg-3 col-md-6 footer-links d-flex">
+                <i class="bi bi-clock icon"></i>
+                <div>
+                    <h4>Horarios</h4>
+                    <p>
+                    <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+                    
+                    </p>
+                </div>
+                </div>
 
-    <div class="col-lg-3 col-md-6 footer-links">
-    <h4>Siguenos</h4>
-    <div class="social-links d-flex">
-        <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook" ></i></a>
-        <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="fa fa-instagram"></i></a>
-        <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
+                <div class="col-lg-3 col-md-6 footer-links">
+                <h4>Siguenos</h4>
+                <div class="social-links d-flex">
+                    <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="fa fa-facebook" ></i></a>
+                    <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="fa fa-instagram"></i></a>
+                    <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="fa fa-whatsapp"></i></a>
 
 
 
-    </div>
-    </div>
+                </div>
+                </div>
 
-</div>
-</div>
+            </div>
+            </div>
 
-<div class="container">
-<div class="copyright">
-    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
-</div>
+            <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+            </div>
 
-</div>
+            </div>
 
-</footer><!-- End Footer -->
+        </footer><!-- End Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -366,5 +365,34 @@ if( $validarusuario == null || $validarusuario = ''){
     <script src="js/demo/datatables-demo.js"></script>
 
 </body>
-
+        <script>
+            $('.btn-del').on('click', function(e){
+            e.preventDefault();
+            const href = $(this).attr('href')
+            Swal.fire({
+                title: '¿Estas seguro de eliminar este usuario?',
+                text: "¡No podrás revertir esto!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!', 
+                cancelButtonText: 'Cancelar!', 
+            }).then((result)=>{
+                if(result.value){
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Eliminado!',
+                    'El usuario fue eliminado.',
+                    'success'
+                    )
+                }
+                document.location.href= href;
+                }   
+            })
+            })
+        </script>
+    <!-- <div id="paginador" class=""></div>-->
+    <script src="../package/dist/sweetalert2.all.js"></script>
+  <script src="../package/dist/sweetalert2.all.min.js"></script>
 </html>

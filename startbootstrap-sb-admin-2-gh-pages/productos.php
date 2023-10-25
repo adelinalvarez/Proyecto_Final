@@ -40,7 +40,6 @@ if ($validarusuario == null || $validarusuario == '') {
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-
     </head>
 
     <body id="page-top">
@@ -238,7 +237,7 @@ if ($validarusuario == null || $validarusuario == '') {
                                                 <td><?php echo $fila['Categoria']; ?></td>
                                                 <td><?php echo $fila['Precio']; ?></td>
                                                 <td>
-                                                    <a class="btn" href="acciones/mostrar.php?id=<?php echo $fila['id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
+                                                    <a class="btn" href="acciones/mostrar_productos.php?id=<?php echo $fila['id']?> "> <i class="fa fa-eye"  style="color: black"> </i></a> 
                                                     <a class="btn" href="acciones/editar_productos.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
                                                     <a class="btn btn-del" href="acciones/eliminar_productos.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
                                                 </td>
