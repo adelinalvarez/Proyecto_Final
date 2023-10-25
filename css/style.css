@@ -1,0 +1,190 @@
+.BotonIniciar{
+    background-color:#ffffff; 
+    color: black; 
+    border-radius: 30px; 
+    padding: 08px 10px;
+}
+.BotonEnlaces{
+    background-color: #f8f673; 
+    color: rgb(0, 0, 0); 
+    border-radius: 30px; 
+    padding: 08px 10px;
+}
+a.EfectoSombra {
+    color: white;
+    text-decoration: none;
+}
+a.EfectoSombra:hover {
+    color: #f8f673;
+}
+@media (max-width: 576px) {
+    .nav-items-responsive{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-height{
+        height: 100px;
+    }
+}
+
+.tracking-in-expand {
+	animation: tracking-in-expand 5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 5 both;
+}
+@keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Escala la diapositiva central */
+.selected-slide {
+    border: 10px solid #f8f673;
+    transform: scale(1.1); /* Aumenta el tamaño al 110% */
+    z-index: 2; /* Asegura que se superponga a las demás diapositivas */
+}
+
+.info {
+    border-top: 3px solid #f8f673;
+    border-bottom: 3px solid #f8f673;
+    padding: 30px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+.info i {
+    font-size: 20px;
+    color: #000000;
+    float: left;
+    width: 44px;
+    height: 44px;
+    background: #f8f673;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+  
+.info h4 {
+    padding: 0 0 0 60px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #374358;
+}
+  
+.info p {
+    padding: 0 0 10px 60px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #576c8f;
+}
+  
+.info .social-links a {
+    font-size: 18px;
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    line-height: 1;
+    padding: 8px 0;
+    border-radius: 50%;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    transition: 0.3s;
+    margin-right: 10px;
+}
+  
+.css-input {
+    padding: 10px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 10px;
+}
+.css-label {
+    color: #000000;
+    font-weight: bold;
+}
+
+.btn-guardar {
+    background-color: #f8f673;
+    color: #000000;
+    border: 2px solid #f8f673;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-container {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 400px; /* Aumentamos el ancho del contenedor */
+}
+.login-container h2 {
+    color: #000;
+}
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+}
+.btn-login {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
