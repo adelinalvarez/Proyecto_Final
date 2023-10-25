@@ -152,6 +152,18 @@ a.EfectoSombra:hover {
     width: 100%;
 }
 
+.animated-image {
+    animation: moveUpDown 4s infinite;
+}
+
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px); /* Cambia el valor para ajustar la distancia de la animación */
+    }
+}
 
 .login-container {
     background: #fff;
@@ -189,3 +201,4 @@ a.EfectoSombra:hover {
     height: 100vh;
     margin: 0;
 }
+
