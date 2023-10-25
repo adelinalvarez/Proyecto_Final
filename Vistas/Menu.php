@@ -26,6 +26,7 @@ error_reporting(0);
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="../startbootstrap-sb-admin-2-gh-pages/css/dashboard.css" rel="stylesheet">
         <link href="../assets/css/veamos.css" rel="stylesheet">
+        <link rel="stylesheet" href="../assets/css/css-cart/style.css">
 
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
@@ -37,7 +38,6 @@ error_reporting(0);
     <body>
 
     <style>
-
         @media (max-width: 576px) {
             .nav-items-responsive{
                 display: flex;
@@ -52,7 +52,6 @@ error_reporting(0);
                 height: 100px;
             }
         }
-
     </style>
 
         <!-- Navbar -->
@@ -93,18 +92,98 @@ error_reporting(0);
                         <a class="nav-link p-2" href="Contacto.php">Contacto</a>
 
                         <a type="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
-                        <img
-                            src="../assets/Imagenes/Menu/cart-check-fill-white.svg"
-                            alt=""
-                            style="width: 40px; height: 40px;"
-                            class="ml-2"
+
+                        <a
+                            href="#"
+                            type="button"
+                            data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight"
+                            aria-controls="offcanvasRight"
                         >
+                            <img
+                                src="../assets/Imagenes/Menu/cart-check-fill-white.svg"
+                                alt=""
+                                style="width: 40px; height: 40px;"
+                                class="ml-2"
+                            >
+                        </a>
                     </div>
                 </div>
                 <!-- Collapsible wrapper -->
             </div>
             <!-- Container wrapper -->
         </nav>
+
+        <!-- OffCanvas Cart of Shopping -->
+        <div>
+            <div class="offcanvas offcanvas-end" tabindex="1000" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel">Carrito de Compra</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div id="shopping-cart" class="">
+                        <table id="cart-content">
+                            <thead>
+                            <tr class="p-2 align-items-center justify-content-center">
+                                <th class="pl-5">Image</th>
+                                <th class="pl-5">Name</th>
+                                <th class="pl-2">Price</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class="">
+                                    <td class="">
+                                        <img
+                                            src="../assets/Imagenes/Comida/Mariscos.jpeg"
+                                            alt=""
+                                            class="card-img"
+                                            style="width: 120px; height: 90px;"
+                                        >
+                                    </td>
+                                    <td class="pl-5">
+                                        Una comida ahi rara
+                                    </td>
+                                    <td class="p-2 ml-5 justify-content-center align-items-center">
+                                        $900
+                                    </td>
+                                    <td class="pl-3">
+                                        <a href="#" data-id="${product.id}" class="remove">X</a>
+                                    </td>
+                                </tr>
+                                <tr class=" ">
+                                    <td class="">
+                                        <img
+                                            src="../assets/Imagenes/Comida/Mariscos.jpeg"
+                                            alt=""
+                                            class="card-img"
+                                            style="width: 120px; height: 90px;"
+                                        >
+                                    </td>
+                                    <td class="pl-5">
+                                        Una comida ahi rara
+                                    </td>
+                                    <td class="p-2 ml-5 justify-content-center align-items-center">
+                                        $900
+                                    </td>
+                                    <td class="pl-3">
+                                        <a href="#" data-id="${product.id}" class="remove">X</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="total-container" id="total-price"></p>
+                       <div class="d-flex flex-column align-items-center">
+                           <a href="#" type="button" id="checkout-btn" class="btn btn-primary mt-2 mb-2 w-100">Comprar</a>
+                           <a href="#" type="button" id="clear-cart" class="btn btn-primary w-100">Limpiar Carrito</a>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Navbar -->
         <br>
         <article> 
@@ -122,6 +201,7 @@ error_reporting(0);
                     $conexion=$GLOBALS['conex'];
                     $fila = null;
                     $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio, productos.Imagen FROM productos");
+
                     while($fila=mysqli_fetch_assoc($SQL)):
                         ?>
                             <div class="col">
@@ -138,51 +218,55 @@ error_reporting(0);
 
                                     <div class="d-flex justify-content-center align-items-center p-1">
                                         <button
-                                                class="button-count btn"
-                                                style="background-color: #f1e645; color: black;"
-                                                type="button"
-                                                id="button_sum"
+                                            class="button-count btn"
+                                            style="background-color: #f1e645; color: black;"
+                                            type="button"
+                                            id="button_sum"
                                             >
                                             +
                                         </button>
 
                                         <input
-                                                type="number"
-                                                id="valor<?php echo $fila['Id']?>"
-                                                value="1"
-                                                name="Cantidad"
-                                                class="css-input ml-2 mr-2"
-                                                required
-                                                style="width: 80px"
+                                            type="number"
+                                            id="valor<?php echo $fila['Id']?>"
+                                            value="1"
+                                            name="Cantidad"
+                                            class="css-input ml-2 mr-2"
+                                            required
+                                            style="width: 80px"
                                         />
 
                                         <button
-                                                class="button-count btn btn-primary"
-                                                style="background-color: #f1e645; color: black;"
-                                                type="button"
-                                                id="boton_restar"
+                                            class="button-count btn btn-primary"
+                                            style="background-color: #f1e645; color: black;"
+                                            type="button"
+                                            id="boton_restar"
                                             >
                                             -
                                         </button>
                                         <div class="d-flex justify-content-center align-items-center">
                                             <a href="#">
                                                 <img
-                                                        src="../assets/Imagenes/Menu/eye.svg"
-                                                        alt="eye"
-                                                        style="width: 40px; height: 40px;"
-                                                        class="ml-2"
+                                                    src="../assets/Imagenes/Menu/eye.svg"
+                                                    alt="eye"
+                                                    style="width: 40px; height: 40px;"
+                                                    class="ml-2"
                                                 >
                                             </a>
-                                            <a href="#" class="carrito">
+                                            <a
+                                                href="#"
+                                                id="carrito-add"
+                                                type="button"
+                                            >
                                                 <img
-                                                        src="../assets/Imagenes/Menu/cart-check-fill.svg"
-                                                        style="width: 40px; height: 40px;"
-                                                        alt="cart">
+                                                    src="../assets/Imagenes/Menu/cart-check-fill.svg"
+                                                    style="width: 40px; height: 40px;"
+                                                    alt="cart"
+                                                    id="<?php echo $fila['Id'] ?>"
+                                                >
                                             </a>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                     <?php endwhile;?>
@@ -193,7 +277,6 @@ error_reporting(0);
             <!-- ======= Footer ======= -->
             <br>
             <footer id="footer" class="footer">
-
                 <div class="container">
                     <div class="row gy-3">
                         <div class="col-lg-3 col-md-6 d-flex">
@@ -259,6 +342,13 @@ error_reporting(0);
             const button_rest = document.getElementById("boton_restar");
             const button_sum = document.getElementById("button_sum");
             const buttons = document.querySelectorAll(".button-count");
+            const buttonAddCart = document.querySelectorAll("#carrito-add")
+
+            buttonAddCart.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    console.log(event.target.id);
+                })
+            });
 
             buttons.forEach(function(button) {
                 button.addEventListener("click", function(event) {
@@ -286,11 +376,9 @@ error_reporting(0);
                 input.value = valorActual;
             }
 
-            function addEventListeners() {
-
-
+            function addProductoToCart(event){
+                console.log(event);
             }
-
 
         </script>
 
@@ -303,5 +391,6 @@ error_reporting(0);
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>
+
   </body>
 </html>
