@@ -139,7 +139,7 @@
                         Realiza tus reservaciones para cualquier tipo de evento importante.
                         <div style="font-size: 15px">
                             <br>
-                            <a class="BotonEnlaces" type="button" href="vistas/menu.php"> Reserva Ahora </a>
+                            <a class="BotonEnlaces" type="button" href="vistas/reservas.php"> Reserva Ahora </a>
                         </div>
                     </div>
 
