@@ -64,7 +64,7 @@
 
         <div class="container">
             <br>
-            <h1 class="tracking-in-expand text-center color-white"> Reservar </h1>
+            <h1 class="focus-in-expand text-center color-white"> Reservar </h1>
             <div class="row">
                 <div class="info">
                     <form  action="../funciones/reservas/validarreserva.php" method="POST">

@@ -194,7 +194,7 @@ error_reporting(0);
 
                 <!-- cards de servicios-->
 
-                <h1 class="tracking-in-expand text-center color-white"> Menu </h1>
+                <h1 class="focus-in-expand text-center color-white"> Menu </h1>
 
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">

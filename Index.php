@@ -74,15 +74,16 @@
 
         <!-- ======= Carousel Section ======= -->
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <a class="BotonEnlaces nosotros-index" type="button" href="vistas/nosotros.php">Conocenos</a>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="...">
+                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
                 </div>
                 <div class="carousel-item">
-                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="...">
+                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
                 </div>
                 <div class="carousel-item">
-                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="...">
+                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -94,12 +95,13 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
         <!-- End Carousel -->
         
         <!-- Swiper -->
         <br>
         <div class="container" data-aos="fade-up">
-            <h1 class="tracking-in-expand text-center"> ¡Revisa nuestro menu! </h1>
+            <h1 class="focus-in-expand text-center"> ¡Revisa nuestro menu! </h1>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
@@ -123,12 +125,12 @@
             <br>
         </div>
 
-        <div style= "background-color: black">
+        <div style="background-color: black; color:white">
             <div class="container text-center">
                 <div class="row">
                     <div class="col"> 
                         <br>
-                        <h1 class="tracking-in-expand text-center color-white"> ¡Ven y comparte!</h1>
+                        <h1 class="focus-in-expand text-center color-white"> ¡Ven y comparte!</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -155,7 +157,7 @@
                 <div class="row">
                     <div class="col"> 
                         <br>
-                        <h1 class="tracking-in-expand text-center color-white"> ¡Contáctate con nosotros!</h1>
+                        <h1 class="focus-in-expand text-center color-white"> ¡Contáctate con nosotros!</h1>
                     </div>
                 </div>
                 <div class="row">
