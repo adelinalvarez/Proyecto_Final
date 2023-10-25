@@ -4,4 +4,4 @@
     $conexion=$GLOBALS['conex']; 
     $consulta= mysqli_query($conexion,"DELETE FROM users WHERE Id= '$Id'");
 
-    header('Location: ../usuarios.php');
+    header('Location: ../../dashboard/usuarios.php');
