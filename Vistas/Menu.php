@@ -19,7 +19,7 @@ error_reporting(0);
         <link rel="icon" href="../assets/Imagenes/Logo.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <!-- Custom fonts for this template -->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<!--        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles for this template -->
@@ -99,6 +99,7 @@ error_reporting(0);
                             data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasRight"
                             aria-controls="offcanvasRight"
+                            id="open-cart-button"
                         >
                             <img
                                 src="../assets/Imagenes/Menu/cart-check-fill-white.svg"
@@ -113,6 +114,27 @@ error_reporting(0);
             </div>
             <!-- Container wrapper -->
         </nav>
+
+        <!-- Toast Message Add Cart -->
+        <div class="toast-cart-success toast alert-success" role="alert" aria-atomic="true" aria-live="assertive" style="position: fixed; bottom: 50px; right: 50px; z-index: 39">
+            <div class="toast-header toast-header-success">
+                <strong class="me-auto header-toast"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body toast-body-success">
+                <p></p>
+            </div>
+        </div>
+
+    <div class="toast toast-cart-danger alert-danger" role="alert" aria-atomic="true" aria-live="assertive" style="position: fixed; bottom: 50px; right: 50px; z-index: 39">
+        <div class="toast-header toast-header-danger">
+            <strong class="me-auto header-toast"></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body toast-body-danger">
+            <p></p>
+        </div>
+    </div>
 
         <!-- OffCanvas Cart of Shopping -->
         <div>
@@ -133,46 +155,7 @@ error_reporting(0);
                             </tr>
                             </thead>
 
-                            <tbody>
-                                <tr class="">
-                                    <td class="">
-                                        <img
-                                            src="../assets/Imagenes/Comida/Mariscos.jpeg"
-                                            alt=""
-                                            class="card-img"
-                                            style="width: 120px; height: 90px;"
-                                        >
-                                    </td>
-                                    <td class="pl-5">
-                                        Una comida ahi rara
-                                    </td>
-                                    <td class="p-2 ml-5 justify-content-center align-items-center">
-                                        $900
-                                    </td>
-                                    <td class="pl-3">
-                                        <a href="#" data-id="${product.id}" class="remove">X</a>
-                                    </td>
-                                </tr>
-                                <tr class=" ">
-                                    <td class="">
-                                        <img
-                                            src="../assets/Imagenes/Comida/Mariscos.jpeg"
-                                            alt=""
-                                            class="card-img"
-                                            style="width: 120px; height: 90px;"
-                                        >
-                                    </td>
-                                    <td class="pl-5">
-                                        Una comida ahi rara
-                                    </td>
-                                    <td class="p-2 ml-5 justify-content-center align-items-center">
-                                        $900
-                                    </td>
-                                    <td class="pl-3">
-                                        <a href="#" data-id="${product.id}" class="remove">X</a>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody class="cart-tbody"></tbody>
                         </table>
                         <p class="total-container" id="total-price"></p>
                        <div class="d-flex flex-column align-items-center">
@@ -210,10 +193,11 @@ error_reporting(0);
                                         <img
                                             src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>"
                                             class="card-img-top img-fluid img-fluid"
+                                            id="imagen<?php echo $fila['Id']?>"
                                             style="width: 100%;"
                                         >
-                                        <h5 class="card-title css-label text-center mt-2"><?php echo $fila['Nombre']?></h5>
-                                        <p class="card-text text-center">$<?php echo $fila['Precio']?></p>
+                                        <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['Id']?>"><?php echo $fila['Nombre']?></h5>
+                                        <p class="card-text text-center" id="precio<?php echo $fila['Id']?>">$<?php echo $fila['Precio']?></p>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center p-1">
@@ -343,12 +327,13 @@ error_reporting(0);
             const button_sum = document.getElementById("button_sum");
             const buttons = document.querySelectorAll(".button-count");
             const buttonAddCart = document.querySelectorAll("#carrito-add")
+            const tbody = document.getElementsByClassName("cart-tbody");
+            let removeButtons = [];
+            const openCartButton = document.getElementById("open-cart-button");
 
-            buttonAddCart.forEach(function(button) {
-                button.addEventListener("click", function(event) {
-                    console.log(event.target.id);
-                })
-            });
+            window.onload = function() {
+                displayProducts();
+            };
 
             buttons.forEach(function(button) {
                 button.addEventListener("click", function(event) {
@@ -361,7 +346,6 @@ error_reporting(0);
             });
 
             function aumentarValor(event) {
-                console.log(event?.target?.nextElementSibling?.id);
                 const input = document.getElementById(event?.target?.nextElementSibling?.id);
                 let valorActual = parseInt(input.value);
                 valorActual++;
@@ -376,8 +360,155 @@ error_reporting(0);
                 input.value = valorActual;
             }
 
+
+            //Shopping Cart
+            buttonAddCart.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    addProductoToCart(event)
+                })
+            });
+
+            //Add product to cart
             function addProductoToCart(event){
-                console.log(event);
+                let price = document.getElementById(`precio${event.target.id}`).textContent
+                let name = document.getElementById(`nombre${event.target.id}`).textContent
+                let quantity = document.getElementById(`valor${event.target.id}`).value
+                let image = document.getElementById(`imagen${event.target.id}`).src
+
+                price = parseInt(price.replace("$", ""))
+
+                let product = {
+                    id: event.target.id,
+                    name: name,
+                    price: price,
+                    quantity: quantity,
+                    image: image
+                }
+
+                let lsContent = getLSContent();
+                if (lsContent === null) {
+                    lsContent = [];
+                }
+
+                if (lsContent.some(product => product.id === event.target.id)) {
+                    toastMessageDanger(product)
+                    return
+                }
+
+                lsContent.push(product);
+                setLSContent(lsContent);
+                displayProducts();
+                toastMessageSuccess(product);
+            }
+
+            //Update products
+            function setLSContent(lsContent) {
+                localStorage.setItem("products", JSON.stringify(lsContent));
+            }
+
+            //Get products
+            function getLSContent() {
+                return JSON.parse(localStorage.getItem("products"));
+            }
+
+            //Clear cart
+            function clearCart() {
+                localStorage.removeItem("products");
+            }
+
+            //Display products
+            function displayProducts() {
+                const lsContent = getLSContent();
+                let productMarkup = "";
+
+                if (lsContent !== null){
+                    for (let product of lsContent) {
+                        productMarkup += `
+                            <tr class="">
+                                <td class="">
+                                    <img
+                                        src="${product.image}"
+                                        alt=""
+                                        class="card-img"
+                                        style="width: 120px; height: 90px;"
+                                    >
+                                </td>
+                                <td class="pl-5">
+                                    ${product.name}
+                                </td>
+                                <td class="p-2 ml-5 justify-content-center align-items-center">
+                                    $${product.price}
+                                </td>
+                                <td class="pl-3">
+                                    <a href="#" id="${product.id}" class="remove" type="">X</a>
+                                </td>
+                            </tr>
+                        `
+                    }
+                }
+
+                tbody[0].innerHTML = productMarkup;
+                removeButtons = document.querySelectorAll(".remove")
+                removeButtons.forEach(function(button) {
+                    button.addEventListener("click", function(event) {
+                        deleteProduct(event.target.id);
+                    })
+                });
+            }
+
+            //Delete product
+            function deleteProduct(id) {
+                let lsContent = getLSContent();
+                lsContent = lsContent.filter(function(product) {
+                    return product.id !== id;
+                });
+
+                setLSContent(lsContent);
+                displayProducts();
+            }
+
+            //Clear cart EventListener
+            document.getElementById('clear-cart').addEventListener('click', function (event){
+                clearCart()
+                displayProducts()
+            })
+
+            //Display offCanvas
+            openCartButton.addEventListener('click', function (event){
+                displayProducts()
+            })
+
+            //Toast Message
+            function toastMessageSuccess(product) {
+
+                const toastHeader = document.querySelector('.toast-header-success')
+                const toastBody = document.querySelector('.toast-body-success').children
+                const toastElList = [].slice.call(document.querySelectorAll('.toast-cart-success'))
+
+                toastHeader.textContent = product.name
+                toastBody[0].textContent = 'Se añadio correctamente al carrito'
+
+                const toastList = toastElList.map(function(toastEl) {
+                    return new bootstrap.Toast(toastEl)
+                })
+
+                toastList.forEach(toast => toast.show())
+            }
+
+            function toastMessageDanger(product) {
+
+                const toastHeader = document.querySelector('.toast-header-danger')
+                const toastBody = document.querySelector('.toast-body-danger').children
+                const toastElList = [].slice.call(document.querySelectorAll('.toast-cart-danger'))
+
+                toastHeader.textContent = product.name
+                toastBody[0].textContent = 'Este producto ya esta en el carrito'
+
+                const toastList = toastElList.map(function(toastEl) {
+                    return new bootstrap.Toast(toastEl)
+                })
+
+                toastList.forEach(toast => toast.show())
             }
 
         </script>
