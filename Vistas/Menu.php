@@ -81,7 +81,7 @@ error_reporting(0);
                         <a class="nav-link p-2 EfectoSombra" href="Reservas.php">Reserva</a>
                         <a class="nav-link p-2 EfectoSombra" href="Contacto.php">Contacto</a>
 
-                        <a type="button" href="vistas/login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
+                        <a type="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
 
                         <a
                             href="#"
