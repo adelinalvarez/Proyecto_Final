@@ -138,7 +138,7 @@ error_reporting(0);
                         <table id="cart-content">
                             <thead>
                             <tr class="p-2 align-items-center justify-content-center">
-                                <th class="pl-5">Imagen</th>
+                                <th class="pl-5 ml-">Imagen</th>
                                 <th class="pl-4">Nombre</th>
                                 <th class="pl-2">Precio</th>
                                 <th class="pl-2">Cantidad</th>
@@ -432,12 +432,7 @@ error_reporting(0);
                         total += prod.quantity * prod.price
                         totalPrice.textContent = `$${total}`
                     })
-
-                    return
                 }
-                totalPrice.textContent = `${0}`
-                console.log(totalPrice.textContent)
-                console.log('si')
             }
 
             //Update products
@@ -457,6 +452,7 @@ error_reporting(0);
 
             //Display products
             function displayProducts() {
+                document.getElementById('total-price').textContent = `${0}`
                 const lsContent = getLSContent();
                 let productMarkup = "";
 
@@ -512,9 +508,8 @@ error_reporting(0);
 
                 setLSContent(lsContent);
                 displayProducts();
-                if (!lsContent){
+                if (lsContent.length === 0)
                     document.getElementById('total-price').textContent = `${0}`
-                }
             }
 
             //Clear cart EventListener
