@@ -104,8 +104,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
 
-
-
                                                 <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdUsuario']?>"> <i class='bx bxs-trash-alt'></i> </a>
                                             
                                             </td>

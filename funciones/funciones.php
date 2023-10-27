@@ -42,11 +42,11 @@ if (isset($_POST['accion'])){
         break;
 
         case 'editar_clientes';
-            editar_usuario();
+            editar_clientes();
         break;
 
         case 'mostrar_clientes';
-            mostrar_usuario();
+            mostrar_clientes();
         break;
 	}
 

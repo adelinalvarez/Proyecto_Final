@@ -81,7 +81,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Celular</th>
-                                            <th>Direccion</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -96,7 +95,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['correo']; ?></td>
                                             <td><?php echo $fila['celular']; ?></td>
-                                            <td><?php echo $fila['direccion']; ?></td>
                                             <td>
 
                                                 <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCliente']?>" >
@@ -105,8 +103,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                 <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdCliente']?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
-
-
 
                                                 <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdCliente']?>"> <i class='bx bxs-trash-alt'></i> </a>
                                             
@@ -166,6 +162,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     nombre: nombre,
                                     correo: correo,
                                     celular: celular,
+                                    direccion: direccion,
                                     accion: 'validar_clientes'
                                 },
                                 success: function(response) {
@@ -203,6 +200,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="celular" class="css-label"> Celular: </label>' +
+                        '<br>'+
                         '<input id="celular" class="swal2-input css-input" placeholder="Ingrese su número de celular" value="">'+
                         '<br>'+
                         '<label for="direccion" class="css-label"> Direccion: </label>' +
@@ -254,13 +252,13 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         accion: 'mostrar_clientes'
                     },
                     success: function(response) {
-                        const userData = JSON.parse(response);
+                        const clienteData = JSON.parse(response);
 
-                        if (userData) {
-                            $('#nombre').val(userData.nombre);
-                            $('#correo').val(userData.correo);
-                            $('#celular').val(userData.celular);
-                            $('#direccion').val(userData.direccion);
+                        if (clienteData) {
+                            $('#nombre').val(clienteData.nombre);
+                            $('#correo').val(clienteData.correo);
+                            $('#celular').val(clienteData.celular);
+                            $('#direccion').val(clienteData.direccion);
                         }
                     },
                     error: function(xhr, status, error) {
@@ -287,17 +285,17 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         },
                         success: function(response) {
                             // Parse the response from the server, assuming it's in JSON format
-                            const userData = JSON.parse(response);
+                            const clienteData = JSON.parse(response);
 
-                            if (userData) {
+                            if (clienteData) {
                                 // Extract and display user information
-                                const name = userData.nombre;
-                                const email = userData.correo;
-                                const celular = userData.celular;
-                                const direccion = userData.direccion;
+                                const name = clienteData.nombre;
+                                const email = clienteData.correo;
+                                const celular = clienteData.celular;
+                                const direccion = clienteData.direccion;
 
                                 Swal.update({
-                                    title: 'Datos del usuario:',
+                                    title: 'Datos del cliente:',
                                     html: `<p class="css-label">Nombre: </p> <p>${name}</p>
                                             <p class="css-label">Correo: </p> <p> ${email}</p>
                                             <p class="css-label">Celular: </p> <p>${celular}</p>
@@ -339,12 +337,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 url: "../funciones/funciones.php",
                 data: {
                 id: IdCliente,
-                accion: 'eliminar_usuario'
+                accion: 'eliminar_clientes'
                 },
                 success: function(response) {
                 Swal.fire(
                     'Eliminado',
-                    'El usuario fue eliminado correctamente.',
+                    'El cliente fue eliminado correctamente.',
                     'success'
                 );
                 location.reload();
@@ -352,7 +350,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 error: function(xhr, status, error) {
                 Swal.fire(
                     'Error',
-                    'Hubo un error al eliminar el usuario: ' + error,
+                    'Hubo un error al eliminar el cliente: ' + error,
                     'error'
                 );
                 }
