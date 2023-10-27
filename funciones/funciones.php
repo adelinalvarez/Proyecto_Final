@@ -32,6 +32,22 @@ if (isset($_POST['accion'])){
         case 'mostrar_usuario';
             mostrar_usuario();
         break;
+
+        case 'validar_clientes';
+            validar_clientes();
+        break;
+
+        case 'eliminar_clientes';
+            eliminar_clientes();
+        break;
+
+        case 'editar_clientes';
+            editar_usuario();
+        break;
+
+        case 'mostrar_clientes';
+            mostrar_usuario();
+        break;
 	}
 
 }
@@ -171,6 +187,94 @@ function validar_contacto(){
 
 
 //casos de CLIENTES
+
+function validar_clientes(){
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+    $direccion = $_POST['direccion'];
+
+    $conexion = $GLOBALS['conex']; 
+    $consulta = "SELECT * FROM clientes WHERE correo ='$correo'";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $filas = mysqli_fetch_array($resultado);
+        $correo = $filas['coreo'];
+
+        if($filas['correo'] == $correo){ //admin
+
+            header('Location: ../dashboard/clientes.php'); 
+    
+        }else{
+
+            $consulta = "INSERT INTO clientes (nombre, correo, celular, direccion)
+            VALUES ('$nombre','$correo', '$celular', '$direccion')";
+            $resultado=mysqli_query($conexion, $consulta);
+            header('Location: ../dashboard/clientes.php');
+    
+        }
+    } else {
+        $consulta = "INSERT INTO clientes (nombre, correo, celular, direccion)
+        VALUES ('$nombre','$correo', '$celular', '$direccion')";
+        $resultado=mysqli_query($conexion, $consulta);
+        header('Location: ../dashboard/clientes.php');
+    }
+}
+
+
+function eliminar_clientes() {
+    if (isset($_POST['id'])) {
+        $IdCliente = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "DELETE FROM clientes WHERE IdCliente = '$IdCliente'");
+        
+        if ($consulta) {
+            header('Location: ../dashboard/clientes.php');
+        } else {
+            echo "Error al eliminar el usuario";
+        }
+    } else {
+        echo "ID de usuario no proporcionado";
+    }
+}
+
+function editar_clientes(){
+    $IdCliente = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+    $direccion = $_POST['direccion'];
+
+    $conexion = $GLOBALS['conex'];
+    $actualizacion = "UPDATE clientes SET nombre = '$nombre', correo = '$correo', celular = '$celular', direccion = '$direccion' WHERE IdCliente = '$IdCliente'";
+    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+
+    if ($resultado_actualizacion) {
+        header('Location: ../dashboard/clientes.php');
+    } else {
+        echo "Error al editar el usuario.";
+    }
+}
+
+function mostrar_clientes() {
+    if (isset($_POST['id'])) {
+        $IdCliente = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdCliente, nombre, correo, celular, direccion FROM clientes WHERE IdCliente = '$IdCliente'");
+
+        if ($consulta) {
+            $usuario = mysqli_fetch_assoc($consulta);
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($usuario);
+        } else {
+            echo "Error al obtener los datos del usuario";
+        }
+    } else {
+        echo "ID de usuario no proporcionado";
+    }
+}
+
 
 //casos de USUARIOS
 

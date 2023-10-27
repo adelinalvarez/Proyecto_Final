@@ -51,7 +51,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 <div>
                     <div class="nav_list"> 
                         <a href="index.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 
-                        <a href="usuarios.php" class="nav_link active"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span> </a> 
+                        <a href="usuarios.php" class="nav_link"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span> </a> 
                         <a href="productos.php" class="nav_link"> <i class='bx bx-restaurant nav_icon'></i> <span class="nav_name">Productos</span> </a> 
                         <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
                         <a href="contactos.php" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
@@ -97,7 +97,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             <td><?php echo $fila['correo']; ?></td>
                                             <td><?php echo $fila['celular']; ?></td>
                                             <td><?php echo $fila['direccion']; ?></td>
-
                                             <td>
 
                                                 <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCliente']?>" >
@@ -133,13 +132,21 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 e.preventDefault();
 
                 Swal.fire({
-                    title: 'Agregar nuevo cliente',
+                    title: '<h2> Agregar nuevo cliente </h2>',
                     html:
-                        '<input id="nombre" class="swal2-input" placeholder="Nombre" value=""> ' +
-                        '<input id="correo" class="swal2-input" placeholder="Correo" value=""> ' +
-                        '<input id="celular" class="swal2-input" placeholder="celular" value="">' +
-                        '<input id="cireccion" class="swal2-input" placeholder="direccion" value="">',
-
+                        '<label for="nombre" class="css-label"> Nombre completo: </label>' +
+                        '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
+                        '<br>' +
+                        '<label for="correo" class="css-label"> Correo: </label>' +
+                        '<br>' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
+                        '<br>' +
+                        '<label for="celular" class="css-label"> Celular: </label>' +
+                        '<br>'+
+                        '<input id="celular" class="swal2-input css-input" placeholder="Ingrese una celular" value="">'+
+                        '<br>'+
+                        '<label for="direccion" class="css-label"> Direccion: </label>' +
+                        '<input id="direccion" class="swal2-input css-input" placeholder="Ingrese su direccion" value="">',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
@@ -148,7 +155,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const correo = $('#correo').val();
                         const celular = $('#celular').val();
                         const direccion = $('#direccion').val();
-
 
                         if (!nombre || !correo || !celular || !direccion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
@@ -159,18 +165,18 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 data: {
                                     nombre: nombre,
                                     correo: correo,
-                                    contraseña: contraseña,
+                                    celular: celular,
                                     accion: 'validar_clientes'
                                 },
                                 success: function(response) {
-                                    Swal.fire('Éxito', 'El nuevo usuario ha sido agregado.', 'success').then((result) => {
+                                    Swal.fire('Éxito', 'El nuevo cliente ha sido agregado.', 'success').then((result) => {
                                         if (result.isConfirmed) {
                                             location.reload(); // Recarga la página
                                         }
                                     });
                                 },
                                 error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar el usuario: ' + error, 'error');
+                                    Swal.fire('Error', 'Hubo un error al agregar el cliente: ' + error, 'error');
                                 }
                             });
                         }
@@ -187,20 +193,30 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 const IdCliente = $(this).data('id');
 
                 Swal.fire({
-                    title: 'Editar usuario',
+                    title: '<h2> Editar usuario <h2>',
                     html:
-                        '<input id="nombre" class="swal2-input" placeholder="Nombre" value=""> ' +
-                        '<input id="correo" class="swal2-input" placeholder="Correo" value=""> ' +
-                        '<input id="contraseña" class="swal2-input" placeholder="Contraseña" value="">',
+                        '<label for="nombre" class="css-label"> Nombre completo: </label>' +
+                        '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
+                        '<br>' +
+                        '<label for="correo" class="css-label"> Correo: </label>' +
+                        '<br>' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
+                        '<br>' +
+                        '<label for="celular" class="css-label"> Celular: </label>' +
+                        '<input id="celular" class="swal2-input css-input" placeholder="Ingrese su número de celular" value="">'+
+                        '<br>'+
+                        '<label for="direccion" class="css-label"> Direccion: </label>' +
+                        '<input id="direccion" class="swal2-input css-input" placeholder="Ingrese su direccion" value="">',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
                         const nombre = $('#nombre').val();
                         const correo = $('#correo').val();
-                        const contraseña = $('#contraseña').val();
+                        const celular = $('#celular').val();
+                        const direccion = $('#direccion').val();
 
-                        if (!nombre || !correo || !contraseña) {
+                        if (!nombre || !correo || !celular || !direccion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
@@ -210,18 +226,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     id: IdCliente,
                                     nombre: nombre,
                                     correo: correo,
-                                    contraseña: contraseña,
-                                    accion: 'editar_usuario'
+                                    celular: celular,
+                                    direccion: direccion,
+                                    accion: 'editar_clientes'
                                 },
                                 success: function(response) {
-                                    Swal.fire('Éxito', 'El usuario ha sido actualizado.', 'success').then((result) => {
+                                    Swal.fire('Éxito', 'El cliente ha sido actualizado.', 'success').then((result) => {
                                         if (result.isConfirmed) {
                                             location.reload(); // Recarga la página
                                         }
                                     });
                                 },
                                 error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al editar el usuario: ' + error, 'error');
+                                    Swal.fire('Error', 'Hubo un error al editar el cliente: ' + error, 'error');
                                 }
                             });
                         }
@@ -234,7 +251,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     url: "../funciones/funciones.php",
                     data: {
                         id: IdCliente,
-                        accion: 'mostrar_usuario'
+                        accion: 'mostrar_clientes'
                     },
                     success: function(response) {
                         const userData = JSON.parse(response);
@@ -242,11 +259,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         if (userData) {
                             $('#nombre').val(userData.nombre);
                             $('#correo').val(userData.correo);
-                            $('#contraseña').val(userData.contraseña);
+                            $('#celular').val(userData.celular);
+                            $('#direccion').val(userData.direccion);
                         }
                     },
                     error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos del usuario: ' + error, 'error');
+                        Swal.fire('Error', 'Hubo un error al cargar los datos del cliente: ' + error, 'error');
                     }
                 });
             });
@@ -265,7 +283,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         url: "../funciones/funciones.php",
                         data: {
                             id: IdCliente,
-                            accion: 'mostrar_usuario'
+                            accion: 'mostrar_clientes'
                         },
                         success: function(response) {
                             // Parse the response from the server, assuming it's in JSON format
@@ -275,18 +293,22 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 // Extract and display user information
                                 const name = userData.nombre;
                                 const email = userData.correo;
-                                const password = userData.contraseña;
+                                const celular = userData.celular;
+                                const direccion = userData.direccion;
 
                                 Swal.update({
                                     title: 'Datos del usuario:',
-                                    html: `<p>Nombre: ${name}</p><p>Correo: ${email}</p><p>Contraseña: ${password}</p>`,
+                                    html: `<p class="css-label">Nombre: </p> <p>${name}</p>
+                                            <p class="css-label">Correo: </p> <p> ${email}</p>
+                                            <p class="css-label">Celular: </p> <p>${celular}</p>
+                                            <p class="css-label">Direccion: </p> <p>${direccion}</p>`,
                                 });
                             }
                         },
                         error: function(xhr, status, error) {
                             Swal.fire(
                                 'Error',
-                                'Hubo un error al cargar los datos del usuario: ' + error,
+                                'Hubo un error al cargar los datos del cliente: ' + error,
                                 'error'
                             );
                         }
