@@ -19,7 +19,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
-        <title> Dashboard - Doña Hilda Tapas and Grill</title>
+        <title> Clientes - Doña Hilda Tapas and Grill</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"> </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
@@ -55,7 +55,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <a href="productos.php" class="nav_link"> <i class='bx bx-restaurant nav_icon'></i> <span class="nav_name">Productos</span> </a> 
                         <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
                         <a href="contactos.php" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
-                        <a href="clientes.php" class="nav_link"> <i class='bx bx-group nav_icon'></i> <span class="nav_name">Clientes</span> </a> 
+                        <a href="clientes.php" class="nav_link active"> <i class='bx bx-group nav_icon'></i> <span class="nav_name">Clientes</span> </a> 
                     </div>
                 </div>
             </nav>
@@ -63,50 +63,53 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <!--Container Main start-->
         <div class="height-100 bg-light">
             <br>
-            <h1 class="text-center color-white"> Administradores </h1>
+            <h1 class="text-center color-white"> Clientes </h1>
             <div class="row py-5">
                 <div class="col-lg-10 mx-auto">
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
                             <div class="text-end mb-3"> <!-- Agrega esta línea para alinear a la derecha -->
                             <a class="btn btn-dark text-white btn-add" href="#">
-                                Agregar nuevo usuario <i class='bx bxs-user-plus text-white'></i>
+                                Agregar nuevo cliente <i class='bx bxs-user-plus text-white'></i>
                             </a>
                             </div>
                             <div class="table-responsive">
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
-                                            <th>Id Usuario</th>
+                                            <th>Id Cliente</th>
                                             <th>Nombre</th>
                                             <th>Correo</th>
-                                            <th>Contraseña</th>
+                                            <th>Celular</th>
+                                            <th>Direccion</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT usuarios.IdUsuario, usuarios.nombre, usuarios.correo, usuarios.contraseña FROM usuarios");
+                                            $SQL=mysqli_query($conexion,"SELECT clientes.IdCliente, clientes.nombre, clientes.correo, clientes.celular, clientes.direccion FROM clientes");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
-                                            <td><?php echo $fila['IdUsuario']; ?></td>
+                                            <td><?php echo $fila['IdCliente']; ?></td>
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['correo']; ?></td>
-                                            <td><?php echo $fila['contraseña']; ?></td>
+                                            <td><?php echo $fila['celular']; ?></td>
+                                            <td><?php echo $fila['direccion']; ?></td>
+
                                             <td>
 
-                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdUsuario']?>" >
+                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCliente']?>" >
                                                     <i class='bx bxs-user-detail'></i>
                                                 </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdUsuario']?>">
+                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdCliente']?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
 
 
 
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdUsuario']?>"> <i class='bx bxs-trash-alt'></i> </a>
+                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdCliente']?>"> <i class='bx bxs-trash-alt'></i> </a>
                                             
                                             </td>
                                         </tr>
@@ -130,20 +133,24 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 e.preventDefault();
 
                 Swal.fire({
-                    title: 'Agregar nuevo usuario',
+                    title: 'Agregar nuevo cliente',
                     html:
                         '<input id="nombre" class="swal2-input" placeholder="Nombre" value=""> ' +
                         '<input id="correo" class="swal2-input" placeholder="Correo" value=""> ' +
-                        '<input id="contraseña" class="swal2-input" placeholder="Contraseña" value="">',
+                        '<input id="celular" class="swal2-input" placeholder="celular" value="">' +
+                        '<input id="cireccion" class="swal2-input" placeholder="direccion" value="">',
+
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
                         const nombre = $('#nombre').val();
                         const correo = $('#correo').val();
-                        const contraseña = $('#contraseña').val();
+                        const celular = $('#celular').val();
+                        const direccion = $('#direccion').val();
 
-                        if (!nombre || !correo || !contraseña) {
+
+                        if (!nombre || !correo || !celular || !direccion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
@@ -153,7 +160,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     nombre: nombre,
                                     correo: correo,
                                     contraseña: contraseña,
-                                    accion: 'validar_usuarios'
+                                    accion: 'validar_clientes'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El nuevo usuario ha sido agregado.', 'success').then((result) => {
@@ -177,7 +184,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
-                const IdUsuario = $(this).data('id');
+                const IdCliente = $(this).data('id');
 
                 Swal.fire({
                     title: 'Editar usuario',
@@ -200,7 +207,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    id: IdUsuario,
+                                    id: IdCliente,
                                     nombre: nombre,
                                     correo: correo,
                                     contraseña: contraseña,
@@ -226,7 +233,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     type: "POST",
                     url: "../funciones/funciones.php",
                     data: {
-                        id: IdUsuario,
+                        id: IdCliente,
                         accion: 'mostrar_usuario'
                     },
                     success: function(response) {
@@ -249,7 +256,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-view').on('click', function(e) {
             e.preventDefault();
-            const IdUsuario = $(this).data('id');
+            const IdCliente = $(this).data('id');
 
             Swal.fire({
                 didOpen: () => {
@@ -257,7 +264,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         type: "POST",
                         url: "../funciones/funciones.php",
                         data: {
-                            id: IdUsuario,
+                            id: IdCliente,
                             accion: 'mostrar_usuario'
                         },
                         success: function(response) {
@@ -292,7 +299,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-del').on('click', function(e){
         e.preventDefault();
-        const IdUsuario = $(this).data('id');
+        const IdCliente = $(this).data('id');
 
         Swal.fire({
             title: '¿Estás seguro de eliminar este usuario?',
@@ -309,7 +316,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 type: "POST",
                 url: "../funciones/funciones.php",
                 data: {
-                id: IdUsuario,
+                id: IdCliente,
                 accion: 'eliminar_usuario'
                 },
                 success: function(response) {

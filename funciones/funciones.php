@@ -70,6 +70,9 @@ function acceso_user() {
     }
 }
 
+
+//casos de RESERVAS
+
 function validar_reservas(){
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
@@ -118,6 +121,12 @@ function validar_reservas(){
     }
 }
 
+
+
+
+//casos de CONTACTOS
+
+
 function validar_contacto(){
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
@@ -159,6 +168,11 @@ function validar_contacto(){
         $resultado=mysqli_query($conexion, $consulta);
     }
 }
+
+
+//casos de CLIENTES
+
+//casos de USUARIOS
 
 function validar_usuarios(){
     $nombre = $_POST['nombre'];
@@ -245,3 +259,5 @@ function mostrar_usuario() {
         echo "ID de usuario no proporcionado";
     }
 }
+
+//casos de PRODUCTOS
