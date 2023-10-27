@@ -1,5 +1,5 @@
 <?php
-require_once ("../includes/_db.php");
+require_once ("../funciones/_db.php");
 session_start();
 error_reporting(0);
 
@@ -9,32 +9,20 @@ error_reporting(0);
 <html lang="en">
     <head>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>Doña Hilda Tapas and Grill</title>
-        <link rel="icon" href="../assets/Imagenes/Logo.png">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <!-- Custom fonts for this template -->
-<!--        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">-->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-        <!-- Custom styles for this template -->
-        <link href="../startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css" rel="stylesheet">
-        <link href="../startbootstrap-sb-admin-2-gh-pages/css/dashboard.css" rel="stylesheet">
-        <link href="../assets/css/veamos.css" rel="stylesheet">
-        <link rel="stylesheet" href="../assets/css/css-cart/style.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../imagenes/Logo.png">
 
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
+        <title>Doña Hilda Tapas and Grill</title>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </head>
 
     <body>
@@ -62,7 +50,7 @@ error_reporting(0);
             <div class="container">
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="../index.php">
-                    <img src="../assets/Imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                    <img src="../imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
                 </a>
 
                 <!-- Toggle button -->
@@ -87,13 +75,13 @@ error_reporting(0);
                     <!-- Left links -->
 
                     <div class="d-flex align-items-center justify-content-center w-auto nav-items-responsive">
-                        <a class="nav-link p-2" href="../Index.php">Inicio</a>
-                        <a class="nav-link p-2" href="Nosotros.php">Nosotros</a>
-                        <a class="nav-link p-2" href="Menu.php">Menu</a>
-                        <a class="nav-link p-2" href="Reservas.php">Reserva</a>
-                        <a class="nav-link p-2" href="Contacto.php">Contacto</a>
+                        <a class="nav-link p-2 EfectoSombra" href="../Index.php">Inicio</a>
+                        <a class="nav-link p-2 EfectoSombra" href="Nosotros.php">Nosotros</a>
+                        <a class="nav-link p-2 EfectoSombra" href="Menu.php">Menu</a>
+                        <a class="nav-link p-2 EfectoSombra" href="Reservas.php">Reserva</a>
+                        <a class="nav-link p-2 EfectoSombra" href="Contacto.php">Contacto</a>
 
-                        <a type="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
+                        <a type="button" href="vistas/login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
 
                         <a
                             href="#"
@@ -104,7 +92,7 @@ error_reporting(0);
                             id="open-cart-button"
                         >
                             <img
-                                src="../assets/Imagenes/Menu/cart-check-fill-white.svg"
+                                src="../imagenes/Menu/cart-check-fill-white.svg"
                                 alt=""
                                 style="width: 40px; height: 40px;"
                                 class="ml-2"
@@ -188,7 +176,7 @@ error_reporting(0);
                     <?php
                     $conexion=$GLOBALS['conex'];
                     $fila = null;
-                    $SQL=mysqli_query($conexion,"SELECT productos.Id, productos.Nombre, productos.Descripcion, productos.Categoria, productos.Precio, productos.Imagen FROM productos");
+                    $SQL=mysqli_query($conexion,"SELECT productos.IdProducto, productos.nombre, productos.descripcion, productos.categoria, productos.precio, productos.imagen FROM productos");
 
                     while($fila=mysqli_fetch_assoc($SQL)):
                         ?>
@@ -196,13 +184,13 @@ error_reporting(0);
                                 <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:26rem">
                                     <div class="card-body bg-white border-white">
                                         <img
-                                            src="data:image/jpg;base64, <?php echo base64_encode($fila['Imagen'])?>"
+                                            src="data:image/jpg;base64, <?php echo base64_encode($fila['imagen'])?>"
                                             class="card-img-top img-fluid img-fluid"
-                                            id="imagen<?php echo $fila['Id']?>"
+                                            id="imagen<?php echo $fila['IdProducto']?>"
                                             style="width: 100%;"
                                         >
-                                        <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['Id']?>"><?php echo $fila['Nombre']?></h5>
-                                        <p class="card-text text-center" id="precio<?php echo $fila['Id']?>">$<?php echo $fila['Precio']?></p>
+                                        <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['IdProducto']?>"><?php echo $fila['nombre']?></h5>
+                                        <p class="card-text text-center" id="precio<?php echo $fila['IdProducto']?>">$<?php echo $fila['precio']?></p>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center p-1">
@@ -217,7 +205,7 @@ error_reporting(0);
 
                                         <input
                                             type="number"
-                                            id="valor<?php echo $fila['Id']?>"
+                                            id="valor<?php echo $fila['IdProducto']?>"
                                             value="1"
                                             name="Cantidad"
                                             class="css-input ml-2 mr-2"
@@ -236,7 +224,7 @@ error_reporting(0);
                                         <div class="d-flex justify-content-center align-items-center">
                                             <a href="#">
                                                 <img
-                                                    src="../assets/Imagenes/Menu/eye.svg"
+                                                    src="../imagenes/Menu/eye.svg"
                                                     alt="eye"
                                                     style="width: 40px; height: 40px;"
                                                     class="ml-2"
@@ -248,10 +236,10 @@ error_reporting(0);
                                                 type="button"
                                             >
                                                 <img
-                                                    src="../assets/Imagenes/Menu/cart-check-fill.svg"
+                                                    src="../imagenes/Menu/cart-check-fill.svg"
                                                     style="width: 40px; height: 40px;"
                                                     alt="cart"
-                                                    id="<?php echo $fila['Id'] ?>"
+                                                    id="<?php echo $fila['IdProducto'] ?>"
                                                 >
                                             </a>
                                         </div>
@@ -265,62 +253,79 @@ error_reporting(0);
 
             <!-- ======= Footer ======= -->
             <br>
-            <footer id="footer" class="footer">
-                <div class="container">
-                    <div class="row gy-3">
-                        <div class="col-lg-3 col-md-6 d-flex">
-                            <i class="bi bi-geo-alt icon"></i>
-                        
-                            <div>
-                                <h4>Direccion</h4>
+            <!-- Footer -->
+            <footer class="text-center text-lg-start bg-black color-white text-muted p-1">            
+
+                <!-- Section: Links  -->
+                <section class="">
+                    <div class="container text-center text-md-start mt-5">
+                        <!-- Grid row -->
+                        <div class="row mt-3">
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                                <!-- Content -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-geo-alt icon me-3 text-secondary"></i>Dirección
+                                </h6>
                                 <p>
-                                Santome #49 <br>
-                                Esq. 16 de Agosto, Baní Peravia<br>
+                                    Santome #49 
+                                </p>
+                                <p>
+                                    Esq. 16 de Agosto, Baní Peravia
                                 </p>
                             </div>
+                            <!-- Grid column -->
 
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 footer-links d-flex">
-                            <i class="bi bi-telephone icon"></i>
-                            <div>
-                                <h4>Reservaciones</h4>
+                            <!-- Grid column -->
+                            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                <!-- Links -->
+                                
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
+                                </h6>
                                 <p>
-                                    <strong>Telefono:</strong> +1 809-522-5146<br>
-                                    <strong>Email:</strong> Donahildabani@gmail.com<br>
+                                    <strong>Telefono:</strong> +1 809-522-5146
+                                </p>
+                                <p>
+                                    <strong>Email:</strong> Donahildabani@gmail.com                            
                                 </p>
                             </div>
-                        </div>
+                            <!-- Grid column -->
 
-                        <div class="col-lg-3 col-md-6 footer-links d-flex">
-                            <i class="bi bi-clock icon"></i>
-                            <div>
-                                <h4>Horarios</h4>
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
+                                </h6>
                                 <p>
-                                    <strong>Lunes-Domingos: 8AM - 11PM<br></strong>
+                                    <strong>Lunes a Domingos: 8:00AM - 11:00PM</strong>
                                 </p>
                             </div>
-                        </div>
+                            <!-- Grid column -->
 
-                        <div class="col-lg-3 col-md-6 footer-links">
-                            <h4>Siguenos</h4>
-                            <div class="social-links d-flex">
+                            <!-- Grid column -->
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
                                 <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
                                 <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
                                 <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
                             </div>
+                            <!-- Grid column -->
                         </div>
-
+                        <!-- Grid row -->
                     </div>
-                </div>
+                </section>
+                <!-- Section: Links  -->
 
-                <div class="container">
-                    <div class="copyright">
-                        &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
-                    </div>
+                <!-- Copyright -->
+                <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
                 </div>
-
+                <!-- Copyright -->
             </footer>
+            <!-- Footer -->  
             <!-- End Footer -->     
         </article>
 
@@ -557,16 +562,6 @@ error_reporting(0);
             }
 
         </script>
-
-        <!-- Vendor JS Files -->
-        <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/vendor/aos/aos.js"></script>
-        <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
-        <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-        <!-- Template Main JS File -->
-        <script src="../assets/js/main.js"></script>
 
   </body>
 </html>

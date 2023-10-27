@@ -63,7 +63,7 @@
                         <a class="nav-link p-2 EfectoSombra" href="vistas/Reservas.php">Reserva</a>
                         <a class="nav-link p-2 EfectoSombra" href="vistas/Contacto.php">Contacto</a>
 
-                        <a class="BotonIniciar" type="button" href="login.php"> Iniciar Sesión </a>
+                        <a class="BotonIniciar" type="button" href="vistas/login.php"> Iniciar Sesión </a>
                     </div>
                 </div>
                 <!-- Collapsible wrapper -->
@@ -283,10 +283,6 @@
         </footer>
         <!-- Footer -->  
         
-
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        <script src="funciones/js/swiper.js"></script>
-
         
     </body>
 </html>

@@ -90,30 +90,31 @@
                 </div>
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
                     <div class="info">
-                        <form  action="../funciones/contactos/validarcontacto.php" method="POST">
+                        <form  action="../funciones/funciones.php" method="POST">
                             <div>
-                                <label for="Nombre" class="css-label"> Nombre Completo: </label>
-                                <input type="text" id="Nombre" name="Nombre" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese su nombre">
+                                <label for="nombre" class="css-label"> Nombre Completo: </label>
+                                <input type="text" id="nombre" name="nombre" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese su nombre">
                             </div>
                             
                             <div>
-                                <label for="Correo" class="css-label"> Correo:</label>
-                                <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese su correo" >
+                                <label for="correo" class="css-label"> Correo:</label>
+                                <input type="text" id="correo" name="correo" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese su correo" >
                             </div>
 
                                                 
                             <div>
-                                <label for="Asunto" class="css-label">Asunto:</label>
-                                <input type="text" id="Asunto" name="Asunto" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese el asunto" >
+                                <label for="asunto" class="css-label">Asunto:</label>
+                                <input type="text" id="asunto" name="asunto" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese el asunto" >
                             </div>
                             <div>
-                                <label for="Mensaje" class="css-label">Mensaje:</label>
-                                <textarea id="Mensaje" name="Mensaje" rows="10" class="css-input form-control" required> </textarea>
+                                <label for="mensaje" class="css-label">Mensaje:</label>
+                                <textarea id="mensaje" name="mensaje" rows="10" class="css-input form-control" required> </textarea>
                             </div>
 
                             <br>
 
-                            <input type="submit" value="Enviar" id="register" class="btn-guardar" name="registrar">
+                            <input type="hidden" name="accion" value="validar_contacto">
+                            <button type="submit" class="btn-guardar">Enviar</button>
                         </form> 
                     </div>
                 </div>

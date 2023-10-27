@@ -1,401 +1,268 @@
 <?php
-require_once ("../includes/_db.php");
+require_once ("../funciones/_db.php");
 session_start();
 error_reporting(0);
 
-$validarusuario = $_SESSION['Correo'];
+$validarusuarios = $_SESSION['correo'];
 
-if( $validarusuario == null || $validarusuario = ''){
+if( $validarusuarios == null || $validarusuarios = ''){
 
   header("Location: ../index.php");
   die();
   
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../imagenes/Logo.png">
+        <title> Dashboard - Doña Hilda Tapas and Grill</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"> </script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> </script>
+        <link rel="stylesheet" href="css/dashboard.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <script type="text/javascript" src="js/dashboard.js"> </script>
+        <script type="text/javascript" src="js/datatables.js"> </script>
 
-        <title>Doña Hilda Tapas and Grill</title>
-        <link rel="icon" href="../assets/Imagenes/Logo.png">
-
-        <!-- Custom styles for this template -->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
-        <link href="../css/style.css" rel="stylesheet">
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </head>
 
-    <body id="page-top">
-
-        <!-- Page Wrapper -->
-        <div id="wrapper">
-
-            <!-- Sidebar -->
-            <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: black;">
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Administrar
-                </div>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="pedidos.php">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Pedidos</span></a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="productos.php">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Productos</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="reservas.php">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Reservas</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="contactos.php">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Contactos</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="usuarios.php">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Usuarios</span></a>
-                </li>
-
-            </ul>
-            <!-- End of Sidebar -->
-
-            <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
-
-                <!-- Main Content -->
-                <div id="content">
-
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light nav-dashboard topbar mb-4 static-top shadow">
-
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <form class="form-inline">
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </form>
-
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-white-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
-                                    <img class="img-profile rounded-circle"
-                                        src="img/undraw_profile.svg">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                    aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Perfil
-                                    </a>
-                                
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Informe
-                                    </a>
-                                    <a class="dropdown-item" href="acciones/cerrarSesion.php">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Cerrar Sesión
-                                    </a>
-                                    
-                                </div>
-                            </li>
-
-                        </ul>
-
-                    </nav>
-                    <!-- End of Topbar -->
-
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-
-                        <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Incorpora nuevos usuarios a tu panel de control</h1>
-                        <p class="mb-4">Permitiéndoles administrar los datos.</p>
-
-                        <!-- DataTales Example -->
-                        <?php
-                            $conexion=$GLOBALS['conex'];  
-                            $where="";
-                            if(isset($_GET['enviar'])){
-                                $busqueda = $_GET['busqueda'];
-                                if (isset($_GET['busqueda'])) {
-                                    $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
-                                }
-                            }
-                        ?>
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800"></h1>
-                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-agregar shadow-sm" data-toggle="modal" data-target="#createuser">
-                                <span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario &nbsp <i class="fa fa-plus"></i> </a>
-                            </button>
-                        </div>
-
-                        
-
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-black">Tabla de usuarios</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead  style="color: white; text-align: center; background-color:black">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Contraseña</th>
-                                                <th>Cargo</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody style="color: black;">
-                                            
-                                            <?php
-                                                $conexion=$GLOBALS['conex'];                
-                                                $SQL=mysqli_query($conexion,"SELECT users.Id, users.Nombres, users.Correo, users.Contraseña, users.Cargo FROM users");
-                                                while($fila=mysqli_fetch_assoc($SQL)):
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $fila['Id']; ?></td>
-                                                <td><?php echo $fila['Nombres']; ?></td>
-                                                <td><?php echo $fila['Correo']; ?></td>
-                                                <td><?php echo $fila['Contraseña']; ?></td>
-                                                <td><?php echo $fila['Cargo']; ?></td>
-                                                <td>
-                                                    <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
-                                                    <a class="btn btn-del" href="../funciones/usuarios/eliminar_usuario.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
-                                                </td>
-                                            </tr>
-                                            <?php endwhile;?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <div> <a class="header_toggle" href="../funciones/cerrarSesion.php"> <i class='bx bx-log-out'></i> </a> </div>
+        </header>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <div class="nav_list"> 
+                        <a href="index.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 
+                        <a href="usuarios.php" class="nav_link active"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span> </a> 
+                        <a href="productos.php" class="nav_link"> <i class='bx bx-restaurant nav_icon'></i> <span class="nav_name">Productos</span> </a> 
+                        <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
+                        <a href="contactos.php" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
+                        <a href="clientes.php" class="nav_link"> <i class='bx bx-group nav_icon'></i> <span class="nav_name">Clientes</span> </a> 
                     </div>
-                    <!-- /.container-fluid -->
-
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="text-center text-lg-start bg-black color-white text-muted p-1">            
-                    <!-- Section: Links  -->
-                    <section class="">
-                        <div class="container text-center text-md-start mt-5">
-                            <!-- Grid row -->
-                            <div class="row mt-3">
-                                <!-- Grid column -->
-                                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                                    <!-- Content -->
-                                    <h6 class="text-uppercase fw-bold mb-4">
-                                        <i class="bi bi-geo-alt icon me-3 text-secondary"></i>Dirección
-                                    </h6>
-                                    <p>
-                                        Santome #49 
-                                    </p>
-                                    <p>
-                                        Esq. 16 de Agosto, Baní Peravia
-                                    </p>
-                                </div>
-                                <!-- Grid column -->
-
-                                <!-- Grid column -->
-                                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                                    <!-- Links -->
-                                    
-                                    <h6 class="text-uppercase fw-bold mb-4">
-                                        <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
-                                    </h6>
-                                    <p>
-                                        <strong>Telefono:</strong> +1 809-522-5146
-                                    </p>
-                                    <p>
-                                        <strong>Email:</strong> Donahildabani@gmail.com                            
-                                    </p>
-                                </div>
-                                <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                                <!-- Links -->
-                                <h6 class="text-uppercase fw-bold mb-4">
-                                    <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
-                                </h6>
-                                <p>
-                                    <strong>Lunes a Domingos: 8:00AM - 11:00PM</strong>
-                                </p>
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                                <!-- Links -->
-                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
-                                <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
-                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
-                                <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-                        </div>
-                    </section>
-                    <!-- Section: Links  -->
-
-                    <!-- Copyright -->
-                    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-                        &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
-                    </div>
-                    <!-- Copyright -->
-                </footer>
-                <!-- Footer -->  
-
-            </div>
-            <!-- End of Content Wrapper -->
-
+            </nav>
         </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Crear Modal-->
-        <div class="modal fade" id="createuser" tabindex="-1" role="dialog" aria-labelledby="createuserLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createuserLabel">Añadir nuevo usuario</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+        <!--Container Main start-->
+        <div class="height-100 bg-light">
+            <br>
+            <h1 class="text-center color-white"> Administradores </h1>
+            <div class="row py-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="card rounded shadow border-0"> 
+                        <div class="card-body p-5 bg-white rounded">
+                            <div class="text-end mb-3"> <!-- Agrega esta línea para alinear a la derecha -->
+                                <a class="btn btn-dark text-white"data-toggle="modal" data-target="#createuser"> Agregar nuevo usuario <i class='bx bxs-user-plus text-white'></i> </a>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="example" style="width:100%" class="table table-striped table-bordered">
+                                    <thead class="text-center" style="background-color: black; color:white;">
+                                        <tr>
+                                            <th>Id Usuario</th>
+                                            <th>Nombre</th>
+                                            <th>Correo</th>
+                                            <th>Contraseña</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $conexion=$GLOBALS['conex'];                
+                                            $SQL=mysqli_query($conexion,"SELECT usuarios.IdUsuario, usuarios.nombre, usuarios.correo, usuarios.contraseña FROM usuarios");
+                                            while($fila=mysqli_fetch_assoc($SQL)):
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $fila['IdUsuario']; ?></td>
+                                            <td><?php echo $fila['nombre']; ?></td>
+                                            <td><?php echo $fila['correo']; ?></td>
+                                            <td><?php echo $fila['contraseña']; ?></td>
+                                            <td>
+                                                <a class="btn" href=""> <i class='bx bxs-user-detail'></i> </a>
+                                                <a class="btn btn-edit" href="#" 
+                                                    data-id="<?php echo $fila['IdUsuario']?>" 
+                                                    data-nombre="<?php echo $fila['nombre']?>" 
+                                                    data-correo="<?php echo $fila['correo']?>" 
+                                                    data-contraseña="<?php echo $fila['contraseña']?>">
+                                                    <i class='bx bxs-edit'></i>
+                                                </a>
+                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdUsuario']?>"> <i class='bx bxs-trash-alt'></i> </a>
+                                            </td>
+                                        </tr>
+                                        <?php endwhile;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-
-                        <form  action="../funciones/usuarios/validarusuario.php" method="POST">
-                            <div>
-                                <label for="Nombres" class="css-label"> Nombre Completo: </label>
-                                <input type="text" id="Nombres" name="Nombres" class="css-input" style= " display: block; width: 100%;" required >
-                            </div>
-                            
-                            <div>
-                                <label for="Correo" class="css-label"> Correo:</label>
-                                <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required >
-                            </div>
-
-                                                
-                            <div>
-                                <label for="Contraseña" class="css-label">Contraseña:</label>
-                                <input type="text" id="Contraseña" name="Contraseña" class="css-input" style= " display: block; width: 100%;" required >
-                            </div>
-
-                            <div>
-                                <label for="Cargo" class="css-label"> Cargo: </label>
-                                <select name="Cargo" id="Cargo" class="css-input" style= " display: block; width: 100%;" required> 
-                                    <option value="Chef">Chef</option>
-                                    <option value="Hola">Hola</option>
-                                </select>
-                            </div>
-                            <br>
-
-                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
-                        </form> 
-
-                    </div>
-                    
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="edituserLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edituserLabel">Editar usuario</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="editUserForm" action="#">
+                        <input type="hidden" name="id" id="editId">
+                        <div>
+                            <label for="nombre" class="css-label">Nombre Completo:</label>
+                            <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
+                        </div>
 
+                        <div>
+                            <label for="correo" class="css-label">Correo:</label>
+                            <input type="text" id="correo" name="correo" class="css-input" style="display: block; width: 100%;" required>
+                        </div>
+
+                        <div>
+                            <label for="contraseña" class="css-label">Contraseña:</label>
+                            <input type="text" id="contraseña" name="contraseña" class="css-input" style="display: block; width: 100%;" required>
+                        </div>
+                        <br>
+
+                        <div style="text-align: center;">
+                            <a type="button" class="btn-guardar" href="usuarios.php"> Cancelar</a>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <input type="submit" value="Guardar" id="update" class="btn-guardar" name="actualizar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </body>
+
+
+
+
+    <script>
+        // Al hacer clic en el botón de editar
+        $('.btn-edit').on('click', function(e){
+            e.preventDefault();
+            const idUsuario = $(this).data('id');
+            const nombre = $(this).data('nombre');
+            const correo = $(this).data('correo');
+            const contraseña = $(this).data('contraseña');
+
+            // Poblar el formulario de edición con los datos del usuario
+            $('#editId').val(idUsuario);
+            $('#nombre').val(nombre);
+            $('#correo').val(correo);
+            $('#contraseña').val(contraseña);
+
+            // Abrir el modal de edición
+            $('#edituser').modal('show');
+        });
+
+        // Al enviar el formulario de edición
+        $('#editUserForm').on('submit', function(e){
+            e.preventDefault();
+
+            // Obtener los datos del formulario
+            const idUsuario = $('#editId').val();
+            const nombre = $('#nombre').val();
+            const correo = $('#correo').val();
+            const contraseña = $('#contraseña').val();
+
+            // Realizar la solicitud AJAX para editar el usuario
+            $.ajax({
+                type: "POST",
+                url: "../funciones/funciones.php",
+                data: {
+                    id: idUsuario,
+                    nombre: nombre,
+                    correo: correo,
+                    contraseña: contraseña,
+                    accion: 'editar_usuario'
+                },
+                success: function(response) {
+                    // Manejar la respuesta (puedes mostrar un mensaje de éxito o recargar la página)
+                    Swal.fire(
+                        'Editado',
+                        'El usuario se ha editado correctamente.',
+                        'success'
+                    );
+                    // Otra acción que desees realizar, como recargar la tabla
+                    location.reload();
+                    // Cerrar el modal de edición
+                    $('#edituser').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    // Manejar errores
+                    Swal.fire(
+                        'Error',
+                        'Hubo un error al editar el usuario: ' + error,
+                        'error'
+                    );
+                }
+            });
+        });
+
+
+    </script>
+
+
 
     <script>
         $('.btn-del').on('click', function(e){
         e.preventDefault();
-        const href = $(this).attr('href')
+        const IdUsuario = $(this).data('id');
+
         Swal.fire({
-            title: '¿Estas seguro de eliminar este usuario?',
-            text: "¡No podrás revertir esto!!",
+            title: '¿Estás seguro de eliminar este usuario?',
+            text: "¡No podrás revertir esto!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar!', 
-            cancelButtonText: 'Cancelar!', 
-        }).then((result)=>{
-            if(result.value){
-            if (result.isConfirmed) {
+            confirmButtonText: 'Sí, eliminar', 
+            cancelButtonText: 'Cancelar', 
+        }).then((result) => {
+            if (result.value) {
+            $.ajax({
+                type: "POST",
+                url: "../funciones/funciones.php",
+                data: {
+                id: IdUsuario,
+                accion: 'eliminar_usuario'
+                },
+                success: function(response) {
                 Swal.fire(
-                'Eliminado!',
-                'El usuario fue eliminado.',
-                'success'
-                )
+                    'Eliminado',
+                    'El usuario fue eliminado correctamente.',
+                    'success'
+                );
+                location.reload();
+                },
+                error: function(xhr, status, error) {
+                Swal.fire(
+                    'Error',
+                    'Hubo un error al eliminar el usuario: ' + error,
+                    'error'
+                );
+                }
+            });
             }
-            document.location.href= href;
-            }   
-        })
-        })
+        });
+        });
     </script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="../startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
-    <script src="../startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="../package/dist/sweetalert2.all.js"></script>
-    <script src="../package/dist/sweetalert2.all.min.js"></script>
-  
 
 </html>

@@ -1,3 +1,9 @@
+<?php
+require_once ("../funciones/_db.php");
+session_start();
+error_reporting(0);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -67,32 +73,32 @@
             <h1 class="focus-in-expand text-center color-white"> Reservar </h1>
             <div class="row">
                 <div class="info">
-                    <form  action="../funciones/reservas/validarreserva.php" method="POST">
+                    <form  action="../funciones/funciones.php" method="POST">
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label for="Nombre" class="css-label"> Nombre Completo:</label>
-                                <input type="text" name="Nombre" class="css-input form-control" id="Nombre" required Placeholder="Ingrese su nombre">
+                                <label for="nombre" class="css-label"> Nombre Completo:</label>
+                                <input type="text" name="nombre" class="css-input" id="nombre" required Placeholder="Ingrese su nombre">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Correo" class="css-label"> Correo: </label>
-                                <input type="email" class="css-input form-control" name="Correo" id="Correo" required Placeholder="Ingrese su correo electronico">
+                                <label for="correo" class="css-label"> Correo: </label>
+                                <input type="email" class="css-input" name="correo" id="correo" required Placeholder="Ingrese su correo electronico">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Celular" class="css-label"> Celular: </label>
-                                <input type="text" class="css-input form-control" name="Celular" id="Celular" required  Placeholder="Ingresar numero de celular">
+                                <label for="celular" class="css-label"> Celular: </label>
+                                <input type="text" class="css-input" name="celular" id="celular" required  Placeholder="Ingresar numero de celular">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Cantidad" class="css-label">Cantidad de personas: </label>
-                                <input type="number" class="css-input form-control" name="Cantidad" id="Cantidad" required  Placeholder="Ingresar cantidad de personas">
+                                <label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>
+                                <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required  Placeholder="Ingresar cantidad de personas">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Fecha" class="css-label"> Fecha: </label>
-                                <input type="date" class="css-input form-control" name="Fecha" id="Fecha" required  Placeholder="dd/mm/aa">
+                                <label for="fecha" class="css-label"> Fecha: </label>
+                                <input type="date" class="css-input" name="fecha" id="fecha" required  Placeholder="dd/mm/aa">
                                 
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="Hora" class="css-label"> Hora: </label>
-                                <select class=" css-input form-control" name="Hora" id="Hora" required>
+                                <label for="hora" class="css-label"> Hora: </label>
+                                <select class=" css-input" name="hora" id="hora" required>
                                     <option value="" >Seleccione la hora</option >
                                     <option value="10:00 AM" >10:00 AM </option >
                                     <option value="11:00 AM">11:00 AM </option >
@@ -111,8 +117,9 @@
 
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="Evento" class="css-label"> Tipo de Evento: </label>
-                                <select class="css-input form-control" name="Evento" id="Evento" required>
+                                <label for="evento" class="css-label"> Tipo de Evento: </label>
+                                <br>
+                                <select class="css-input" name="evento" id="evento" required>
                                     <option value="" >Seleccione el tipo de evento</option>
                                     <option value="Reservar normal" >Reservar normal </option>
                                     <option value="Cumpleaños">Cumpleaños </option>
@@ -121,8 +128,9 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="Area" class="css-label"> Area de reservacion: </label>
-                                <select class="css-input form-control" name="Area" id="Area" required>
+                                <label for="area" class="css-label"> Area de reservacion: </label>
+                                <br>
+                                <select class="css-input" name="area" id="area" required>
                                     <option value="">Seleccione area de reservacion</option>
                                     <option value="Sala VIP" >Sala VIP </option>
                                     <option value="Terraza">Terraza</option>
@@ -130,25 +138,23 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="Descripcion" class="css-label"> Descripcion de la reservacion</label>
-                                <textarea id="Descripcion" name="Descripcion" rows="10" class="css-input form-control" required> </textarea>
+                                <label for="descripcion" class="css-label"> Descripcion de la reservacion</label>
+                                <br>
+                                <textarea id="descripcion" name="descripcion" rows="10" class="css-input" required> </textarea>
                                 <br>
                             </div>
                             
                             <br>
-                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
-
+                            <input type="hidden" name="accion" value="validar_reservas">
+                            <button type="submit" class="btn-guardar">Enviar</button>
                         </form>
 
                      </div>
 
                 </div>
             </div>
-
             <br>
         </div>
-
-
 
         <!-- Footer -->
         <footer class="text-center text-lg-start bg-black color-white text-muted p-1">            
