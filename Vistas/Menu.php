@@ -158,7 +158,10 @@ error_reporting(0);
                             </thead>
                             <tbody class="cart-tbody"></tbody>
                         </table>
-                        <p class="total-container" id="total-price"></p>
+                        <div class="d-flex justify-content-center align-items-center" style="margin-top: 90px">
+                            <p class="total-container mr-1">Total: </p>
+                            <p id="total-price"></p>
+                        </div>
                        <div class="d-flex flex-column align-items-center">
                            <a href="#" type="button" id="checkout-btn" class="btn btn-primary mt-2 mb-2 w-100">Comprar</a>
                            <a href="#" type="button" id="clear-cart" class="btn btn-primary w-100">Limpiar Carrito</a>
@@ -396,7 +399,6 @@ error_reporting(0);
                 if (lsContent.some(product => product.id === event.target.id)) {
                     lsContent?.forEach(prod => {
                         if(prod.id === event.target.id){
-                            console.log('dentro')
                             prod.quantity += product.quantity
 
                         }
@@ -408,9 +410,28 @@ error_reporting(0);
                 }
 
                 lsContent.push(product);
+                setTotal(lsContent)
                 setLSContent(lsContent);
                 displayProducts();
                 toastMessageSuccess(product);
+            }
+
+            function setTotal(lsContent){
+                let totalPrice = document.getElementById('total-price')
+
+                if (lsContent){
+                    let total = 0;
+
+                    lsContent.forEach(prod => {
+                        total += prod.quantity * prod.price
+                        totalPrice.textContent = `$${total}`
+                    })
+
+                    return
+                }
+                totalPrice.textContent = `${0}`
+                console.log(totalPrice.textContent)
+                console.log('si')
             }
 
             //Update products
@@ -464,6 +485,7 @@ error_reporting(0);
                     }
                 }
 
+
                 tbody[0].innerHTML = productMarkup;
                 removeButtons = document.querySelectorAll(".remove")
                 removeButtons.forEach(function(button) {
@@ -471,6 +493,8 @@ error_reporting(0);
                         deleteProduct(event.target.id);
                     })
                 });
+
+                setTotal(lsContent)
             }
 
             //Delete product
@@ -482,6 +506,9 @@ error_reporting(0);
 
                 setLSContent(lsContent);
                 displayProducts();
+                if (!lsContent){
+                    document.getElementById('total-price').textContent = `${0}`
+                }
             }
 
             //Clear cart EventListener
