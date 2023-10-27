@@ -137,6 +137,72 @@ function validar_reservas(){
     }
 }
 
+function eliminar_reservas() {
+    if (isset($_POST['idReservas'])) {
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+    $cantidadPersonas = $_POST['cantidadPersonas'];
+    $fecha = $_POST['fecha'];
+    $hora = $_POST['hora'];
+    $evento = $_POST['evento'];
+    $area = $_POST['area'];
+    $descripcion = $_POST['descripcion'];
+
+
+        $consulta = mysqli_query($conexion, "DELETE FROM reservas WHERE IdReservas = '$IdReservas'");
+        
+        if ($consulta) {
+            header('Location: ../dashboard/reservas.php');
+        } else {
+            echo "Error al eliminar la reserva";
+        }
+    } else {
+        echo "ID de reserva no proporcionado";
+    }
+}
+
+function editar_reservas(){
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+    $cantidadPersonas = $_POST['cantidadPersonas'];
+    $fecha = $_POST['fecha'];
+    $hora = $_POST['hora'];
+    $evento = $_POST['evento'];
+    $area = $_POST['area'];
+    $descripcion = $_POST['descripcion'];
+    
+    $conexion = $GLOBALS['conex'];
+    $actualizacion = " UPDATE reservas SET cantidadPersonas = '$cantidadPersonas', fecha = '$fecha', hora = '$hora', evento = '$evento', area = '$area', descripcion = '$descripcion' WHERE idReserva = '$idReservas' "; 
+    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+    
+    header('Location: ../vistas/reservas.php'); 
+
+    if ($resultado_actualizacion) {
+        header('Location: ../dashboard/reservas.php');
+    } else {
+        echo "Error al editar la reserva.";
+    }
+}
+
+function mostrar_reservas() {
+    if (isset($_POST['id'])) {
+        $IdUsuario = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdUsuario, nombre, correo, contraseña FROM usuarios WHERE IdUsuario = '$IdUsuario'");
+
+        if ($consulta) {
+            $usuario = mysqli_fetch_assoc($consulta);
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($usuario);
+        } else {
+            echo "Error al obtener los datos del usuario";
+        }
+    } else {
+        echo "ID de usuario no proporcionado";
+    }
+}
 
 
 
@@ -365,3 +431,5 @@ function mostrar_usuario() {
 }
 
 //casos de PRODUCTOS
+
+
