@@ -138,7 +138,7 @@ error_reporting(0);
 
         <!-- OffCanvas Cart of Shopping -->
         <div>
-            <div class="offcanvas offcanvas-end" tabindex="1000" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas offcanvas-end" style="width: 500px" tabindex="1000" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <h5 id="offcanvasRightLabel">Carrito de Compra</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -148,13 +148,14 @@ error_reporting(0);
                         <table id="cart-content">
                             <thead>
                             <tr class="p-2 align-items-center justify-content-center">
-                                <th class="pl-5">Image</th>
-                                <th class="pl-5">Name</th>
-                                <th class="pl-2">Price</th>
+                                <th class="pl-5">Imagen</th>
+                                <th class="pl-4">Nombre</th>
+                                <th class="pl-2">Precio</th>
+                                <th class="pl-2">Cantidad</th>
                                 <th></th>
+                                <hr />
                             </tr>
                             </thead>
-
                             <tbody class="cart-tbody"></tbody>
                         </table>
                         <p class="total-container" id="total-price"></p>
@@ -364,6 +365,7 @@ error_reporting(0);
             //Shopping Cart
             buttonAddCart.forEach(function(button) {
                 button.addEventListener("click", function(event) {
+                    event.preventDefault()
                     addProductoToCart(event)
                 })
             });
@@ -376,6 +378,7 @@ error_reporting(0);
                 let image = document.getElementById(`imagen${event.target.id}`).src
 
                 price = parseInt(price.replace("$", ""))
+                quantity = parseInt(quantity)
 
                 let product = {
                     id: event.target.id,
@@ -391,7 +394,16 @@ error_reporting(0);
                 }
 
                 if (lsContent.some(product => product.id === event.target.id)) {
-                    toastMessageDanger(product)
+                    lsContent?.forEach(prod => {
+                        if(prod.id === event.target.id){
+                            console.log('dentro')
+                            prod.quantity += product.quantity
+
+                        }
+                    })
+                    setLSContent(lsContent)
+                    displayProducts()
+                    toastMessageSuccess(product)
                     return
                 }
 
@@ -433,12 +445,17 @@ error_reporting(0);
                                         style="width: 120px; height: 90px;"
                                     >
                                 </td>
-                                <td class="pl-5">
+                                <td class="pl-4">
                                     ${product.name}
                                 </td>
                                 <td class="p-2 ml-5 justify-content-center align-items-center">
                                     $${product.price}
                                 </td>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <td class="pl-4">
+                                        ${product.quantity}
+                                    </td>
+                                </div>
                                 <td class="pl-3">
                                     <a href="#" id="${product.id}" class="remove" type="">X</a>
                                 </td>
