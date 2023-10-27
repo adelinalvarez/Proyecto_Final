@@ -1,5 +1,5 @@
 <?php
-require_once ("../funciones/_db.php");
+require_once ("../includes/_db.php");
 session_start();
 error_reporting(0);
 
@@ -21,202 +21,381 @@ if( $validarusuario == null || $validarusuario = ''){
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
         <title>Doña Hilda Tapas and Grill</title>
         <link rel="icon" href="../assets/Imagenes/Logo.png">
-        <link href="css/dashboard.css" rel="stylesheet">
-        
 
+        <!-- Custom styles for this template -->
+        <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="../css/style.css" rel="stylesheet">
 
     </head>
 
-    <body>
-        <!-- Sidenav -->
-        <nav
-        id="sidenav-4"
-        class="group fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-slim='true']:hidden data-[te-sidenav-slim-collapsed='true']:w-[77px] data-[te-sidenav-slim='true']:w-[77px] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800 [&[data-te-sidenav-slim-collapsed='true'][data-te-sidenav-slim='false']]:hidden [&[data-te-sidenav-slim-collapsed='true'][data-te-sidenav-slim='true']]:[display:unset]"
-        data-te-sidenav-init
-        data-te-sidenav-hidden="false"
-        data-te-sidenav-mode="side"
-        data-te-sidenav-slim="true"
-        data-te-sidenav-content="#slim-content"
-        data-te-sidenav-slim-collapsed="true">
-        <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
-            <li class="relative">
-            <a
-                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                data-te-sidenav-link-ref>
-                <span
-                class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="h-4 w-4">
-                    <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-                </svg>
-                </span>
-                <span
-                class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                data-te-sidenav-slim="false"
-                >Link 1</span
-                >
-            </a>
-            </li>
-            <li class="relative">
-            <a
-                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                data-te-sidenav-link-ref>
-                <span
-                class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="h-4 w-4">
-                    <path
-                    fill-rule="evenodd"
-                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
-                    clip-rule="evenodd" />
-                </svg>
-                </span>
-                <span
-                class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                data-te-sidenav-slim="false"
-                >Category 1</span
-                >
-                <span
-                class="absolute right-0 ml-auto mr-[0.5rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
-                data-te-sidenav-rotate-icon-ref>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5">
-                    <path
-                    fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd" />
-                </svg>
-                </span>
-            </a>
-            <ul
-                class="!visible relative m-0 hidden list-none p-0 data-[te-collapse-show]:block "
-                data-te-sidenav-collapse-ref>
-                <li class="relative">
-                <a
-                    class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref
-                    >Link 2</a
-                >
-                </li>
-                <li class="relative">
-                <a
-                    class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref
-                    >Link 3</a
-                >
-                </li>
-            </ul>
-            </li>
-            <li class="relative">
-            <a
-                class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                data-te-sidenav-link-ref>
-                <span
-                class="mr-4 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:text-gray-400 dark:[&>svg]:text-gray-300">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="h-4 w-4">
-                    <path
-                    fill-rule="evenodd"
-                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-2.625 6c-.54 0-.828.419-.936.634a1.96 1.96 0 00-.189.866c0 .298.059.605.189.866.108.215.395.634.936.634.54 0 .828-.419.936-.634.13-.26.189-.568.189-.866 0-.298-.059-.605-.189-.866-.108-.215-.395-.634-.936-.634zm4.314.634c.108-.215.395-.634.936-.634.54 0 .828.419.936.634.13.26.189.568.189.866 0 .298-.059.605-.189.866-.108.215-.395.634-.936.634-.54 0-.828-.419-.936-.634a1.96 1.96 0 01-.189-.866c0-.298.059-.605.189-.866zm2.023 6.828a.75.75 0 10-1.06-1.06 3.75 3.75 0 01-5.304 0 .75.75 0 00-1.06 1.06 5.25 5.25 0 007.424 0z"
-                    clip-rule="evenodd" />
-                </svg>
-                </span>
-                <span
-                class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                data-te-sidenav-slim="false"
-                >Category 2</span
-                >
-                <span
-                class="absolute right-0 ml-auto mr-[0.5rem] transition-transform duration-300 ease-linear motion-reduce:transition-none [&>svg]:text-gray-600 dark:[&>svg]:text-gray-300"
-                data-te-sidenav-rotate-icon-ref>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5">
-                    <path
-                    fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd" />
-                </svg>
-                </span>
-            </a>
-            <ul
-                class="show !visible relative m-0 hidden list-none p-0 data-[te-collapse-show]:block "
-                data-te-sidenav-collapse-ref>
-                <li class="relative">
-                <a
-                    class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref
-                    >Link 4</a
-                >
-                </li>
-                <li class="relative">
-                <a
-                    class="flex h-6 cursor-pointer items-center truncate rounded-[5px] py-4 pl-[3.4rem] pr-6 text-[0.78rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref
-                    >Link 5</a
-                >
-                </li>
-            </ul>
-            </li>
-        </ul>
-        </nav>
-        <!-- Sidenav -->
+    <body id="page-top">
 
-        <div id="slim-content" class="flex !pl-[77px]">
-        <!-- Toggler -->
-        <button
-            class="mr-1 mt-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-            data-te-sidenav-toggle-ref
-            data-te-target="#sidenav-4"
-            aria-controls="#sidenav-4"
-            aria-haspopup="true">
-            <span class="block [&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="h-5 w-5">
-                <path
-                fill-rule="evenodd"
-                d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-                clip-rule="evenodd" />
-            </svg>
-            </span>
-        </button>
-        <!-- Toggler -->
-        <button
-            class="mt-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-            aria-haspopup="true"
-            id="slim-toggler">
-            Toggle Slim
-        </button>
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar -->
+            <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: black;">
+
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Administrar
+                </div>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="pedidos.php">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Pedidos</span></a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="productos.php">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="reservas.php">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Reservas</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="contactos.php">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Contactos</span>
+                    </a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="usuarios.php">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Usuarios</span></a>
+                </li>
+
+            </ul>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light nav-dashboard topbar mb-4 static-top shadow">
+
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <form class="form-inline">
+                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </form>
+
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-white-600 small"> <?php echo $_SESSION['Correo']; ?> </span>
+                                    <img class="img-profile rounded-circle"
+                                        src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Perfil
+                                    </a>
+                                
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Informe
+                                    </a>
+                                    <a class="dropdown-item" href="acciones/cerrarSesion.php">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Cerrar Sesión
+                                    </a>
+                                    
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+                    <!-- End of Topbar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Incorpora nuevos usuarios a tu panel de control</h1>
+                        <p class="mb-4">Permitiéndoles administrar los datos.</p>
+
+                        <!-- DataTales Example -->
+                        <?php
+                            $conexion=$GLOBALS['conex'];  
+                            $where="";
+                            if(isset($_GET['enviar'])){
+                                $busqueda = $_GET['busqueda'];
+                                if (isset($_GET['busqueda'])) {
+                                    $where="WHERE users.Correo LIKE'%".$busqueda."%' OR nombre  LIKE'%".$busqueda."%'";
+                                }
+                            }
+                        ?>
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800"></h1>
+                            <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-agregar shadow-sm" data-toggle="modal" data-target="#createuser">
+                                <span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario &nbsp <i class="fa fa-plus"></i> </a>
+                            </button>
+                        </div>
+
+                        
+
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-black">Tabla de usuarios</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead  style="color: white; text-align: center; background-color:black">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Correo</th>
+                                                <th>Contraseña</th>
+                                                <th>Cargo</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color: black;">
+                                            
+                                            <?php
+                                                $conexion=$GLOBALS['conex'];                
+                                                $SQL=mysqli_query($conexion,"SELECT users.Id, users.Nombres, users.Correo, users.Contraseña, users.Cargo FROM users");
+                                                while($fila=mysqli_fetch_assoc($SQL)):
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $fila['Id']; ?></td>
+                                                <td><?php echo $fila['Nombres']; ?></td>
+                                                <td><?php echo $fila['Correo']; ?></td>
+                                                <td><?php echo $fila['Contraseña']; ?></td>
+                                                <td><?php echo $fila['Cargo']; ?></td>
+                                                <td>
+                                                    <a class="btn" href="acciones/editar_user.php?id=<?php echo $fila['id']?> "> <i class="fa fa-edit"  style="color: black"></i></a>
+                                                    <a class="btn btn-del" href="../funciones/usuarios/eliminar_usuario.php?id=<?php echo $fila['Id']?> "> <i class="fa fa-trash"  style="color: black"></i></a>
+                                                </td>
+                                            </tr>
+                                            <?php endwhile;?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="text-center text-lg-start bg-black color-white text-muted p-1">            
+                    <!-- Section: Links  -->
+                    <section class="">
+                        <div class="container text-center text-md-start mt-5">
+                            <!-- Grid row -->
+                            <div class="row mt-3">
+                                <!-- Grid column -->
+                                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                                    <!-- Content -->
+                                    <h6 class="text-uppercase fw-bold mb-4">
+                                        <i class="bi bi-geo-alt icon me-3 text-secondary"></i>Dirección
+                                    </h6>
+                                    <p>
+                                        Santome #49 
+                                    </p>
+                                    <p>
+                                        Esq. 16 de Agosto, Baní Peravia
+                                    </p>
+                                </div>
+                                <!-- Grid column -->
+
+                                <!-- Grid column -->
+                                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                    <!-- Links -->
+                                    
+                                    <h6 class="text-uppercase fw-bold mb-4">
+                                        <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
+                                    </h6>
+                                    <p>
+                                        <strong>Telefono:</strong> +1 809-522-5146
+                                    </p>
+                                    <p>
+                                        <strong>Email:</strong> Donahildabani@gmail.com                            
+                                    </p>
+                                </div>
+                                <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
+                                </h6>
+                                <p>
+                                    <strong>Lunes a Domingos: 8:00AM - 11:00PM</strong>
+                                </p>
+                            </div>
+                            <!-- Grid column -->
+
+                            <!-- Grid column -->
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
+                                <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
+                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                        </div>
+                    </section>
+                    <!-- Section: Links  -->
+
+                    <!-- Copyright -->
+                    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+                        &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                    </div>
+                    <!-- Copyright -->
+                </footer>
+                <!-- Footer -->  
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Crear Modal-->
+        <div class="modal fade" id="createuser" tabindex="-1" role="dialog" aria-labelledby="createuserLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createuserLabel">Añadir nuevo usuario</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form  action="../funciones/usuarios/validarusuario.php" method="POST">
+                            <div>
+                                <label for="Nombres" class="css-label"> Nombre Completo: </label>
+                                <input type="text" id="Nombres" name="Nombres" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+                            
+                            <div>
+                                <label for="Correo" class="css-label"> Correo:</label>
+                                <input type="text" id="Correo" name="Correo" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+
+                                                
+                            <div>
+                                <label for="Contraseña" class="css-label">Contraseña:</label>
+                                <input type="text" id="Contraseña" name="Contraseña" class="css-input" style= " display: block; width: 100%;" required >
+                            </div>
+
+                            <div>
+                                <label for="Cargo" class="css-label"> Cargo: </label>
+                                <select name="Cargo" id="Cargo" class="css-input" style= " display: block; width: 100%;" required> 
+                                    <option value="Chef">Chef</option>
+                                    <option value="Hola">Hola</option>
+                                </select>
+                            </div>
+                            <br>
+
+                            <input type="submit" value="Guardar" id="register" class="btn-guardar" name="registrar">
+                        </form> 
+
+                    </div>
+                    
+                </div>
+            </div>
         </div>
 
 
     </body>
-    <script src="js/sidenav.js"></script>
 
+    <script>
+        $('.btn-del').on('click', function(e){
+        e.preventDefault();
+        const href = $(this).attr('href')
+        Swal.fire({
+            title: '¿Estas seguro de eliminar este usuario?',
+            text: "¡No podrás revertir esto!!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!', 
+            cancelButtonText: 'Cancelar!', 
+        }).then((result)=>{
+            if(result.value){
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Eliminado!',
+                'El usuario fue eliminado.',
+                'success'
+                )
+            }
+            document.location.href= href;
+            }   
+        })
+        })
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="../startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../package/dist/sweetalert2.all.js"></script>
+    <script src="../package/dist/sweetalert2.all.min.js"></script>
+  
 
 </html>

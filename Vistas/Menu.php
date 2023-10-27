@@ -33,6 +33,8 @@ error_reporting(0);
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 
+        <link href="../css/style.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -179,9 +181,8 @@ error_reporting(0);
 
                 <!-- cards de servicios-->
 
-                <div style =" scroll-margin-top: 90px;">
-                    <p class="css-label text-center"> Menu </p>
-                </div>
+                <h1 class="focus-in-expand text-center color-white"> Menu </h1>
+
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <?php

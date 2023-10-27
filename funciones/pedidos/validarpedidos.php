@@ -19,7 +19,7 @@ require_once ("_db.php");
         $resultado=mysqli_query($conexion, $consulta);
   
       if($resultado){
-        header('Location: ../startbootstrap-sb-admin-2-gh-pages/pedidos.php'); 
+        header('Location: ../../dashboard/pedidos.php'); 
 
       }else{
         echo 'Ocurrio un error al guardar los datos';

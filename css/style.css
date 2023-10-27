@@ -10,6 +10,13 @@
     border-radius: 30px; 
     padding: 08px 10px;
 }
+.nosotros-index{
+    position: absolute;
+    top: 80%; /* Ajusta el valor para controlar la posición vertical del botón */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
 a.EfectoSombra {
     color: white;
     text-decoration: none;
@@ -32,18 +39,17 @@ a.EfectoSombra:hover {
     }
 }
 
-.tracking-in-expand {
-	animation: tracking-in-expand 5s cubic-bezier(0.215, 0.610, 0.355, 1.000) 5 both;
+.focus-in-expand {
+	animation: focus-in-expand 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
-@keyframes tracking-in-expand {
+@keyframes focus-in-expand {
     0% {
       letter-spacing: -0.5em;
+      filter: blur(12px);
       opacity: 0;
     }
-    40% {
-      opacity: 0.6;
-    }
     100% {
+      filter: blur(0px);
       opacity: 1;
     }
 }
@@ -152,6 +158,19 @@ a.EfectoSombra:hover {
     width: 100%;
 }
 
+.animated-image {
+    animation: moveUpDown 4s infinite;
+}
+
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px); /* Cambia el valor para ajustar la distancia de la animación */
+    }
+}
+
 .login-container {
     background: #fff;
     border-radius: 10px;
@@ -188,3 +207,84 @@ a.EfectoSombra:hover {
     height: 100vh;
     margin: 0;
 }
+
+/* Estilos para la sección de preguntas frecuentes */
+.faq .faq-list {
+    padding: 0 100px;
+}
+
+.faq .faq-list ul {
+    padding: 0;
+    list-style: none;
+}
+
+.faq .faq-list li+li {
+    margin-top: 15px;
+}
+
+.faq .faq-list li {
+    padding: 20px;
+    background: #fffd89;
+    border-radius: 4px;
+    position: relative;
+}
+
+.faq .faq-list a {
+    display: block;
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    padding: 0 30px;
+    outline: none;
+    cursor: pointer;
+}
+
+.faq .faq-list .icon-help {
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    left: 20px;
+    color: #000000;
+}
+
+.faq .faq-list .icon-show, .faq .faq-list .icon-close {
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.faq .faq-list p {
+    margin-bottom: 0;
+    padding: 10px 0 0 0;
+}
+
+.faq .faq-list .icon-show {
+    display: none;
+}
+
+.faq .faq-list a.collapsed {
+    color: #37517e;
+    transition: 0.3s;
+}
+
+.faq .faq-list a.collapsed:hover {
+    color: #47b2e4;
+}
+
+.faq .faq-list a.collapsed .icon-show {
+    display: inline-block;
+}
+
+.faq .faq-list a.collapsed .icon-close {
+    display: none;
+}
+
+@media (max-width: 1200px) {
+    .faq .faq-list {
+        padding: 0;
+    }
+}
+

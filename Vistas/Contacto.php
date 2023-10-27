@@ -64,7 +64,7 @@
 
         <div class="container">
             <br>
-            <h1 class="tracking-in-expand text-center color-white"> Contacto </h1>
+            <h1 class="focus-in-expand text-center"> Contacto </h1>
             <div class="row">
                 <div class="col-lg-5 d-flex align-items-stretch">
                     <div class="info">
