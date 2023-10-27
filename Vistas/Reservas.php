@@ -27,7 +27,7 @@ error_reporting(0);
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Navbar brand -->
-                <a class="navbar-brand me-2" href="index.php">
+                <a class="navbar-brand me-2" href="../Index.php">
                     <img src="../imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
                 </a>
 
@@ -47,7 +47,7 @@ error_reporting(0);
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link" href="index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
+                        <a class="nav-link" href="../Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                         </li>
                     </ul>
                     <!-- Left links -->
@@ -156,79 +156,75 @@ error_reporting(0);
             <br>
         </div>
 
-        <!-- Footer -->
-        <footer class="text-center text-lg-start bg-black color-white text-muted p-1">            
+            <!-- Footer -->
+            <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
 
-            <!-- Section: Links  -->
-            <section class="">
-                <div class="container text-center text-md-start mt-5">
-                    <!-- Grid row -->
-                    <div class="row mt-3">
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                            <!-- Content -->
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="bi bi-geo-alt icon me-3 text-secondary"></i>Dirección
-                            </h6>
-                            <p>
-                                Santome #49 
-                            </p>
-                            <p>
-                                Esq. 16 de Agosto, Baní Peravia
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                <!-- Section: Links  -->
+                <section class="">
+                    <div class="container text-center text-md-start mt-5" style="color:white">
+                        <!-- Grid row -->
+                        <div class="row mt-3">
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" >
+                                <!-- Content -->
+                                <h6 class="text-uppercase fw-bold mb-4" >
+                                    <i class="bi bi-geo-alt icon me-1 text-secondary"></i>Dirección
+                                </h6>
+                                <p>
+                                    Santome #49 
+                                    Esq. 16 de Agosto, Baní Peravia
+                                </p>
+                            </div>
+                            <!-- Grid column -->
 
-                        <!-- Grid column -->
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <!-- Links -->
-                            
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
-                            </h6>
-                            <p>
-                                <strong>Telefono:</strong> +1 809-522-5146
-                            </p>
-                            <p>
-                                <strong>Email:</strong> Donahildabani@gmail.com                            
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                <!-- Links -->
+                                
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
+                                </h6>
+                                <p>
+                                    Telefono +1 809-522-5146 <br>
+                                    Email: Donahildabani@gmail.com                            
+                                </p>
+                            </div>
+                            <!-- Grid column -->
 
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
-                            </h6>
-                            <p>
-                                <strong>Lunes a Domingos: 8:00AM - 11:00PM</strong>
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
+                                </h6>
+                                <p>
+                                Lunes a Domingos: 8:00AM - 11:00PM
+                                </p>
+                            </div>
+                            <!-- Grid column -->
 
-                        <!-- Grid column -->
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
-                            <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
-                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                            <!-- Grid column -->
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
+                                <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
+                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp "></i></a>
+                            </div>
+                            <!-- Grid column -->
                         </div>
-                        <!-- Grid column -->
+                        <!-- Grid row -->
                     </div>
-                    <!-- Grid row -->
-                </div>
-            </section>
-            <!-- Section: Links  -->
+                </section>
+                <!-- Section: Links  -->
 
-            <!-- Copyright -->
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-                &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
-            </div>
-            <!-- Copyright -->
-        </footer>
-        <!-- Footer -->  
+                <!-- Copyright -->
+                <div class="text-center p-4"  style="color:white">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                </div>
+                <!-- Copyright -->
+            </footer>
+            <!-- Footer -->  
         
     </body>
 </html>

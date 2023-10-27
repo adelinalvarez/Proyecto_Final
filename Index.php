@@ -31,7 +31,7 @@
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Navbar brand -->
-                <a class="navbar-brand me-2" href="index.php">
+                <a class="navbar-brand me-2" href="Index.php">
                     <img src="imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
                 </a>
 
@@ -51,7 +51,7 @@
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link" href="index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
+                        <a class="nav-link" href="Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                         </li>
                     </ul>
                     <!-- Left links -->
@@ -76,14 +76,14 @@
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
             <a class="BotonEnlaces nosotros-index" type="button" href="vistas/nosotros.php">Conocenos</a>
             <div class="carousel-inner">
-                <div class="carousel-item active">
+            <div class="carousel-item active">
                     <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
                 </div>
                 <div class="carousel-item">
-                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+                    <img src="imagenes/Local/Hilda_Express.jpg" class="d-block w-100" alt="..." style="height: 500px;">
                 </div>
                 <div class="carousel-item">
-                    <img src="imagenes/Local/Privado2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+                    <img src="imagenes/Local/BarAmplia.jpg" class="d-block w-100" alt="..." style="height: 500px;">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -104,16 +104,16 @@
             <h1 class="focus-in-expand text-center"> ¡Revisa nuestro menu! </h1>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="imagenes/Comida/Penne_ala_marinera.jpeg" class="img-fluid" alt=""></div>
                     <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide selected-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide selected-slide"><img src="imagenes/Comida/Pollo_relleno.jpeg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Candita_de_lambi.jpeg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mofonguitos.jpeg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/filete2.jpg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mariscos.jpeg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Carbonada.jpg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Canasticas1.jpg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mofongo.jpg" class="img-fluid" alt=""></div>
                 </div>
                 <br>
                 <br>
@@ -142,14 +142,11 @@
                             <a class="BotonEnlaces" type="button" href="vistas/reservas.php"> Reserva Ahora </a>
                         </div>
                     </div>
-
                     <div class="col-5">
-                        <img src="imagenes/reservar.png" class="img-fluid" alt="">
+                        <img src="imagenes/reservar3.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
-            <br>
-
         </div>
 
         <div>
@@ -210,23 +207,21 @@
 
 
         <!-- Footer -->
-        <footer class="text-center text-lg-start bg-black color-white text-muted p-1">            
+        <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
 
             <!-- Section: Links  -->
             <section class="">
-                <div class="container text-center text-md-start mt-5">
+                <div class="container text-center text-md-start mt-5" style="color:white">
                     <!-- Grid row -->
                     <div class="row mt-3">
                         <!-- Grid column -->
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" >
                             <!-- Content -->
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="bi bi-geo-alt icon me-3 text-secondary"></i>Dirección
+                            <h6 class="text-uppercase fw-bold mb-4" >
+                                <i class="bi bi-geo-alt icon me-1 text-secondary"></i>Dirección
                             </h6>
                             <p>
                                 Santome #49 
-                            </p>
-                            <p>
                                 Esq. 16 de Agosto, Baní Peravia
                             </p>
                         </div>
@@ -240,10 +235,8 @@
                                 <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
                             </h6>
                             <p>
-                                <strong>Telefono:</strong> +1 809-522-5146
-                            </p>
-                            <p>
-                                <strong>Email:</strong> Donahildabani@gmail.com                            
+                                Telefono +1 809-522-5146 <br>
+                                Email: Donahildabani@gmail.com                            
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -255,7 +248,7 @@
                                 <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
                             </h6>
                             <p>
-                                <strong>Lunes a Domingos: 8:00AM - 11:00PM</strong>
+                               Lunes a Domingos: 8:00AM - 11:00PM
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -266,7 +259,7 @@
                             <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
                             <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
                             <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp "></i></a>
                         </div>
                         <!-- Grid column -->
                     </div>
@@ -276,7 +269,7 @@
             <!-- Section: Links  -->
 
             <!-- Copyright -->
-            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+            <div class="text-center p-4"  style="color:white">
                 &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
             </div>
             <!-- Copyright -->
