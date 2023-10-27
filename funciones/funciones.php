@@ -28,10 +28,13 @@ if (isset($_POST['accion'])){
         case 'editar_usuario';
             editar_usuario();
         break;
+
+        case 'mostrar_usuario';
+            mostrar_usuario();
+        break;
 	}
 
 }
-
 
 
 function acceso_user() {
@@ -222,5 +225,23 @@ function editar_usuario(){
         header('Location: ../dashboard/usuarios.php');
     } else {
         echo "Error al editar el usuario.";
+    }
+}
+
+function mostrar_usuario() {
+    if (isset($_POST['id'])) {
+        $IdUsuario = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdUsuario, nombre, correo, contraseña FROM usuarios WHERE IdUsuario = '$IdUsuario'");
+
+        if ($consulta) {
+            $usuario = mysqli_fetch_assoc($consulta);
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($usuario);
+        } else {
+            echo "Error al obtener los datos del usuario";
+        }
+    } else {
+        echo "ID de usuario no proporcionado";
     }
 }

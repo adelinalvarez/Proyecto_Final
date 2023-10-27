@@ -24,7 +24,10 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"> </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> </script>
+        
         <link rel="stylesheet" href="css/dashboard.css">
+        <link href="../css/style.css" rel="stylesheet">
+
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
         <script type="text/javascript" src="js/dashboard.js"> </script>
@@ -34,6 +37,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
 
     </head>
 
@@ -65,7 +69,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
                             <div class="text-end mb-3"> <!-- Agrega esta línea para alinear a la derecha -->
-                                <a class="btn btn-dark text-white"data-toggle="modal" data-target="#createuser"> Agregar nuevo usuario <i class='bx bxs-user-plus text-white'></i> </a>
+                            <a class="btn btn-dark text-white btn-add" href="#">
+                                Agregar nuevo usuario <i class='bx bxs-user-plus text-white'></i>
+                            </a>
                             </div>
                             <div class="table-responsive">
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
@@ -90,15 +96,18 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             <td><?php echo $fila['correo']; ?></td>
                                             <td><?php echo $fila['contraseña']; ?></td>
                                             <td>
-                                                <a class="btn" href=""> <i class='bx bxs-user-detail'></i> </a>
-                                                <a class="btn btn-edit" href="#" 
-                                                    data-id="<?php echo $fila['IdUsuario']?>" 
-                                                    data-nombre="<?php echo $fila['nombre']?>" 
-                                                    data-correo="<?php echo $fila['correo']?>" 
-                                                    data-contraseña="<?php echo $fila['contraseña']?>">
+
+                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdUsuario']?>" >
+                                                    <i class='bx bxs-user-detail'></i>
+                                                </a>
+                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdUsuario']?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
+
+
+
                                                 <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdUsuario']?>"> <i class='bx bxs-trash-alt'></i> </a>
+                                            
                                             </td>
                                         </tr>
                                         <?php endwhile;?>
@@ -110,116 +119,179 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="edituser" tabindex="-1" role="dialog" aria-labelledby="edituserLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edituserLabel">Editar usuario</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="editUserForm" action="#">
-                        <input type="hidden" name="id" id="editId">
-                        <div>
-                            <label for="nombre" class="css-label">Nombre Completo:</label>
-                            <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
-                        </div>
-
-                        <div>
-                            <label for="correo" class="css-label">Correo:</label>
-                            <input type="text" id="correo" name="correo" class="css-input" style="display: block; width: 100%;" required>
-                        </div>
-
-                        <div>
-                            <label for="contraseña" class="css-label">Contraseña:</label>
-                            <input type="text" id="contraseña" name="contraseña" class="css-input" style="display: block; width: 100%;" required>
-                        </div>
-                        <br>
-
-                        <div style="text-align: center;">
-                            <a type="button" class="btn-guardar" href="usuarios.php"> Cancelar</a>
-                        </div>
-
-                        <div style="text-align: center;">
-                            <input type="submit" value="Guardar" id="update" class="btn-guardar" name="actualizar">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     </body>
+
+    <script>
+    $(document).ready(function() {
+        $('.btn-add').on('click', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Agregar nuevo usuario',
+                html:
+                    '<input id="nombre" class="swal2-input" placeholder="Nombre" value=""> ' +
+                    '<input id="correo" class="swal2-input" placeholder="Correo" value=""> ' +
+                    '<input id="contraseña" class="swal2-input" placeholder="Contraseña" value="">',
+                focusConfirm: false,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                preConfirm: () => {
+                    const nombre = $('#nombre').val();
+                    const correo = $('#correo').val();
+                    const contraseña = $('#contraseña').val();
+
+                    if (!nombre || !correo || !contraseña) {
+                        Swal.showValidationMessage('Por favor, completa todos los campos');
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                nombre: nombre,
+                                correo: correo,
+                                contraseña: contraseña,
+                                accion: 'validar_usuarios'
+                            },
+                            success: function(response) {
+                                Swal.fire('Éxito', 'El nuevo usuario ha sido agregado.', 'success').then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al agregar el usuario: ' + error, 'error');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('.btn-edit').on('click', function(e) {
+                e.preventDefault();
+                const IdUsuario = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Editar usuario',
+                    html:
+                        '<input id="nombre" class="swal2-input" placeholder="Nombre" value=""> ' +
+                        '<input id="correo" class="swal2-input" placeholder="Correo" value=""> ' +
+                        '<input id="contraseña" class="swal2-input" placeholder="Contraseña" value="">',
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    preConfirm: () => {
+                        const nombre = $('#nombre').val();
+                        const correo = $('#correo').val();
+                        const contraseña = $('#contraseña').val();
+
+                        if (!nombre || !correo || !contraseña) {
+                            Swal.showValidationMessage('Por favor, completa todos los campos');
+                        } else {
+                            $.ajax({
+                                type: "POST",
+                                url: "../funciones/funciones.php",
+                                data: {
+                                    id: IdUsuario,
+                                    nombre: nombre,
+                                    correo: correo,
+                                    contraseña: contraseña,
+                                    accion: 'editar_usuario'
+                                },
+                                success: function(response) {
+                                    Swal.fire('Éxito', 'El usuario ha sido actualizado.', 'success').then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload(); // Recarga la página
+                                        }
+                                    });
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire('Error', 'Hubo un error al editar el usuario: ' + error, 'error');
+                                }
+                            });
+                        }
+                    }
+                });
+
+                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
+                $.ajax({
+                    type: "POST",
+                    url: "../funciones/funciones.php",
+                    data: {
+                        id: IdUsuario,
+                        accion: 'mostrar_usuario'
+                    },
+                    success: function(response) {
+                        const userData = JSON.parse(response);
+
+                        if (userData) {
+                            $('#nombre').val(userData.nombre);
+                            $('#correo').val(userData.correo);
+                            $('#contraseña').val(userData.contraseña);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Error', 'Hubo un error al cargar los datos del usuario: ' + error, 'error');
+                    }
+                });
+            });
+        });
+    </script>
+
 
 
 
 
     <script>
-        // Al hacer clic en el botón de editar
-        $('.btn-edit').on('click', function(e){
+        $('.btn-view').on('click', function(e) {
             e.preventDefault();
-            const idUsuario = $(this).data('id');
-            const nombre = $(this).data('nombre');
-            const correo = $(this).data('correo');
-            const contraseña = $(this).data('contraseña');
+            const IdUsuario = $(this).data('id');
 
-            // Poblar el formulario de edición con los datos del usuario
-            $('#editId').val(idUsuario);
-            $('#nombre').val(nombre);
-            $('#correo').val(correo);
-            $('#contraseña').val(contraseña);
+            Swal.fire({
+                didOpen: () => {
+                    $.ajax({
+                        type: "POST",
+                        url: "../funciones/funciones.php",
+                        data: {
+                            id: IdUsuario,
+                            accion: 'mostrar_usuario'
+                        },
+                        success: function(response) {
+                            // Parse the response from the server, assuming it's in JSON format
+                            const userData = JSON.parse(response);
 
-            // Abrir el modal de edición
-            $('#edituser').modal('show');
-        });
+                            if (userData) {
+                                // Extract and display user information
+                                const name = userData.nombre;
+                                const email = userData.correo;
+                                const password = userData.contraseña;
 
-        // Al enviar el formulario de edición
-        $('#editUserForm').on('submit', function(e){
-            e.preventDefault();
-
-            // Obtener los datos del formulario
-            const idUsuario = $('#editId').val();
-            const nombre = $('#nombre').val();
-            const correo = $('#correo').val();
-            const contraseña = $('#contraseña').val();
-
-            // Realizar la solicitud AJAX para editar el usuario
-            $.ajax({
-                type: "POST",
-                url: "../funciones/funciones.php",
-                data: {
-                    id: idUsuario,
-                    nombre: nombre,
-                    correo: correo,
-                    contraseña: contraseña,
-                    accion: 'editar_usuario'
-                },
-                success: function(response) {
-                    // Manejar la respuesta (puedes mostrar un mensaje de éxito o recargar la página)
-                    Swal.fire(
-                        'Editado',
-                        'El usuario se ha editado correctamente.',
-                        'success'
-                    );
-                    // Otra acción que desees realizar, como recargar la tabla
-                    location.reload();
-                    // Cerrar el modal de edición
-                    $('#edituser').modal('hide');
-                },
-                error: function(xhr, status, error) {
-                    // Manejar errores
-                    Swal.fire(
-                        'Error',
-                        'Hubo un error al editar el usuario: ' + error,
-                        'error'
-                    );
+                                Swal.update({
+                                    title: 'Datos del usuario:',
+                                    html: `<p>Nombre: ${name}</p><p>Correo: ${email}</p><p>Contraseña: ${password}</p>`,
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire(
+                                'Error',
+                                'Hubo un error al cargar los datos del usuario: ' + error,
+                                'error'
+                            );
+                        }
+                    });
                 }
             });
         });
-
-
     </script>
-
-
 
     <script>
         $('.btn-del').on('click', function(e){
