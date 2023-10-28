@@ -181,49 +181,36 @@ function eliminar_reservas() {
     }
 }
 
-function editar_reservas(){
-    $IdContacto = $_POST['id'];
-    $IdCliente = $_POST['IdCliente'];
-    $asunto = $_POST['asunto'];
-    $mensaje = $_POST['mensaje'];
+function editar_reservas() {
+    if (isset($_POST['idReservas'])) {
+        $IdReservas = $_POST['idReservas'];
+        $cantidadPersonas = $_POST['cantidadPersonas'];
+        $fecha = $_POST['fecha'];
+        $hora = $_POST['hora'];
+        $evento = $_POST['evento'];
+        $area = $_POST['area'];
+        $descripcion = $_POST['descripcion'];
 
-    $conexion = $GLOBALS['conex'];
-    $actualizacion = "UPDATE contactos SET IdCliente = '$IdCliente', asunto = '$asunto', mensaje = '$mensaje' WHERE IdContacto = '$IdContacto'";
-    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
-
-    if ($resultado_actualizacion) {
-        header('Location: ../dashboard/contactos.php');
-    } else {
-        echo "Error al editar el usuario.";
-    }
-}
-
-
-function mostrar_reservas() {
-    if (isset($_POST['idContacto'])) {
-        $IdContacto = $_POST['idContacto'];
         $conexion = $GLOBALS['conex'];
 
-        // Consulta para obtener los datos del contacto y su cliente correspondiente
-        $consulta = mysqli_query($conexion, "
-            SELECT c.IdContacto, c.IdCliente, c.asunto, c.mensaje, cl.nombre, cl.correo, cl.celular, cl.direccion
-            FROM contactos c
-            JOIN clientes cl ON c.IdCliente = cl.IdCliente
-            WHERE c.IdContacto = '$IdContacto'
-        ");
+        // Realiza la actualización en la tabla de reservas
+        $actualizacion = "UPDATE reservas 
+                         SET cantidadPersonas = '$cantidadPersonas', fecha = '$fecha', hora = '$hora', evento = '$evento', area = '$area', descripcion = '$descripcion'
+                         WHERE IdReservas = '$IdReservas'";
 
-        if ($consulta) {
-            $datosContacto = mysqli_fetch_assoc($consulta);
+        $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
 
-            // Convertir el resultado a JSON y enviarlo como respuesta
-            echo json_encode($datosContacto);
+        if ($resultado_actualizacion) {
+            echo "Reserva actualizada con éxito.";
         } else {
-            echo "Error al obtener los datos del contacto";
+            echo "Error al actualizar la reserva.";
         }
     } else {
-        echo "ID de contacto no proporcionado";
+        echo "Datos de reserva no proporcionados.";
     }
 }
+
+
 
 
 //casos de CONTACTOS FUNCIONAN
