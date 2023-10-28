@@ -19,7 +19,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
-        <title> Contacto - Doña Hilda Tapas and Grill</title>
+        <title> Contactos - Doña Hilda Tapas and Grill</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"> </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
@@ -54,7 +54,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <a href="usuarios.php" class="nav_link"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span> </a> 
                         <a href="productos.php" class="nav_link"> <i class='bx bx-restaurant nav_icon'></i> <span class="nav_name">Productos</span> </a> 
                         <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
-                        <a href="contactos.php" class="nav_link"  active> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
+                        <a href="contactos.php" class="nav_link active"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
                         <a href="clientes.php" class="nav_link"> <i class='bx bx-group nav_icon'></i> <span class="nav_name">Clientes</span> </a> 
                     </div>
                 </div>
@@ -63,12 +63,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <!--Container Main start-->
         <div class="height-100 bg-light">
             <br>
-            <h1 class="text-center color-white"> Contactos</h1>
+            <h1 class="text-center color-white"> Solicitud de contactos </h1>
             <div class="row py-5">
                 <div class="col-lg-10 mx-auto">
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
-                            <div class="text-end mb-3"> 
+                            <div class="text-end mb-3"> <!-- Agrega esta línea para alinear a la derecha -->
                             <a class="btn btn-dark text-white btn-add" href="#">
                                 Agregar nuevo contacto <i class='bx bxs-user-plus text-white'></i>
                             </a>
@@ -130,26 +130,31 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Agregar nuevo contacto </h2>',
                     html:
-                        '<label for="asunto" class="css-label">Asunto: </label>' +
+                        '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
+                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<br>' +
+                        '<label for="asunto" class="css-label"> asunto: </label>' +
+                        '<br>' +
                         '<input id="asunto" class="swal2-input css-input" placeholder="Ingrese el asunto" value=""> ' +
                         '<br>' +
-                        '<label for="mensaje" class="css-label"> Mensaje: </label>' +
-                        '<br>' +
-                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese el mensaje" value=""> ',
+                        '<label for="mensaje" class="css-label"> mensaje: </label>' +
+                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese una mensaje" value="">',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
+                        const IdCliente = $('#IdCliente').val();
                         const asunto = $('#asunto').val();
                         const mensaje = $('#mensaje').val();
 
-                        if (!asunto || !mensaje) {
+                        if (!IdCliente || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
+                                    IdCliente: IdCliente,
                                     asunto: asunto,
                                     mensaje: mensaje,
                                     accion: 'validar_contactos'
@@ -176,25 +181,29 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
-                const IdContacto = $(this).data('idContacto');
+                const IdContacto = $(this).data('id');
 
                 Swal.fire({
-                    title: '<h2> Editar usuario <h2>',
+                    title: '<h2> Editar contacto <h2>',
                     html:
-                        '<label for="asunto" class="css-label"> Asunto: </label>' +
+                        '<label for="IdCliente" class="css-label"> IdCliente completo: </label>' +
+                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<br>' +
+                        '<label for="asunto" class="css-label"> asunto: </label>' +
                         '<br>' +
                         '<input id="asunto" class="swal2-input css-input" placeholder="Ingrese el asunto" value=""> ' +
                         '<br>' +
-                        '<label for="mensaje" class="css-label"> Mensaje: </label>' +
-                        '<br>' +
-                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese el mensaje" value=""> ',
+                        '<label for="mensaje" class="css-label"> mensaje: </label>' +
+                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese una mensaje" value="">',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
+                        const IdCliente = $('#IdCliente').val();
                         const asunto = $('#asunto').val();
                         const mensaje = $('#mensaje').val();
-                        if (!asunto || !mensaje ) {
+
+                        if (!IdCliente || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
@@ -202,9 +211,10 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 url: "../funciones/funciones.php",
                                 data: {
                                     id: IdContacto,
+                                    IdCliente: IdCliente,
                                     asunto: asunto,
                                     mensaje: mensaje,
-                                    accion: 'editar_contactos'
+                                    accion: 'editar_contacto'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El contacto ha sido actualizado.', 'success').then((result) => {
@@ -221,20 +231,21 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     }
                 });
 
-                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
+                // Realiza una solicitud AJAX para cargar los datos del contacto y mostrarlos en el formulario
                 $.ajax({
                     type: "POST",
                     url: "../funciones/funciones.php",
                     data: {
                         id: IdContacto,
-                        accion: 'mostrar_contactos'
+                        accion: 'mostrar_contacto'
                     },
                     success: function(response) {
-                        const contactoData = JSON.parse(response);
+                        const userData = JSON.parse(response);
 
-                        if (contactoData) {
-                            $('#asunto').val(contactoData.asunto);
-                            $('#mensaje').val(contactoData.mensaje);
+                        if (userData) {
+                            $('#IdCliente').val(userData.IdCliente);
+                            $('#asunto').val(userData.asunto);
+                            $('#mensaje').val(userData.mensaje);
                         }
                     },
                     error: function(xhr, status, error) {
@@ -257,21 +268,23 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         url: "../funciones/funciones.php",
                         data: {
                             id: IdContacto,
-                            accion: 'mostrar_contactos'
+                            accion: 'mostrar_contacto'
                         },
                         success: function(response) {
                             // Parse the response from the server, assuming it's in JSON format
-                            const contactoData = JSON.parse(response);
+                            const userData = JSON.parse(response);
 
-                            if (contactoData) {
+                            if (userData) {
                                 // Extract and display user information
-                                const asunto = contactoData.asunto;
-                                const mensaje = contactoData.mensaje;
+                                const IdCliente = userData.IdCliente;
+                                const asunto = userData.asunto;
+                                const mensaje = userData.mensaje;
 
                                 Swal.update({
                                     title: 'Datos del contacto:',
-                                    html: `<p class="css-label">Asunto: </p> <p>${asunto}</p>
-                                            <p class="css-label">Mensaje: </p> <p> ${mensaje}</p>`,
+                                    html: `<p class="css-label">IdCliente: </p> <p>${IdCliente}</p>
+                                            <p class="css-label">asunto: </p> <p> ${asunto}</p>
+                                            <p class="css-label">mensaje: </p> <p>${mensaje}</p>`,
                                 });
                             }
                         },
@@ -291,10 +304,10 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-del').on('click', function(e){
         e.preventDefault();
-        const IdContacto = $(this).data('idContacto');
+        const IdContacto = $(this).data('id');
 
         Swal.fire({
-            title: '¿Estás seguro de eliminar este usuario?',
+            title: '¿Estás seguro de eliminar este contacto?',
             text: "¡No podrás revertir esto!",
             icon: 'warning',
             showCancelButton: true,
@@ -309,7 +322,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 url: "../funciones/funciones.php",
                 data: {
                 id: IdContacto,
-                accion: 'eliminar_contactos'
+                accion: 'eliminar_contacto'
                 },
                 success: function(response) {
                 Swal.fire(
