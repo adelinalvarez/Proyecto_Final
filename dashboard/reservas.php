@@ -140,30 +140,62 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<label for="cantidadPersonas" class="css-label">cantidadPersonas: </label>' +
                         '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
                         '<br>' +
+                        '<label for="IdCliente" class="css-label">IdCliente: </label>' +
+                        '<br>' +
+                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<br>' +
                         '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
-                        '<input id="fecha" class="swal2-input css-input" placeholder="Ingrese el fecha" value=""> ' +
+                        '<input id="fecha" class="swal2-input css-input" type="date"> ' +
                         '<br>' +
                         '<label for="hora" class="css-label"> Hora: </label>' +
                         '<br>'+
-                        '<input id="hora" class="swal2-input css-input" placeholder="Ingrese la hora" value="">'+
+                        '<select class="swal2-input css-input" name="hora" id="hora" required>' +
+                            '<option value="">Seleccione la hora</option>' +
+                            '<option value="10:00 AM">10:00 AM</option>' +
+                            '<option value="11:00 AM">11:00 AM</option>' +
+                            '<option value="12:00 PM">12:00 PM</option>' +
+                            '<option value="01:00 PM">01:00 PM</option>' +
+                            '<option value="02:00 PM">02:00 PM</option>' +
+                            '<option value="03:00 PM">03:00 PM</option>' +
+                            '<option value="04:00 PM">04:00 PM</option>' +
+                            '<option value="05:00 PM">05:00 PM</option>' +
+                            '<option value="06:00 PM">06:00 PM</option>' +
+                            '<option value="07:00 PM">07:00 PM</option>' +
+                            '<option value="08:00 PM">08:00 PM</option>' +
+                            '<option value="09:00 PM">09:00 PM</option>' +
+                            '<option value="10:00 PM">10:00 PM</option>' +
+                        '</select>' +
                         '<br>'+
                         '</div>' +
                         '<div class="divider"></div>' +
                         '<div class="column">' +
-                        '<label for="evento" class="css-label"> Evento: </label>' +
-                        '<input id="evento" class="swal2-input css-input" placeholder="Ingrese el evento" value="">'+
+                        '<label for="evento" class="css-label"> Seleccion el tipo de evento: </label>' +
+                        '<br>' +
+                        '<select class="swal2-input css-input" name="evento" id="evento" required>' +
+                            '<option value="">Seleccione el tipo de evento</option>' +
+                            '<option value="Reservar normal">Reservar normal</option>' +
+                            '<option value="Cumpleaños">Cumpleaños</option>' +
+                            '<option value="Boda">Boda</option>' +
+                            '<option value="Reunion">Reunion</option>' +
+                        '</select>' +
                         '<br>'+
-                        '<label for="area" class="css-label"> Area: </label>' +
-                        '<input id="area" class="swal2-input css-input" placeholder="Ingrese el area" value="">'+
+                        '<label for="area" class="css-label"> Seleccione area de reservacion: </label>' +
+                        '<br>' +
+                        '<select class="swal2-input css-input" name="area" id="area" required>' +
+                            '<option value="">Seleccione area de reservacion</option>' +
+                            '<option value="Sala VIP">Sala VIP</option>' +
+                            '<option value="Terraza">Terraza</option>' +
+                        '</select>' +                  
                         '<br>'+
                         '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">'+
+                        '<textarea id="descripcion" name="descripcion" rows="10" class="swal2-input css-input"> </textarea>'+
                         '</div>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
+                        const IdCliente = $('#IdCliente').val();
                         const cantidadPersonas = $('#cantidadPersonas').val();
                         const fecha = $('#fecha').val();
                         const hora = $('#hora').val();
@@ -171,13 +203,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
 
-                        if (!cantidadPersonas|| !fecha|| !hora || !evento || !area || !descripcion) {
+                        if (!IdCliente|| !cantidadPersonas|| !fecha|| !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
+                                    IdCliente: IdCliente,
                                     cantidadPersonas: cantidadPersonas,
                                     hora: hora,
                                     evento: evento,
@@ -210,34 +243,95 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 const IdReservas = $(this).data('id');
 
                 Swal.fire({
-                    title: '<h2> Editar reserva <h2>',
+                    title: '<h2> Editar reserva </h2>',
                     html:
-                    '<label for="cantidadPersonas" class="css-label"> Cantidad Personas: </label>' +
-                        '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad=""> ' +
+                        '<div class="column">' +
+                        '<label for="cantidadPersonas" class="css-label">cantidadPersonas: </label>' +
+                        '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
+                        '<br>' +
+                        '<label for="IdCliente" class="css-label">IdCliente: </label>' +
+                        '<br>' +
+                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
                         '<br>' +
                         '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
-                        '<input id="fecha" class="swal2-input css-input" placeholder="Ingrese la fecha" value=""> ' +
+                        '<input id="fecha" class="swal2-input css-input" type="date"> ' +
                         '<br>' +
                         '<label for="hora" class="css-label"> Hora: </label>' +
-                        '<br>'+
-                        '<input id="hora" class="swal2-input css-input" placeholder="Ingrese la hora" value="">'+
-                        '<br>'+
-                        '<label for="evento" class="css-label"> Evento: </label>' +
-                        '<br>'+
-                        '<input id="evento" class="swal2-input css-input" placeholder="Ingrese su tipo de evento" value="">'
-                        '<br>'+
-                        '<label for="area" class="css-label"> Area: </label>' +
-                        '<br>'+
-                        '<input id="area" class="swal2-input css-input" placeholder="Ingrese el area" value="">'+
-                        '<br>'+
+                        '<br>' +
+                        '<select class="swal2-input css-input" name="hora" id="hora" required>' +
+                        '<option value="">Seleccione la hora</option>' +
+                        '<option value="10:00 AM">10:00 AM</option>' +
+                        '<option value="11:00 AM">11:00 AM</option>' +
+                        '<option value="12:00 PM">12:00 PM</option>' +
+                        '<option value="01:00 PM">01:00 PM</option>' +
+                        '<option value="02:00 PM">02:00 PM</option>' +
+                        '<option value="03:00 PM">03:00 PM</option>' +
+                        '<option value="04:00 PM">04:00 PM</option>' +
+                        '<option value="05:00 PM">05:00 PM</option>' +
+                        '<option value="06:00 PM">06:00 PM</option>' +
+                        '<option value="07:00 PM">07:00 PM</option>' +
+                        '<option value="08:00 PM">08:00 PM</option>' +
+                        '<option value="09:00 PM">09:00 PM</option>' +
+                        '<option value="10:00 PM">10:00 PM</option>' +
+                        '</select>' +
+                        '<br>' +
+                        '</div>' +
+                        '<div class="divider"></div>' +
+                        '<div class="column">' +
+                        '<label for="evento" class="css-label"> Seleccion el tipo de evento: </label>' +
+                        '<br>' +
+                        '<select class="swal2-input css-input" name="evento" id="evento" required>' +
+                        '<option value="">Seleccione el tipo de evento</option>' +
+                        '<option value="Reservar normal">Reservar normal</option>' +
+                        '<option value="Cumpleaños">Cumpleaños</option>' +
+                        '<option value="Boda">Boda</option>' +
+                        '<option value="Reunion">Reunion</option>' +
+                        '</select>' +
+                        '<br>' +
+                        '<label for="area" class="css-label"> Seleccione area de reservacion: </label>' +
+                        '<br>' +
+                        '<select class="swal2-input css-input" name="area" id="area" required>' +
+                        '<option value="">Seleccione area de reservacion</option>' +
+                        '<option value="Sala VIP">Sala VIP</option>' +
+                        '<option value="Terraza">Terraza</option>' +
+                        '</select>' +
+                        '<br>' +
                         '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<br>'+
-                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">',
+                        '<textarea id="descripcion" name="descripcion" rows="10" class="swal2-input css-input"></textarea>' +
+                        '</div>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
+                    didOpen: () => {
+                        // Realiza una solicitud AJAX para cargar los datos de la reserva y mostrarlos en el formulario
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                idReservas: IdReservas, // Cambiado el nombre del campo a idReservas
+                                accion: 'mostrar_reservas'
+                            },
+                            success: function(response) {
+                                console.log(response); // Verifica si los datos se están recibiendo
+                                const reservasData = JSON.parse(response);
+                                if (reservasData) {
+                                    $('#IdCliente').val(reservasData.IdCliente);
+                                    $('#cantidadPersonas').val(reservasData.cantidadPersonas);
+                                    $('#fecha').val(reservasData.fecha);
+                                    $('#hora').val(reservasData.hora);
+                                    $('#evento').val(reservasData.evento);
+                                    $('#area').val(reservasData.area);
+                                    $('#descripcion').val(reservasData.descripcion);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al cargar los datos de la reserva: ' + error, 'error');
+                            }
+                        });
+                    },
                     preConfirm: () => {
+                        const IdCliente = $('#IdCliente').val();
                         const cantidadPersonas = $('#cantidadPersonas').val();
                         const fecha = $('#fecha').val();
                         const hora = $('#hora').val();
@@ -245,14 +339,16 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
 
-                        if (!cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
+                        if (!IdCliente || !cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    cantidadPersonas:cantidadPersonas,
+                                    idReservas: IdReservas,
+                                    IdCliente: IdCliente,
+                                    cantidadPersonas: cantidadPersonas,
                                     fecha: fecha,
                                     hora: hora,
                                     evento: evento,
@@ -261,7 +357,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     accion: 'editar_reservas'
                                 },
                                 success: function(response) {
-                                    Swal.fire('Éxito', 'La reserva ha sido actualizado.', 'success').then((result) => {
+                                    Swal.fire('Éxito', 'La reserva ha sido actualizada.', 'success').then((result) => {
                                         if (result.isConfirmed) {
                                             location.reload(); // Recarga la página
                                         }
@@ -274,36 +370,65 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         }
                     }
                 });
-
-                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
-                $.ajax({
-                    type: "POST",
-                    url: "../funciones/funciones.php",
-                    data: {
-                        id: IdReservas,
-                        accion: 'mostrar_reservas'
-                    },
-                    success: function(response) {
-                        const reservasData = JSON.parse(response);
-                        if (reservasData) {
-                            $('#cantidadPersonas').val(reservasData.cantidadPersonas);
-                            $('#fecha').val(reservasData.fecha);
-                            $('#hora').val(reservasData.hora);
-                            $('#evento').val(reservasData.evento);
-                            $('#area').val(reservasData.area);
-                            $('#descripcion').val(reservasData.descripcion);
-
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos de la reserva: ' + error, 'error');
-                    }
-                });
             });
         });
     </script>
 
-  
+    <script>
+        $('.btn-view').on('click', function(e) {
+            e.preventDefault();
+            const idReservas = $(this).data('id');
+
+            Swal.fire({
+                title: 'Datos de la reserva',
+                didOpen: () => {
+
+                    // Realiza una solicitud AJAX para cargar los detalles del contacto
+                    $.ajax({
+                        type: "POST",
+                        url: "../funciones/funciones.php",
+                        data: {
+                            idReservas: idReservas,
+                            accion: 'mostrar_reservas'
+                        },
+                        success: function(response) {
+                            const userData = JSON.parse(response);
+
+                            if (userData) {
+                                Swal.update({
+                                    html: `
+                                        <p class="css-label">Id Cliente: ${userData.IdCliente}</p>
+                                        <p class="css-label">nombre: ${userData.nombre}</p>
+                                        <p class="css-label">correo: ${userData.correo}</p>
+                                        <p class="css-label">celular: ${userData.celular}</p>
+                                        <p class="css-label">direccion: ${userData.direccion}</p>
+                                        <p class="css-label">cantidadPersonas: ${userData.cantidadPersonas}</p>
+                                        <p class="css-label">fecha: ${userData.fecha}</p>
+                                        <p class="css-label">hora: ${userData.hora}</p>
+                                        <p class="css-label">evento: ${userData.evento}</p>
+                                        <p class="css-label">area: ${userData.area}</p>
+                                        <p class="css-label">descripcion: ${userData.descripcion}</p>`
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'No se pudieron cargar los detalles de la reserva.',
+                                    icon: 'error'
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Hubo un error al cargar los datos de la reserva: ' + error,
+                                icon: 'error'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 
     <script>
         $('.btn-del').on('click', function(e){
@@ -349,24 +474,24 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-<style>
-    .column {
-        width: 48%;
-        display: inline-block;
-        vertical-align: top;
-        border-right: 1px solid #ccc; /* Línea divisoria entre las columnas */
-        padding-right: 10px; /* Espacio a la derecha de la línea divisoria */
-    }
+    <style>
+        .column {
+            width: 48%;
+            display: inline-block;
+            vertical-align: top;
+            border-right: 1px solid #ccc; /* Línea divisoria entre las columnas */
+            padding-right: 10px; /* Espacio a la derecha de la línea divisoria */
+        }
 
-    .divider {
-        width: 4%;
-        display: inline-block;
-    }
+        .divider {
+            width: 4%;
+            display: inline-block;
+        }
 
-    /* Establece un ancho personalizado para el modal */
-    .swal2-popup {
-        width: 80%; /* Ancho personalizado */
-    }
-</style>
+        /* Establece un ancho personalizado para el modal */
+        .swal2-popup {
+            width: 80%; /* Ancho personalizado */
+        }
+    </style>
 
 </html>

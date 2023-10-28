@@ -200,7 +200,7 @@ error_reporting(0);
                                             src="data:image/jpg;base64, <?php echo base64_encode($fila['imagen'])?>"
                                             class="card-img-top img-fluid img-fluid"
                                             id="imagen<?php echo $fila['IdProducto']?>"
-                                            style="width: 100%;"
+                                            style="width: 90%;"
                                         >
                                         <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['IdProducto']?>"><?php echo $fila['nombre']?></h5>
                                         <p class="card-text text-center" id="precio<?php echo $fila['IdProducto']?>">$<?php echo $fila['precio']?></p>

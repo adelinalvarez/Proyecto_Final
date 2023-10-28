@@ -71,10 +71,25 @@ if (isset($_POST['accion'])){
         case 'mostrar_clientes';
             mostrar_clientes();
         break;
+
+        case 'validar_productos';
+            validar_productos();
+        break;
+
+        case 'eliminar_productos';
+            eliminar_productos();
+        break;
+
+        case 'editar_productos';
+            editar_productos();
+        break;
+
+        case 'mostrar_productos';
+            mostrar_productos();
+        break;
 	}
 
 }
-
 
 function acceso_user() {
     $correo = $_POST['correo'];
@@ -109,8 +124,7 @@ function acceso_user() {
     }
 }
 
-
-//casos de RESERVAS
+//casos de RESERVAS FUNCIONAN
 
 function validar_reservas(){
     $idCliente = $_POST['IdCliente'];
@@ -181,50 +195,60 @@ function eliminar_reservas() {
     }
 }
 
-function editar_reservas(){
-    $IdContacto = $_POST['id'];
-    $IdCliente = $_POST['IdCliente'];
-    $asunto = $_POST['asunto'];
-    $mensaje = $_POST['mensaje'];
+function editar_reservas() {
+    if (isset($_POST['idReservas'])) {
+        $IdReservas = $_POST['idReservas'];
+        $cantidadPersonas = $_POST['cantidadPersonas'];
+        $fecha = $_POST['fecha'];
+        $hora = $_POST['hora'];
+        $evento = $_POST['evento'];
+        $area = $_POST['area'];
+        $descripcion = $_POST['descripcion'];
 
-    $conexion = $GLOBALS['conex'];
-    $actualizacion = "UPDATE contactos SET IdCliente = '$IdCliente', asunto = '$asunto', mensaje = '$mensaje' WHERE IdContacto = '$IdContacto'";
-    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+        $conexion = $GLOBALS['conex'];
 
-    if ($resultado_actualizacion) {
-        header('Location: ../dashboard/contactos.php');
+        // Realiza la actualización en la tabla de reservas
+        $actualizacion = "UPDATE reservas 
+                         SET cantidadPersonas = '$cantidadPersonas', fecha = '$fecha', hora = '$hora', evento = '$evento', area = '$area', descripcion = '$descripcion'
+                         WHERE IdReservas = '$IdReservas'";
+
+        $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+
+        if ($resultado_actualizacion) {
+            echo "Reserva actualizada con éxito.";
+        } else {
+            echo "Error al actualizar la reserva.";
+        }
     } else {
-        echo "Error al editar el usuario.";
+        echo "Datos de reserva no proporcionados.";
     }
 }
 
-
 function mostrar_reservas() {
-    if (isset($_POST['idContacto'])) {
-        $IdContacto = $_POST['idContacto'];
+    if (isset($_POST['idReservas'])) {
+        $IdReservas = $_POST['idReservas'];
         $conexion = $GLOBALS['conex'];
 
-        // Consulta para obtener los datos del contacto y su cliente correspondiente
+        // Consulta para obtener los datos de la reserva
         $consulta = mysqli_query($conexion, "
-            SELECT c.IdContacto, c.IdCliente, c.asunto, c.mensaje, cl.nombre, cl.correo, cl.celular, cl.direccion
-            FROM contactos c
-            JOIN clientes cl ON c.IdCliente = cl.IdCliente
-            WHERE c.IdContacto = '$IdContacto'
+            SELECT r.IdReservas, r.IdCliente, r.cantidadPersonas, r.fecha, r.hora, r.evento, r.area, r.descripcion, c.nombre, c.correo, c.celular, c.direccion
+            FROM reservas r
+            JOIN clientes c ON r.IdCliente = c.IdCliente
+            WHERE r.IdReservas = '$IdReservas'
         ");
 
         if ($consulta) {
-            $datosContacto = mysqli_fetch_assoc($consulta);
+            $datosReserva = mysqli_fetch_assoc($consulta);
 
             // Convertir el resultado a JSON y enviarlo como respuesta
-            echo json_encode($datosContacto);
+            echo json_encode($datosReserva);
         } else {
-            echo "Error al obtener los datos del contacto";
+            echo "Error al obtener los datos de la reserva";
         }
     } else {
-        echo "ID de contacto no proporcionado";
+        echo "ID de reserva no proporcionado";
     }
 }
-
 
 //casos de CONTACTOS FUNCIONAN
 
@@ -294,7 +318,7 @@ function eliminar_contactos() {
 }
 
 function editar_contactos(){
-    $IdContacto = $_POST['id'];
+    $IdContacto = $_POST['idContacto'];
     $IdCliente = $_POST['IdCliente'];
     $asunto = $_POST['asunto'];
     $mensaje = $_POST['mensaje'];
@@ -337,10 +361,7 @@ function mostrar_contactos() {
     }
 }
 
-
-
-
-//casos de CLIENTES
+//casos de CLIENTES FUNCIONAN
 
 function validar_clientes(){
     $nombre = $_POST['nombre'];
@@ -415,7 +436,6 @@ function mostrar_clientes() {
         echo "ID de usuario no proporcionado";
     }
 }
-
 
 //casos de USUARIOS FUNCIONAN
 
@@ -505,6 +525,111 @@ function mostrar_usuario() {
     }
 }
 
-//casos de PRODUCTOS
+//casos de PRODUCTOS FUNCIONAN
+
+function validar_productos(){
+    $imagen = $_POST['imagen'];
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $categoria = $_POST['categoria'];
+    $precio = $_POST['precio'];
+    $imagen= addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 
 
+    $conexion = $GLOBALS['conex']; 
+    $consulta = "SELECT * FROM productos WHERE nombre ='$nombre'";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $filas = mysqli_fetch_array($resultado);
+        $nombre = $filas['nombre'];
+
+        if($filas['nombre'] == $correo){ //admin
+
+            header('Location: ../dashboard/productos.php'); 
+    
+        }else{
+
+            $consulta = "INSERT INTO productos (nombre, descripcion, categoria, precio, imagen)
+            VALUES ('$nombre', '$descripcion', '$categoria', '$precio','$imagen')";
+            $resultado=mysqli_query($conexion, $consulta);
+            header('Location: ../dashboard/productos.php');
+    
+        }
+    } else {
+        $consulta = "INSERT INTO productos (nombre, descripcion, categoria, precio, imagen)
+        VALUES ('$nombre', '$descripcion', '$categoria', '$precio','$imagen')";
+        $resultado=mysqli_query($conexion, $consulta);
+        header('Location: ../dashboard/productos.php');
+    }
+}
+
+function eliminar_productos() {
+    if (isset($_POST['id'])) {
+        $IdProducto = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "DELETE FROM productos WHERE IdProducto = '$IdProducto'");
+        
+        if ($consulta) {
+            echo "Producto eliminado correctamente.";
+        } else {
+            echo "Error al eliminar el producto";
+        }
+    } else {
+        echo "ID de producto no proporcionado";
+    }
+}
+
+function editar_productos() {
+    if (isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['categoria'], $_POST['precio'])) {
+        $IdProducto = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
+        $categoria = $_POST['categoria'];
+        $precio = $_POST['precio'];
+
+        // Validación de datos (puedes personalizar esto según tus requerimientos)
+        if (empty($nombre) || empty($descripcion) || empty($categoria) || empty($precio)) {
+            echo "Por favor, completa todos los campos.";
+            return;
+        }
+
+        // Conexión a la base de datos (asegúrate de tener una conexión válida aquí)
+        $conexion = $GLOBALS['conex'];
+
+        // Consulta preparada para evitar SQL injection
+        $actualizacion = "UPDATE productos SET nombre = ?, descripcion = ?, categoria = ?, precio = ? WHERE IdProducto = ?";
+        if ($stmt = mysqli_prepare($conexion, $actualizacion)) {
+            mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $descripcion, $categoria, $precio, $IdProducto);
+
+            // Ejecutar la consulta
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                header('Location: ../dashboard/productos.php');
+            } else {
+                echo "Error al editar el producto: " . mysqli_error($conexion);
+            }
+        } else {
+            echo "Error en la consulta SQL: " . mysqli_error($conexion);
+        }
+    } else {
+        echo "Faltan datos necesarios para la edición.";
+    }
+}
+
+function mostrar_productos() {
+    if (isset($_POST['id'])) {
+        $IdProducto = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdProducto, nombre, descripcion, categoria, precio FROM productos WHERE IdProducto = '$IdProducto'");
+
+        if ($consulta) {
+            $producto = mysqli_fetch_assoc($consulta);
+            echo json_encode($producto);
+        } else {
+            echo "Error en la consulta SQL";
+        }
+    } else {
+        echo "ID del producto no proporcionado";
+    }
+}
