@@ -210,6 +210,31 @@ function editar_reservas() {
     }
 }
 
+function mostrar_reservas() {
+    if (isset($_POST['idReservas'])) {
+        $IdReservas = $_POST['idReservas'];
+        $conexion = $GLOBALS['conex'];
+
+        // Consulta para obtener los datos de la reserva
+        $consulta = mysqli_query($conexion, "
+            SELECT r.IdReservas, r.IdCliente, r.cantidadPersonas, r.fecha, r.hora, r.evento, r.area, r.descripcion, c.nombre, c.correo, c.celular, c.direccion
+            FROM reservas r
+            JOIN clientes c ON r.IdCliente = c.IdCliente
+            WHERE r.IdReservas = '$IdReservas'
+        ");
+
+        if ($consulta) {
+            $datosReserva = mysqli_fetch_assoc($consulta);
+
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($datosReserva);
+        } else {
+            echo "Error al obtener los datos de la reserva";
+        }
+    } else {
+        echo "ID de reserva no proporcionado";
+    }
+}
 
 
 
