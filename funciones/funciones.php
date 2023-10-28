@@ -91,7 +91,6 @@ if (isset($_POST['accion'])){
 
 }
 
-
 function acceso_user() {
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
@@ -124,7 +123,6 @@ function acceso_user() {
         session_destroy();
     }
 }
-
 
 //casos de RESERVAS FUNCIONAN
 
@@ -252,8 +250,6 @@ function mostrar_reservas() {
     }
 }
 
-
-
 //casos de CONTACTOS FUNCIONAN
 
 function validar_contactos(){
@@ -365,8 +361,6 @@ function mostrar_contactos() {
     }
 }
 
-
-
 //casos de CLIENTES FUNCIONAN
 
 function validar_clientes(){
@@ -442,7 +436,6 @@ function mostrar_clientes() {
         echo "ID de usuario no proporcionado";
     }
 }
-
 
 //casos de USUARIOS FUNCIONAN
 
@@ -532,7 +525,7 @@ function mostrar_usuario() {
     }
 }
 
-//casos de PRODUCTOS
+//casos de PRODUCTOS FUNCIONAN
 
 function validar_productos(){
     $imagen = $_POST['imagen'];
@@ -587,7 +580,6 @@ function eliminar_productos() {
     }
 }
 
-
 function editar_productos() {
     if (isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['categoria'], $_POST['precio'])) {
         $IdProducto = $_POST['id'];
@@ -625,7 +617,6 @@ function editar_productos() {
     }
 }
 
-
 function mostrar_productos() {
     if (isset($_POST['id'])) {
         $IdProducto = $_POST['id'];
@@ -642,4 +633,3 @@ function mostrar_productos() {
         echo "ID del producto no proporcionado";
     }
 }
-
