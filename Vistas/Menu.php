@@ -22,6 +22,8 @@ error_reporting(0);
         <link href="../css/style.css" rel="stylesheet">
         <title>Doña Hilda Tapas and Grill</title>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </head>
 
@@ -41,6 +43,12 @@ error_reporting(0);
             .nav-height{
                 height: 100px;
             }
+        }
+    </style>
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 20px 10px; 
         }
     </style>
 
@@ -153,7 +161,12 @@ error_reporting(0);
                             <p id="total-price"></p>
                         </div>
                        <div class="d-flex flex-column align-items-center">
-                           <a href="#" type="button" id="checkout-btn" class="btn btn-primary mt-2 mb-2 w-100">Comprar</a>
+                            <button class="btn btn-primary w-100"
+                                type="button"
+                                id="boton_comprar" >
+                                Comprar
+                            </button>
+                            <br>
                            <a href="#" type="button" id="clear-cart" class="btn btn-primary w-100">Limpiar Carrito</a>
                        </div>
                     </div>
@@ -553,6 +566,96 @@ error_reporting(0);
             }
 
         </script>
+
+    <script>
+        const botonComprar = document.getElementById("boton_comprar");
+        botonComprar.addEventListener("click", function () {
+            Swal.fire({
+                title: '<h2> Confirmar Compra </h2>',
+                html:
+                    '<div class="column">' +
+                    '<h4> Formulario de compra </h4>'+
+                    '<br>'+
+                    '   <label for="nombre" class="css-label"> Nombre: </label>' +
+                    '   <input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
+                    '   <br>' +
+                    '   <label for="correo" class="css-label"> Correo: </label>' +
+                    '   <input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
+                    '   <br>' +
+                    '   <label for="celular" class="css-label"> Celular: </label>' +
+                    '   <input id="celular" class="swal2-input css-input" placeholder="Ingrese un celular" value="">'+
+                    '   <br>'+
+                    '   <label for="direccion" class="css-label"> Dirección: </label>' +
+                    '   <input id="direccion" class="swal2-input css-input" placeholder="Ingrese su dirección" value="">'+
+                    '</div>' +
+                    '<div class="divider"></div>' +
+                    '<div class="column">' +
+                    '<h4> Detalles de la compra </h4>'+
+                    '</div>',
+                focusConfirm: false,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Confirmar compra',
+                preConfirm: () => {
+                    const nombre = document.getElementById("nombre").value;
+                    const correo = document.getElementById("correo").value;
+                    const celular = document.getElementById("celular").value;
+                    const direccion = document.getElementById("direccion").value;
+
+                    if (!nombre || !correo || !celular || !direccion) {
+                        Swal.showValidationMessage('Por favor, completa todos los campos');
+                    } else {
+                        // Realiza la solicitud AJAX para agregar la compra
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                nombre: nombre,
+                                correo: correo,
+                                celular: celular,
+                                direccion: direccion,
+                                accion: 'agregar_compra' // Cambia el valor de accion para agregar compra
+                            },
+                            success: function(response) {
+                                Swal.fire('Éxito', 'La compra ha sido registrada.', 'success').then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al registrar la compra: ' + error, 'error');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
+
+<style>
+    .column {
+        width: 48%;
+        display: inline-block;
+        vertical-align: top;
+        border-right: 1px solid #ccc; /* Línea divisoria entre las columnas */
+        padding-right: 10px; /* Espacio a la derecha de la línea divisoria */
+    }
+
+    .divider {
+        width: 4%;
+        display: inline-block;
+    }
+
+    /* Establece un ancho personalizado para el modal */
+    .swal2-popup {
+        width: 80%; /* Ancho personalizado */
+    }
+</style>
+
 
   </body>
 </html>
