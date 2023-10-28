@@ -294,7 +294,7 @@ function eliminar_contactos() {
 }
 
 function editar_contactos(){
-    $IdContacto = $_POST['id'];
+    $IdContacto = $_POST['idContacto'];
     $IdCliente = $_POST['IdCliente'];
     $asunto = $_POST['asunto'];
     $mensaje = $_POST['mensaje'];
