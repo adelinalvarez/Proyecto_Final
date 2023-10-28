@@ -134,8 +134,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 e.preventDefault();
 
                 Swal.fire({
-                    title: '<h2> Agregar nuevo reserva</h2>',
+                    title: '<h2> Agregar nueva reserva </h2>',
                     html:
+                        '<div class="column">' +
                         '<label for="cantidadPersonas" class="css-label">cantidadPersonas: </label>' +
                         '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
                         '<br>' +
@@ -147,14 +148,18 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<br>'+
                         '<input id="hora" class="swal2-input css-input" placeholder="Ingrese la hora" value="">'+
                         '<br>'+
-                        '<label for="evento" class="css-label"> Direccion: </label>' +
+                        '</div>' +
+                        '<div class="divider"></div>' +
+                        '<div class="column">' +
+                        '<label for="evento" class="css-label"> Evento: </label>' +
                         '<input id="evento" class="swal2-input css-input" placeholder="Ingrese el evento" value="">'+
                         '<br>'+
-                        '<label for="area" class="css-label"> Direccion: </label>' +
+                        '<label for="area" class="css-label"> Area: </label>' +
                         '<input id="area" class="swal2-input css-input" placeholder="Ingrese el area" value="">'+
                         '<br>'+
-                        '<label for="descripcion" class="css-label"> Direccion: </label>' +
-                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">',,
+                        '<label for="descripcion" class="css-label"> Descripcion: </label>' +
+                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">'+
+                        '</div>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
@@ -343,5 +348,25 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
         });
     </script>
+
+<style>
+    .column {
+        width: 48%;
+        display: inline-block;
+        vertical-align: top;
+        border-right: 1px solid #ccc; /* Línea divisoria entre las columnas */
+        padding-right: 10px; /* Espacio a la derecha de la línea divisoria */
+    }
+
+    .divider {
+        width: 4%;
+        display: inline-block;
+    }
+
+    /* Establece un ancho personalizado para el modal */
+    .swal2-popup {
+        width: 80%; /* Ancho personalizado */
+    }
+</style>
 
 </html>

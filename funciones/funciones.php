@@ -113,9 +113,7 @@ function acceso_user() {
 //casos de RESERVAS
 
 function validar_reservas(){
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $celular = $_POST['celular'];
+    $idCliente = $_POST['IdCliente'];
     $cantidadPersonas = $_POST['cantidadPersonas'];
     $fecha = $_POST['fecha'];
     $hora = $_POST['hora'];
@@ -123,46 +121,54 @@ function validar_reservas(){
     $area = $_POST['area'];
     $descripcion = $_POST['descripcion'];
 
-    $conexion = $GLOBALS['conex']; 
-    $consulta = "SELECT * FROM clientes WHERE correo ='$correo' AND celular = '$celular'";
+    $conexion = $GLOBALS['conex'];
+
+    $consulta = "SELECT * FROM clientes WHERE IdCliente = $idCliente";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
-        $filas = mysqli_fetch_array($resultado);
-        $correo = $filas['correo'];
-        $celular = $filas['celular'];
-        $IdCliente = $filas['IdCliente'];
+        // El IdCliente existe, guardar en la tabla de contactos
+        $consultaContacto = "INSERT INTO reservas (IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion) 
+                            VALUES ($idCliente, '$cantidadPersonas', '$fecha', '$hora', '$evento', '$area', '$descripcion')";
+        $resultadoContacto = mysqli_query($conexion, $consultaContacto);
 
-        if($filas['correo'] == $correo){ //admin
-
-            $consulta = "INSERT INTO reservas (IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion)
-            VALUES ('$IdCliente','$cantidadPersonas', '$fecha', '$hora', '$evento', '$area', '$descripcion')";
-            $resultado=mysqli_query($conexion, $consulta);
-            header('Location: ../vistas/reservas.php'); 
-    
-        }else{
-
-            $consulta = "INSERT INTO clientes (nombre, correo, celular)
-            VALUES ('$nombre', '$correo', '$celular')";
-            $resultado=mysqli_query($conexion, $consulta);
-            $filas = mysqli_fetch_array($resultado);
-            $IdCliente = $filas['IdCliente'];
-            $consulta = "INSERT INTO reservas (IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion)
-            VALUES ('$IdCliente','$cantidadPersonas', '$fecha', '$hora', '$evento', '$area', '$descripcion')";
-            $resultado=mysqli_query($conexion, $consulta);
-            header('Location: ../vistas/reservas.php');
-    
+        if ($resultadoContacto) {
+            header('Location: ../dashboard/reservas.php');
+        } else {
+            echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
         }
     } else {
-        $consulta = "INSERT INTO clientes (nombre, correo, celular)
-        VALUES ('$nombre', '$correo', '$celular')";
-        $resultado=mysqli_query($conexion, $consulta);
+        // El IdCliente no existe, primero guardar en la tabla de clientes
+        $nombreCliente = $_POST['nombreCliente'];
+        $correoCliente = $_POST['correoCliente'];
+        $celularCliente = $_POST['celularCliente'];
+        $direccionCliente = $_POST['direccionCliente'];
+
+        $consultaCliente = "INSERT INTO clientes (IdCliente, nombre, correo, celular, direccion) 
+                           VALUES ($idCliente, '$nombreCliente', '$correoCliente', '$celularCliente', '$direccionCliente')";
+        $resultadoCliente = mysqli_query($conexion, $consultaCliente);
+
+        if ($resultadoCliente) {
+            // Luego, guardar en la tabla de contactos
+            $consultaContacto = "INSERT INTO contactos (IdCliente, asunto, mensaje) 
+                                VALUES ($idCliente, '$asunto', '$mensaje')";
+            $resultadoContacto = mysqli_query($conexion, $consultaContacto);
+
+            if ($resultadoContacto) {
+                header('Location: ../dashboard/reservas.php');
+            } else {
+                echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
+            }
+        } else {
+            echo "Error al guardar los datos del cliente: " . mysqli_error($conexion);
+        }
     }
 }
 
 function eliminar_reservas() {
     if (isset($_POST['id'])) {
-    $IdReservas = $_POST['id'];  
+        $IdReservas = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
         $consulta = mysqli_query($conexion, "DELETE FROM reservas WHERE IdReservas = '$IdReservas'");
         
         if ($consulta) {
@@ -171,55 +177,56 @@ function eliminar_reservas() {
             echo "Error al eliminar la reserva";
         }
     } else {
-        echo "ID de reserva no proporcionado";
+        echo "ID de la reserva no proporcionado";
     }
 }
 
 function editar_reservas(){
+    $IdContacto = $_POST['id'];
     $IdCliente = $_POST['IdCliente'];
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $celular = $_POST['celular'];
-    $cantidadPersonas = $_POST['cantidadPersonas'];
-    $fecha = $_POST['fecha'];
-    $hora = $_POST['hora'];
-    $evento = $_POST['evento'];
-    $area = $_POST['area'];
-    $descripcion = $_POST['descripcion'];
-    
+    $asunto = $_POST['asunto'];
+    $mensaje = $_POST['mensaje'];
+
     $conexion = $GLOBALS['conex'];
-    $actualizacion = " UPDATE reservas SET cantidadPersonas = '$cantidadPersonas', fecha = '$fecha', hora = '$hora', evento = '$evento', area = '$area', descripcion = '$descripcion' WHERE idReserva = '$idReservas' "; 
+    $actualizacion = "UPDATE contactos SET IdCliente = '$IdCliente', asunto = '$asunto', mensaje = '$mensaje' WHERE IdContacto = '$IdContacto'";
     $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
-    
-    header('Location: ../vistas/reservas.php'); 
 
     if ($resultado_actualizacion) {
-        header('Location: ../dashboard/reservas.php');
+        header('Location: ../dashboard/contactos.php');
     } else {
-        echo "Error al editar la reserva.";
+        echo "Error al editar el usuario.";
     }
 }
+
 
 function mostrar_reservas() {
-    if (isset($_POST['id'])) {
-        $IdReservas = $_POST['IdReservas'];
+    if (isset($_POST['idContacto'])) {
+        $IdContacto = $_POST['idContacto'];
         $conexion = $GLOBALS['conex'];
-        $consulta = mysqli_query($conexion, "SELECT IdReservas, IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion  FROM reservas WHERE IdReservas = '$IdReservas'");
+
+        // Consulta para obtener los datos del contacto y su cliente correspondiente
+        $consulta = mysqli_query($conexion, "
+            SELECT c.IdContacto, c.IdCliente, c.asunto, c.mensaje, cl.nombre, cl.correo, cl.celular, cl.direccion
+            FROM contactos c
+            JOIN clientes cl ON c.IdCliente = cl.IdCliente
+            WHERE c.IdContacto = '$IdContacto'
+        ");
 
         if ($consulta) {
-            $usuario = mysqli_fetch_assoc($consulta);
+            $datosContacto = mysqli_fetch_assoc($consulta);
+
             // Convertir el resultado a JSON y enviarlo como respuesta
-            echo json_encode($usuario);
+            echo json_encode($datosContacto);
         } else {
-            echo "Error al obtener los datos de las reservas";
+            echo "Error al obtener los datos del contacto";
         }
     } else {
-        echo "ID de reserva no proporcionado";
+        echo "ID de contacto no proporcionado";
     }
 }
 
 
-//casos de CONTACTOS
+//casos de CONTACTOS FUNCIONAN
 
 function validar_contactos(){
     $idCliente = $_POST['IdCliente'];
@@ -246,9 +253,11 @@ function validar_contactos(){
         // El IdCliente no existe, primero guardar en la tabla de clientes
         $nombreCliente = $_POST['nombreCliente'];
         $correoCliente = $_POST['correoCliente'];
+        $celularCliente = $_POST['celularCliente'];
+        $direccionCliente = $_POST['direccionCliente'];
 
-        $consultaCliente = "INSERT INTO clientes (IdCliente, nombre, correo) 
-                           VALUES ($idCliente, '$nombreCliente', '$correoCliente')";
+        $consultaCliente = "INSERT INTO clientes (IdCliente, nombre, correo, celular, direccion) 
+                           VALUES ($idCliente, '$nombreCliente', '$correoCliente', '$celularCliente', '$direccionCliente')";
         $resultadoCliente = mysqli_query($conexion, $consultaCliente);
 
         if ($resultadoCliente) {
@@ -303,15 +312,23 @@ function editar_contactos(){
 
 
 function mostrar_contactos() {
-    if (isset($_POST['id'])) {
-        $IdContacto = $_POST['id'];
+    if (isset($_POST['idContacto'])) {
+        $IdContacto = $_POST['idContacto'];
         $conexion = $GLOBALS['conex'];
-        $consulta = mysqli_query($conexion, "SELECT IdContacto, IdCliente,  asunto, mensaje  FROM contactos WHERE IdContacto = '$IdContacto'");
+
+        // Consulta para obtener los datos del contacto y su cliente correspondiente
+        $consulta = mysqli_query($conexion, "
+            SELECT c.IdContacto, c.IdCliente, c.asunto, c.mensaje, cl.nombre, cl.correo, cl.celular, cl.direccion
+            FROM contactos c
+            JOIN clientes cl ON c.IdCliente = cl.IdCliente
+            WHERE c.IdContacto = '$IdContacto'
+        ");
 
         if ($consulta) {
-            $usuario = mysqli_fetch_assoc($consulta);
+            $datosContacto = mysqli_fetch_assoc($consulta);
+
             // Convertir el resultado a JSON y enviarlo como respuesta
-            echo json_encode($usuario);
+            echo json_encode($datosContacto);
         } else {
             echo "Error al obtener los datos del contacto";
         }
@@ -319,6 +336,8 @@ function mostrar_contactos() {
         echo "ID de contacto no proporcionado";
     }
 }
+
+
 
 
 //casos de CLIENTES
@@ -398,7 +417,7 @@ function mostrar_clientes() {
 }
 
 
-//casos de USUARIOS
+//casos de USUARIOS FUNCIONAN
 
 function validar_usuarios(){
     $nombre = $_POST['nombre'];

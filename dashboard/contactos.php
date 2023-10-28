@@ -189,12 +189,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                 '<input id="nombreCliente" class="swal2-input css-input" placeholder="Ingrese el nombre del cliente" value=""> ' +
                                                 '<br>' +
                                                 '<label for "correoCliente" class="css-label"> Correo Cliente: </label>' +
-                                                '<input id="correoCliente" class="swal2-input css-input" placeholder="Ingrese el correo del cliente" value=""> ',
+                                                '<input id="correoCliente" class="swal2-input css-input" placeholder="Ingrese el correo del cliente" value=""> ' +
+                                                '<label for="celularCliente" class="css-label"> Celular Cliente: </label>' +
+                                                '<input id="celularCliente" class="swal2-input css-input" placeholder="Ingrese el celular del cliente" value=""> ' +
+                                                '<br>' +
+                                                '<label for="direccionCliente" class="css-label"> Direccion Cliente: </label>' +
+                                                '<input id="direccionCliente" class="swal2-input css-input" placeholder="Ingrese la direccion del cliente" value=""> ',
                                             showCancelButton: true,
                                             cancelButtonText: 'Cancelar',
                                             preConfirm: () => {
                                                 const nombreCliente = $('#nombreCliente').val();
                                                 const correoCliente = $('#correoCliente').val();
+                                                const celularCliente = $('#celularCliente').val();
+                                                const direccionCliente = $('#direccionCliente').val();
 
                                                 // Continuar con la lógica de guardar el cliente y el contacto
                                                 $.ajax({
@@ -206,6 +213,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                         mensaje: mensaje,
                                                         nombreCliente: nombreCliente,
                                                         correoCliente: correoCliente,
+                                                        celularCliente: celularCliente,
+                                                        direccionCliente: direccionCliente,
                                                         accion: 'validar_contactos'
                                                     },
                                                     success: function(response) {
@@ -234,14 +243,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-<script>
+    <script>
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
                 const IdContacto = $(this).data('id');
 
                 Swal.fire({
-                    title: '<h2> Editar contacto <h2>',
+                    title: '<h2> Editar contacto </h2>',
                     html:
                         '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
                         '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
@@ -267,11 +276,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    id: IdContacto,
-                                    nombre: nombre,
-                                    correo: correo,
-                                    contraseña: contraseña,
-                                    accion: 'editar_contacto'
+                                    idContacto: IdContacto, // Cambiado el nombre del campo a idContacto
+                                    IdCliente: IdCliente,
+                                    asunto: asunto,
+                                    mensaje: mensaje,
+                                    accion: 'editar_contactos'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El contacto ha sido actualizado.', 'success').then((result) => {
@@ -293,7 +302,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     type: "POST",
                     url: "../funciones/funciones.php",
                     data: {
-                        id: IdContacto,
+                        idContacto: IdContacto, // Cambiado el nombre del campo a idContacto
                         accion: 'mostrar_contactos'
                     },
                     success: function(response) {
@@ -313,50 +322,60 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
+
     <script>
         $('.btn-view').on('click', function(e) {
             e.preventDefault();
             const IdContacto = $(this).data('id');
 
             Swal.fire({
+                title: 'Datos del contacto',
                 didOpen: () => {
+
+                    // Realiza una solicitud AJAX para cargar los detalles del contacto
                     $.ajax({
                         type: "POST",
                         url: "../funciones/funciones.php",
                         data: {
-                            id: IdContacto,
+                            idContacto: IdContacto,
                             accion: 'mostrar_contactos'
                         },
                         success: function(response) {
-                            // Parse the response from the server, assuming it's in JSON format
                             const userData = JSON.parse(response);
 
                             if (userData) {
-                                // Extract and display user information
-                                const IdCliente = userData.IdCliente;
-                                const asunto = userData.asunto;
-                                const mensaje = userData.mensaje;
-
                                 Swal.update({
-                                    title: 'Datos del contacto:',
-                                    html: `<p class="css-label">Id Cliente: </p> <p>${IdCliente}</p>
-                                            <p class="css-label">Asunto: </p> <p> ${asunto}</p>
-                                            <p class="css-label">Mensaje: </p> <p>${mensaje}</p>`,
+                                    html: `
+                                        <p class="css-label">Id Cliente: ${userData.IdCliente}</p>
+                                        <p class="css-label">nombre: ${userData.nombre}</p>
+                                        <p class="css-label">correo: ${userData.correo}</p>
+                                        <p class="css-label">celular: ${userData.celular}</p>
+                                        <p class="css-label">direccion: ${userData.direccion}</p>
+                                        <p class="css-label">Asunto: ${userData.asunto}</p>
+                                        <p class="css-label">Mensaje: ${userData.mensaje}</p>`
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'No se pudieron cargar los detalles del contacto.',
+                                    icon: 'error'
                                 });
                             }
                         },
                         error: function(xhr, status, error) {
-                            Swal.fire(
-                                'Error',
-                                'Hubo un error al cargar los datos del contacto: ' + error,
-                                'error'
-                            );
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Hubo un error al cargar los datos del contacto: ' + error,
+                                icon: 'error'
+                            });
                         }
                     });
                 }
             });
         });
     </script>
+
+
 
     <script>
         $('.btn-del').on('click', function(e){
