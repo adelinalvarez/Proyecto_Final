@@ -94,7 +94,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                         ?>
                                         <tr>
                                             <td><?php echo $fila['IdProducto']; ?></td>
-                                            <td><?php echo $fila['imagen']; ?></td>
+                                            <td> <img src="data:image/jpg;base64, <?php echo base64_encode($fila['imagen'])?>" alt="Imagen del producto" style="max-width: 100px;"></td>
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['descripcion']; ?></td>
                                             <td><?php echo $fila['categoria']; ?></td>
@@ -123,168 +123,78 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
     </body>
 
-    
-
     <script>
-        $(document).ready(function() {
-            $('.btn-add').on('click', function(e) {
-                e.preventDefault();
+        $('.btn-add').on('click', function(e) {
+            Swal.fire({
+                title: "Agregar nuevo producto",
+                html: `
+                <form action="../funciones/funciones.php" method="POST" enctype="multipart/form-data">
+                    <div>
+                    <label class="css-label" for="customFile">Agregar imagen</label>
+                    <input type="file" name="imagen" id="imagen" class="css-input" style="display: none;" required />
+                    <input type="file" name="imagen" id="imagen" class="css-input" style="display: block; width: 100%;" />
+                    </div>
+                    <div>
+                    <label for="Nombre" class="css-label"> Nombre: </label>
+                    <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
+                    </div>
+                    <div>
+                    <label for="Descripcion" class="css-label"> Descripcion:</label>
+                    <input type="text" id="descripcion" name="descripcion" class="css-input" style="display: block; width: 100%;" required>
+                    </div>
+                    <div>
+                    <label for "Categoria" class="css-label">Categoria:</label>
+                    <input type="text" id="categoria" name="categoria" class="css-input" style="display: block; width: 100%;" required>
+                    </div>
+                    <div>
+                    <label for="Precio" class="css-label">Precio:</label>
+                    <input type="text" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
+                    </div>
+                    <br>
+                </form>`,
+                showCancelButton: true,
+                confirmButtonText: "Agregar",
+                preConfirm: () => {
+                const formData = new FormData(document.querySelector('form'));
+                
+                // Obtiene los valores de nombre, correo y contraseña desde el formulario
+                const nombre = $('#nombre').val();
+                const imagen = $('#imagen').val();
+                const descripcion = $('#descripcion').val();
+                const categoria = $('#categoria').val();
+                const precio = $('#precio').val();
 
-                Swal.fire({
-                    title: '<h2> Agregar nuevo producto </h2>',
-                    html:
-                        //'<label for="imagen" class="css-label"> Imagen: </label>' +
-                       // '<input id="imagen" class="swal2-input css-input" placeholder="Ingrese la imagen" value=""> ' +
-                       // '<br>' +
-                        '<label for="nombre" class="css-label"> Nombre: </label>' +
-                        '<br>' +
-                        '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
-                        '<br>' +
-                        '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<br>'+
-                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">'+
-                        '<br>'+
-                        '<label for="categoria" class="css-label"> Categoria: </label>' +
-                        '<br>'+
-                        '<input id="categoria" class="swal2-input css-input" placeholder="Ingrese la categoria" value="">'
-                        '<br>'+
-                        '<label for="precio" class="css-label"> Precio: </label>' +
-                        '<br>'+
-                        '<input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="">',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                    //    const imagen = $('#imagen').val();
-                        const nombre = $('#nombre').val();
-                        const descripcion = $('#descripcion').val();
-                        const categoria= $('#categoria').val();
-                        const precio = $('#precio').val();
+                
+                if (!nombre) {
+                    Swal.showValidationMessage('Por favor, completa todos los campos');
+                } else {
+                    // Agrega los valores al objeto FormData
+                    formData.append('nombre', nombre);
+                    formData.append('imagen', imagen);
+                    formData.append('descripcion', descripcion);
+                    formData.append('categoria', categoria);
+                    formData.append('precio', precio);
+                    formData.append('accion', 'validar_productos');
 
-                     //   if (!imagen || !nombre|| !descripcion || !categoria || !precio)
-                        if (!nombre|| !descripcion || !categoria || !precio) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                  //  imagen: imagen,
-                                    nombre: nombre,
-                                    descripcion: descripcion,
-                                    categoria: categoria,
-                                    precio: precio,
-                                    accion: 'validar_productos'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'El nuevo producto ha sido agregado.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar el producto: ' + error, 'error');
-                                }
-                            });
-                        }
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('.btn-edit').on('click', function(e) {
-                e.preventDefault();
-                const IdProducto = $(this).data('id');
-
-                Swal.fire({
-                    title: '<h2> Editar producto <h2>',
-                    html:
-               //'<label for="imagen" class="css-label"> Imagen: </label>' +
-                       // '<input id="imagen" class="swal2-input css-input" placeholder="Ingrese la imagen" value=""> ' +
-                       // '<br>' +
-                       '<label for="nombre" class="css-label"> Nombre: </label>' +
-                        '<br>' +
-                        '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
-                        '<br>' +
-                        '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<br>'+
-                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">'+
-                        '<br>'+
-                        '<label for="categoria" class="css-label"> Categoria: </label>' +
-                        '<br>'+
-                        '<input id="categoria" class="swal2-input css-input" placeholder="Ingrese la categoria" value="">'
-                        '<br>'+
-                        '<label for="precio" class="css-label"> Precio: </label>' +
-                        '<br>'+
-                        '<input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="">',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                       // const imagen = $('#imagen').val();
-                        const nombre = $('#nombre').val();
-                        const descripcion = $('#descripcion').val();
-                        const categoria = $('#categoria').val();
-                        const precio = $('#precio').val();
-
-                       // if (!imagen || !nombre || !descripcion || !categoria || !precio)
-                        if (!nombre || !descripcion || !categoria || !precio) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    //  imagen: imagen,
-                                    nombre: nombre,
-                                    descripcion: descripcion,
-                                    categoria: categoria,
-                                    precio: precio,
-                                    accion: 'editar_productos'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'El productos ha sido actualizado.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al editar el productos: ' + error, 'error');
-                                }
-                            });
-                        }
-                    }
-                });
-
-                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
-                $.ajax({
+                    $.ajax({
                     type: "POST",
                     url: "../funciones/funciones.php",
-                    data: {
-                        id: IdProducto,
-                        accion: 'mostrar_productos'
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     success: function(response) {
-                        const productosData = JSON.parse(response);
-
-                        if (productosData) {
-                            $('#imagen').val(productosData.imagen);
-                            $('#nombre').val(productosData.nombre);
-                            $('#descripcion').val(productosData.descripcion);
-                            $('#categoria').val(productosData.categoria);
-                            $('#precio').val(productosData.precio);
-                            $('#direccion').val(productosData.direccion);
+                        Swal.fire('Éxito', 'El nuevo producto ha sido agregado.', 'success').then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload(); // Recarga la página
                         }
+                        });
                     },
                     error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos del producto: ' + error, 'error');
+                        Swal.fire('Error', 'Hubo un error al agregar el producto: ' + error, 'error');
                     }
-                });
+                    });
+                }
+                }
             });
         });
     </script>
@@ -317,7 +227,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
                                 Swal.update({
                                     title: 'Datos del producto:',
-                                  //  <p class="css-label">Imagen: </p> <p>${name}</p>
+                                  //  <p class="css-label">imagen: </p> <p>${name}</p>
                                     html: `<p class="css-label">nombre: </p> <p>${nombre}</p>
                                             <p class="css-label">descripcion: </p> <p> ${descripcion}</p>
                                             <p class="css-label">categoria: </p> <p>${categoria}</p>
@@ -337,6 +247,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
             });
         });
     </script>
+
+    
 
     <script>
         $('.btn-del').on('click', function(e){
@@ -358,8 +270,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 type: "POST",
                 url: "../funciones/funciones.php",
                 data: {
-                id: IdProducto
-                accion: 'eliminar_productos'
+                    id: IdProducto,
+                    accion: 'eliminar_productos'
                 },
                 success: function(response) {
                 Swal.fire(

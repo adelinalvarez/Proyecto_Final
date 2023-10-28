@@ -71,6 +71,22 @@ if (isset($_POST['accion'])){
         case 'mostrar_clientes';
             mostrar_clientes();
         break;
+
+        case 'validar_productos';
+            validar_productos();
+        break;
+
+        case 'eliminar_productos';
+            eliminar_productos();
+        break;
+
+        case 'editar_productos';
+            editar_productos();
+        break;
+
+        case 'mostrar_productos';
+            mostrar_productos();
+        break;
 	}
 
 }
@@ -110,7 +126,7 @@ function acceso_user() {
 }
 
 
-//casos de RESERVAS
+//casos de RESERVAS FUNCIONAN
 
 function validar_reservas(){
     $idCliente = $_POST['IdCliente'];
@@ -351,8 +367,7 @@ function mostrar_contactos() {
 
 
 
-
-//casos de CLIENTES
+//casos de CLIENTES FUNCIONAN
 
 function validar_clientes(){
     $nombre = $_POST['nombre'];
@@ -519,4 +534,92 @@ function mostrar_usuario() {
 
 //casos de PRODUCTOS
 
+function validar_productos(){
+    $imagen = $_POST['imagen'];
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $categoria = $_POST['categoria'];
+    $precio = $_POST['precio'];
+    $imagen= addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 
+
+    $conexion = $GLOBALS['conex']; 
+    $consulta = "SELECT * FROM productos WHERE nombre ='$nombre'";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $filas = mysqli_fetch_array($resultado);
+        $nombre = $filas['nombre'];
+
+        if($filas['nombre'] == $correo){ //admin
+
+            header('Location: ../dashboard/productos.php'); 
+    
+        }else{
+
+            $consulta = "INSERT INTO productos (nombre, descripcion, categoria, precio, imagen)
+            VALUES ('$nombre', '$descripcion', '$categoria', '$precio','$imagen')";
+            $resultado=mysqli_query($conexion, $consulta);
+            header('Location: ../dashboard/productos.php');
+    
+        }
+    } else {
+        $consulta = "INSERT INTO productos (nombre, descripcion, categoria, precio, imagen)
+        VALUES ('$nombre', '$descripcion', '$categoria', '$precio','$imagen')";
+        $resultado=mysqli_query($conexion, $consulta);
+        header('Location: ../dashboard/productos.php');
+    }
+}
+
+function eliminar_productos() {
+    if (isset($_POST['id'])) {
+        $IdProducto = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "DELETE FROM productos WHERE IdProducto = '$IdProducto'");
+        
+        if ($consulta) {
+            echo "Producto eliminado correctamente.";
+        } else {
+            echo "Error al eliminar el producto";
+        }
+    } else {
+        echo "ID de producto no proporcionado";
+    }
+}
+
+
+function editar_productos(){
+    $IdCliente = $_POST['id'];
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+    $direccion = $_POST['direccion'];
+
+    $conexion = $GLOBALS['conex'];
+    $actualizacion = "UPDATE clientes SET nombre = '$nombre', correo = '$correo', celular = '$celular', direccion = '$direccion' WHERE IdCliente = '$IdCliente'";
+    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+
+    if ($resultado_actualizacion) {
+        header('Location: ../dashboard/clientes.php');
+    } else {
+        echo "Error al editar el usuario.";
+    }
+}
+
+function mostrar_productos() {
+    if (isset($_POST['id'])) {
+        $IdCliente = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdCliente, nombre, correo, celular, direccion FROM clientes WHERE IdCliente = '$IdCliente'");
+
+        if ($consulta) {
+            $usuario = mysqli_fetch_assoc($consulta);
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($usuario);
+        } else {
+            echo "Error al obtener los datos del usuario";
+        }
+    } else {
+        echo "ID de usuario no proporcionado";
+    }
+}
