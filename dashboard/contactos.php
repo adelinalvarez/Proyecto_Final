@@ -37,7 +37,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"> </script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
 
     </head>
 
@@ -63,7 +62,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <!--Container Main start-->
         <div class="height-100 bg-light">
             <br>
-            <h1 class="text-center color-white"> Solicitud de contactos </h1>
+            <h1 class="text-center color-white"> Contactos </h1>
             <div class="row py-5">
                 <div class="col-lg-10 mx-auto">
                     <div class="card rounded shadow border-0"> 
@@ -119,9 +118,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         </div>
 
     </body>
-
-    
-
+   
     <script>
        $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
@@ -322,7 +319,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-
     <script>
         $('.btn-view').on('click', function(e) {
             e.preventDefault();
@@ -374,8 +370,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
             });
         });
     </script>
-
-
 
     <script>
         $('.btn-del').on('click', function(e){
