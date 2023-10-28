@@ -78,20 +78,20 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
                                         <th>Id Reserva</th>
-                                            <th>Nombre</th>
-                                            <th>Correo</th>
-                                            <th>Celular</th>
+                                            <th>Id cliente</th>
+                                            <th>Cantidad de Personas</th>
                                             <th>Fecha</th>
                                             <th>Hora</th>
                                             <th>Evento</th>
                                             <th>Area</th>
+                                            <th>Descripcion</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $conexion=$GLOBALS['conex']; 
-                                            $SQL=mysqli_query($conexion," SELECT reservas.IdCliente, reservas.IdReservas, reservas.cantidadPersonas, reservas.fecha, reservas.hora, reservas.evento reservas.area reservas.descripcion FROM reservas");
+                                            $SQL=mysqli_query($conexion," SELECT reservas.IdCliente, reservas.IdReservas, reservas.cantidadPersonas, reservas.fecha, reservas.hora, reservas.evento, reservas.area, reservas.descripcion FROM reservas");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
@@ -314,7 +314,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-view').on('click', function(e) {
             e.preventDefault();
-            const Idreservas = $(this).data('idReservas');
+            const IdReservas = $(this).data('id');
 
             Swal.fire({
                 didOpen: () => {
@@ -339,10 +339,16 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
                                 Swal.update({
                                     title: 'Datos del reservas:',
-                                    html: `<p class="css-label">Cantidad de Personas: </p> <p>$cantidadPersonas}</p>
-                                            <p class="css-label">Fecha: </p> <p> ${fecha}</p>
-                                            <p class="css-label">Hora: </p> <p>${hora}</p>
-                                            <p class="css-label">Evento: </p> <p>${evento}</p> <p class="css-label">Area: </p> <p>${area}</p> <p class="css-label">Descripcion: </p> <p>${descripcion}</p> `,
+                                    html: `<p class="css-label">Cantidad de Personas: </p>
+                                            <p> ${cantidadPersonas} </p>
+                                            <p class="css-label">Fecha: </p> 
+                                            <p> ${fecha}</p>
+                                            <p class="css-label">Hora: </p> 
+                                            <p>${hora}</p>
+                                            <p class="css-label">Evento: </p> 
+                                            <p>${evento}</p> <p class="css-label">Area: </p> 
+                                            <p>${area}</p> <p class="css-label">Descripcion: </p> 
+                                            <p>${descripcion}</p> `,
                                 });
                             }
                         },

@@ -13,8 +13,31 @@ if (isset($_POST['accion'])){
             validar_reservas();
         break;
 
-        case 'validar_contacto';
-            validar_contacto();
+        case 'eliminar_reservas';
+            eliminar_reservas();
+        break;
+
+        case 'editar_reservas';
+            editar_reservas();
+        break;
+
+        case 'mostrar_reservas';
+            mostrar_reservas();
+        break;
+
+        case 'validar_contactos';
+            validar_contactos();
+        break;
+        case 'eliminar_contactos';
+             eliminar_contactos();
+        break;
+
+        case 'editar_contactos';
+            editar_contactos();
+        break;
+
+        case 'mostrar_contactos';
+            mostrar_contactos();
         break;
 
         case 'validar_usuarios';
@@ -90,6 +113,7 @@ function acceso_user() {
 //casos de RESERVAS
 
 function validar_reservas(){
+    $IdCliente = $_POST['IdCliente'];
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $celular = $_POST['celular'];
@@ -138,19 +162,8 @@ function validar_reservas(){
 }
 
 function eliminar_reservas() {
-    if (isset($_POST['IdReservas'])) {
-    $IdCliente = $_POST['IdCliente'];  
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $celular = $_POST['celular'];
-    $cantidadPersonas = $_POST['cantidadPersonas'];
-    $fecha = $_POST['fecha'];
-    $hora = $_POST['hora'];
-    $evento = $_POST['evento'];
-    $area = $_POST['area'];
-    $descripcion = $_POST['descripcion'];
-
-
+    if (isset($_POST['id'])) {
+    $IdReservas = $_POST['id'];  
         $consulta = mysqli_query($conexion, "DELETE FROM reservas WHERE IdReservas = '$IdReservas'");
         
         if ($consulta) {
@@ -189,11 +202,10 @@ function editar_reservas(){
 }
 
 function mostrar_reservas() {
-    if (isset($_POST['IdReservas'])) {
-        $IdUsuario = $_POST['IdReservas'];
+    if (isset($_POST['id'])) {
+        $IdReservas = $_POST['IdReservas'];
         $conexion = $GLOBALS['conex'];
         $consulta = mysqli_query($conexion, "SELECT IdReservas, IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion  FROM reservas WHERE IdReservas = '$IdReservas'");
-        $consulta = mysqli_query($conexion, "SELECT IdCliente, nombre, correo, celular FROM clientes WHERE IdCliente = '$IdCliente'");
 
         if ($consulta) {
             $usuario = mysqli_fetch_assoc($consulta);
@@ -212,9 +224,9 @@ function mostrar_reservas() {
 //casos de CONTACTOS
 
 
-function validar_contacto(){
-    $nombre = $_POST['nombre'];
+function validar_contactos(){
     $correo = $_POST['correo'];
+    $nombre = $_POST['nombre'];
     $asunto = $_POST['asunto'];
     $mensaje = $_POST['mensaje'];
 
@@ -224,8 +236,7 @@ function validar_contacto(){
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
         $filas = mysqli_fetch_array($resultado);
-        $correo = $filas['correo'];
-        $IdCliente = $filas['IdCliente'];
+        $correo= $filas['correo'];
 
         if($filas['correo'] == $correo){ //admin
 
@@ -251,6 +262,58 @@ function validar_contacto(){
         $consulta = "INSERT INTO clientes (nombre, correo)
         VALUES ('$nombre', '$correo')";
         $resultado=mysqli_query($conexion, $consulta);
+        header('Location: ../vistas/contacto.php');
+    }
+}
+
+function eliminar_contactos() {
+    if (isset($_POST['IdContacto'])) {
+        $IdContacto = $_POST['IdContacto'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "DELETE FROM contactos WHERE IdContacto = '$IdContacto'");
+        
+        if ($consulta) {
+            header('Location: ../dashboard/contactos.php');
+        } else {
+            echo "Error al eliminar el contacto";
+        }
+    } else {
+        echo "ID de contacto no proporcionado";
+    }
+}
+
+function editar_contactos(){
+    $IdContacto = $_POST['IdContacto'];
+    $IdCliente = $_POST['IdCliente'];
+    $asunto = $_POST['asunto'];
+    $mensaje = $_POST['mensaje'];
+
+    $conexion = $GLOBALS['conex'];
+    $actualizacion = "UPDATE contactos SET asunto = '$asunto', mensaje = '$mensaje' WHERE IdContacto = '$IdContacto'";
+    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+
+    if ($resultado_actualizacion) {
+        header('Location: ../dashboard/contactos.php');
+    } else {
+        echo "Error al editar el contacto.";
+    }
+}
+
+function mostrar_contactos() {
+    if (isset($_POST['IdContacto'])) {
+        $IdContacto = $_POST['IdContacto'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdContacto, IdCliente,  asunto, mensaje  FROM contactos WHERE IdContacto = '$IdContacto'");
+
+        if ($consulta) {
+            $usuario = mysqli_fetch_assoc($consulta);
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($usuario);
+        } else {
+            echo "Error al obtener los datos del contacto";
+        }
+    } else {
+        echo "ID de contacto no proporcionado";
     }
 }
 
