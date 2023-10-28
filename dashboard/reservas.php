@@ -207,12 +207,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Editar reserva <h2>',
                     html:
-                    '<label for="Cantidad" class="css-label"> Cantidad Personas: </label>' +
-                        '<input id="Cantidad" class="swal2-input css-input" placeholder="Ingrese la cantidad=""> ' +
+                    '<label for="cantidadPersonas" class="css-label"> Cantidad Personas: </label>' +
+                        '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad=""> ' +
                         '<br>' +
-                        '<label for="Fecha" class="css-label"> Fecha: </label>' +
+                        '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
-                        '<input id="Fecha" class="swal2-input css-input" placeholder="Ingrese la fecha" value=""> ' +
+                        '<input id="fecha" class="swal2-input css-input" placeholder="Ingrese la fecha" value=""> ' +
                         '<br>' +
                         '<label for="hora" class="css-label"> Hora: </label>' +
                         '<br>'+
@@ -253,7 +253,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     evento: evento,
                                     area: area,
                                     descripcion: descripcion,
-                                    accion: 'editar_reserva'
+                                    accion: 'editar_reservas'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'La reserva ha sido actualizado.', 'success').then((result) => {
@@ -298,42 +298,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
-        $('.btn-view').on('click', function(e) {
-            e.preventDefault();
-            const IdReservas = $(this).data('id');
-
-            Swal.fire({
-                didOpen: () => {
-                    $.ajax({
-                        type: "POST",
-                        url: "../funciones/funciones.php",
-                        data: {
-                            id: IdReservas,
-                            accion: 'mostrar_reservas'
-                        },
-                        success: function(response) {
-                            // Parse the response from the server, assuming it's in JSON format
-                            const reservasData = JSON.parse(response);
-                            if (reservasData) {
-                            $('#nombre').val(reservasData.nombre);
-                            $('#correo').val(reservasData.correo);
-                            $('#celular').val(reservasData.celular);
-                            $('#direccion').val(reservasData.direccion);
-                        }
-                                
-                        error: function(xhr, status, error) {
-                            Swal.fire(
-                                'Error',
-                                'Hubo un error al cargar los datos de la reserva:' + error,
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+  
 
     <script>
         $('.btn-del').on('click', function(e){
