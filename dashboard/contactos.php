@@ -123,7 +123,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     
 
     <script>
-        $(document).ready(function() {
+       $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
                 e.preventDefault();
 
@@ -133,13 +133,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
                         '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
                         '<br>' +
-                        '<label for="asunto" class="css-label"> asunto: </label>' +
+                        '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +
                         '<input id="asunto" class="swal2-input css-input" placeholder="Ingrese el asunto" value=""> ' +
                         '<br>' +
-                        '<label for="mensaje" class="css-label"> mensaje: </label>' +
+                        '<label for="mensaje" class="css-label"> Mensaje: </label>' +
                         '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese una mensaje" value="">',
-                    focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
@@ -150,24 +149,82 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         if (!IdCliente || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
+                            // Realizar una consulta AJAX para verificar si el IdCliente existe
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
                                     IdCliente: IdCliente,
-                                    asunto: asunto,
-                                    mensaje: mensaje,
-                                    accion: 'validar_contactos'
+                                    accion: 'verificar_cliente'
                                 },
                                 success: function(response) {
-                                    Swal.fire('Éxito', 'El nuevo contacto ha sido agregado.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
+                                    if (response === 'existe_cliente') {
+                                        // El IdCliente existe, continuar con la lógica de guardar el contacto
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "../funciones/funciones.php",
+                                            data: {
+                                                IdCliente: IdCliente,
+                                                asunto: asunto,
+                                                mensaje: mensaje,
+                                                accion: 'validar_contactos'
+                                            },
+                                            success: function(response) {
+                                                Swal.fire('Éxito', 'El nuevo contacto ha sido agregado.', 'success').then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        location.reload(); // Recarga la página
+                                                    }
+                                                });
+                                            },
+                                            error: function(xhr, status, error) {
+                                                Swal.fire('Error', 'Hubo un error al agregar el contacto: ' + error, 'error');
+                                            }
+                                        });
+                                    } else {
+                                        // El IdCliente no existe, mostrar campos de nombre y correo
+                                        Swal.fire({
+                                            title: '<h2> Agregar nuevo cliente </h2>',
+                                            html:
+                                                '<label for="nombreCliente" class="css-label"> Nombre Cliente: </label>' +
+                                                '<input id="nombreCliente" class="swal2-input css-input" placeholder="Ingrese el nombre del cliente" value=""> ' +
+                                                '<br>' +
+                                                '<label for "correoCliente" class="css-label"> Correo Cliente: </label>' +
+                                                '<input id="correoCliente" class="swal2-input css-input" placeholder="Ingrese el correo del cliente" value=""> ',
+                                            showCancelButton: true,
+                                            cancelButtonText: 'Cancelar',
+                                            preConfirm: () => {
+                                                const nombreCliente = $('#nombreCliente').val();
+                                                const correoCliente = $('#correoCliente').val();
+
+                                                // Continuar con la lógica de guardar el cliente y el contacto
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "../funciones/funciones.php",
+                                                    data: {
+                                                        IdCliente: IdCliente,
+                                                        asunto: asunto,
+                                                        mensaje: mensaje,
+                                                        nombreCliente: nombreCliente,
+                                                        correoCliente: correoCliente,
+                                                        accion: 'validar_contactos'
+                                                    },
+                                                    success: function(response) {
+                                                        Swal.fire('Éxito', 'El nuevo contacto ha sido agregado.', 'success').then((result) => {
+                                                            if (result.isConfirmed) {
+                                                                location.reload(); // Recarga la página
+                                                            }
+                                                        });
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        Swal.fire('Error', 'Hubo un error al agregar el contacto: ' + error, 'error');
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
                                 },
                                 error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar el contacto: ' + error, 'error');
+                                    Swal.fire('Error', 'Hubo un error al verificar el IdCliente: ' + error, 'error');
                                 }
                             });
                         }
@@ -177,7 +234,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
+<script>
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
@@ -186,15 +243,15 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Editar contacto <h2>',
                     html:
-                        '<label for="IdCliente" class="css-label"> IdCliente completo: </label>' +
+                        '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
                         '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
                         '<br>' +
-                        '<label for="asunto" class="css-label"> asunto: </label>' +
+                        '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +
                         '<input id="asunto" class="swal2-input css-input" placeholder="Ingrese el asunto" value=""> ' +
                         '<br>' +
-                        '<label for="mensaje" class="css-label"> mensaje: </label>' +
-                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese una mensaje" value="">',
+                        '<label for="mensaje" class="css-label"> Mensaje: </label>' +
+                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese un mensaje" value="">',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
@@ -211,9 +268,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 url: "../funciones/funciones.php",
                                 data: {
                                     id: IdContacto,
-                                    IdCliente: IdCliente,
-                                    asunto: asunto,
-                                    mensaje: mensaje,
+                                    nombre: nombre,
+                                    correo: correo,
+                                    contraseña: contraseña,
                                     accion: 'editar_contacto'
                                 },
                                 success: function(response) {
@@ -237,7 +294,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     url: "../funciones/funciones.php",
                     data: {
                         id: IdContacto,
-                        accion: 'mostrar_contacto'
+                        accion: 'mostrar_contactos'
                     },
                     success: function(response) {
                         const userData = JSON.parse(response);
@@ -268,7 +325,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         url: "../funciones/funciones.php",
                         data: {
                             id: IdContacto,
-                            accion: 'mostrar_contacto'
+                            accion: 'mostrar_contactos'
                         },
                         success: function(response) {
                             // Parse the response from the server, assuming it's in JSON format
@@ -282,9 +339,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
                                 Swal.update({
                                     title: 'Datos del contacto:',
-                                    html: `<p class="css-label">IdCliente: </p> <p>${IdCliente}</p>
-                                            <p class="css-label">asunto: </p> <p> ${asunto}</p>
-                                            <p class="css-label">mensaje: </p> <p>${mensaje}</p>`,
+                                    html: `<p class="css-label">Id Cliente: </p> <p>${IdCliente}</p>
+                                            <p class="css-label">Asunto: </p> <p> ${asunto}</p>
+                                            <p class="css-label">Mensaje: </p> <p>${mensaje}</p>`,
                                 });
                             }
                         },
@@ -322,7 +379,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 url: "../funciones/funciones.php",
                 data: {
                 id: IdContacto,
-                accion: 'eliminar_contacto'
+                accion: 'eliminar_contactos'
                 },
                 success: function(response) {
                 Swal.fire(
