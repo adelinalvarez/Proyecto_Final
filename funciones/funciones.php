@@ -588,23 +588,43 @@ function eliminar_productos() {
 }
 
 
-function editar_productos(){
-    $IdCliente = $_POST['id'];
-    $nombre = $_POST['nombre'];
-    $correo = $_POST['correo'];
-    $celular = $_POST['celular'];
-    $direccion = $_POST['direccion'];
+function editar_productos() {
+    if (isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['categoria'], $_POST['precio'])) {
+        $IdProducto = $_POST['id'];
+        $nombre = $_POST['nombre'];
+        $descripcion = $_POST['descripcion'];
+        $categoria = $_POST['categoria'];
+        $precio = $_POST['precio'];
 
-    $conexion = $GLOBALS['conex'];
-    $actualizacion = "UPDATE clientes SET nombre = '$nombre', correo = '$correo', celular = '$celular', direccion = '$direccion' WHERE IdCliente = '$IdCliente'";
-    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+        // Validación de datos (puedes personalizar esto según tus requerimientos)
+        if (empty($nombre) || empty($descripcion) || empty($categoria) || empty($precio)) {
+            echo "Por favor, completa todos los campos.";
+            return;
+        }
 
-    if ($resultado_actualizacion) {
-        header('Location: ../dashboard/clientes.php');
+        // Conexión a la base de datos (asegúrate de tener una conexión válida aquí)
+        $conexion = $GLOBALS['conex'];
+
+        // Consulta preparada para evitar SQL injection
+        $actualizacion = "UPDATE productos SET nombre = ?, descripcion = ?, categoria = ?, precio = ? WHERE IdProducto = ?";
+        if ($stmt = mysqli_prepare($conexion, $actualizacion)) {
+            mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $descripcion, $categoria, $precio, $IdProducto);
+
+            // Ejecutar la consulta
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                header('Location: ../dashboard/productos.php');
+            } else {
+                echo "Error al editar el producto: " . mysqli_error($conexion);
+            }
+        } else {
+            echo "Error en la consulta SQL: " . mysqli_error($conexion);
+        }
     } else {
-        echo "Error al editar el usuario.";
+        echo "Faltan datos necesarios para la edición.";
     }
 }
+
 
 function mostrar_productos() {
     if (isset($_POST['id'])) {

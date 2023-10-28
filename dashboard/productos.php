@@ -199,7 +199,91 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-<script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-edit').on('click', function(e) {
+                e.preventDefault();
+                const IdProducto = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Editar Producto',
+                    html: `
+                        <label for="nombre" class="css-label"> Nombre: </label>
+                        <input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value="">
+                        <br>
+                        <label for="descripcion" class="css-label"> Descripción: </label>
+                        <input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripción" value="">
+                        <br>
+                        <label for="categoria" class "css-label"> Categoría: </label>
+                        <input id="categoria" class="swal2-input css-input" placeholder="Ingrese la categoría" value="">
+                        <br>
+                        <label for="precio" class="css-label"> Precio: </label>
+                        <input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="">`,
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    preConfirm: () => {
+                        const nombre = $('#nombre').val();
+                        const descripcion = $('#descripcion').val();
+                        const categoria = $('#categoria').val();
+                        const precio = $('#precio').val();
+
+                        if (!nombre) {
+                            Swal.showValidationMessage('Por favor, completa el campo de Nombre');
+                        } else {
+                            $.ajax({
+                                type: "POST",
+                                url: "../funciones/funciones.php",
+                                data: {
+                                    id: IdProducto,
+                                    nombre: nombre,
+                                    descripcion: descripcion,
+                                    categoria: categoria,
+                                    precio: precio,
+                                    accion: 'editar_productos'
+                                },
+                                success: function(response) {
+                                    Swal.fire('Éxito', 'El producto ha sido actualizado.', 'success').then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload(); // Recarga la página
+                                        }
+                                    });
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire('Error', 'Hubo un error al editar el producto: ' + error, 'error');
+                                }
+                            });
+                        }
+                    }
+                });
+
+                // Realiza una solicitud AJAX para cargar los datos del producto y mostrarlos en el formulario
+                $.ajax({
+                    type: "POST",
+                    url: "../funciones/funciones.php",
+                    data: {
+                        id: IdProducto,
+                        accion: 'mostrar_productos'
+                    },
+                    success: function(response) {
+                        const productoData = JSON.parse(response);
+
+                        if (productoData) {
+                            $('#nombre').val(productoData.nombre);
+                            $('#descripcion').val(productoData.descripcion);
+                            $('#categoria').val(productoData.categoria);
+                            $('#precio').val(productoData.precio);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire('Error', 'Hubo un error al cargar los datos del producto: ' + error, 'error');
+                    }
+                });
+            });
+        });
+    </script>    
+
+    <script>
         $(document).ready(function () {
             $('.btn-view').on('click', function () {
                 const IdProducto = $(this).data('id');
