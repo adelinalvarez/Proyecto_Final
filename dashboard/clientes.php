@@ -68,7 +68,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 <div class="col-lg-10 mx-auto">
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
-                            <div class="text-end mb-3"> <!-- Agrega esta línea para alinear a la derecha -->
+                            <div class="text-end mb-3"> 
                             <a class="btn btn-dark text-white btn-add" href="#">
                                 Agregar nuevo cliente <i class='bx bxs-user-plus text-white'></i>
                             </a>

@@ -138,7 +138,8 @@ function validar_reservas(){
 }
 
 function eliminar_reservas() {
-    if (isset($_POST['idReservas'])) {
+    if (isset($_POST['IdReservas'])) {
+    $IdCliente = $_POST['IdCliente'];  
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $celular = $_POST['celular'];
@@ -163,6 +164,7 @@ function eliminar_reservas() {
 }
 
 function editar_reservas(){
+    $IdCliente = $_POST['IdCliente'];
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $celular = $_POST['celular'];
@@ -187,20 +189,21 @@ function editar_reservas(){
 }
 
 function mostrar_reservas() {
-    if (isset($_POST['id'])) {
-        $IdUsuario = $_POST['id'];
+    if (isset($_POST['IdReservas'])) {
+        $IdUsuario = $_POST['IdReservas'];
         $conexion = $GLOBALS['conex'];
-        $consulta = mysqli_query($conexion, "SELECT IdUsuario, nombre, correo, contraseña FROM usuarios WHERE IdUsuario = '$IdUsuario'");
+        $consulta = mysqli_query($conexion, "SELECT IdReservas, IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion  FROM reservas WHERE IdReservas = '$IdReservas'");
+        $consulta = mysqli_query($conexion, "SELECT IdCliente, nombre, correo, celular FROM clientes WHERE IdCliente = '$IdCliente'");
 
         if ($consulta) {
             $usuario = mysqli_fetch_assoc($consulta);
             // Convertir el resultado a JSON y enviarlo como respuesta
             echo json_encode($usuario);
         } else {
-            echo "Error al obtener los datos del usuario";
+            echo "Error al obtener los datos de las reservas";
         }
     } else {
-        echo "ID de usuario no proporcionado";
+        echo "ID de reserva no proporcionado";
     }
 }
 
