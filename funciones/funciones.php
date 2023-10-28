@@ -219,55 +219,58 @@ function mostrar_reservas() {
 }
 
 
-
 //casos de CONTACTOS
 
-
 function validar_contactos(){
-    $correo = $_POST['correo'];
-    $nombre = $_POST['nombre'];
+    $idCliente = $_POST['IdCliente'];
     $asunto = $_POST['asunto'];
     $mensaje = $_POST['mensaje'];
 
-    $conexion = $GLOBALS['conex']; 
-    $consulta = "SELECT * FROM clientes WHERE correo ='$correo'";
+    $conexion = $GLOBALS['conex'];
+
+    $consulta = "SELECT * FROM clientes WHERE IdCliente = $idCliente";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
-        $filas = mysqli_fetch_array($resultado);
-        $correo= $filas['correo'];
+        // El IdCliente existe, guardar en la tabla de contactos
+        $consultaContacto = "INSERT INTO contactos (IdCliente, asunto, mensaje) 
+                            VALUES ($idCliente, '$asunto', '$mensaje')";
+        $resultadoContacto = mysqli_query($conexion, $consultaContacto);
 
-        if($filas['correo'] == $correo){ //admin
-
-            $consulta = "INSERT INTO contactos (IdCliente, asunto, mensaje)
-            VALUES ('$IdCliente','$asunto', '$mensaje')";
-            $resultado=mysqli_query($conexion, $consulta);
-            header('Location: ../vistas/contacto.php'); 
-    
-        }else{
-
-            $consulta = "INSERT INTO clientes (nombre, correo)
-            VALUES ('$nombre', '$correo')";
-            $resultado=mysqli_query($conexion, $consulta);
-            $filas = mysqli_fetch_array($resultado);
-            $IdCliente = $filas['IdCliente'];
-            $consulta = "INSERT INTO contactos (IdCliente, asunto, mensaje)
-            VALUES ('$IdCliente','$asunto', '$mensaje')";
-            $resultado=mysqli_query($conexion, $consulta);
-            header('Location: ../vistas/contacto.php');
-    
+        if ($resultadoContacto) {
+            header('Location: ../dashboard/contactos.php');
+        } else {
+            echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
         }
     } else {
-        $consulta = "INSERT INTO clientes (nombre, correo)
-        VALUES ('$nombre', '$correo')";
-        $resultado=mysqli_query($conexion, $consulta);
-        header('Location: ../vistas/contacto.php');
+        // El IdCliente no existe, primero guardar en la tabla de clientes
+        $nombreCliente = $_POST['nombreCliente'];
+        $correoCliente = $_POST['correoCliente'];
+
+        $consultaCliente = "INSERT INTO clientes (IdCliente, nombre, correo) 
+                           VALUES ($idCliente, '$nombreCliente', '$correoCliente')";
+        $resultadoCliente = mysqli_query($conexion, $consultaCliente);
+
+        if ($resultadoCliente) {
+            // Luego, guardar en la tabla de contactos
+            $consultaContacto = "INSERT INTO contactos (IdCliente, asunto, mensaje) 
+                                VALUES ($idCliente, '$asunto', '$mensaje')";
+            $resultadoContacto = mysqli_query($conexion, $consultaContacto);
+
+            if ($resultadoContacto) {
+                header('Location: ../dashboard/contactos.php');
+            } else {
+                echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
+            }
+        } else {
+            echo "Error al guardar los datos del cliente: " . mysqli_error($conexion);
+        }
     }
 }
 
 function eliminar_contactos() {
-    if (isset($_POST['IdContacto'])) {
-        $IdContacto = $_POST['IdContacto'];
+    if (isset($_POST['id'])) {
+        $IdContacto = $_POST['id'];
         $conexion = $GLOBALS['conex'];
         $consulta = mysqli_query($conexion, "DELETE FROM contactos WHERE IdContacto = '$IdContacto'");
         
@@ -282,25 +285,26 @@ function eliminar_contactos() {
 }
 
 function editar_contactos(){
-    $IdContacto = $_POST['IdContacto'];
+    $IdContacto = $_POST['id'];
     $IdCliente = $_POST['IdCliente'];
     $asunto = $_POST['asunto'];
     $mensaje = $_POST['mensaje'];
 
     $conexion = $GLOBALS['conex'];
-    $actualizacion = "UPDATE contactos SET asunto = '$asunto', mensaje = '$mensaje' WHERE IdContacto = '$IdContacto'";
+    $actualizacion = "UPDATE contactos SET IdCliente = '$IdCliente', asunto = '$asunto', mensaje = '$mensaje' WHERE IdContacto = '$IdContacto'";
     $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
 
     if ($resultado_actualizacion) {
         header('Location: ../dashboard/contactos.php');
     } else {
-        echo "Error al editar el contacto.";
+        echo "Error al editar el usuario.";
     }
 }
 
+
 function mostrar_contactos() {
-    if (isset($_POST['IdContacto'])) {
-        $IdContacto = $_POST['IdContacto'];
+    if (isset($_POST['id'])) {
+        $IdContacto = $_POST['id'];
         $conexion = $GLOBALS['conex'];
         $consulta = mysqli_query($conexion, "SELECT IdContacto, IdCliente,  asunto, mensaje  FROM contactos WHERE IdContacto = '$IdContacto'");
 
@@ -326,33 +330,20 @@ function validar_clientes(){
     $direccion = $_POST['direccion'];
 
     $conexion = $GLOBALS['conex']; 
-    $consulta = "SELECT * FROM clientes WHERE correo ='$correo'";
+    $consulta = "SELECT * FROM clientes WHERE correo = '$correo'";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
-        $filas = mysqli_fetch_array($resultado);
-        $correo = $filas['coreo'];
-
-        if($filas['correo'] == $correo){ //admin
-
-            header('Location: ../dashboard/clientes.php'); 
-    
-        }else{
-
-            $consulta = "INSERT INTO clientes (nombre, correo, celular, direccion)
-            VALUES ('$nombre','$correo', '$celular', '$direccion')";
-            $resultado=mysqli_query($conexion, $consulta);
-            header('Location: ../dashboard/clientes.php');
-    
-        }
+        // El correo ya existe en la tabla de clientes
+        header('Location: ../dashboard/clientes.php');
     } else {
+        // El correo no existe en la tabla de clientes, insertar el nuevo cliente
         $consulta = "INSERT INTO clientes (nombre, correo, celular, direccion)
-        VALUES ('$nombre','$correo', '$celular', '$direccion')";
-        $resultado=mysqli_query($conexion, $consulta);
+        VALUES ('$nombre', '$correo', '$celular', '$direccion')";
+        $resultado = mysqli_query($conexion, $consulta);
         header('Location: ../dashboard/clientes.php');
     }
 }
-
 
 function eliminar_clientes() {
     if (isset($_POST['id'])) {
@@ -420,7 +411,7 @@ function validar_usuarios(){
 
     if ($resultado && mysqli_num_rows($resultado) > 0) {
         $filas = mysqli_fetch_array($resultado);
-        $correo = $filas['coreo'];
+        $correo = $filas['correo'];
         $contraseña = $filas['contraseña'];
 
         if($filas['correo'] == $correo){ //admin
