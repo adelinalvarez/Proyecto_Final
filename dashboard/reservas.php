@@ -134,30 +134,27 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 e.preventDefault();
 
                 Swal.fire({
-                    title: '<h2> Agregar nueva reserva </h2>',
+                    title: '<h2> Agregar nuevo reserva</h2>',
                     html:
-                        '<label for="Cantidad" class="css-label"> Cantidad de Personas: </label>' +
-                        '<input id="Cantidad" class="swal2-input css-input" placeholder="Ingrese la cantidad=""> ' +
+                        '<label for="cantidadPersonas" class="css-label">cantidadPersonas: </label>' +
+                        '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
                         '<br>' +
-                        '<label for="Fecha" class="css-label"> Fecha: </label>' +
+                        '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
-                        '<input id="Fecha" class="swal2-input css-input" placeholder="Ingrese la fecha" value=""> ' +
+                        '<input id="fecha" class="swal2-input css-input" placeholder="Ingrese el fecha" value=""> ' +
                         '<br>' +
                         '<label for="hora" class="css-label"> Hora: </label>' +
                         '<br>'+
                         '<input id="hora" class="swal2-input css-input" placeholder="Ingrese la hora" value="">'+
                         '<br>'+
-                        '<label for="evento" class="css-label"> Evento: </label>' +
+                        '<label for="evento" class="css-label"> Direccion: </label>' +
+                        '<input id="evento" class="swal2-input css-input" placeholder="Ingrese el evento" value="">'+
                         '<br>'+
-                        '<input id="evento" class="swal2-input css-input" placeholder="Ingrese su tipo de evento" value="">'
-                        '<br>'+
-                        '<label for="area" class="css-label"> Area: </label>' +
-                        '<br>'+
+                        '<label for="area" class="css-label"> Direccion: </label>' +
                         '<input id="area" class="swal2-input css-input" placeholder="Ingrese el area" value="">'+
                         '<br>'+
-                        '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<br>'+
-                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">',
+                        '<label for="descripcion" class="css-label"> Direccion: </label>' +
+                        '<input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripcion" value="">',,
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
@@ -169,24 +166,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
 
-                        if (!cantidadPersona || !fecha || !hora || !evento || !area
-                        || !descripcion ) {
+                        if (!cantidadPersonas|| !fecha|| !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    <td><?php echo $fila['IdReservas']; ?></td>
-                                            <td><?php echo $fila['cantidadPersonas']; ?></td>
-                                            <td><?php echo $fila['fecha']; ?></td>
-                                            <td><?php echo $fila['hora']; ?></td>
-                                            <td><?php echo $fila['evento']; ?></td>
-                                            <td><?php echo $fila['area']; ?></td>
-                                            <td><?php echo $fila['descripcion']; ?></td>
-                                            <td>
-                                    cantidadPersonas:cantidadPersonas,
-                                    fecha: fecha,
+                                    cantidadPersonas: cantidadPersonas,
                                     hora: hora,
                                     evento: evento,
                                     area: area,
@@ -194,14 +181,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     accion: 'validar_reservas'
                                 },
                                 success: function(response) {
-                                    Swal.fire('Éxito', 'La nueva reserva ha sido agregada.', 'success').then((result) => {
+                                    Swal.fire('Éxito', 'El nuevo cliente ha sido agregado.', 'success').then((result) => {
                                         if (result.isConfirmed) {
                                             location.reload(); // Recarga la página
                                         }
                                     });
                                 },
                                 error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar la reserva: ' + error, 'error');
+                                    Swal.fire('Error', 'Hubo un error al agregar el cliente: ' + error, 'error');
                                 }
                             });
                         }
@@ -220,12 +207,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Editar reserva <h2>',
                     html:
-                    '<label for="Cantidad" class="css-label"> Cantidad Personas: </label>' +
-                        '<input id="Cantidad" class="swal2-input css-input" placeholder="Ingrese la cantidad=""> ' +
+                    '<label for="cantidadPersonas" class="css-label"> Cantidad Personas: </label>' +
+                        '<input id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad=""> ' +
                         '<br>' +
-                        '<label for="Fecha" class="css-label"> Fecha: </label>' +
+                        '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
-                        '<input id="Fecha" class="swal2-input css-input" placeholder="Ingrese la fecha" value=""> ' +
+                        '<input id="fecha" class="swal2-input css-input" placeholder="Ingrese la fecha" value=""> ' +
                         '<br>' +
                         '<label for="hora" class="css-label"> Hora: </label>' +
                         '<br>'+
@@ -266,7 +253,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     evento: evento,
                                     area: area,
                                     descripcion: descripcion,
-                                    accion: 'editar_reserva'
+                                    accion: 'editar_reservas'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'La reserva ha sido actualizado.', 'success').then((result) => {
@@ -288,7 +275,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     type: "POST",
                     url: "../funciones/funciones.php",
                     data: {
-                        id: Idreservas,
+                        id: IdReservas,
                         accion: 'mostrar_reservas'
                     },
                     success: function(response) {
@@ -311,59 +298,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
-        $('.btn-view').on('click', function(e) {
-            e.preventDefault();
-            const IdReservas = $(this).data('id');
-
-            Swal.fire({
-                didOpen: () => {
-                    $.ajax({
-                        type: "POST",
-                        url: "../funciones/funciones.php",
-                        data: {
-                            id: IdReservas,
-                            accion: 'mostrar_reservas'
-                        },
-                        success: function(response) {
-                            // Parse the response from the server, assuming it's in JSON format
-                            const reservasData = JSON.parse(response);
-                            if (reservasData) {
-                                // Extract and display user information
-                                const cantidadPersonas = reservasData.cantidadPersonas;
-                                const fecha = reservasData.fecha;
-                                const hora = reservasData.hora;
-                                const evento = reservasData.evento;
-                                const area = reservasData.area;
-                                const descripcion = reservasData.descripcion;
-
-                                Swal.update({
-                                    title: 'Datos del reservas:',
-                                    html: `<p class="css-label">Cantidad de Personas: </p>
-                                            <p> ${cantidadPersonas} </p>
-                                            <p class="css-label">Fecha: </p> 
-                                            <p> ${fecha}</p>
-                                            <p class="css-label">Hora: </p> 
-                                            <p>${hora}</p>
-                                            <p class="css-label">Evento: </p> 
-                                            <p>${evento}</p> <p class="css-label">Area: </p> 
-                                            <p>${area}</p> <p class="css-label">Descripcion: </p> 
-                                            <p>${descripcion}</p> `,
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            Swal.fire(
-                                'Error',
-                                'Hubo un error al cargar los datos de la reserva:' + error,
-                                'error'
-                            );
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+  
 
     <script>
         $('.btn-del').on('click', function(e){

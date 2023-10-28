@@ -113,7 +113,6 @@ function acceso_user() {
 //casos de RESERVAS
 
 function validar_reservas(){
-    $IdCliente = $_POST['IdCliente'];
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $celular = $_POST['celular'];
