@@ -125,6 +125,7 @@ error_reporting(0);
                                     <option value="Cumpleaños">Cumpleaños </option>
                                     <option value="Boda">Boda </option>
                                     <option value="Reunion">Reunion</option >
+                                    <option value="Reunion">Otro</option >
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -140,7 +141,7 @@ error_reporting(0);
                             <div class="form-group col-md-12">
                                 <label for="descripcion" class="css-label"> Descripcion de la reservacion</label>
                                 <br>
-                                <textarea id="descripcion" name="descripcion" rows="10" class="css-input" required> </textarea>
+                                <textarea id="descripcion" name="descripcion" rows="10"  style="width: 100%;" class="css-input" required> </textarea>
                                 <br>
                             </div>
                             

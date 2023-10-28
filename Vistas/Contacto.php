@@ -109,7 +109,7 @@
                             </div>
                             <div>
                                 <label for="mensaje" class="css-label">Mensaje:</label>
-                                <textarea id="mensaje" name="mensaje" rows="10" class="css-input form-control" required> </textarea>
+                                <textarea id="mensaje" name="mensaje" rows="10" style="width: 100%;" class="css-input form-control" required> </textarea>
                             </div>
 
                             <br>
