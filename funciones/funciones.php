@@ -608,18 +608,18 @@ function editar_productos(){
 
 function mostrar_productos() {
     if (isset($_POST['id'])) {
-        $IdCliente = $_POST['id'];
+        $IdProducto = $_POST['id'];
         $conexion = $GLOBALS['conex'];
-        $consulta = mysqli_query($conexion, "SELECT IdCliente, nombre, correo, celular, direccion FROM clientes WHERE IdCliente = '$IdCliente'");
+        $consulta = mysqli_query($conexion, "SELECT IdProducto, nombre, descripcion, categoria, precio FROM productos WHERE IdProducto = '$IdProducto'");
 
         if ($consulta) {
-            $usuario = mysqli_fetch_assoc($consulta);
-            // Convertir el resultado a JSON y enviarlo como respuesta
-            echo json_encode($usuario);
+            $producto = mysqli_fetch_assoc($consulta);
+            echo json_encode($producto);
         } else {
-            echo "Error al obtener los datos del usuario";
+            echo "Error en la consulta SQL";
         }
     } else {
-        echo "ID de usuario no proporcionado";
+        echo "ID del producto no proporcionado";
     }
 }
+

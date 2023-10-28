@@ -199,56 +199,40 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
-        $('.btn-view').on('click', function(e) {
-            e.preventDefault();
-            const IdProducto = $(this).data('id');
+<script>
+        $(document).ready(function () {
+            $('.btn-view').on('click', function () {
+                const IdProducto = $(this).data('id');
 
-            Swal.fire({
-                didOpen: () => {
-                    $.ajax({
-                        type: "POST",
-                        url: "../funciones/funciones.php",
-                        data: {
-                            id: IdProducto,
-                            accion: 'mostrar_productos'
-                        },
-                        success: function(response) {
-                            // Parse the response from the server, assuming it's in JSON format
-                            const productosData = JSON.parse(response);
+                $.ajax({
+                    type: "POST",
+                    url: "../funciones/funciones.php", // Cambia esto a la ruta correcta
+                    data: {
+                        id: IdProducto,
+                        accion: 'mostrar_productos'
+                    },
+                    success: function (response) {
+                        const productosData = JSON.parse(response);
 
-                            if (productosData) {
-                                // Extract and display user information
-                               // const imagen = productosData.imagen;
-                               const nombre = productosData.nombre;
-                                const descripcion = productosData.descripcion;
-                                const categoria = productosData.categoria;
-                                const precio = productosData.precio;
-
-                                Swal.update({
-                                    title: 'Datos del producto:',
-                                  //  <p class="css-label">imagen: </p> <p>${name}</p>
-                                    html: `<p class="css-label">nombre: </p> <p>${nombre}</p>
-                                            <p class="css-label">descripcion: </p> <p> ${descripcion}</p>
-                                            <p class="css-label">categoria: </p> <p>${categoria}</p>
-                                            <p class="css-label">precio: </p> <p>${preConfirm}</p>`,
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            Swal.fire(
-                                'Error',
-                                'Hubo un error al cargar los datos del producto: ' + error,
-                                'error'
-                            );
+                        if (productosData) {
+                            Swal.fire({
+                                title: 'Datos del producto:',
+                                html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
+                                       <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
+                                       <p class="css-label">categoria: </p> <p>${productosData.categoria}</p>
+                                       <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
+                            });
+                        } else {
+                            Swal.fire('Error', 'No se pudo cargar los datos del producto', 'error');
                         }
-                    });
-                }
+                    },
+                    error: function () {
+                        Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                    }
+                });
             });
         });
     </script>
-
-    
 
     <script>
         $('.btn-del').on('click', function(e){
