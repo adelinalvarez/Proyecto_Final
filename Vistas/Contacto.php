@@ -65,54 +65,53 @@
 
         <div class="container">
             <br>
-            <h1 class="focus-in-expand text-center"> Contacto </h1>
+            <h1 class="focus-in-expand text-center" style="color: black;"> Contáctanos </h1>
+            <br>
             <div class="row">
                 <div class="col-lg-5 d-flex align-items-stretch">
                     <div class="info">
                         <div class="address">
                             <i class="bi bi-geo-alt"></i>
-                            <h4>Ubicación:</h4>
-                            <p>Santome, Esq. 16 De Agosto, Baní 94000</p>
+                            <h4 style="color: black;">Ubicación:</h4>
+                            <p>Santome #49, Esq. 16 De Agosto, Baní 94000</p>
                         </div>
 
                         <div class="email">
                             <i class="bi bi-envelope"></i>
-                            <h4>Correo:</h4>
+                            <h4 style="color: black;">Correo:</h4>
                             <p>donahildabani@gmail.com</p>
                         </div>
 
-                        <div class="Telefono">
+                        <div class="Telefono" >
                             <i class="bi bi-phone"></i>
-                            <h4>Telefono:</h4>
+                            <h4 style="color: black;">Telefono:</h4>
                             <p>+1 809-522-5146</p>
                         </div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 350px;" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
                     <div class="info">
                         <form  action="../funciones/funciones.php" method="POST">
                             <div>
-                                <label for="nombre" class="css-label"> Nombre Completo: </label>
-                                <input type="text" id="nombre" name="nombre" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese su nombre">
+                                <label for="nombre" class="css-label"> Nombre Completo: </label>  
+                                <input type="text" id="nombre" name="nombre" class="css-input" style= " display: block; width: 100%; border: 2px solid #AEB6BF;" required Placeholder="Ingrese su nombre">
                             </div>
                             
                             <div>
-                                <label for="correo" class="css-label"> Correo:</label>
-                                <input type="text" id="correo" name="correo" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese su correo" >
+                                <label for="correo" class="css-label"> Correo:</label>   
+                                <input type="text" id="correo" name="correo" class="css-input" style= " display: block; width: 100%; border: 2px solid #AEB6BF;" required Placeholder="Ingrese su correo" pattern="[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}"  title="Por favor, incluya el símbolo @ en su dirección de correo."> 
                             </div>
 
                                                 
                             <div>
-                                <label for="asunto" class="css-label">Asunto:</label>
-                                <input type="text" id="asunto" name="asunto" class="css-input" style= " display: block; width: 100%;" required Placeholder="Ingrese el asunto" >
+                                <label for="asunto" class="css-label">Asunto:</label> 
+                                <input type="text" id="asunto" name="asunto" class="css-input" style= " display: block; width: 100%; border: 2px solid #AEB6BF;" required Placeholder="Ingrese el asunto" >
                             </div>
                             <div>
-                                <label for="mensaje" class="css-label">Mensaje:</label>
-                                <textarea id="mensaje" name="mensaje" rows="10" style="width: 100%;" class="css-input form-control" required> </textarea>
+                                <label for="mensaje" class="css-label">Mensaje:</label>  
+                                <textarea id="mensaje" name="mensaje" rows="10" style="width: 100%; border: 2px solid #AEB6BF;" class="css-input form-control" required placeholder="Ingrese un mensaje"></textarea>
                             </div>
-
-                            <br>
 
                             <input type="hidden" name="accion" value="insertar_contacto">
                             <button type="submit" class="btn-guardar">Enviar</button>
@@ -140,7 +139,7 @@
                             </h6>
                             <p>
                                 Santome #49 
-                                Esq. 16 de Agosto, Baní Peravia
+                                Esq. 16 de Agosto, Baní, Peravia, República Dominicana
                             </p>
                         </div>
                         <!-- Grid column -->
