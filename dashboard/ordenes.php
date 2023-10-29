@@ -70,41 +70,46 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <div class="card-body p-5 bg-white rounded">
                             <div class="text-end mb-3"> 
                             <a class="btn btn-dark text-white btn-add" href="#">
-                                Agregar nuevo cliente <i class='bx bxs-user-plus text-white'></i>
+                                Agregar nueva orden <i class='bx bxs-user-plus text-white'></i>
                             </a>
                             </div>
                             <div class="table-responsive">
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
+                                            <th>Id Orden</th>
                                             <th>Id Cliente</th>
-                                            <th>Nombre</th>
-                                            <th>Correo</th>
-                                            <th>Celular</th>
+                                            <th>Fecha</th>
+                                            <th>Id Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT clientes.IdCliente, clientes.nombre, clientes.correo, clientes.celular, clientes.direccion FROM clientes");
+                                            $SQL=mysqli_query($conexion,"SELECT ordendetalle.IdOrden, ordendetalle.IdProducto, ordendetalle.Cantidad, ordendetalle.Precio FROM ordendetalle");
+                                            $SQL=mysqli_query($conexion,"SELECT orden.fecha, ordendetalle.IdCliente FROM orden");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
+                                            <td><?php echo $fila['IdOrden']; ?></td>
                                             <td><?php echo $fila['IdCliente']; ?></td>
-                                            <td><?php echo $fila['nombre']; ?></td>
-                                            <td><?php echo $fila['correo']; ?></td>
-                                            <td><?php echo $fila['celular']; ?></td>
+                                            <td><?php echo $fila['fecha']; ?></td>
+                                            <td><?php echo $fila['IdProducto']; ?></td>
+                                            <td><?php echo $fila['Cantidad']; ?></td>
+                                            <td><?php echo $fila['Precio']; ?></td>
                                             <td>
 
-                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCliente']?>" >
+                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdOrden']?>" >
                                                     <i class='bx bxs-user-detail'></i>
                                                 </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdCliente']?>">
+                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdOrden']?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
 
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdCliente']?>"> <i class='bx bxs-trash-alt'></i> </a>
+                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdOrden']?>"> <i class='bx bxs-trash-alt'></i> </a>
                                             
                                             </td>
                                         </tr>
@@ -161,7 +166,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     correo: correo,
                                     celular: celular,
                                     direccion: direccion,
-                                    accion: 'validar_clientes'
+                                    accion: 'validar_orden'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El nuevo cliente ha sido agregado.', 'success').then((result) => {
@@ -185,7 +190,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
-                const IdCliente = $(this).data('id');
+                const IdOrden = $(this).data('id');
 
                 Swal.fire({
                     title: '<h2> Editar usuario <h2>',
@@ -219,12 +224,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    id: IdCliente,
+                                    id: IdOrden,
                                     nombre: nombre,
                                     correo: correo,
                                     celular: celular,
                                     direccion: direccion,
-                                    accion: 'editar_clientes'
+                                    accion: 'editar_orden'
                                 },
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El cliente ha sido actualizado.', 'success').then((result) => {
@@ -246,7 +251,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     type: "POST",
                     url: "../funciones/funciones.php",
                     data: {
-                        id: IdCliente,
+                        id: IdOrden,
                         accion: 'mostrar_clientes'
                     },
                     success: function(response) {
@@ -270,7 +275,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-view').on('click', function(e) {
             e.preventDefault();
-            const IdCliente = $(this).data('id');
+            const IdOrden = $(this).data('id');
 
             Swal.fire({
                 didOpen: () => {
@@ -278,8 +283,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         type: "POST",
                         url: "../funciones/funciones.php",
                         data: {
-                            id: IdCliente,
-                            accion: 'mostrar_clientes'
+                            id: IdOrden,
+                            accion: 'mostrar_orden'
                         },
                         success: function(response) {
                             // Parse the response from the server, assuming it's in JSON format
@@ -317,7 +322,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-del').on('click', function(e){
         e.preventDefault();
-        const IdCliente = $(this).data('id');
+        const IdOrden = $(this).data('id');
 
         Swal.fire({
             title: '¿Estás seguro de eliminar este usuario?',
@@ -334,8 +339,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 type: "POST",
                 url: "../funciones/funciones.php",
                 data: {
-                id: IdCliente,
-                accion: 'eliminar_clientes'
+                id: IdOrden,
+                accion: 'eliminar_orden'
                 },
                 success: function(response) {
                 Swal.fire(

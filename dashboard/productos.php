@@ -95,7 +95,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                         ?>
                                         <tr>
                                             <td><?php echo $fila['IdProducto']; ?></td>
-                                            <td> <img src="data:image/jpg;base64, <?php echo base64_encode($fila['imagen'])?>" alt="Imagen del producto" style="max-width: 100px;"></td>
+                                            <td> <img src="data:image/jpeg;base64, <?php echo base64_encode($fila['imagen'])?>" alt="Imagen del producto" style="max-width: 100px; object-fit: cover"></td>
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['descripcion']; ?></td>
                                             <td><?php echo $fila['categoria']; ?></td>
