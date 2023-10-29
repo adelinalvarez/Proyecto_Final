@@ -87,6 +87,20 @@ if (isset($_POST['accion'])){
         case 'mostrar_productos';
             mostrar_productos();
         break;
+
+        case 'validar_reservas_normal';
+            validar_reservas_normal();
+        break;
+
+        case 'insertar_contacto';
+            insertar_contacto(
+                $_POST['nombre'],
+                $_POST['correo'],
+                $_POST['asunto'],
+                $_POST['mensaje']
+            );
+        break;
+
 	}
 
 }
@@ -151,7 +165,8 @@ function validar_reservas(){
         } else {
             echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
         }
-    } else {
+    } elseif ($resultado && mysqli_num_rows($resultado) < 0) {
+        # code...
         // El IdCliente no existe, primero guardar en la tabla de clientes
         $nombreCliente = $_POST['nombreCliente'];
         $correoCliente = $_POST['correoCliente'];
@@ -176,6 +191,64 @@ function validar_reservas(){
         } else {
             echo "Error al guardar los datos del cliente: " . mysqli_error($conexion);
         }
+    }else{
+
+        $consulta = "INSERT INTO clientes (nombre, correo, celular)
+        VALUES ('$nombre', '$correo', '$celular')";
+        $resultado = mysqli_query($conexion, $consulta);
+        $consulta = "INSERT INTO reservas (cantidadPersonas, fecha, hora, evento, area, descripcion)
+        VALUES ('$cantidadPersonas', '$fecha', '$hora'', '$evento', '$area'', '$descripcion')";
+        $resultado = mysqli_query($conexion, $consulta);
+        header('Location: ../vistas/reservas.php');
+    }
+}
+
+function validar_reservas_normal(){
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+
+    $cantidadPersonas = $_POST['cantidadPersonas'];
+    $fecha = $_POST['fecha'];
+    $hora = $_POST['hora'];
+    $evento = $_POST['evento'];
+    $area = $_POST['area'];
+    $descripcion = $_POST['descripcion'];
+
+    $conexion = $GLOBALS['conex'];
+
+    // Comprueba si el cliente ya existe en la tabla "clientes" basado en el correo.
+    $consulta_cliente_existente = "SELECT IdCliente FROM clientes WHERE correo = ?";
+    $stmt_cliente_existente = mysqli_prepare($conexion, $consulta_cliente_existente);
+    mysqli_stmt_bind_param($stmt_cliente_existente, "s", $correo);
+    mysqli_stmt_execute($stmt_cliente_existente);
+    $resultado_cliente_existente = mysqli_stmt_get_result($stmt_cliente_existente);
+
+    if ($fila = mysqli_fetch_assoc($resultado_cliente_existente)) {
+        // El cliente ya existe en la base de datos, obtenemos su IdCliente.
+        $idCliente = $fila['IdCliente'];
+    } else {
+        // El cliente no existe, lo insertamos en la tabla "clientes".
+        $consulta_insertar_cliente = "INSERT INTO clientes (nombre, correo, celular) VALUES (?, ?, ?)";
+        $stmt_insertar_cliente = mysqli_prepare($conexion, $consulta_insertar_cliente);
+        mysqli_stmt_bind_param($stmt_insertar_cliente, "sss", $nombre, $correo, $celular);
+        mysqli_stmt_execute($stmt_insertar_cliente);
+
+        // Obtenemos el IdCliente recién insertado.
+        $idCliente = mysqli_insert_id($conexion);
+    }
+
+    // Insertamos la información de la reserva en la tabla "reservas" junto con el IdCliente.
+    $consulta_insertar_reserva = "INSERT INTO reservas (IdCliente, cantidadPersonas, fecha, hora, evento, area, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt_insertar_reserva = mysqli_prepare($conexion, $consulta_insertar_reserva);
+    mysqli_stmt_bind_param($stmt_insertar_reserva, "iississ", $idCliente, $cantidadPersonas, $fecha, $hora, $evento, $area, $descripcion);
+    $resultado_insertar_reserva = mysqli_stmt_execute($stmt_insertar_reserva);
+
+    if ($resultado_insertar_reserva) {
+        header('Location: ../vistas/reservas.php');
+    } else {
+        // Manejar el error, redirigir a una página de error, etc.
+        echo "Error al guardar los datos de la reserva.";
     }
 }
 
@@ -301,6 +374,60 @@ function validar_contactos(){
     }
 }
 
+// Función para insertar datos de contacto en la base de datos
+function insertar_contacto($nombre, $correo, $asunto, $mensaje) {
+    $conexion = $GLOBALS['conex'];
+
+    // Verificar si el cliente ya existe en la tabla "clientes" basado en el correo.
+    $consulta_cliente_existente = "SELECT IdCliente FROM clientes WHERE correo = ?";
+    $stmt_cliente_existente = mysqli_prepare($conexion, $consulta_cliente_existente);
+    mysqli_stmt_bind_param($stmt_cliente_existente, "s", $correo);
+    mysqli_stmt_execute($stmt_cliente_existente);
+    $resultado_cliente_existente = mysqli_stmt_get_result($stmt_cliente_existente);
+
+    if ($fila = mysqli_fetch_assoc($resultado_cliente_existente)) {
+        // El cliente ya existe en la base de datos, obtenemos su IdCliente.
+        $idCliente = $fila['IdCliente'];
+    } else {
+        // El cliente no existe, lo insertamos en la tabla "clientes".
+        $consulta_insertar_cliente = "INSERT INTO clientes (nombre, correo) VALUES (?, ?)";
+        $stmt_insertar_cliente = mysqli_prepare($conexion, $consulta_insertar_cliente);
+        mysqli_stmt_bind_param($stmt_insertar_cliente, "ss", $nombre, $correo);
+        mysqli_stmt_execute($stmt_insertar_cliente);
+
+        // Obtenemos el IdCliente recién insertado.
+        $idCliente = mysqli_insert_id($conexion);
+    }
+
+    // Insertar la información del contacto en la tabla "contactos" junto con el IdCliente.
+    $consulta_insertar_contacto = "INSERT INTO contactos (IdCliente, asunto, mensaje) VALUES (?, ?, ?)";
+    $stmt_insertar_contacto = mysqli_prepare($conexion, $consulta_insertar_contacto);
+    mysqli_stmt_bind_param($stmt_insertar_contacto, "iss", $idCliente, $asunto, $mensaje);
+
+    if (mysqli_stmt_execute($stmt_insertar_contacto)) {
+        header('Location: ../vistas/contacto.php'); // Redirige aquí después de guardar los datos
+        exit; 
+
+    } else {
+        return false; // Devuelve falso si hubo un error
+    }
+}
+
+// Procesamiento del formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accion']) && $_POST['accion'] == "validar_contactos_normal") {
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $asunto = $_POST['asunto'];
+    $mensaje = $_POST['mensaje'];
+
+    // Llama a la función insertar_contacto con los datos del formulario
+    if (insertar_contacto($nombre, $correo, $asunto, $mensaje)) {
+        header('Location: ../vistas/contacto.php');
+    } else {
+        echo "Error al guardar los datos del contacto.";
+    }
+}
+
 function eliminar_contactos() {
     if (isset($_POST['id'])) {
         $IdContacto = $_POST['id'];
@@ -333,7 +460,6 @@ function editar_contactos(){
         echo "Error al editar el usuario.";
     }
 }
-
 
 function mostrar_contactos() {
     if (isset($_POST['idContacto'])) {
@@ -472,7 +598,6 @@ function validar_usuarios(){
         header('Location: ../dashboard/usuarios.php');
     }
 }
-
 
 function eliminar_usuario() {
     if (isset($_POST['id'])) {

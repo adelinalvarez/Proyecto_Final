@@ -146,7 +146,7 @@ error_reporting(0);
                             </div>
                             
                             <br>
-                            <input type="hidden" name="accion" value="validar_reservas">
+                            <input type="hidden" name="accion" value="validar_reservas_normal">
                             <button type="submit" class="btn-guardar">Enviar</button>
                         </form>
 

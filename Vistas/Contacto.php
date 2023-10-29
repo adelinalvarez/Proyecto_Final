@@ -114,7 +114,7 @@
 
                             <br>
 
-                            <input type="hidden" name="accion" value="validar_contacto">
+                            <input type="hidden" name="accion" value="insertar_contacto">
                             <button type="submit" class="btn-guardar">Enviar</button>
                         </form> 
                     </div>
