@@ -38,7 +38,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
-
     </head>
 
     <body id="body-pd">
@@ -56,6 +55,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
                         <a href="contactos.php" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
                         <a href="clientes.php" class="nav_link active"> <i class='bx bx-group nav_icon'></i> <span class="nav_name">Clientes</span> </a> 
+                        <a href="ordenes.php" class="nav_link"> <i class='bx bx-cart-add nav_icon'></i> <span class="nav_name">Ordenes</span> </a> 
                     </div>
                 </div>
             </nav>
@@ -119,8 +119,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
         </div>
 
     </body>
-
-    
 
     <script>
         $(document).ready(function() {
