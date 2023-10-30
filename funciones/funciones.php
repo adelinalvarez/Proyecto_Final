@@ -374,7 +374,6 @@ function validar_contactos(){
     }
 }
 
-// Función para insertar datos de contacto en la base de datos
 function insertar_contacto($nombre, $correo, $asunto, $mensaje) {
     $conexion = $GLOBALS['conex'];
 
@@ -413,7 +412,6 @@ function insertar_contacto($nombre, $correo, $asunto, $mensaje) {
     }
 }
 
-// Procesamiento del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['accion']) && $_POST['accion'] == "validar_contactos_normal") {
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
@@ -673,7 +671,7 @@ function validar_productos(){
         $filas = mysqli_fetch_array($resultado);
         $nombre = $filas['nombre'];
 
-        if($filas['nombre'] == $correo){ //admin
+        if($filas['nombre'] == $nombre){ //admin
 
             header('Location: ../dashboard/productos.php'); 
     
@@ -793,3 +791,5 @@ function mostrar_productos() {
         echo "ID del producto no proporcionado";
     }
 }
+
+//casos de ORDENES

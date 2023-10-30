@@ -590,8 +590,8 @@ error_reporting(0);
                         '   <br>'+
                         '   <input id="celular" class="swal2-input css-input" placeholder="Ingrese un celular" value="">'+
                         '   <br>'+
-                        '   <label for="direccion" class="css-label"> Dirección de envio: </label>' +
-                        '   <input id="direccion" class="swal2-input css-input" placeholder="Ingrese su dirección" value="">',
+                        '   <label for="DireccionEnvio" class="css-label"> Dirección de envio: </label>' +
+                        '   <input id="DireccionEnvio" class="swal2-input css-input" placeholder="Ingrese su direccion de envio" value="">',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Revisar compra',
@@ -600,9 +600,9 @@ error_reporting(0);
                         const nombre = document.getElementById("nombre").value;
                         const correo = document.getElementById("correo").value;
                         const celular = document.getElementById("celular").value;
-                        const direccion = document.getElementById("direccion").value;
+                        const DireccionEnvio = document.getElementById("DireccionEnvio").value;
 
-                        if (!nombre || !correo || !celular || !direccion) {
+                        if (!nombre || !correo || !celular || !DireccionEnvio) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             // Realiza la solicitud AJAX para agregar la compra
@@ -613,7 +613,7 @@ error_reporting(0);
                                     nombre: nombre,
                                     correo: correo,
                                     celular: celular,
-                                    direccion: direccion,
+                                    DireccionEnvio: DireccionEnvio,
                                     accion: 'agregar_compra' // Cambia el valor de accion para agregar compra
                                 },
                                 success: function(response) {
