@@ -198,10 +198,10 @@ error_reporting(0);
                                 <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:26rem">
                                     <div class="card-body bg-white border-white">
                                         <img
-                                            src="data:image/jpg;base64, <?php echo base64_encode($fila['imagen'])?>"
+                                            src="../product_images/<?php echo $fila['imagen']?>"
                                             class="card-img-top img-fluid img-fluid"
                                             id="imagen<?php echo $fila['IdProducto']?>"
-                                            style="width: 90%;"
+                                            style="max-width: 300px; max-height: 200px; display: block; margin: 0 auto"
                                         >
                                         <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['IdProducto']?>"><?php echo $fila['nombre']?></h5>
                                         <p class="card-text text-center" id="precio<?php echo $fila['IdProducto']?>">$<?php echo $fila['precio']?></p>
@@ -404,7 +404,7 @@ error_reporting(0);
                     name: name,
                     price: price,
                     quantity: quantity,
-                    image: image
+                    image: image.replace("http://localhost/Proyecto_Final", "..")
                 }
 
                 let lsContent = getLSContent();

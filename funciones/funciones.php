@@ -658,10 +658,14 @@ function validar_productos(){
     $descripcion = $_POST['descripcion'];
     $categoria = $_POST['categoria'];
     $precio = $_POST['precio'];
-    $imagen= addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 
+    $typeImage = exif_imagetype($_FILES["imagen"]["tmp_name"]);
 
-    $conexion = $GLOBALS['conex']; 
+    $name_generated =  generateNameImage($typeImage);
+    move_uploaded_file($_FILES["imagen"]["tmp_name"], '../product_images/' . $name_generated);
+    $imagen = $name_generated;
+
+    $conexion = $GLOBALS['conex'];
     $consulta = "SELECT * FROM productos WHERE nombre ='$nombre'";
     $resultado = mysqli_query($conexion, $consulta);
 
@@ -687,6 +691,37 @@ function validar_productos(){
         $resultado=mysqli_query($conexion, $consulta);
         header('Location: ../dashboard/productos.php');
     }
+}
+
+function generateNameImage($typeImage): string
+{
+    $extensiones = [
+        IMAGETYPE_GIF => '.gif',
+        IMAGETYPE_JPEG => '.jpeg',
+        IMAGETYPE_PNG => '.png',
+        IMAGETYPE_BMP => '.bmp',
+        IMAGETYPE_PSD => '.psd',
+        IMAGETYPE_JPC => '.jpc',
+        IMAGETYPE_JP2 => '.jp2',
+        IMAGETYPE_JPX => '.jpx',
+        IMAGETYPE_JB2 => '.jb2',
+        IMAGETYPE_SWC => '.swc',
+        IMAGETYPE_WBMP => '.wbmp',
+    ];
+
+    $extension = '';
+
+    if (array_key_exists($typeImage, $extensiones)) {
+        $extension = $extensiones[$typeImage];
+    } else {
+       echo 'Extension no soportada';
+    }
+
+    $random_string = bin2hex(random_bytes(8));
+    $current_timestamp = time();
+    $unique_name = $current_timestamp . "_" . $random_string;
+    $unique_name .= $extension;
+    return $unique_name;
 }
 
 function eliminar_productos() {
