@@ -129,30 +129,29 @@ if( $validarusuarios == null || $validarusuarios = ''){
             Swal.fire({
                 title: "Agregar nuevo producto",
                 html: `
-                <form action="../funciones/funciones.php" method="POST" enctype="multipart/form-data">
-                    <div>
-                    <label class="css-label" for="customFile">Agregar imagen</label>
-                    <input type="file" name="imagen" id="imagen" class="css-input" style="display: none;" required />
-                    <input type="file" name="imagen" id="imagen" class="css-input" style="display: block; width: 100%;" />
-                    </div>
-                    <div>
-                    <label for="Nombre" class="css-label"> Nombre: </label>
-                    <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
-                    </div>
-                    <div>
-                    <label for="Descripcion" class="css-label"> Descripcion:</label>
-                    <input type="text" id="descripcion" name="descripcion" class="css-input" style="display: block; width: 100%;" required>
-                    </div>
-                    <div>
-                    <label for "Categoria" class="css-label">Categoria:</label>
-                    <input type="text" id="categoria" name="categoria" class="css-input" style="display: block; width: 100%;" required>
-                    </div>
-                    <div>
-                    <label for="Precio" class="css-label">Precio:</label>
-                    <input type="text" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
-                    </div>
-                    <br>
-                </form>`,
+                    <form action="../funciones/funciones.php" method="POST" enctype="multipart/form-data">
+                        <div class="column">
+                            <label class="css-label" for="customFile">Agregar imagen</label>
+                            <input type="file" name="imagen" id="imagen" class="css-input" style="display: none;" required />
+                            <input type="file" name="imagen" id="imagen" class="css-input" style="display: block; width: 100%;" />
+                            <br>                            
+                            <label for="Nombre" class="css-label"> Nombre: </label>
+                            <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
+                            <br>
+                            <label for "Categoria" class="css-label">Categoria:</label>
+                            <input type="text" id="categoria" name="categoria" class="css-input" style="display: block; width: 100%;" required>
+                            <br>
+                            <label for="Precio" class="css-label">Precio:</label>
+                            <input type="number" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
+                            <br>
+                        </div>
+                        <div class="divider"></div>'
+                        <div class="column">
+                            <label for="Descripcion" class="css-label"> Descripcion:</label>
+                            <textarea id="descripcion" name="descripcion" rows="14"  style="width: 100%;" class="css-input" required> </textarea>
+                        </div>
+                        <br>
+                    </form>`,
                 showCancelButton: true,
                 confirmButtonText: "Agregar",
                 preConfirm: () => {
@@ -362,5 +361,25 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
         });
     </script>
+
+    <style>
+        .column {
+            width: 40%;
+            display: inline-block;
+            vertical-align: top;
+            border-right: 1px solid #ccc; /* Línea divisoria entre las columnas */
+            padding-right: 10px; /* Espacio a la derecha de la línea divisoria */
+        }
+
+        .divider {
+            width: 4%;
+            display: inline-block;
+        }
+
+        /* Establece un ancho personalizado para el modal */
+        .swal2-popup {
+            width: 80%; /* Ancho personalizado */
+        }
+    </style>
 
 </html>
