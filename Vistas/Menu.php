@@ -12,6 +12,7 @@ error_reporting(0);
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
@@ -22,7 +23,6 @@ error_reporting(0);
         <link href="../css/style.css" rel="stylesheet">
         <title>Doña Hilda Tapas and Grill</title>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </head>
@@ -136,7 +136,7 @@ error_reporting(0);
 
         <!-- OffCanvas Cart of Shopping -->
         <div>
-            <div class="offcanvas offcanvas-end" style="width: 500px" tabindex="1000" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas offcanvas-end" style="width: 550px" tabindex="1000" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <h5 id="offcanvasRightLabel">Carrito de Compra</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -178,14 +178,9 @@ error_reporting(0);
         <!-- Navbar -->
         <br>
         <article> 
-
             <div class="container-lg my-15">
-
                 <!-- cards de servicios-->
-
                 <h1 class="focus-in-expand text-center color-white"> Menu </h1>
-
-
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <?php
                     $conexion=$GLOBALS['conex'];
@@ -201,12 +196,13 @@ error_reporting(0);
                                             src="../product_images/<?php echo $fila['imagen']?>"
                                             class="card-img-top img-fluid img-fluid"
                                             id="imagen<?php echo $fila['IdProducto']?>"
-                                            style="max-width: 300px; max-height: 200px; display: block; margin: 0 auto"
+                                            style="max-width: 250px; max-height: 200px; display: block; margin: 0 auto"
                                         >
+                                    </div>
+                                    <div> 
                                         <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['IdProducto']?>"><?php echo $fila['nombre']?></h5>
                                         <p class="card-text text-center" id="precio<?php echo $fila['IdProducto']?>">$<?php echo $fila['precio']?></p>
                                     </div>
-
                                     <div class="d-flex justify-content-center align-items-center p-1">
                                         <button
                                             class="button-count btn"
@@ -264,78 +260,76 @@ error_reporting(0);
                     </div>
               
             </div>
-
             <!-- ======= Footer ======= -->
             <br>
             <!-- Footer -->
-        <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
+            <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
 
-            <!-- Section: Links  -->
-            <section class="">
-                <div class="container text-center text-md-start mt-5" style="color:white">
-                    <!-- Grid row -->
-                    <div class="row mt-3">
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" >
-                            <!-- Content -->
-                            <h6 class="text-uppercase fw-bold mb-4" >
-                                <i class="bi bi-geo-alt icon me-1 text-secondary"></i>Dirección
-                            </h6>
-                            <p>
-                                Santome #49 
-                                Esq. 16 de Agosto, Baní Peravia
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                <!-- Section: Links  -->
+                <section class="">
+                    <div class="container text-center text-md-start mt-5" style="color:white">
+                        <!-- Grid row -->
+                        <div class="row mt-3">
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" >
+                                <!-- Content -->
+                                <h6 class="text-uppercase fw-bold mb-4" >
+                                    <i class="bi bi-geo-alt icon me-1 text-secondary"></i>Dirección
+                                </h6>
+                                <p>
+                                    Santome #49 
+                                    Esq. 16 de Agosto, Baní Peravia
+                                </p>
+                            </div>
+                            <!-- Grid column -->
 
-                        <!-- Grid column -->
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                            <!-- Links -->
-                            
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
-                            </h6>
-                            <p>
-                                Telefono +1 809-522-5146 <br>
-                                Email: Donahildabani@gmail.com                            
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                <!-- Links -->
+                                
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-telephone icon me-3 text-secondary"></i>Reservaciones
+                                </h6>
+                                <p>
+                                    Telefono +1 809-522-5146 <br>
+                                    Email: Donahildabani@gmail.com                            
+                                </p>
+                            </div>
+                            <!-- Grid column -->
 
-                        <!-- Grid column -->
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">
-                                <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
-                            </h6>
-                            <p>
-                            Lunes a Domingos: 8:00AM - 11:00PM
-                            </p>
-                        </div>
-                        <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="bi bi-clock icon me-3 text-secondary"></i>Horarios
+                                </h6>
+                                <p>
+                                Lunes a Domingos: 8:00AM - 11:00PM
+                                </p>
+                            </div>
+                            <!-- Grid column -->
 
-                        <!-- Grid column -->
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
-                            <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
-                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp "></i></a>
+                            <!-- Grid column -->
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
+                                <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
+                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+                                <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp "></i></a>
+                            </div>
+                            <!-- Grid column -->
                         </div>
-                        <!-- Grid column -->
+                        <!-- Grid row -->
                     </div>
-                    <!-- Grid row -->
-                </div>
-            </section>
-            <!-- Section: Links  -->
+                </section>
+                <!-- Section: Links  -->
 
-            <!-- Copyright -->
-            <div class="text-center p-4"  style="color:white">
-                &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
-            </div>
-            <!-- Copyright -->
+                <!-- Copyright -->
+                <div class="text-center p-4"  style="color:white">
+                    &copy; Copyright <strong><span>Doña Hilda Tapas and Grill</span></strong>. All Rights Reserved
+                </div>
+                <!-- Copyright -->
             </footer>
-            <!-- Footer --> 
             <!-- End Footer -->     
         </article>
 
@@ -475,7 +469,7 @@ error_reporting(0);
                                         src="${product.image}"
                                         alt=""
                                         class="card-img"
-                                        style="width: 90px; height: 90px;"
+                                        style="width: 90px; height: 80px;"
                                     >
                                 </td>
                                 <td class="pl-4">
@@ -573,65 +567,6 @@ error_reporting(0);
 
         </script>
 
-        <script>
-            const botonComprar = document.getElementById("boton_comprar");
-            botonComprar.addEventListener("click", function () {
-                Swal.fire({
-                    title: '<h2> Confirmar Compra </h2>',
-                    html:
-                        '   <label for="nombre" class="css-label"> Nombre: </label>' +
-                        '   <input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
-                        '   <br>' +
-                        '   <label for="correo" class="css-label"> Correo: </label>' +
-                        '   <br>'+
-                        '   <input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
-                        '   <br>' +
-                        '   <label for="celular" class="css-label"> Celular: </label>' +
-                        '   <br>'+
-                        '   <input id="celular" class="swal2-input css-input" placeholder="Ingrese un celular" value="">'+
-                        '   <br>'+
-                        '   <label for="DireccionEnvio" class="css-label"> Dirección de envio: </label>' +
-                        '   <input id="DireccionEnvio" class="swal2-input css-input" placeholder="Ingrese su direccion de envio" value="">',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Revisar compra',
-                    confirmButtonText: 'Confirmar compra',
-                    preConfirm: () => {
-                        const nombre = document.getElementById("nombre").value;
-                        const correo = document.getElementById("correo").value;
-                        const celular = document.getElementById("celular").value;
-                        const DireccionEnvio = document.getElementById("DireccionEnvio").value;
 
-                        if (!nombre || !correo || !celular || !DireccionEnvio) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            // Realiza la solicitud AJAX para agregar la compra
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    nombre: nombre,
-                                    correo: correo,
-                                    celular: celular,
-                                    DireccionEnvio: DireccionEnvio,
-                                    accion: 'agregar_compra' // Cambia el valor de accion para agregar compra
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'La compra ha sido registrada.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al registrar la compra: ' + error, 'error');
-                                }
-                            });
-                        }
-                    }
-                });
-            });
-        </script>
-
-  </body>
+    </body>
 </html>
