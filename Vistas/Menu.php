@@ -24,7 +24,6 @@ error_reporting(0);
         <title>Doña Hilda Tapas and Grill</title>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </head>
 
     <body>
@@ -89,7 +88,9 @@ error_reporting(0);
                         <a class="nav-link p-2 EfectoSombra" href="Reservas.php">Reserva</a>
                         <a class="nav-link p-2 EfectoSombra" href="Contacto.php">Contacto</a>
 
-                        <a type="button" href="login.php" style="background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
+                        <a type="button"
+                           href="login.php"
+                           style="text-decoration: none; background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
 
                         <a
                             href="#"
@@ -119,7 +120,7 @@ error_reporting(0);
                 <strong class="me-auto header-toast"></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
             </div>
-            <div class="toast-body toast-body-success">
+            <div class="toast-body toast-body-success alert-success">
                 <p></p>
             </div>
         </div>
@@ -162,7 +163,11 @@ error_reporting(0);
                             <p id="total-price"></p>
                         </div>
                        <div class="d-flex flex-column align-items-center">
-                            <button class="btn btn-primary w-100"
+                            <button
+                                class="btn btn-primary w-100"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                data-bs-whatever="@fat"
                                 type="button"
                                 id="boton_comprar" >
                                 Comprar
@@ -262,6 +267,40 @@ error_reporting(0);
             </div>
             <!-- ======= Footer ======= -->
             <br>
+
+            <!-- ======= Modal ======= -->
+            <div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmar Compra</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                        <br>
+                                        <input type="text" class="css-input" id="recipient-name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label">Message:</label>
+                                        <br>
+                                        <textarea class="css-input" id="message-text"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Footer -->
             <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
 
@@ -489,7 +528,7 @@ error_reporting(0);
                                     </td>
                                 </div>
                                 <td class="pl-3">
-                                    <a href="#" id="${product.id}" class="remove" type="">X</a>
+                                    <a href="#" id="${product.id}" style="text-decoration: none;" class="remove" type="">X</a>
                                 </td>
                             </tr>
                         `
@@ -566,7 +605,6 @@ error_reporting(0);
             }
 
         </script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>
