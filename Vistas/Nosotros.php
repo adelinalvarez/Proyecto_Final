@@ -76,8 +76,8 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-7" style="font-size: 20px">
-                Somos Doña Hilda Tapas and Grill, un rincón culinario situado en el corazón de Baní, República Dominicana, donde convergen los sabores auténticos de la cocina dominicana con influencias españolas. Nuestra historia es una fusión de tradición y pasión por la gastronomía, inspirada por las enseñanzas culinarias de la inolvidable "Doña Hilda". Enclavados en un espacio que ha sido testigo de glorias culinarias pasadas, buscamos revivir y elevar esa tradición. Aquí, no solo ofrecemos deliciosos platillos, sino que brindamos un ambiente cálido y acogedor, donde la comunidad se reúne para compartir, celebrar y disfrutar la herencia culinaria que nos define. Bienvenidos a Doña Hilda, donde la comida se convierte en una experiencia que honra nuestras raíces y crea nuevos recuerdos.
+                <div class="col-7" style="font-size: 20px; text-align: justify">
+                Somos Doña Hilda Tapas and Grill, un rincón culinario situado en el corazón de Baní, República Dominicana, donde convergen los sabores auténticos de la cocina dominicana con influencias españolas. Nuestra historia es una fusión de tradición y pasión por la gastronomía, inspirada por las enseñanzas culinarias de la inolvidable "Doña Hilda". <br> <br> Enclavados en un espacio que ha sido testigo de glorias culinarias pasadas, buscamos revivir y elevar esa tradición. Aquí, no solo ofrecemos deliciosos platillos, sino que brindamos un ambiente cálido y acogedor, donde la comunidad se reúne para compartir, celebrar y disfrutar la herencia culinaria que nos define. Bienvenidos a Doña Hilda, donde la comida se convierte en una experiencia que honra nuestras raíces y crea nuevos recuerdos.
                 </div>
                 <div class="col-5">
                     <img src="../imagenes/Logo.png" height="500" class="animated-image"/>
