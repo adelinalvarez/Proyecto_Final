@@ -77,7 +77,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
-                                            <th>Id categoria</th>
+                                            <th>Id Categoria</th>
                                             <th>Nombre Categoria</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -85,7 +85,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     <tbody>
                                         <?php
                                             $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT categorias.IdCategoria, categoria.NombreCompleto FROM categorias");
+                                            $SQL=mysqli_query($conexion,"SELECT categorias.IdCategoria, categorias.NombreCompleto FROM categorias");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
@@ -259,7 +259,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
                             if (categoriaData) {
                                 // Extract and display user information
-                                const nombre= ccategoriaData.NombreCategoria;
+                                const nombre= categoriaData.NombreCategoria;
 
                                 Swal.update({
                                     title: 'Datos las categorias:',
@@ -283,7 +283,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-del').on('click', function(e){
         e.preventDefault();
-        const IdCliente = $(this).data('id');
+        const IdCategoria = $(this).data('id');
 
         Swal.fire({
             title: '¿Estás seguro de eliminar esta categoria?',
