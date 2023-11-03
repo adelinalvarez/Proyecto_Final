@@ -654,7 +654,7 @@ function validar_productos(){
     $imagen = $_POST['imagen'];
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
-    $categoria = $_POST['categoria'];
+    $NombreCategoria = $_POST['NombreCategoria'];
     $precio = $_POST['precio'];
 
     $typeImage = exif_imagetype($_FILES["imagen"]["tmp_name"]);
@@ -678,14 +678,14 @@ function validar_productos(){
         }else{
 
             $consulta = "INSERT INTO productos (nombre, descripcion, categoria, precio, imagen)
-            VALUES ('$nombre', '$descripcion', '$categoria', '$precio','$imagen')";
+            VALUES ('$nombre', '$descripcion', '$NombreCategoria', '$precio','$imagen')";
             $resultado=mysqli_query($conexion, $consulta);
             header('Location: ../dashboard/productos.php');
     
         }
     } else {
         $consulta = "INSERT INTO productos (nombre, descripcion, categoria, precio, imagen)
-        VALUES ('$nombre', '$descripcion', '$categoria', '$precio','$imagen')";
+        VALUES ('$nombre', '$descripcion', '$NombreCategoria', '$precio','$imagen')";
         $resultado=mysqli_query($conexion, $consulta);
         header('Location: ../dashboard/productos.php');
     }

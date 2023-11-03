@@ -53,6 +53,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <a href="index.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 
                         <a href="usuarios.php" class="nav_link"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span> </a> 
                         <a href="productos.php" class="nav_link active"> <i class='bx bx-restaurant nav_icon'></i> <span class="nav_name">Productos</span> </a> 
+                        <a href="categorias.php" class="nav_link"> <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">Categorias</span> </a> 
                         <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
                         <a href="contactos.php" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contactos</span> </a> 
                         <a href="clientes.php" class="nav_link "> <i class='bx bx-group nav_icon'></i> <span class="nav_name">Clientes</span> </a> 
@@ -139,7 +140,15 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
                             <br>
                             <label for "Categoria" class="css-label">Categoria:</label>
-                            <input type="text" id="categoria" name="categoria" class="css-input" style="display: block; width: 100%;" required>
+                            <select name="NombreCategoria" id="NombreCategoria" class="css-input" style="display: block; width: 100%;" required>
+                                <?php
+                                    $conexion = $GLOBALS['conex'];                
+                                    $SQL = mysqli_query($conexion, "SELECT categorias.NombreCategoria FROM categorias");
+                                    while ($row = mysqli_fetch_assoc($SQL)) {
+                                        echo "<option value='" . $row['NombreCategoria'] . "'>" . $row['NombreCategoria'] . "</option>";
+                                    }
+                                ?>
+                            </select>
                             <br>
                             <label for="Precio" class="css-label">Precio:</label>
                             <input type="number" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
@@ -161,7 +170,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 const nombre = $('#nombre').val();
                 const imagen = $('#imagen').val();
                 const descripcion = $('#descripcion').val();
-                const categoria = $('#categoria').val();
+                const NombreCategoria = $('#NombreCategoria').val();
                 const precio = $('#precio').val();
 
                 
@@ -172,7 +181,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     formData.append('nombre', nombre);
                     formData.append('imagen', imagen);
                     formData.append('descripcion', descripcion);
-                    formData.append('categoria', categoria);
+                    formData.append('NombreCategoria', NombreCategoria);
                     formData.append('precio', precio);
                     formData.append('accion', 'validar_productos');
 
