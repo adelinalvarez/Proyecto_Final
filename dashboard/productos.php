@@ -223,8 +223,16 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <label for="descripcion" class="css-label"> Descripción: </label>
                         <input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripción" value="">
                         <br>
-                        <label for="categoria" class "css-label"> Categoría: </label>
-                        <input id="categoria" class="swal2-input css-input" placeholder="Ingrese la categoría" value="">
+                        <label for="NombreCategoria" class="css-label"> Categoria: </label>
+                        <select name="NombreCategoria" id="NombreCategoria" class="css-input">
+                            <?php
+                                $conexion = $GLOBALS['conex'];                
+                                $SQL = mysqli_query($conexion, "SELECT categorias.NombreCategoria FROM categorias");
+                                while ($row = mysqli_fetch_assoc($SQL)) {
+                                    echo "<option value='" . $row['NombreCategoria'] . "'>" . $row['NombreCategoria'] . "</option>";
+                                }
+                            ?>
+                        </select>
                         <br>
                         <label for="precio" class="css-label"> Precio: </label>
                         <input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="">`,
@@ -234,7 +242,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     preConfirm: () => {
                         const nombre = $('#nombre').val();
                         const descripcion = $('#descripcion').val();
-                        const categoria = $('#categoria').val();
+                        const NombreCategoria = $('#NombreCategoria').val();
                         const precio = $('#precio').val();
 
                         if (!nombre) {
@@ -247,7 +255,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     id: IdProducto,
                                     nombre: nombre,
                                     descripcion: descripcion,
-                                    categoria: categoria,
+                                    NombreCategoria: NombreCategoria,
                                     precio: precio,
                                     accion: 'editar_productos'
                                 },
@@ -280,7 +288,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         if (productoData) {
                             $('#nombre').val(productoData.nombre);
                             $('#descripcion').val(productoData.descripcion);
-                            $('#categoria').val(productoData.categoria);
+                            $('#NombreCategoria').val(productoData.categoria);
                             $('#precio').val(productoData.precio);
                         }
                     },
@@ -312,7 +320,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 title: 'Datos del producto:',
                                 html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
                                        <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
-                                       <p class="css-label">categoria: </p> <p>${productosData.categoria}</p>
+                                       <p class="css-label">categoria: </p> <p>${productosData.NombreCategoria}</p>
                                        <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
                             });
                         } else {

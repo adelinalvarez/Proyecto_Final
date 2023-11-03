@@ -838,15 +838,15 @@ function eliminar_productos() {
 }
 
 function editar_productos() {
-    if (isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['categoria'], $_POST['precio'])) {
+    if (isset($_POST['id'], $_POST['nombre'], $_POST['descripcion'], $_POST['NombreCategoria'], $_POST['precio'])) {
         $IdProducto = $_POST['id'];
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
-        $categoria = $_POST['categoria'];
+        $NombreCategoria = $_POST['NombreCategoria'];
         $precio = $_POST['precio'];
 
         // Validación de datos (puedes personalizar esto según tus requerimientos)
-        if (empty($nombre) || empty($descripcion) || empty($categoria) || empty($precio)) {
+        if (empty($nombre) || empty($descripcion) || empty($NombreCategoria) || empty($precio)) {
             echo "Por favor, completa todos los campos.";
             return;
         }
@@ -857,7 +857,7 @@ function editar_productos() {
         // Consulta preparada para evitar SQL injection
         $actualizacion = "UPDATE productos SET nombre = ?, descripcion = ?, categoria = ?, precio = ? WHERE IdProducto = ?";
         if ($stmt = mysqli_prepare($conexion, $actualizacion)) {
-            mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $descripcion, $categoria, $precio, $IdProducto);
+            mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $descripcion, $NombreCategoria, $precio, $IdProducto);
 
             // Ejecutar la consulta
             if (mysqli_stmt_execute($stmt)) {
