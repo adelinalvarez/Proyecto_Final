@@ -50,7 +50,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 <div>
                     <div class="nav_list"> 
                         <a href="index.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 
-                        <a href="usuarios.php" class="nav_link"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span>  <a href="categorias.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon active'></i> <span class="nav_name">Categorias</span> </a> </a> 
+                        <a href="usuarios.php" class="nav_link"> <i class='bx bx-user-plus nav_icon'></i> <span class="nav_name">Administradores</span> </a> 
                         <a href="productos.php" class="nav_link"> <i class='bx bx-restaurant nav_icon'></i> <span class="nav_name">Productos</span> </a> 
                         <a href="categorias.php" class="nav_link active"> <i class='bx bx-folder-plus nav_icon'></i> <span class="nav_name">Categorias</span> </a> 
                         <a href="reservas.php" class="nav_link"> <i class='bx bx-food-menu nav_icon'></i> <span class="nav_name">Reservas</span> </a> 
@@ -86,7 +86,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     <tbody>
                                         <?php
                                             $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT categorias.IdCategoria, categorias.NombreCompleto FROM categorias");
+                                            $SQL=mysqli_query($conexion,"SELECT categorias.IdCategoria, categorias.NombreCategoria FROM categorias");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
@@ -126,17 +126,13 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Agregar nueva categoria </h2>',
                     html:
-                        '<label for="IdCategoria" class="css-label"> Id Categoria: </label>' +
-                        '<input id="IdCategoria" class="swal2-input css-input" placeholder="Ingrese la categoria" value=""> ' +
-                        '<br>' +
-                        '<label for="NombreCategoria" class="css-label"> Nombre de categoria: </label>' +
-                        '<br>' +
-                        '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value="">',
+                        '<label for="NombreCategoria" class="css-label"> Nombre de la categoria: </label>' +
+                        '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value=""> ' +
+                        '<br>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
-
                         const NombreCategoria = $('#NombreCategoria').val();
 
                         if (!NombreCategoria) {
@@ -146,7 +142,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    NombreCategoria:NombreCategoria,
+                                    NombreCategoria: NombreCategoria,
                                     accion: 'validar_categorias'
                                 },
                                 success: function(response) {
@@ -157,7 +153,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     });
                                 },
                                 error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar la categoria: ' + error, 'error');
+                                    Swal.fire('Error', 'Hubo un error al agregar la nueva categoria: ' + error, 'error');
                                 }
                             });
                         }
@@ -171,44 +167,38 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
-                const IdCliente = $(this).data('id');
+                const IdCategoria = $(this).data('id');
 
                 Swal.fire({
                     title: '<h2> Editar categoria <h2>',
                     html:
-                '<label for="IdCategoria" class="css-label"> Id Categoria: </label>' +
-                '<input id="IdCategoria" class="swal2-input css-input" placeholder="Ingrese la categoria" value="">'+
-                '<br>' +
-                '<label for="NombreCategoria" class="css-label"> Nombre de categoria: </label>' +
-                '<br>' +
-                '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value="">',
+                        '<label for="NombreCategoria" class="css-label"> Nombre de la categoria: </label>' +
+                        '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value=""> ' +
+                        '<br>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
-                        const IdCategoria = $('#IdCategoria').val();
                         const NombreCategoria = $('#NombreCategoria').val();
 
-                        if (!IdCategoria || !NombreCategoria) {
+                        if (!NombreCategoria) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
-
                         } else {
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
-                                data: { 
-                                    IdCategoria: IdCategoria,
-                                    NombreCategoria:NombreCategoria,
+                                data: {
+                                    id: IdCategoria,
+                                    NombreCategoria: NombreCategoria,
                                     accion: 'editar_categorias'
                                 },
-
                                 success: function(response) {
-                                    Swal.fire('Éxito', 'la categoria ha sido actualizada.', 'success').then((result) => {
+                                    Swal.fire('Éxito', 'La categoria ha sido actualizada.', 'success').then((result) => {
                                         if (result.isConfirmed) {
                                             location.reload(); // Recarga la página
                                         }
                                     });
-                                }, 
+                                },
                                 error: function(xhr, status, error) {
                                     Swal.fire('Error', 'Hubo un error al editar la categoria: ' + error, 'error');
                                 }
@@ -216,6 +206,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         }
                     }
                 });
+
                 // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
                 $.ajax({
                     type: "POST",
@@ -225,15 +216,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         accion: 'mostrar_categorias'
                     },
                     success: function(response) {
-                        const categoriaData = JSON.parse(response);
+                        const userData = JSON.parse(response);
 
-                        if (categoriaData) {
-
-                            $('#NombreCategoria').val(categoriaData.NombreCategoria);
+                        if (userData) {
+                            $('#NombreCategoria').val(userData.NombreCategoria);
                         }
-                    }, 
+                    },
                     error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos de las categorias: ' + error, 'error');
+                        Swal.fire('Error', 'Hubo un error al cargar los datos de la categoria: ' + error, 'error');
                     }
                 });
             });
@@ -243,7 +233,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <script>
         $('.btn-view').on('click', function(e) {
             e.preventDefault();
-            const IdCliente = $(this).data('id');
+            const IdCategoria = $(this).data('id');
 
             Swal.fire({
                 didOpen: () => {
@@ -256,22 +246,24 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         },
                         success: function(response) {
                             // Parse the response from the server, assuming it's in JSON format
-                            const categoriaData = JSON.parse(response);
+                            const userData = JSON.parse(response);
 
-                            if (categoriaData) {
+                            if (userData) {
                                 // Extract and display user information
-                                const nombre= categoriaData.NombreCategoria;
+                                const IdCategoria = userData.IdCategoria;
+                                const NombreCategoria = userData.NombreCategoria;
 
                                 Swal.update({
-                                    title: 'Datos las categorias:',
-                                    html: `<p class="css-label">Nomb: </p> <p>${name}</p>`,
+                                    title: 'Datos de la categoria:',
+                                    html: `<p class="css-label">Id Categoria: </p> <p>${IdCategoria}</p>
+                                            <p class="css-label">Nombre Categoria: </p> <p> ${NombreCategoria}</p>`,
                                 });
                             }
                         },
                         error: function(xhr, status, error) {
                             Swal.fire(
                                 'Error',
-                                'Hubo un error al cargar los datos de las categorias: ' + error,
+                                'Hubo un error al cargar los datos del usuario: ' + error,
                                 'error'
                             );
                         }

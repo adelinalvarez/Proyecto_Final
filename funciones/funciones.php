@@ -101,6 +101,22 @@ if (isset($_POST['accion'])){
             );
         break;
 
+        case 'eliminar_categorias';
+            eliminar_categorias();
+        break;
+
+        case 'mostrar_categorias';
+            mostrar_categorias();
+        break;
+
+        case 'editar_categorias';
+            editar_categorias();
+        break;
+
+        case 'validar_categorias';
+            validar_categorias();
+        break;
+
 	}
 
 }
@@ -135,6 +151,89 @@ function acceso_user() {
     } else {
         header("location: ../vistas/login.php?fallo=true");
         session_destroy();
+    }
+}
+
+//casos de CATEGORIAS FUNCIONAN
+
+function eliminar_categorias(){
+    if (isset($_POST['id'])) {
+        $IdCategoria = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "DELETE FROM categorias WHERE IdCategoria = '$IdCategoria'");
+        
+        if ($consulta) {
+            header('Location: ../dashboard/categorias.php');
+        } else {
+            echo "Error al eliminar la categoria";
+        }
+    } else {
+        echo "ID de la categoria no proporcionado";
+    }
+}
+
+function mostrar_categorias() {
+    if (isset($_POST['id'])) {
+        $IdCategoria = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "SELECT IdCategoria, NombreCategoria FROM categorias WHERE IdCategoria = '$IdCategoria'");
+
+        if ($consulta) {
+            $usuario = mysqli_fetch_assoc($consulta);
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            echo json_encode($usuario);
+        } else {
+            echo "Error al obtener los datos de la categoria";
+        }
+    } else {
+        echo "ID de la categoria no proporcionado";
+    }
+}
+
+function editar_categorias(){
+    $IdCategoria = $_POST['id'];
+    $NombreCategoria = $_POST['NombreCategoria'];
+
+
+    $conexion = $GLOBALS['conex'];
+    $actualizacion = "UPDATE categorias SET NombreCategoria = '$NombreCategoria' WHERE IdCategoria = '$IdCategoria'";
+    $resultado_actualizacion = mysqli_query($conexion, $actualizacion);
+
+    if ($resultado_actualizacion) {
+        header('Location: ../dashboard/categorias.php');
+    } else {
+        echo "Error al editar la categoria.";
+    }
+}
+
+function validar_categorias(){
+    $NombreCategoria = $_POST['NombreCategoria'];
+
+    $conexion = $GLOBALS['conex']; 
+    $consulta = "SELECT * FROM categorias WHERE NombreCategoria ='$NombreCategoria'";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $filas = mysqli_fetch_array($resultado);
+        $NombreCategoria = $filas['NombreCategoria'];
+
+        if($filas['NombreCategoria'] == $NombreCategoria){ //admin
+
+            header('Location: ../dashboard/categorias.php'); 
+    
+        }else{
+
+            $consulta = "INSERT INTO categorias (NombreCategoria)
+            VALUES ('$NombreCategoria')";
+            $resultado=mysqli_query($conexion, $consulta);
+            header('Location: ../dashboard/categorias.php');
+    
+        }
+    } else {
+        $consulta = "INSERT INTO categorias (NombreCategoria)
+        VALUES ('$NombreCategoria')";
+        $resultado=mysqli_query($conexion, $consulta);
+        header('Location: ../dashboard/categorias.php');
     }
 }
 
