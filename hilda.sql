@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2023 a las 04:46:51
+-- Tiempo de generación: 04-11-2023 a las 17:06:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -42,9 +42,16 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`IdCliente`, `nombre`, `correo`, `celular`, `direccion`) VALUES
 (1, 'hola', 'hola1@gmail.com', '829-508-2104', 'Bani'),
 (2, 'hola', 'hola1222@gmail.com', '829-508-2104', ''),
-(3, 'nahomi', 'hola3@gmail.com', '829-508-2104', ''),
-(4, 'nahomi3333333', 'hola4@gmail.com', '', ''),
-(5, 'nahomi3333333', 'hola5@gmail.com', '', '');
+(8, 'hola232', 'nahomi232@gmail.com', '829-000-1111', '30 de Mayo'),
+(9, 'nahomi', 'nahomi.nunez@isfodosu.edu.do', '', ''),
+(11, '', '', '', ''),
+(15, 'Veamos condicion', 'veamoscondicion@gmail.com', '', ''),
+(16, 'Adelin', 'adelin80000@gmail.com', '', ''),
+(17, 'Hey probando nuevos campos', 'bdsbd@gmail.com', '823-456-7890', 'Bani'),
+(20, 'holaHECTOR MONGOLO', 'WDJWAGS@gmail.com', '829-508-2104', ''),
+(21, 'jkdbljfhfgmd', 'sfhdss@gmail.com', '', ''),
+(22, 'uhfiusf', 'WDJWAGS@gmail.com	', '', ''),
+(23, 'shdgashdflasjkdbasvhja', 'dvashdl.sjahcWGDHASDQWT@gmail.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -64,7 +71,17 @@ CREATE TABLE `contactos` (
 --
 
 INSERT INTO `contactos` (`IdContacto`, `IdCliente`, `asunto`, `mensaje`) VALUES
-(1, 1, 'Veamos', ' Holaaaaaaaaaaa');
+(13, 11, '11dffrg2', 'dfdffgdf'),
+(16, 15, 'hola', 'dfkusdhfkjsm'),
+(17, 17, 'urgencia32335', 'adelin'),
+(19, 21, 'sdgshg', ' cxhcouhsd'),
+(20, 21, 'sdgshg', ' cxhcouhsd'),
+(21, 22, 'dgiusf', ' zhvshaf'),
+(22, 22, 'ahdgfsd', ' sdygyufsgf'),
+(23, 21, 'ahdgfsd', ' sdygyufsgf'),
+(24, 21, 'ahdgfsd', ' sdygyufsgf'),
+(25, 21, 'ahdgfsd', ' sdygyufsgf'),
+(26, 23, 'sdgasy', ' shsagfha');
 
 -- --------------------------------------------------------
 
@@ -75,6 +92,7 @@ INSERT INTO `contactos` (`IdContacto`, `IdCliente`, `asunto`, `mensaje`) VALUES
 CREATE TABLE `orden` (
   `Id` int(11) NOT NULL,
   `IdCliente` int(11) NOT NULL,
+  `DireccionEnvio` varchar(50) NOT NULL,
   `Fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -100,7 +118,7 @@ CREATE TABLE `ordendetalle` (
 
 CREATE TABLE `productos` (
   `IdProducto` int(11) NOT NULL,
-  `imagen` blob NOT NULL,
+  `imagen` varchar(250) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `categoria` varchar(50) NOT NULL,
@@ -112,7 +130,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`IdProducto`, `imagen`, `nombre`, `descripcion`, `categoria`, `precio`) VALUES
-(1, 0x20, 'hola', 'holaaa', 'Habichuela', 800);
+(13, '1698716772_f3c088d32bd4a56d.jpeg', 'hsvhdhhdafdy', 'HECTOR NO SABE', 'agsahga', 123),
+(14, '1698717231_5ed4d84f05286665.png', '3tr63r3gyfr34h', 'neh34uhefbeh', 'enfefueunj', 5424),
+(17, '1698973983_92f81da447a52d95.jpeg', 'S8SDTWE7WYUDWYD7WY', ' cbzhczb', 'Tapas', 200);
 
 -- --------------------------------------------------------
 
@@ -136,9 +156,10 @@ CREATE TABLE `reservas` (
 --
 
 INSERT INTO `reservas` (`IdReservas`, `IdCliente`, `cantidadPersonas`, `fecha`, `hora`, `evento`, `area`, `descripcion`) VALUES
-(2, 1, 2, '2023-10-27', '04:00 PM', 'Reservar normal', 'Sala VIP', ' Holaaaaaaaaaaaaaa'),
-(4, 2, 2, '2023-10-27', '04:00 PM', 'Reservar normal', 'Sala VIP', ' Holaaaaaaaaaaaaaa'),
-(5, 1, 2, '2023-10-30', '05:00 PM', 'Reservar normal', 'Terraza', ' Holaaaaaaaaaaaa');
+(6, 17, 89, '0000-00-00', '05:00 PM', 'Boda', 'Terraza', ' sdxgfdhd'),
+(7, 17, 743, '2023-10-31', '09:00 PM', 'Reunion', 'Terraza', 'refd'),
+(8, 20, 3, '2023-10-30', '06:00 PM', '0', 'Terraza', ' gshgdahs'),
+(9, 9, 2, '2023-10-31', '03:00 PM', '0', 'Terraza', ' tdyttsesy');
 
 -- --------------------------------------------------------
 
@@ -159,9 +180,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`IdUsuario`, `nombre`, `correo`, `contraseña`) VALUES
 (1, 'Nahomi Nuñez', 'nahomi@gmail.com', '123'),
-(6, 'sgahjsadsdg', 'hola23dfsg4576747@gmail.com', '45gfg364'),
-(7, 'jejeje', 'holaaaaaaaaaaa@gmail.com', 'holaaa'),
-(8, 'sgdfdgdfahjsa', 'hole4534fta234576747@gmail.com', 'veamos2');
+(9, 'parece que ya lo habia puesto', 'hey@gmail.com', '122435');
 
 --
 -- Índices para tablas volcadas
@@ -222,13 +241,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `contactos`
 --
 ALTER TABLE `contactos`
-  MODIFY `IdContacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IdContacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `orden`
@@ -246,19 +265,19 @@ ALTER TABLE `ordendetalle`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IdProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `IdReservas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IdReservas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `IdUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
