@@ -30,6 +30,7 @@
     font-size: 1.5rem;
     cursor: pointer
 }
+
 .header_toggle:hover{
     color: yellow
 }

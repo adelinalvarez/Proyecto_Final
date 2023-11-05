@@ -13,43 +13,59 @@ error_reporting(0);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
         <title>Doña Hilda Tapas and Grill</title>
-
 
     </head>
 
     <body>
 
-    <style>
-        @media (max-width: 576px) {
-            .nav-items-responsive{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
+        <style>
+            @media (max-width: 576px) {
+                .nav-items-responsive{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                }
             }
-        }
 
-        @media (min-width: 992px) {
-            .nav-height{
-                height: 100px;
+            @media (min-width: 992px) {
+                .nav-height{
+                    height: 100px;
+                }
             }
-        }
-    </style>
-    <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 20px 10px; 
-        }
-    </style>
+        </style>
+        <style>
+            table {
+                border-collapse: separate;
+                border-spacing: 20px 10px; 
+            }
+        </style>
+        <style>
+            /* Estilo para la raya de color debajo de la categoría seleccionada */
+            .nav-link.active {
+                border-bottom: 2px solid yellow;
+                color: black;
+            }
+
+            /* Estilo para el contenedor de imágenes */
+            .img-container {
+                height: 150px; /* Establece la altura fija que desees para todas las imágenes */
+                overflow: hidden; /* Para recortar la imagen si es más alta que el contenedor */
+            }
+
+            .img-container img {
+                width: 100%; /* La imagen se ajustará al 100% del contenedor */
+                height: 100%; /* La altura se ajustará automáticamente al tamaño fijo del contenedor */
+            }
+
+        </style>
 
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-black nav-height">
@@ -125,15 +141,15 @@ error_reporting(0);
             </div>
         </div>
 
-    <div class="toast toast-cart-danger alert-danger" role="alert" aria-atomic="true" aria-live="assertive" style="position: fixed; bottom: 50px; right: 50px; z-index: 39">
-        <div class="toast-header toast-header-danger">
-            <strong class="me-auto header-toast"></strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        <div class="toast toast-cart-danger alert-danger" role="alert" aria-atomic="true" aria-live="assertive" style="position: fixed; bottom: 50px; right: 50px; z-index: 39">
+            <div class="toast-header toast-header-danger">
+                <strong class="me-auto header-toast"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body toast-body-danger">
+                <p></p>
+            </div>
         </div>
-        <div class="toast-body toast-body-danger">
-            <p></p>
-        </div>
-    </div>
 
         <!-- OffCanvas Cart of Shopping -->
         <div>
@@ -183,90 +199,104 @@ error_reporting(0);
         <!-- Navbar -->
         <br>
         <article> 
+
             <div class="container-lg my-15">
                 <!-- cards de servicios-->
-                <h1 class="focus-in-expand text-center color-white"> Menu </h1>
-                <div class="row row-cols-1 row-cols-md-3 g-4">
+                <h1 class="focus-in-expand text-center color-white">Menu</h1>
+                <!-- Lista de categorías como opciones de <li> -->
+                <ul class="nav justify-content-center" id="categorias">
                     <?php
-                    $conexion=$GLOBALS['conex'];
-                    $fila = null;
-                    $SQL=mysqli_query($conexion,"SELECT productos.IdProducto, productos.nombre, productos.descripcion, productos.categoria, productos.precio, productos.imagen FROM productos");
+                    $conexion = $GLOBALS['conex'];
+                    $categorias = array();
 
-                    while($fila=mysqli_fetch_assoc($SQL)):
-                        ?>
-                            <div class="col">
-                                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem; height:26rem">
-                                    <div class="card-body bg-white border-white">
-                                        <img
-                                            src="../product_images/<?php echo $fila['imagen']?>"
-                                            class="card-img-top img-fluid img-fluid"
-                                            id="imagen<?php echo $fila['IdProducto']?>"
-                                            style="max-width: 250px; max-height: 200px; display: block; margin: 0 auto"
-                                        >
-                                    </div>
-                                    <div> 
-                                        <h5 class="card-title css-label text-center mt-2" id="nombre<?php echo $fila['IdProducto']?>"><?php echo $fila['nombre']?></h5>
-                                        <p class="card-text text-center" id="precio<?php echo $fila['IdProducto']?>">$<?php echo $fila['precio']?></p>
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center p-1">
-                                        <button
-                                            class="button-count btn"
-                                            style="background-color: #f1e645; color: black;"
-                                            type="button"
-                                            id="button_sum"
-                                            >
-                                            +
-                                        </button>
+                    $SQL = mysqli_query($conexion, "SELECT DISTINCT categoria FROM productos");
+                    while ($fila = mysqli_fetch_assoc($SQL)) {
+                        $categoria = $fila['categoria'];
+                        $categorias[] = $categoria;
+                        echo '<li class="nav-item"> <a class="nav-link focus-in-expand" style="color: black; font-weight: bold; font-size: 18px;"  href="#" data-categoria="' . $categoria . '">' . $categoria . '</a></li>';
+                    }
+                    ?>
+                </ul>
+                <br>
 
-                                        <input
-                                            type="number"
-                                            id="valor<?php echo $fila['IdProducto']?>"
-                                            value="1"
-                                            name="Cantidad"
-                                            class="css-input ml-2 mr-2"
-                                            required
-                                            style="width: 80px"
-                                        />
-
-                                        <button
-                                            class="button-count btn btn-primary"
-                                            style="background-color: #f1e645; color: black;"
-                                            type="button"
-                                            id="boton_restar"
-                                            >
-                                            -
-                                        </button>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <a href="#">
-                                                <img
-                                                    src="../imagenes/Menu/eye.svg"
-                                                    alt="eye"
-                                                    style="width: 40px; height: 40px;"
-                                                    class="ml-2"
-                                                >
-                                            </a>
-                                            <a
-                                                href="#"
-                                                id="carrito-add"
-                                                type="button"
-                                            >
-                                                <img
-                                                    src="../imagenes/Menu/cart-check-fill.svg"
-                                                    style="width: 40px; height: 40px;"
-                                                    alt="cart"
-                                                    id="<?php echo $fila['IdProducto'] ?>"
-                                                >
-                                            </a>
-                                        </div>
-                                    </div>
+                <!-- Contenedor de productos filtrados por categoría -->
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="productos-container">
+                    <?php
+                    $SQL = mysqli_query($conexion, "SELECT productos.IdProducto, productos.nombre, productos.descripcion, productos.categoria, productos.precio, productos.imagen FROM productos");
+                    while ($fila = mysqli_fetch_assoc($SQL)):
+                    ?>
+                    <div class="col producto" data-categoria="<?php echo $fila['categoria'] ?>">
+                        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
+                            <div class="card-body bg-white border-white" style="height: auto;">
+                                <!-- Agrega un contenedor para la imagen con clase "img-container" -->
+                                <div class="img-container">
+                                    <img src="../product_images/<?php echo $fila['imagen'] ?>" class="card-img-top img-fluid" id="imagen<?php echo $fila['IdProducto'] ?>">
                                 </div>
                             </div>
-                    <?php endwhile;?>
+                            <div class="text-center">
+                                <h5 class="card-title css-label mt-2" id="nombre<?php echo $fila['IdProducto'] ?>"><?php echo $fila['nombre'] ?></h5>
+                                <p class="card-text" id="precio<?php echo $fila['IdProducto'] ?>">$<?php echo $fila['precio'] ?></p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button class="button-count btn" style="background-color: #f1e645; color: black;" type="button" id="button_sum">+</button>
+                                <input type="number" id="valor<?php echo $fila['IdProducto'] ?>" value="1" name="Cantidad" class="ml-2 mr-2" required style="width: 40px" disabled>
+                                <button class="button-count btn btn-primary" style="background-color: #f1e645; color: black;" type="button" id="boton_restar">-</button>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <a href="#" class="ml-2">
+                                    <img src="../imagenes/Menu/eye.svg" alt="eye" style="width: 40px; height: 40px;">
+                                </a>
+                                <a href="#" id="carrito-add">
+                                    <img src="../imagenes/Menu/cart-check-fill.svg" style="width: 40px; height: 40px;" alt="cart" id="<?php echo $fila['IdProducto'] ?>">
+                                </a>
+                            </div>
+                        </div>
                     </div>
-              
+                    <?php endwhile; ?>
+                </div>
             </div>
-            <!-- ======= Footer ======= -->
-            <br>
+            
+            <script>
+                // Función para cambiar la categoría y aplicar la clase "active"
+                function cambiarCategoria(event) {
+                    // Elimina la clase "active" de todos los enlaces
+                    const links = document.querySelectorAll("#categorias .nav-link");
+                    links.forEach((link) => link.classList.remove("active"));
+
+                    // Agrega la clase "active" al enlace seleccionado
+                    event.target.classList.add("active");
+
+                    // Aquí puedes agregar el código para cargar y mostrar los productos de la nueva categoría.
+                    // Puedes acceder al valor de data-categoria utilizando event.target.dataset.categoria.
+                    const nuevaCategoria = event.target.dataset.categoria;
+                    // Luego, puedes cargar los productos relacionados con la nueva categoría.
+                }
+
+                // Agrega un evento click a todos los enlaces de categoría
+                const links = document.querySelectorAll("#categorias .nav-link");
+                links.forEach((link) => link.addEventListener("click", cambiarCategoria));
+            </script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const categorias = document.querySelectorAll("#categorias a");
+                    const productos = document.querySelectorAll(".producto");
+
+                    categorias.forEach((categoria) => {
+                        categoria.addEventListener("click", () => {
+                            const categoriaSeleccionada = categoria.getAttribute("data-categoria");
+
+                            productos.forEach((producto) => {
+                                const categoriaProducto = producto.getAttribute("data-categoria");
+                                if (categoriaProducto === categoriaSeleccionada || categoriaSeleccionada === "Todas") {
+                                    producto.style.display = "block";
+                                } else {
+                                    producto.style.display = "none";
+                                }
+                            });
+                        });
+                    });
+                });
+            </script>
 
             <!-- ======= Modal ======= -->
             <div>
@@ -300,10 +330,8 @@ error_reporting(0);
                 </div>
             </div>
 
-
             <!-- Footer -->
             <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
-
                 <!-- Section: Links  -->
                 <section class="">
                     <div class="container text-center text-md-start mt-5" style="color:white">
@@ -401,8 +429,11 @@ error_reporting(0);
             function aumentarValor(event) {
                 const input = document.getElementById(event?.target?.nextElementSibling?.id);
                 let valorActual = parseInt(input.value);
-                valorActual++;
-                input.value = valorActual;
+                
+                if (valorActual < 15) {
+                    valorActual++;
+                    input.value = valorActual;
+                }
             }
 
             function disminuirValor(event) {
@@ -412,7 +443,6 @@ error_reporting(0);
                 valorActual-=1;
                 input.value = valorActual;
             }
-
 
             //Shopping Cart
             buttonAddCart.forEach(function(button) {
@@ -605,6 +635,6 @@ error_reporting(0);
             }
 
         </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </body>
 </html>
