@@ -201,9 +201,7 @@ error_reporting(0);
         <article> 
 
             <div class="container-lg my-15">
-                <!-- cards de servicios-->
                 <h1 class="focus-in-expand text-center color-white">Menu</h1>
-                <!-- Lista de categorías como opciones de <li> -->
                 <ul class="nav justify-content-center" id="categorias">
                     <?php
                     $conexion = $GLOBALS['conex'];
@@ -219,7 +217,6 @@ error_reporting(0);
                 </ul>
                 <br>
 
-                <!-- Contenedor de productos filtrados por categoría -->
                 <div class="row row-cols-1 row-cols-md-3 g-4" id="productos-container">
                     <?php
                     $SQL = mysqli_query($conexion, "SELECT productos.IdProducto, productos.nombre, productos.descripcion, productos.categoria, productos.precio, productos.imagen FROM productos");
@@ -228,7 +225,6 @@ error_reporting(0);
                     <div class="col producto" data-categoria="<?php echo $fila['categoria'] ?>">
                         <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
                             <div class="card-body bg-white border-white" style="height: auto;">
-                                <!-- Agrega un contenedor para la imagen con clase "img-container" -->
                                 <div class="img-container">
                                     <img src="../product_images/<?php echo $fila['imagen'] ?>" class="card-img-top img-fluid" id="imagen<?php echo $fila['IdProducto'] ?>">
                                 </div>
@@ -257,22 +253,15 @@ error_reporting(0);
             </div>
             
             <script>
-                // Función para cambiar la categoría y aplicar la clase "active"
                 function cambiarCategoria(event) {
-                    // Elimina la clase "active" de todos los enlaces
                     const links = document.querySelectorAll("#categorias .nav-link");
                     links.forEach((link) => link.classList.remove("active"));
 
-                    // Agrega la clase "active" al enlace seleccionado
                     event.target.classList.add("active");
 
-                    // Aquí puedes agregar el código para cargar y mostrar los productos de la nueva categoría.
-                    // Puedes acceder al valor de data-categoria utilizando event.target.dataset.categoria.
                     const nuevaCategoria = event.target.dataset.categoria;
-                    // Luego, puedes cargar los productos relacionados con la nueva categoría.
                 }
 
-                // Agrega un evento click a todos los enlaces de categoría
                 const links = document.querySelectorAll("#categorias .nav-link");
                 links.forEach((link) => link.addEventListener("click", cambiarCategoria));
             </script>
