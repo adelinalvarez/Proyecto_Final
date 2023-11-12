@@ -896,3 +896,40 @@ function mostrar_productos() {
 }
 
 //casos de ORDENES
+
+function validar_compras() {
+    $conexion = $GLOBALS['conex'];
+
+    // Verificar si el cliente ya existe en la tabla "clientes" basado en el correo.
+    $consulta_cliente_existente = "SELECT IdCliente FROM clientes WHERE correo = ?";
+    $stmt_cliente_existente = mysqli_prepare($conexion, $consulta_cliente_existente);
+    mysqli_stmt_bind_param($stmt_cliente_existente, "s", $correo);
+    mysqli_stmt_execute($stmt_cliente_existente);
+    $resultado_cliente_existente = mysqli_stmt_get_result($stmt_cliente_existente);
+
+    if ($fila = mysqli_fetch_assoc($resultado_cliente_existente)) {
+        // El cliente ya existe en la base de datos, obtenemos su IdCliente.
+        $idCliente = $fila['IdCliente'];
+    } else {
+        // El cliente no existe, lo insertamos en la tabla "clientes".
+        $consulta_insertar_cliente = "INSERT INTO clientes (nombre, correo, celular) VALUES (?, ?, ?)";
+        $stmt_insertar_cliente = mysqli_prepare($conexion, $consulta_insertar_cliente);
+        mysqli_stmt_bind_param($stmt_insertar_cliente, "ss", $nombre, $correo, $celular);
+        mysqli_stmt_execute($stmt_insertar_cliente);
+
+        // Obtenemos el IdCliente recién insertado.
+        $idCliente = mysqli_insert_id($conexion);
+    }
+
+    $consulta_insertar_contacto = "INSERT INTO orden (IdCliente, DireccionEnvio, Fecha) VALUES (?, ?, ?)";
+    $stmt_insertar_contacto = mysqli_prepare($conexion, $consulta_insertar_contacto);
+    mysqli_stmt_bind_param($stmt_insertar_contacto, "iss", $idCliente, $DireccionEnvio, $Fecha);
+
+    if (mysqli_stmt_execute($stmt_insertar_contacto)) {
+        header('Location: ../vistas/Menu.php'); // Redirige aquí después de guardar los datos
+        exit; 
+
+    } else {
+        return false; // Devuelve falso si hubo un error
+    }
+}

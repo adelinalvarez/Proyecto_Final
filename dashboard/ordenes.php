@@ -69,11 +69,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 <div class="col-lg-10 mx-auto">
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
-                            <div class="text-end mb-3"> 
-                            <a class="btn btn-dark text-white btn-add" href="#">
-                                Agregar nueva orden <i class='bx bxs-user-plus text-white'></i>
-                            </a>
-                            </div>
                             <div class="table-responsive">
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
@@ -102,16 +97,13 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             <td><?php echo $fila['Cantidad']; ?></td>
                                             <td><?php echo $fila['Precio']; ?></td>
                                             <td>
-
                                                 <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdOrden']?>" >
                                                     <i class='bx bxs-user-detail'></i>
                                                 </a>
                                                 <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdOrden']?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
-
                                                 <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdOrden']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            
                                             </td>
                                         </tr>
                                         <?php endwhile;?>
