@@ -117,6 +117,10 @@ if (isset($_POST['accion'])){
             validar_categorias();
         break;
 
+        case 'validar_compras';
+            validar_compras();
+        break;
+
 	}
 
 }

@@ -7,8 +7,8 @@ error_reporting(0);
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
 
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
@@ -17,10 +17,11 @@ error_reporting(0);
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
-        <title>Doña Hilda Tapas and Grill</title>
 
+        <title>Doña Hilda Tapas and Grill</title>
     </head>
 
     <body>
@@ -40,74 +41,52 @@ error_reporting(0);
                     height: 100px;
                 }
             }
-        </style>
-        <style>
-            table {
+
+            .table {
                 border-collapse: separate;
                 border-spacing: 20px 10px; 
             }
-        </style>
-        <style>
-            /* Estilo para la raya de color debajo de la categoría seleccionada */
             .nav-link.active {
                 border-bottom: 2px solid yellow;
                 color: black;
             }
-
-            /* Estilo para el contenedor de imágenes */
             .img-container {
-                height: 150px; /* Establece la altura fija que desees para todas las imágenes */
-                overflow: hidden; /* Para recortar la imagen si es más alta que el contenedor */
+                height: 165px;
+                overflow: hidden; 
             }
-
             .img-container img {
-                width: 100%; /* La imagen se ajustará al 100% del contenedor */
-                height: 100%; /* La altura se ajustará automáticamente al tamaño fijo del contenedor */
+                width: 100%;
+                height: 100%;
             }
-
         </style>
-
-        <!-- Navbar -->
+        
         <nav class="navbar navbar-expand-lg navbar-light bg-black nav-height">
-            <!-- Container wrapper -->
             <div class="container">
-                <!-- Navbar brand -->
-                <a class="navbar-brand me-2" href="../index.php">
-                    <img src="../imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                <a class="navbar-brand me-2" href="../Index.php">
+                    <img src="../imagenes/Logo-Hilda.png" height="40" style="margin-top: -1px;">
                 </a>
-
-                <!-- Toggle button -->
                 <button class="navbar-toggler" 
                     type="button" 
-                    data-mdb-toggle="collapse" 
-                    data-mdb-target="#navbarButtonsExample"
+                    data-toggle="collapse" 
+                    data-target="#navbarButtonsExample"
                     aria-controls="navbarButtonsExample"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
                     <i class="fas fa-bars" style="color:white"></i>
                 </button>
-
-                <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarButtonsExample">
-                    <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link" href="../index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
+                            <a class="nav-link" href="../Index.php" style="color: white">Doña Hilda Tapas and Grill</a>
                         </li>
                     </ul>
-                    <!-- Left links -->
-
                     <div class="d-flex align-items-center justify-content-center w-auto nav-items-responsive">
                         <a class="nav-link p-2 EfectoSombra" href="../Index.php">Inicio</a>
                         <a class="nav-link p-2 EfectoSombra" href="Nosotros.php">Nosotros</a>
                         <a class="nav-link p-2 EfectoSombra" href="Menu.php">Menu</a>
                         <a class="nav-link p-2 EfectoSombra" href="Reservas.php">Reserva</a>
                         <a class="nav-link p-2 EfectoSombra" href="Contacto.php">Contacto</a>
-
-                        <a type="button"
-                           href="login.php"
-                           style="text-decoration: none; background-color:#ffffff; color: black; border-radius: 30px; padding: 08px 10px;"> Iniciar Sesión </a>
-
+                        <a class="BotonIniciar" type="button" href="login.php">Iniciar Sesión</a>
                         <a
                             href="#"
                             type="button"
@@ -123,11 +102,10 @@ error_reporting(0);
                                 class="ml-2"
                             >
                         </a>
+
                     </div>
                 </div>
-                <!-- Collapsible wrapper -->
             </div>
-            <!-- Container wrapper -->
         </nav>
 
         <!-- Toast Message Add Cart -->
@@ -223,7 +201,7 @@ error_reporting(0);
                     while ($fila = mysqli_fetch_assoc($SQL)):
                     ?>
                     <div class="col producto" data-categoria="<?php echo $fila['categoria'] ?>">
-                        <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
                             <div class="card-body bg-white border-white" style="height: auto;">
                                 <div class="img-container">
                                     <img src="../product_images/<?php echo $fila['imagen'] ?>" class="card-img-top img-fluid" id="imagen<?php echo $fila['IdProducto'] ?>">
@@ -294,25 +272,35 @@ error_reporting(0);
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Confirmar Compra</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                <form action="../funciones/funciones.php" method="POST">
+                                    <div>
+                                        <label for="Nombre" class="css-label">Nombre:</label>
                                         <br>
-                                        <input type="text" class="css-input" id="recipient-name">
+                                        <input type="text" class="css-input" id="nombre">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Message:</label>
+                                    <div>
+                                        <label for="correo" class="css-label">Correo:</label>
                                         <br>
-                                        <textarea class="css-input" id="message-text"></textarea>
+                                        <input type="text" class="css-input" id="correo">
                                     </div>
+                                    <div>
+                                        <label for="celular" class="css-label">Celular:</label>
+                                        <br>
+                                        <input type="text" class="css-input" id="celular">
+                                    </div>
+                                    <div>
+                                        <label for="DireccionEnvio" class="css-label">Dirección de Envio:</label>
+                                        <br>
+                                        <input type="text" class="css-input" id="DireccionEnvio">
+                                    </div>
+
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary">Confirmar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
+                                <input type="submit" class="btn btn-primary" value="Confirmar" value="validar_compras">
                             </div>
                         </div>
                     </div>
@@ -625,5 +613,6 @@ error_reporting(0);
 
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     </body>
 </html>
