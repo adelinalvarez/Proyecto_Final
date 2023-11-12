@@ -253,15 +253,16 @@
                         </div>
                         <!-- Grid column -->
 
+                       <!-- Grid column -->
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
+                                <a href="https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook mb-2"><i class="bi bi-facebook text-white"></i></a>
+                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram mb-2"><i class="bi bi-instagram text-white"></i></a>
+                                <a href="https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp text-white"></i></a>
+                            </div>
                         <!-- Grid column -->
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
-                            <a href=" https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook"><i class="bi bi-facebook" ></i></a>
-                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href=" https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp "></i></a>
-                        </div>
-                        <!-- Grid column -->
+
                     </div>
                     <!-- Grid row -->
                 </div>
