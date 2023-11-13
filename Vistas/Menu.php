@@ -275,32 +275,44 @@ error_reporting(0);
                             </div>
                             <div class="modal-body">
                                 <form action="../funciones/funciones.php" method="POST">
-                                    <div>
-                                        <label for="Nombre" class="css-label">Nombre:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="nombre">
-                                    </div>
-                                    <div>
-                                        <label for="correo" class="css-label">Correo:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="correo">
-                                    </div>
-                                    <div>
-                                        <label for="celular" class="css-label">Celular:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="celular">
-                                    </div>
-                                    <div>
-                                        <label for="DireccionEnvio" class="css-label">Dirección de Envio:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="DireccionEnvio">
-                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <label for="DireccionEnvio" class="css-label">Fecha:
+                                                <?php
+                                                    date_default_timezone_set('America/Santo_Domingo');
+                                                    $currentDateTime = new DateTime('now');
+                                                    $currentDate = $currentDateTime->format('d-m-Y h:i:s');
+                                                    echo $currentDate;
+                                                ?>
+                                            </label>
+                                        </div>
+                                        <div class="col-6"> 
+                                            <label for="Nombre" class="css-label">Nombre:</label>
+                                            <br>
+                                            <input type="text" class="css-input" id="nombre">
 
+                                            <label for="correo" class="css-label">Correo:</label>
+                                            <br>
+                                            <input type="text" class="css-input" id="correo">
+
+                                            <label for="celular" class="css-label">Celular:</label>
+                                            <br>
+                                            <input type="text" class="css-input" id="celular">
+
+                                            <label for="DireccionEnvio" class="css-label">Dirección de Envio:</label>
+                                            <br>
+                                            <input type="text" class="css-input" id="DireccionEnvio">
+                                        </div>
+                                        <div class="col-6">
+                                            
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
-                                <input type="submit" class="btn btn-primary" value="Confirmar" value="validar_compras">
+                                <input type="hidden" name="accion" value="validar_compras">
+                                <button type="submit" class="btn btn-primary">Confirmar Compra</button>
                             </div>
                         </div>
                     </div>

@@ -897,6 +897,53 @@ function mostrar_productos() {
 
 //casos de ORDENES
 
+function validar_compras(){
+    $idCliente = $_POST['IdCliente'];
+
+    $conexion = $GLOBALS['conex'];
+
+    $consulta = "SELECT * FROM clientes WHERE IdCliente = $idCliente";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        // El IdCliente existe, guardar en la tabla de ordenDetalle
+        $consultaOrdenDetalle = "INSERT INTO OrdenDetalle (IdCliente) 
+                            VALUES ($idCliente)";
+        $resultadoContacto = mysqli_query($conexion, $consultaOrdenDetalle);
+
+        if ($resultadoContacto) {
+            header('Location: ../vistas/Menu.php');
+        } else {
+            echo "Error al guardar los datos: " . mysqli_error($conexion);
+        }
+    } else {
+        // El IdCliente no existe, primero guardar en la tabla de clientes
+        $nombreCliente = $_POST['nombreCliente'];
+        $correoCliente = $_POST['correoCliente'];
+        $celularCliente = $_POST['celularCliente'];
+        $direccionCliente = $_POST['direccionCliente'];
+
+        $consultaCliente = "INSERT INTO clientes (IdCliente, nombre, correo, celular, direccion) 
+                           VALUES ($idCliente, '$nombreCliente', '$correoCliente', '$celularCliente', '$direccionCliente')";
+        $resultadoCliente = mysqli_query($conexion, $consultaCliente);
+
+        if ($resultadoCliente) {
+            // Luego, guardar en la tabla de contactos
+            $consultaOrdenDetalle = "INSERT INTO contactos (IdCliente, asunto, mensaje) 
+                                VALUES ($idCliente, '$asunto', '$mensaje')";
+            $resultadoContacto = mysqli_query($conexion, $consultaOrdenDetalle);
+
+            if ($resultadoContacto) {
+                header('Location: ../dashboard/contactos.php');
+            } else {
+                echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
+            }
+        } else {
+            echo "Error al guardar los datos del cliente: " . mysqli_error($conexion);
+        }
+    }
+}
+
 function validar_compras() {
     $conexion = $GLOBALS['conex'];
 
