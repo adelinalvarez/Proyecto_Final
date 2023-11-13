@@ -62,59 +62,61 @@ if( $validarusuarios == null || $validarusuarios = ''){
             </nav>
         </div>
         <!--Container Main start-->
-        <div class="height-100 bg-light">
-            <br>
-            <h1 class="text-center color-white"> Categorias </h1>
-            <div class="row py-5">
-                <div class="col-lg-10 mx-auto">
-                    <div class="card rounded shadow border-0"> 
-                        <div class="card-body p-5 bg-white rounded">
-                            <div class="text-end mb-3"> 
-                            <a class="btn btn-dark text-white btn-add" href="#">
-                                Agregar nueva categoria <i class='bx bxs-user-plus text-white'></i>
-                            </a>
-                            </div>
-                            <div class="table-responsive">
-                                <table id="example" style="width:100%" class="table table-striped table-bordered">
-                                    <thead class="text-center" style="background-color: black; color:white;">
-                                        <tr>
-                                            <th>Id Categoria</th>
-                                            <th>Nombre Categoria</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT categorias.IdCategoria, categorias.NombreCategoria FROM categorias");
-                                            while($fila=mysqli_fetch_assoc($SQL)):
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $fila['IdCategoria']; ?></td>
-                                            <td><?php echo $fila['NombreCategoria']; ?></td>
+      <div class="height-100 bg-light">
+    <br>
+    <h1 class="text-center color-white"> Categorias </h1>
+    <div class="row py-5">
+        <div class="col-lg-10 mx-auto">
+            <div class="card rounded shadow border-0"> 
+                <div class="card-body p-5 bg-white rounded">
+                    <div class="text-end mb-3"> 
+                        <a class="btn btn-dark text-white btn-add" href="#">
+                            Agregar nueva categoria <i class='bx bxs-user-plus text-white'></i>
+                        </a>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="example" style="width:100%" class="table table-striped table-bordered">
+                            <thead class="text-center" style="background-color: black; color:white;">
+                                <tr>
+                                    <th>Id Categoria</th>
+                                    <th>Nombre Categoria</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $conexion = $GLOBALS['conex'];
+                                $SQL = mysqli_query($conexion, "SELECT categorias.IdCategoria, categorias.NombreCategoria FROM categorias");
+                                while ($fila = mysqli_fetch_assoc($SQL)) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $fila['IdCategoria']; ?></td>
+                                        <td><?php echo $fila['NombreCategoria']; ?></td>
 
-                                            <td>
+                                        <td class="d-flex align-items-center">
 
-                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCategoria']?>" >
-                                                    <i class='bx bxs-user-detail'></i>
-                                                </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdCategoria']?>">
-                                                    <i class='bx bxs-edit'></i>
-                                                </a>
+                                            <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCategoria'] ?>">
+                                                <i class='bx bxs-user-detail'></i>
+                                            </a>
+                                            <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdCategoria'] ?>">
+                                                <i class='bx bxs-edit'></i>
+                                            </a>
 
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdCategoria']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            
-                                            </td>
-                                        </tr>
-                                        <?php endwhile;?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                            <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdCategoria'] ?>">
+                                                <i class='bx bxs-trash-alt'></i>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
     </body>
 

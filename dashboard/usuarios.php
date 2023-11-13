@@ -70,63 +70,59 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 <div class="col-lg-10 mx-auto">
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
-                            <div class="text-end mb-3"> <!-- Agrega esta línea para alinear a la derecha -->
+                            <div class="text-end mb-3"> 
                             <a class="btn btn-dark text-white btn-add" href="#">
                                 Agregar nuevo usuario <i class='bx bxs-user-plus text-white'></i>
                             </a>
                             </div>
                             <div class="table-responsive">
-                                <table id="example" style="width:100%" class="table table-striped table-bordered">
-                                    <thead class="text-center" style="background-color: black; color:white;">
+                            <table id="example" style="width:100%" class="table table-striped table-bordered">
+                                <thead class="text-center" style="background-color: black; color:white;">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Contraseña</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $conexion = $GLOBALS['conex'];
+                                    $SQL = mysqli_query($conexion, "SELECT usuarios.IdUsuario, usuarios.nombre, usuarios.correo, usuarios.contraseña FROM usuarios");
+                                    while ($fila = mysqli_fetch_assoc($SQL)) :
+                                    ?>
                                         <tr>
-                                            <th>Id Usuario</th>
-                                            <th>Nombre</th>
-                                            <th>Correo</th>
-                                            <th>Contraseña</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT usuarios.IdUsuario, usuarios.nombre, usuarios.correo, usuarios.contraseña FROM usuarios");
-                                            while($fila=mysqli_fetch_assoc($SQL)):
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $fila['IdUsuario']; ?></td>
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['correo']; ?></td>
                                             <td><?php echo $fila['contraseña']; ?></td>
-                                            <td>
-
-                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdUsuario']?>" >
+                                            <td class="text-center align-middle">
+                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdUsuario'] ?>">
                                                     <i class='bx bxs-user-detail'></i>
                                                 </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdUsuario']?>">
+                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdUsuario'] ?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
-
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdUsuario']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            
+                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdUsuario'] ?>">
+                                                    <i class='bx bxs-trash-alt'></i>
+                                                </a>
                                             </td>
+
                                         </tr>
-                                        <?php endwhile;?>
-                                    </tbody>
-                                </table>
+                                    <?php endwhile; ?>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </body>
 
     <script>
-        $(document).ready(function() {
+      $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
                 e.preventDefault();
-
                 Swal.fire({
                     title: '<h2> Agregar nuevo usuario </h2>',
                     html:
@@ -146,9 +142,18 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const nombre = $('#nombre').val();
                         const correo = $('#correo').val();
                         const contraseña = $('#contraseña').val();
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        const nameRegex = /^[a-zA-Z\s]*$/;
 
                         if (!nombre || !correo || !contraseña) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
+                            return false; // Evita que se cierre el modal si falta información
+                        } else if (!emailRegex.test(correo)) {
+                            Swal.showValidationMessage('Formato de correo electrónico no válido');
+                            return false;
+                        } else if (!nameRegex.test(nombre)) {
+                            Swal.showValidationMessage('El nombre solo puede contener letras y espacios');
+                            return false;
                         } else {
                             $.ajax({
                                 type: "POST",
@@ -162,7 +167,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El nuevo usuario ha sido agregado.', 'success').then((result) => {
                                         if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
+                                            location.reload();
                                         }
                                     });
                                 },
@@ -175,10 +180,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 });
             });
         });
+
     </script>
 
     <script>
-        $(document).ready(function() {
+       $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
                 const IdUsuario = $(this).data('id');
@@ -202,9 +208,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const nombre = $('#nombre').val();
                         const correo = $('#correo').val();
                         const contraseña = $('#contraseña').val();
-
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        const nameRegex = /^[a-zA-Z\s]*$/; 
                         if (!nombre || !correo || !contraseña) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
+                        } else if (!emailRegex.test(correo)) {
+                            Swal.showValidationMessage('Formato de correo electrónico no válido');
+                        } else if (!nameRegex.test(nombre)) {
+                            Swal.showValidationMessage('El nombre solo puede contener letras y espacios');
                         } else {
                             $.ajax({
                                 type: "POST",
@@ -219,7 +230,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El usuario ha sido actualizado.', 'success').then((result) => {
                                         if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
+                                            location.reload(); 
                                         }
                                     });
                                 },
@@ -231,7 +242,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     }
                 });
 
-                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
+               
                 $.ajax({
                     type: "POST",
                     url: "../funciones/funciones.php",
@@ -254,6 +265,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 });
             });
         });
+
     </script>
 
     <script>

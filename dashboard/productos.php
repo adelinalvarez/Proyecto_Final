@@ -65,15 +65,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     <div class="card rounded shadow border-0"> 
                         <div class="card-body p-5 bg-white rounded">
                             <div class="text-end mb-3"> 
-                            <a class="btn btn-dark text-white btn-add" href="#">
-                                Agregar nuevo producto <i class='bx bxs-user-plus text-white'></i>
-                            </a>
+                                <a class="btn btn-dark text-white btn-add" href="#">
+                                    Agregar nuevo producto <i class='bx bxs-user-plus text-white'></i>
+                                </a>
                             </div>
                             <div class="table-responsive">
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
-                                            <th>Id Producto</th>
                                             <th>Imagen</th>
                                             <th>Nombre</th>
                                             <th>Descripcion</th>
@@ -89,12 +88,13 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
-                                            <td><?php echo $fila['IdProducto']; ?></td>
                                             <td> <img src="../product_images/<?php echo $fila['imagen']?>" alt="Imagen del producto" style="max-width: 100px;"></td>
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['descripcion']; ?></td>
                                             <td><?php echo $fila['categoria']; ?></td>
-                                            <td><?php echo $fila['precio']; ?></td>
+                                            <td>
+                                                <span><i class='bx bx-dollar'></i></span><?php echo $fila['precio']; ?>
+                                            </td>
                                             <td>
                                                 <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdProducto']?>" >
                                                     <i class='bx bxs-user-detail'></i>
@@ -102,9 +102,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                 <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdProducto']?>">
                                                     <i class='bx bxs-edit'></i>
                                                 </a>
-
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdProducto']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            
+                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdProducto']?>"> 
+                                                    <i class='bx bxs-trash-alt'></i> 
+                                                </a>
                                             </td>
                                         </tr>
                                         <?php endwhile;?>
@@ -117,10 +117,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
             </div>
         </div>
 
+
     </body>
 
     <script>
-        $('.btn-add').on('click', function(e) {
+      $('.btn-add').on('click', function(e) {
             Swal.fire({
                 title: "Agregar nuevo producto",
                 html: `
@@ -145,10 +146,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             </select>
                             <br>
                             <label for="Precio" class="css-label">Precio:</label>
-                            <input type="number" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
+                            <input type="text" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
                             <br>
+                            <p id="errorPrecio" style="color: red;"></p>
                         </div>
-                        <div class="divider"></div>'
+                        <div class="divider"></div>
                         <div class="column">
                             <label for="Descripcion" class="css-label"> Descripcion:</label>
                             <textarea id="descripcion" name="descripcion" rows="14"  style="width: 100%;" class="css-input" required> </textarea>
@@ -158,48 +160,52 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 showCancelButton: true,
                 confirmButtonText: "Agregar",
                 preConfirm: () => {
-                const formData = new FormData(document.querySelector('form'));
-                
-                // Obtiene los valores de nombre, correo y contraseña desde el formulario
-                const nombre = $('#nombre').val();
-                const imagen = $('#imagen').val();
-                const descripcion = $('#descripcion').val();
-                const NombreCategoria = $('#NombreCategoria').val();
-                const precio = $('#precio').val();
+                    const formData = new FormData(document.querySelector('form'));
+                    const nombre = $('#nombre').val();
+                    const imagen = $('#imagen').val();
+                    const descripcion = $('#descripcion').val();
+                    const NombreCategoria = $('#NombreCategoria').val();
+                    const precio = $('#precio').val();
 
-                
-                if (!nombre) {
-                    Swal.showValidationMessage('Por favor, completa todos los campos');
-                } else {
-                    // Agrega los valores al objeto FormData
-                    formData.append('nombre', nombre);
-                    formData.append('imagen', imagen);
-                    formData.append('descripcion', descripcion);
-                    formData.append('NombreCategoria', NombreCategoria);
-                    formData.append('precio', precio);
-                    formData.append('accion', 'validar_productos');
-
-                    $.ajax({
-                    type: "POST",
-                    url: "../funciones/funciones.php",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        Swal.fire('Éxito', 'El nuevo producto ha sido agregado.', 'success').then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload(); // Recarga la página
-                        }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al agregar el producto: ' + error, 'error');
+                    // Verificar si el valor del precio es un número
+                    if (isNaN(precio)) {
+                        $('#errorPrecio').text('Solo se permiten números en el campo de precio.');
+                        return false;
                     }
-                    });
-                }
+
+                    if (!nombre || !precio) {
+                        Swal.showValidationMessage('Por favor, completa todos los campos');
+                    } else {
+                        formData.append('nombre', nombre);
+                        formData.append('imagen', imagen);
+                        formData.append('descripcion', descripcion);
+                        formData.append('NombreCategoria', NombreCategoria);
+                        formData.append('precio', precio);
+                        formData.append('accion', 'validar_productos');
+
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                Swal.fire('Éxito', 'El nuevo producto ha sido agregado.', 'success').then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al agregar el producto: ' + error, 'error');
+                            }
+                        });
+                    }
                 }
             });
         });
+
+
     </script>
 
     <script>
@@ -229,7 +235,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         </select>
                         <br>
                         <label for="precio" class="css-label"> Precio: </label>
-                        <input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="">`,
+                        <input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="" oninput="validatePrecio()">
+                    `,
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
@@ -239,8 +246,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const NombreCategoria = $('#NombreCategoria').val();
                         const precio = $('#precio').val();
 
-                        if (!nombre) {
-                            Swal.showValidationMessage('Por favor, completa el campo de Nombre');
+                        if (!validateNombre(nombre) || !validatePrecio()) {
+                            Swal.showValidationMessage('Por favor, completa el campo de Nombre y asegúrate de ingresar un precio válido.');
+                            return false;
                         } else {
                             $.ajax({
                                 type: "POST",
@@ -292,6 +300,15 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 });
             });
         });
+
+        function validateNombre(nombre) {
+            return nombre.trim() !== '';
+        }
+
+        function validatePrecio() {
+            const precio = $('#precio').val().trim();
+            return /^\d+$/.test(precio); // Devuelve true si el precio es un número entero, de lo contrario, false
+        }
     </script>    
 
     <script>
