@@ -62,7 +62,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
             </nav>
         </div>
         <!--Container Main start-->
-      <div class="height-100 bg-light">
+        <div class="height-100 bg-light">
     <br>
     <h1 class="text-center color-white"> Categorias </h1>
     <div class="row py-5">
@@ -78,7 +78,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         <table id="example" style="width:100%" class="table table-striped table-bordered">
                             <thead class="text-center" style="background-color: black; color:white;">
                                 <tr>
-                                    <th>Id Categoria</th>
                                     <th>Nombre Categoria</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -90,22 +89,17 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 while ($fila = mysqli_fetch_assoc($SQL)) :
                                 ?>
                                     <tr>
-                                        <td><?php echo $fila['IdCategoria']; ?></td>
                                         <td><?php echo $fila['NombreCategoria']; ?></td>
-
-                                        <td class="d-flex align-items-center">
-
+                                        <td class="text-center align-middle">
                                             <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdCategoria'] ?>">
                                                 <i class='bx bxs-user-detail'></i>
                                             </a>
                                             <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdCategoria'] ?>">
                                                 <i class='bx bxs-edit'></i>
                                             </a>
-
                                             <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdCategoria'] ?>">
                                                 <i class='bx bxs-trash-alt'></i>
                                             </a>
-
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -119,118 +113,127 @@ if( $validarusuarios == null || $validarusuarios = ''){
 </div>
 
     </body>
-
     <script>
-        $(document).ready(function() {
-            $('.btn-add').on('click', function(e) {
-                e.preventDefault();
+    $(document).ready(function() {
+        $('.btn-add').on('click', function(e) {
+            e.preventDefault();
 
-                Swal.fire({
-                    title: '<h2> Agregar nueva categoria </h2>',
-                    html:
-                        '<label for="NombreCategoria" class="css-label"> Nombre de la categoria: </label>' +
-                        '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value=""> ' +
-                        '<br>',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                        const NombreCategoria = $('#NombreCategoria').val();
+            Swal.fire({
+                title: '<h2> Agregar nueva categoria </h2>',
+                html:
+                    '<label for="NombreCategoria" class="css-label"> Nombre de la categoria: </label>' +
+                    '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value=""> ' +
+                    '<br>',
+                focusConfirm: false,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                preConfirm: () => {
+                    const NombreCategoria = $('#NombreCategoria').val();
 
-                        if (!NombreCategoria) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    NombreCategoria: NombreCategoria,
-                                    accion: 'validar_categorias'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'La nueva categoria ha sido agregada.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar la nueva categoria: ' + error, 'error');
-                                }
-                            });
-                        }
+                    // Expresión regular para permitir solo letras (puedes ajustarla según tus necesidades)
+                    const soloLetras = /^[A-Za-z\s]+$/;
+
+                    if (!NombreCategoria.match(soloLetras)) {
+                        Swal.showValidationMessage('Por favor, ingresa solo letras en el nombre');
+                        return false;
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                NombreCategoria: NombreCategoria,
+                                accion: 'validar_categorias'
+                            },
+                            success: function(response) {
+                                Swal.fire('Éxito', 'La nueva categoria ha sido agregada.', 'success').then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al agregar la nueva categoria: ' + error, 'error');
+                            }
+                        });
                     }
-                });
+                }
             });
         });
-    </script>
+    });
+</script>
 
-    <script>
-        $(document).ready(function() {
-            $('.btn-edit').on('click', function(e) {
-                e.preventDefault();
-                const IdCategoria = $(this).data('id');
+<script>
+    $(document).ready(function() {
+        $('.btn-edit').on('click', function(e) {
+            e.preventDefault();
+            const IdCategoria = $(this).data('id');
 
-                Swal.fire({
-                    title: '<h2> Editar categoria <h2>',
-                    html:
-                        '<label for="NombreCategoria" class="css-label"> Nombre de la categoria: </label>' +
-                        '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoria" value=""> ' +
-                        '<br>',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                        const NombreCategoria = $('#NombreCategoria').val();
+            Swal.fire({
+                title: '<h2> Editar categoría </h2>',
+                html:
+                    '<label for="NombreCategoria" class="css-label"> Nombre de la categoría: </label>' +
+                    '<input id="NombreCategoria" class="swal2-input css-input" placeholder="Ingrese el nombre de la categoría" value=""> ' +
+                    '<br>',
+                focusConfirm: false,
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                preConfirm: () => {
+                    const NombreCategoria = $('#NombreCategoria').val();
 
-                        if (!NombreCategoria) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    id: IdCategoria,
-                                    NombreCategoria: NombreCategoria,
-                                    accion: 'editar_categorias'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'La categoria ha sido actualizada.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al editar la categoria: ' + error, 'error');
-                                }
-                            });
-                        }
+                    // Expresión regular para permitir solo letras y espacios
+                    const soloLetras = /^[A-Za-z\s]+$/;
+
+                    if (!NombreCategoria.match(soloLetras)) {
+                        Swal.showValidationMessage('Por favor, ingresa solo letras en el nombre de la categoría');
+                        return false;
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                id: IdCategoria,
+                                NombreCategoria: NombreCategoria,
+                                accion: 'editar_categorias'
+                            },
+                            success: function(response) {
+                                Swal.fire('Éxito', 'La categoría ha sido actualizada.', 'success').then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al editar la categoría: ' + error, 'error');
+                            }
+                        });
                     }
-                });
+                }
+            });
 
-                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
-                $.ajax({
-                    type: "POST",
-                    url: "../funciones/funciones.php",
-                    data: {
-                        id: IdCategoria,
-                        accion: 'mostrar_categorias'
-                    },
-                    success: function(response) {
-                        const userData = JSON.parse(response);
+            // Realiza una solicitud AJAX para cargar los datos de la categoría y mostrarlos en el formulario
+            $.ajax({
+                type: "POST",
+                url: "../funciones/funciones.php",
+                data: {
+                    id: IdCategoria,
+                    accion: 'mostrar_categorias'
+                },
+                success: function(response) {
+                    const categoriaData = JSON.parse(response);
 
-                        if (userData) {
-                            $('#NombreCategoria').val(userData.NombreCategoria);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos de la categoria: ' + error, 'error');
+                    if (categoriaData) {
+                        $('#NombreCategoria').val(categoriaData.NombreCategoria);
                     }
-                });
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire('Error', 'Hubo un error al cargar los datos de la categoría: ' + error, 'error');
+                }
             });
         });
-    </script>
+    });
+</script>
+
+
 
     <script>
         $('.btn-view').on('click', function(e) {
