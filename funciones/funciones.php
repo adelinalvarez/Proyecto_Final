@@ -897,86 +897,72 @@ function mostrar_productos() {
 
 //casos de ORDENES
 
-function validar_compras(){
-    $idCliente = $_POST['IdCliente'];
-
-    $conexion = $GLOBALS['conex'];
-
-    $consulta = "SELECT * FROM clientes WHERE IdCliente = $idCliente";
-    $resultado = mysqli_query($conexion, $consulta);
-
-    if ($resultado && mysqli_num_rows($resultado) > 0) {
-        // El IdCliente existe, guardar en la tabla de ordenDetalle
-        $consultaOrdenDetalle = "INSERT INTO OrdenDetalle (IdCliente) 
-                            VALUES ($idCliente)";
-        $resultadoContacto = mysqli_query($conexion, $consultaOrdenDetalle);
-
-        if ($resultadoContacto) {
-            header('Location: ../vistas/Menu.php');
-        } else {
-            echo "Error al guardar los datos: " . mysqli_error($conexion);
-        }
-    } else {
-        // El IdCliente no existe, primero guardar en la tabla de clientes
-        $nombreCliente = $_POST['nombreCliente'];
-        $correoCliente = $_POST['correoCliente'];
-        $celularCliente = $_POST['celularCliente'];
-        $direccionCliente = $_POST['direccionCliente'];
-
-        $consultaCliente = "INSERT INTO clientes (IdCliente, nombre, correo, celular, direccion) 
-                           VALUES ($idCliente, '$nombreCliente', '$correoCliente', '$celularCliente', '$direccionCliente')";
-        $resultadoCliente = mysqli_query($conexion, $consultaCliente);
-
-        if ($resultadoCliente) {
-            // Luego, guardar en la tabla de contactos
-            $consultaOrdenDetalle = "INSERT INTO contactos (IdCliente, asunto, mensaje) 
-                                VALUES ($idCliente, '$asunto', '$mensaje')";
-            $resultadoContacto = mysqli_query($conexion, $consultaOrdenDetalle);
-
-            if ($resultadoContacto) {
-                header('Location: ../dashboard/contactos.php');
-            } else {
-                echo "Error al guardar los datos de contacto: " . mysqli_error($conexion);
-            }
-        } else {
-            echo "Error al guardar los datos del cliente: " . mysqli_error($conexion);
-        }
-    }
-}
-
 function validar_compras() {
     $conexion = $GLOBALS['conex'];
 
-    // Verificar si el cliente ya existe en la tabla "clientes" basado en el correo.
-    $consulta_cliente_existente = "SELECT IdCliente FROM clientes WHERE correo = ?";
-    $stmt_cliente_existente = mysqli_prepare($conexion, $consulta_cliente_existente);
-    mysqli_stmt_bind_param($stmt_cliente_existente, "s", $correo);
-    mysqli_stmt_execute($stmt_cliente_existente);
-    $resultado_cliente_existente = mysqli_stmt_get_result($stmt_cliente_existente);
+    $compra = json_decode($_POST['compra'], true);
 
-    if ($fila = mysqli_fetch_assoc($resultado_cliente_existente)) {
-        // El cliente ya existe en la base de datos, obtenemos su IdCliente.
-        $idCliente = $fila['IdCliente'];
-    } else {
-        // El cliente no existe, lo insertamos en la tabla "clientes".
-        $consulta_insertar_cliente = "INSERT INTO clientes (nombre, correo, celular) VALUES (?, ?, ?)";
-        $stmt_insertar_cliente = mysqli_prepare($conexion, $consulta_insertar_cliente);
-        mysqli_stmt_bind_param($stmt_insertar_cliente, "ss", $nombre, $correo, $celular);
-        mysqli_stmt_execute($stmt_insertar_cliente);
+    $nombre = $_POST['nombre'];
+    $correo = $_POST['correo'];
+    $celular = $_POST['celular'];
+    $direccionEnvio = $_POST['DireccionEnvio'];
+    $fecha = date('Y-m-d H:i:s');
 
-        // Obtenemos el IdCliente recién insertado.
-        $idCliente = mysqli_insert_id($conexion);
-    }
+    $stmt = mysqli_prepare($conexion, "SELECT IdCliente FROM clientes WHERE Correo = ?");
+    mysqli_stmt_bind_param($stmt, 's', $correo);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
 
-    $consulta_insertar_contacto = "INSERT INTO orden (IdCliente, DireccionEnvio, Fecha) VALUES (?, ?, ?)";
-    $stmt_insertar_contacto = mysqli_prepare($conexion, $consulta_insertar_contacto);
-    mysqli_stmt_bind_param($stmt_insertar_contacto, "iss", $idCliente, $DireccionEnvio, $Fecha);
+    if (mysqli_stmt_num_rows($stmt) > 0) {
 
-    if (mysqli_stmt_execute($stmt_insertar_contacto)) {
-        header('Location: ../vistas/Menu.php'); // Redirige aquí después de guardar los datos
-        exit; 
+        mysqli_stmt_bind_result($stmt, $idCliente);
+        mysqli_stmt_fetch($stmt);
+        error_log("Cliente existente, IdCliente: $idCliente");
 
     } else {
-        return false; // Devuelve falso si hubo un error
+
+        $stmt = mysqli_prepare($conexion, "INSERT INTO clientes (Nombre, Correo, Celular) VALUES (?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, 'sss', $nombre, $correo, $celular);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            error_log("Error al insertar nuevo cliente: " . mysqli_error($conexion));
+
+        } else {
+
+            $idCliente = mysqli_insert_id($conexion);
+            error_log("Nuevo cliente creado, IdCliente: $idCliente");
+        }
     }
+
+    $stmt = mysqli_prepare($conexion, "INSERT INTO orden (IdCliente, DireccionEnvio, Fecha) VALUES (?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, 'iss', $idCliente, $direccionEnvio, $fecha);
+
+    if (!mysqli_stmt_execute($stmt)) {
+        error_log("Error al insertar nueva orden: " . mysqli_error($conexion));
+
+    } else {
+        
+        $idOrden = mysqli_insert_id($conexion);
+        error_log("Nueva orden creada, IdOrden: $idOrden");
+
+        foreach ($compra as $producto) {
+            $idProducto = $producto['id'];
+            $cantidad = $producto['cantidad'];
+            $precio = $producto['precio'];
+
+            $stmtDetalle = mysqli_prepare($conexion, "INSERT INTO ordendetalle (IdOrden, IdProducto, Cantidad, Precio) VALUES (?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmtDetalle, 'iiid', $idOrden, $idProducto, $cantidad, $precio);
+
+            if (!mysqli_stmt_execute($stmtDetalle)) {
+                error_log("Error en la consulta preparada de ordendetalle: " . mysqli_error($conexion));
+            }
+
+            mysqli_stmt_close($stmtDetalle);
+        }
+
+        unset($_SESSION['carrito']);
+    }
+
+    header("Location: ../vistas/Menu.php");
+    exit();
 }

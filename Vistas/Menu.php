@@ -157,15 +157,19 @@ error_reporting(0);
                             <p id="total-price"></p>
                         </div>
                        <div class="d-flex flex-column align-items-center">
+                            <!-- Botón Comprar -->
                             <button
                                 class="btn btn-primary w-100"
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
                                 data-bs-whatever="@fat"
                                 type="button"
-                                id="boton_comprar" >
+                                id="boton_comprar"
+                                onclick="prepararCompra()"
+                            >
                                 Comprar
                             </button>
+
                             <br>
                            <a href="#" type="button" id="clear-cart" class="btn btn-primary w-100">Limpiar Carrito</a>
                        </div>
@@ -264,6 +268,7 @@ error_reporting(0);
                     });
                 });
             </script>
+            
 
             <!-- ======= Modal ======= -->
             <div>
@@ -274,10 +279,10 @@ error_reporting(0);
                                 <h5 class="modal-title" id="exampleModalLabel">Confirmar Compra</h5>
                             </div>
                             <div class="modal-body">
-                                <form action="../funciones/funciones.php" method="POST">
+                                <form action="../funciones/funciones.php" method="POST" id="validar_compras">
                                     <div class="row">
                                         <div class="col-12 text-center">
-                                            <label for="DireccionEnvio" class="css-label">Fecha:
+                                            <label for="fecha" class="css-label">Fecha:
                                                 <?php
                                                     date_default_timezone_set('America/Santo_Domingo');
                                                     $currentDateTime = new DateTime('now');
@@ -287,36 +292,37 @@ error_reporting(0);
                                             </label>
                                         </div>
                                         <div class="col-6"> 
-                                            <label for="Nombre" class="css-label">Nombre:</label>
+                                            <label for="nombre" class="css-label">Nombre:</label>
                                             <br>
-                                            <input type="text" class="css-input" id="nombre">
+                                            <input type="text" class="css-input" id="nombre" name="nombre">
 
                                             <label for="correo" class="css-label">Correo:</label>
                                             <br>
-                                            <input type="text" class="css-input" id="correo">
+                                            <input type="text" class="css-input" id="correo" name="correo">
 
                                             <label for="celular" class="css-label">Celular:</label>
                                             <br>
-                                            <input type="text" class="css-input" id="celular">
+                                            <input type="text" class="css-input" id="celular" name="celular">
 
-                                            <label for="DireccionEnvio" class="css-label">Dirección de Envio:</label>
+                                            <label for="DireccionEnvio" class="css-label">Direccion de Envio:</label>
                                             <br>
-                                            <input type="text" class="css-input" id="DireccionEnvio">
+                                            <input type="text" class="css-input" id="DireccionEnvio" name="DireccionEnvio">
                                         </div>
                                         <div class="col-6">
-                                            
+                                            <!-- Puedes agregar más campos aquí si es necesario -->
                                         </div>
                                     </div>
+                                    <input type="hidden" name="accion" value="validar_compras">
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
-                                <input type="hidden" name="accion" value="validar_compras">
-                                <button type="submit" class="btn btn-primary">Confirmar Compra</button>
+                                <button type="submit" class="btn btn-primary" form="validar_compras">Confirmar Compra</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- Footer -->
@@ -625,6 +631,38 @@ error_reporting(0);
 
                 toastList.forEach(toast => toast.show())
             }
+
+            function prepararCompra() {
+                const lsContent = getLSContent();
+                const compra = lsContent.map(producto => {
+                    return {
+                        id: producto.id,
+                        cantidad: producto.quantity,
+                        precio: producto.price
+                    };
+                });
+
+                // Hacer una solicitud AJAX para enviar la información al servidor
+                $.ajax({
+                    type: "POST",
+                    url: "../funciones/funciones.php",  // Asegúrate de proporcionar la ruta correcta al archivo del servidor
+                    data: {
+                        accion: "validar_compras",
+                        compra: JSON.stringify(compra)
+                    },
+                    success: function (response) {
+                        // Manejar la respuesta del servidor si es necesario
+                        console.log(response);
+                        // Después de recibir una respuesta exitosa, puedes redirigir o realizar otras acciones
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+
+
 
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
