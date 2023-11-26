@@ -146,7 +146,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             </select>
                             <br>
                             <label for="Precio" class="css-label">Precio:</label>
-                            <input type="text" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
+                            <input type="number" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
                             <br>
                             <p id="errorPrecio" style="color: red;"></p>
                         </div>
