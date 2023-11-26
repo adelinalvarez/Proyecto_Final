@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="imagenes/Logo.png">
-        
         <!-- carousel -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="css/style.css" rel="stylesheet">
-
         <!-- Link Swiper's CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
-        
         <title>Doña Hilda Tapas and Grill</title>
+        
     </head>
 
     <body>
@@ -33,6 +30,7 @@
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="Index.php">
                     <img src="imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                    <a class="nav-link" href="Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                 </a>
 
                 <!-- Toggle button -->
@@ -51,7 +49,6 @@
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link" href="Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                         </li>
                     </ul>
                     <!-- Left links -->
