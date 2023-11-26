@@ -947,18 +947,18 @@ function validar_compras() {
 
         foreach ($compra as $producto) {
             $idProducto = $producto['id'];
-            $cantidad = $producto['cantidad'];
-            $precio = $producto['precio'];
-
+            $cantidad = $producto['quantity'];
+            $precio = $producto['price'];
+        
             $stmtDetalle = mysqli_prepare($conexion, "INSERT INTO ordendetalle (IdOrden, IdProducto, Cantidad, Precio) VALUES (?, ?, ?, ?)");
             mysqli_stmt_bind_param($stmtDetalle, 'iiid', $idOrden, $idProducto, $cantidad, $precio);
-
+        
             if (!mysqli_stmt_execute($stmtDetalle)) {
                 error_log("Error en la consulta preparada de ordendetalle: " . mysqli_error($conexion));
             }
-
+        
             mysqli_stmt_close($stmtDetalle);
-        }
+        }        
 
         unset($_SESSION['carrito']);
     }

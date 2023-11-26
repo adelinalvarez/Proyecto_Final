@@ -157,7 +157,7 @@ error_reporting(0);
                             <p id="total-price"></p>
                         </div>
                        <div class="d-flex flex-column align-items-center">
-                            <!-- Botón Comprar -->
+
                             <button
                                 class="btn btn-primary w-100"
                                 data-bs-toggle="modal"
@@ -165,11 +165,10 @@ error_reporting(0);
                                 data-bs-whatever="@fat"
                                 type="button"
                                 id="boton_comprar"
-                                onclick="prepararCompra()"
+                                onclick="prepararCompra()" 
                             >
                                 Comprar
                             </button>
-
                             <br>
                            <a href="#" type="button" id="clear-cart" class="btn btn-primary w-100">Limpiar Carrito</a>
                        </div>
@@ -247,6 +246,7 @@ error_reporting(0);
                 const links = document.querySelectorAll("#categorias .nav-link");
                 links.forEach((link) => link.addEventListener("click", cambiarCategoria));
             </script>
+
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     const categorias = document.querySelectorAll("#categorias a");
@@ -269,7 +269,6 @@ error_reporting(0);
                 });
             </script>
             
-
             <!-- ======= Modal ======= -->
             <div>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -279,7 +278,8 @@ error_reporting(0);
                                 <h5 class="modal-title" id="exampleModalLabel">Confirmar Compra</h5>
                             </div>
                             <div class="modal-body">
-                                <form action="../funciones/funciones.php" method="POST" id="validar_compras">
+                                <div id="canva-modal"></div>
+                                <form action="../funciones/funciones.php" method="POST" id="validar_compras" onsubmit="return validar_compras()">
                                     <div class="row">
                                         <div class="col-12 text-center">
                                             <label for="fecha" class="css-label">Fecha:
@@ -309,7 +309,7 @@ error_reporting(0);
                                             <input type="text" class="css-input" id="DireccionEnvio" name="DireccionEnvio">
                                         </div>
                                         <div class="col-6">
-                                            <!-- Puedes agregar más campos aquí si es necesario -->
+
                                         </div>
                                     </div>
                                     <input type="hidden" name="accion" value="validar_compras">
@@ -372,17 +372,14 @@ error_reporting(0);
                             <!-- Grid column -->
 
                             <!-- Grid column -->
-                        <!-- Grid column -->
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
-                            <!-- Links -->
-                            <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
-                            <a href="https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook mb-2"><i class="bi bi-facebook text-white"></i></a>
-                            <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram mb-2"><i class="bi bi-instagram text-white"></i></a>
-                            <a href="https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp text-white"></i></a>
-                        </div>
-                        <!-- Grid column -->
-
-
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">Siguenos</h6>
+                                <a href="https://www.facebook.com/DonaHildaBani?mibextid=ZbWKwL" class="facebook mb-2"><i class="bi bi-facebook text-white"></i></a>
+                                <a href="https://instagram.com/donahildabani?igshid=MmU2YjMzNjRlOQ==" class="instagram mb-2"><i class="bi bi-instagram text-white"></i></a>
+                                <a href="https://api.whatsapp.com/message/XV75XSG4HTO2J1?autoload=1&app_absent=0" class="whatsapp"><i class="bi bi-whatsapp text-white"></i></a>
+                            </div>
+                            <!-- Grid column -->
                         </div>
                         <!-- Grid row -->
                     </div>
@@ -563,7 +560,6 @@ error_reporting(0);
                     }
                 }
 
-
                 tbody[0].innerHTML = productMarkup;
                 removeButtons = document.querySelectorAll(".remove")
                 removeButtons.forEach(function(button) {
@@ -633,38 +629,50 @@ error_reporting(0);
             }
 
             function prepararCompra() {
-                const lsContent = getLSContent();
-                const compra = lsContent.map(producto => {
-                    return {
-                        id: producto.id,
-                        cantidad: producto.quantity,
-                        precio: producto.price
-                    };
-                });
 
-                // Hacer una solicitud AJAX para enviar la información al servidor
-                $.ajax({
-                    type: "POST",
-                    url: "../funciones/funciones.php",  // Asegúrate de proporcionar la ruta correcta al archivo del servidor
-                    data: {
-                        accion: "validar_compras",
-                        compra: JSON.stringify(compra)
-                    },
-                    success: function (response) {
-                        // Manejar la respuesta del servidor si es necesario
-                        console.log(response);
-                        // Después de recibir una respuesta exitosa, puedes redirigir o realizar otras acciones
-                    },
-                    error: function (error) {
-                        console.error('Error:', error);
-                    }
-                });
+                const productosParaCompra = obtenerInformacionProductos();
+                
+                llenarModal(productosParaCompra);
             }
 
+            function obtenerInformacionProductos() {
+                const lsContent = getLSContent();
+                let productosParaCompra = [];
 
+                if (lsContent !== null) {
+                    for (let product of lsContent) {
+                        productosParaCompra.push({
+                            id: product.id,
+                            quantity: product.quantity,
+                            price: product.price
+                        });
+                    }
+                }
 
+                return productosParaCompra;
+            }
+
+            function llenarModal(productosParaCompra) {
+                const canvaModal = document.getElementById('canva-modal');
+                let canvaMarkup = "";
+
+                for (let product of productosParaCompra) {
+                    canvaMarkup += `
+                        
+                    `;
+                }
+
+                canvaModal.innerHTML = canvaMarkup;
+
+                const carritoInput = document.createElement('input');
+                carritoInput.type = 'hidden';
+                carritoInput.name = 'compra';
+                carritoInput.value = JSON.stringify(productosParaCompra);
+                document.getElementById('validar_compras').appendChild(carritoInput);
+            }
 
         </script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     </body>
