@@ -78,7 +78,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
-                                            <th>Id Contacto</th>
                                             <th>Id Cliente</th>
                                             <th>Asunto</th>
                                             <th>Mensaje</th>
@@ -91,23 +90,21 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             $SQL=mysqli_query($conexion,"SELECT contactos.IdContacto, contactos.IdCliente, contactos.asunto, contactos.mensaje FROM contactos");
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
-                                        <tr>
-                                            <td><?php echo $fila['IdContacto']; ?></td>
+                                         <tr>
                                             <td><?php echo $fila['IdCliente']; ?></td>
                                             <td><?php echo $fila['asunto']; ?></td>
                                             <td><?php echo $fila['mensaje']; ?></td>
-                                            <td>
-
-                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdContacto']?>" >
-                                                    <i class='bx bxs-user-detail'></i>
-                                                </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdContacto']?>">
-                                                    <i class='bx bxs-edit'></i>
-                                                </a>
-
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdContacto']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            
-                                            </td>
+                                            <td class="text-center align-middle">
+                                            <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdContacto'] ?>">
+                                                <i class='bx bxs-user-detail'></i>
+                                            </a>
+                                            <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdContacto'] ?>">
+                                                <i class='bx bxs-edit'></i>
+                                            </a>
+                                            <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdContacto'] ?>">
+                                                <i class='bx bxs-trash-alt'></i>
+                                            </a>
+                                        </td>
                                         </tr>
                                         <?php endwhile;?>
                                     </tbody>
@@ -180,7 +177,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             }
                                         });
                                     } else {
-                                        // El IdCliente no existe, mostrar campos de nombre y correo
+                                      
                                         Swal.fire({
                                             title: '<h2> Agregar nuevo cliente </h2>',
                                             html:
@@ -202,7 +199,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                 const celularCliente = $('#celularCliente').val();
                                                 const direccionCliente = $('#direccionCliente').val();
 
-                                                // Continuar con la lógica de guardar el cliente y el contacto
+                                                
                                                 $.ajax({
                                                     type: "POST",
                                                     url: "../funciones/funciones.php",

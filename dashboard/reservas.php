@@ -79,14 +79,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 <table id="example" style="width:100%" class="table table-striped table-bordered">
                                     <thead class="text-center" style="background-color: black; color:white;">
                                         <tr>
-                                        <th>Id Reserva</th>
                                             <th>Id cliente</th>
                                             <th>Cantidad de Personas</th>
                                             <th>Fecha</th>
                                             <th>Hora</th>
                                             <th>Evento</th>
                                             <th>Area</th>
-                                            <th>Descripcion</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -97,24 +95,23 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
-                                            <td><?php echo $fila['IdReservas']; ?></td>
                                             <td><?php echo $fila['IdCliente']; ?></td>
                                             <td><?php echo $fila['cantidadPersonas']; ?></td>
                                             <td><?php echo $fila['fecha']; ?></td>
                                             <td><?php echo $fila['hora']; ?></td>
                                             <td><?php echo $fila['evento']; ?></td>
                                             <td><?php echo $fila['area']; ?></td>
-                                            <td><?php echo $fila['descripcion']; ?></td>
-                                            <td>
-                                                <a class="btn btn-view" href="#" data-id="<?php echo$fila['IdReservas']?>" >
-                                                    <i class='bx bxs-user-detail'></i>
-                                                </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdReservas']?>">
-                                                    <i class='bx bxs-edit'></i>
-                                                </a>
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdReservas']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            
-                                            </td>
+                                            <td class="text-center align-middle">
+                                            <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
+                                                <i class='bx bxs-user-detail'></i>
+                                            </a>
+                                            <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
+                                                <i class='bx bxs-edit'></i>
+                                            </a>
+                                            <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
+                                                <i class='bx bxs-trash-alt'></i>
+                                            </a>
+                                        </td>
                                         </tr>
                                         <?php endwhile;?>
                                     </tbody>
