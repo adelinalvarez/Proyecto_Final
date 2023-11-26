@@ -90,13 +90,13 @@ error_reporting(0);
             <div class="row">
                 <div class="info">
                     <form  action="../funciones/funciones.php" method="POST">
-                        <div class="row">
+                        <div class="row align-items-stretch">
                             <div class="form-group col-md-4">
                                 <label for="nombre" class="css-label"> Nombre Completo:</label>
                                 <input type="text" name="nombre" class="css-input" id="nombre" required Placeholder="Ingrese su nombre">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="correo" class="css-label"> Correo: </label>
+                                <label for="correo" class="css-label"> Correo Electrónico: </label>
                                 <input type="email" class="css-input" name="correo" id="correo" required Placeholder="Ingrese su correo electronico">
                             </div>
                             <div class="form-group col-md-4">

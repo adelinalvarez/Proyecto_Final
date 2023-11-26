@@ -98,7 +98,7 @@ error_reporting(0);
                         <a class="nav-link p-2 EfectoSombra" href="Nosotros.php">Nosotros</a>
                         <a class="nav-link p-2 EfectoSombra" href="Menu.php">Menu</a>
                         <a class="nav-link p-2 EfectoSombra" href="Reservas.php">Reserva</a>
-                        <a class="nav-link p-2 EfectoSombra" href="vistas/Contacto.php">Contacto</a>
+                        <a class="nav-link p-2 EfectoSombra" href="Contacto.php">Contacto</a>
                         <a class="BotonIniciar" type="button" href="login.php"> Iniciar Sesión </a>
                         <a
                             href="#"
