@@ -64,6 +64,7 @@ error_reporting(0);
             <div class="container">
                 <a class="navbar-brand me-2" href="../Index.php">
                     <img src="../imagenes/Logo-Hilda.png" height="40" style="margin-top: -1px;">
+                    <a class="nav-link" href="../Index.php" style="color: white">Doña Hilda Tapas and Grill</a>
                 </a>
                 <button class="navbar-toggler" 
                     type="button" 
@@ -77,7 +78,6 @@ error_reporting(0);
                 <div class="collapse navbar-collapse" id="navbarButtonsExample">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="../Index.php" style="color: white">Doña Hilda Tapas and Grill</a>
                         </li>
                     </ul>
                     <div class="d-flex align-items-center justify-content-center w-auto nav-items-responsive">

@@ -24,6 +24,7 @@
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="../Index.php">
                     <img src="../imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                    <a class="nav-link" href="../Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                 </a>
 
                 <!-- Toggle button -->
@@ -42,7 +43,6 @@
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                        <a class="nav-link" href="../Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                         </li>
                     </ul>
                     <!-- Left links -->
