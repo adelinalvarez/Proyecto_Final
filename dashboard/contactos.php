@@ -127,8 +127,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Agregar nuevo contacto </h2>',
                     html:
-                        '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
-                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<label for="correo" class="css-label">Correo: </label>' +
+                        '<br>' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +
@@ -249,8 +250,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Editar contacto </h2>',
                     html:
-                        '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
-                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<label for="correo" class="css-label">Correo: </label>' +
+                        '<br>' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +

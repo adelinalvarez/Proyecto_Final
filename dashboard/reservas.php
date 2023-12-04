@@ -139,9 +139,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>' +
                         '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
                         '<br>' +
-                        '<label for="IdCliente" class="css-label">IdCliente: </label>' +
+                        '<label for="correo" class="css-label">Correo: </label>' +
                         '<br>' +
-                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
@@ -252,9 +252,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>' +
                         '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
                         '<br>' +
-                        '<label for="IdCliente" class="css-label">IdCliente: </label>' +
+                        '<label for="correo" class="css-label">Correo: </label>' +
                         '<br>' +
-                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="fecha" class="css-label"> Fecha: </label>' +
                         '<br>' +
