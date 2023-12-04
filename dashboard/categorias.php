@@ -43,6 +43,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <div style= "color:white"> <?php echo $_SESSION['correo']; ?></div>
             <div> <a class="header_toggle" href="../funciones/cerrarSesion.php"> <i class='bx bx-log-out'></i> </a> </div>
         </header>
         <div class="l-navbar" id="nav-bar">

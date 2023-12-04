@@ -140,6 +140,7 @@ function acceso_user() {
         $filas = mysqli_fetch_array($resultado);
         $correo = $filas['correo'];
         $contraseña = $filas['contraseña'];
+        $nombre = $filas['nombre'];
 
         $_SESSION['correo'] = $correo;
 
