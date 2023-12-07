@@ -43,6 +43,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
     <body id="body-pd">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <div style= "color:white"> <?php echo $_SESSION['correo']; ?></div>
             <div> <a class="header_toggle" href="../funciones/cerrarSesion.php"> <i class='bx bx-log-out'></i> </a> </div>
         </header>
         <div class="l-navbar" id="nav-bar">
@@ -126,8 +127,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Agregar nuevo contacto </h2>',
                     html:
-                        '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
-                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<label for="correo" class="css-label">Correo: </label>' +
+                        '<br>' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +
@@ -248,8 +250,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: '<h2> Editar contacto </h2>',
                     html:
-                        '<label for="IdCliente" class="css-label"> Id Cliente: </label>' +
-                        '<input id="IdCliente" class="swal2-input css-input" placeholder="Ingrese el IdCliente" value=""> ' +
+                        '<label for="correo" class="css-label">Correo: </label>' +
+                        '<br>' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
                         '<br>' +
                         '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +

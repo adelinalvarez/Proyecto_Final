@@ -23,6 +23,7 @@ error_reporting(0);
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
+
         <!-- Link Swiper's CSS -->
         <title>Doña Hilda Tapas and Grill</title>
 
@@ -35,13 +36,11 @@ error_reporting(0);
                     flex-direction: column;
                 }
             }
-
             @media (min-width: 992px) {
                 .nav-height{
                     height: 100px;
                 }
             }
-
             .table {
                 border-collapse: separate;
                 border-spacing: 20px 10px; 
@@ -231,7 +230,12 @@ error_reporting(0);
                             <button class="button-count btn btn-primary" style="background-color: #f1e645; color: black;" type="button" id="boton_restar">-</button>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="ml-2">
+                            <a
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#MostrarModal"
+                                    data-id="<?php echo $fila['IdProducto']?>"  
+                                    href="#"                                  
+                                >
                                 <img src="../imagenes/Menu/eye.svg" alt="eye" style="width: 40px; height: 40px;">
                             </a>
                             <a href="#" id="carrito-add">
@@ -280,7 +284,7 @@ error_reporting(0);
             });
         </script>
         
-        <!-- ======= Modal ======= -->
+        <!-- ======= Modal Ordenar ======= -->
         <div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -325,6 +329,49 @@ error_reporting(0);
                                 </div>
                                 <input type="hidden" name="accion" value="validar_compras">
                             </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
+                            <button type="submit" class="btn btn-primary" form="validar_compras">Confirmar Compra</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="modal fade" id="MostrarModal" tabindex="-1" aria-labelledby="MostrarModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="MostrarModalLabel">Detalles del producto</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div id="canva-modal"></div>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <label for="producto" class="css-label">Producto</label>
+                                    <br>
+
+                                    <label for="nombre" class="css-label">Nombre:</label>
+                                    <br>
+
+                                    <label for="descripcion" class="css-label">Descripción:</label>
+                                    <br>
+
+                                    <label for="categoria" class="css-label">Categoria:</label>
+                                    <br>
+
+                                    <label for="precio" class="css-label">Precio:</label>
+                                    <br>
+                                </div>
+                                
+                                <div class="col-6">
+
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
@@ -682,9 +729,26 @@ error_reporting(0);
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script>
+            function openModal(id) {
+            var modal = document.getElementById('mostrar');
+            modal.style.display = 'block';
+            // Puedes personalizar el contenido del modal según el ID pasado
+            }
 
-    
+            function closeModal() {
+            var modal = document.getElementById('mostrar');
+            modal.style.display = 'none';
+            }
+
+            document.querySelector('.open-modal').addEventListener('click', function(e) {
+            e.preventDefault();
+            var productId = this.getAttribute('data-id');
+            openModal(productId);
+            });
+        </script>
         
     </body>
+
 </html>
 
