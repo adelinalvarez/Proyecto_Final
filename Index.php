@@ -5,7 +5,7 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="imagenes/Logo.png">
+        <link rel="icon" href="imagenes/Logo.webp">
         <!-- carousel -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
@@ -29,7 +29,7 @@
             <div class="container">
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="Index.php">
-                    <img src="imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                    <img src="imagenes/Logo-Hilda.webp" height="40"style="margin-top: -1px;"/>
                     <a class="nav-link" href="Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                 </a>
 
@@ -73,13 +73,13 @@
                 <a class="BotonEnlaces nosotros-index" type="button" href="vistas/nosotros.php">Conocenos</a>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="imagenes/Local/Privado4.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <img src="imagenes/Local/Privado4.webp" class="d-block w-100 img-fluid" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="imagenes/Local/Hilda_Express1.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <img src="imagenes/Local/Hilda_Express1.webp" class="d-block w-100 img-fluid" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="imagenes/Local/BarAmplia1.jpg" class="d-block w-100 img-fluid" alt="...">
+                        <img src="imagenes/Local/BarAmplia1.webp" class="d-block w-100 img-fluid" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -101,16 +101,16 @@
             <h1 class="focus-in-expand text-center"> ¡Revisa nuestro menu! </h1>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="imagenes/Comida/Penne_ala_marinera.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide selected-slide"><img src="imagenes/Comida/Pollo_relleno.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Candita_de_lambi.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mofonguitos.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/filete2.jpg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mariscos.jpeg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Carbonada.jpg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Canasticas1.jpg" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mofongo.jpg" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Penne_ala_marinera.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide selected-slide"><img src="imagenes/Comida/Pollo_relleno.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Candita_de_lambi.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mofonguitos.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/filete2.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mariscos.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Carbonada.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Canasticas1.webp" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="imagenes/Comida/Mofongo.webp" class="img-fluid" alt=""></div>
                 </div>
                 <br>
                 <br>
@@ -140,7 +140,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <img src="imagenes/reservar3.png" class="img-fluid" alt="">
+                            <img src="imagenes/Local/Privado2.webp" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>

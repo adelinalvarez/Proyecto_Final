@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../imagenes/Logo.png">
+        <link rel="icon" href="../imagenes/Logo.webp">
 
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
@@ -23,7 +23,7 @@
             <div class="container">
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="../Index.php">
-                    <img src="../imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                    <img src="../imagenes/Logo-Hilda.webp" height="40"style="margin-top: -1px;"/>
                     <a class="nav-link" href="../Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                 </a>
 
