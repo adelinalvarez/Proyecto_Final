@@ -2,7 +2,6 @@
 <html lang="en">
 
     <head>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="imagenes/Logo.webp">
@@ -19,7 +18,6 @@
         <!-- Link Swiper's CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
         <title>Doña Hilda Tapas and Grill</title>
-        
     </head>
 
     <body>
@@ -91,36 +89,68 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        <!-- End Carousel -->
+                <main>
+                    <section class="section slider-section">
+                    <div class="container slider-column">
+                    <h1 class="focus-in-expand text-center"> ¡Revisa nuestro menu! </h1>
+                            <div class="swiper swiper-slider">
+                                <div class="swiper-wrapper">
+                                    <img class="swiper-slide" src="imagenes/Comida/Penne_ala_marinera.webp" alt="Swiper" style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Mero.webp" alt="Swiper" style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Candita_de_lambi.webp" alt="Swiper" style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Mofonguitos.webp" alt="Swiper" style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/filete2.webp" alt="Swiper" style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Mariscos.webp" alt="Swiper"  style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Carbonada.webp" alt="Swiper"  style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Canasticas1.webp" alt="Swiper"  style="max-width: 100%; height: auto; max-height: 250px;">
+                                    <img class="swiper-slide" src="imagenes/Comida/Mofongo.webp" alt="Swiper"  style="max-width: 100%; height: auto; max-height: 250px;">
+                                </div>
+                                <br>
+                                    <div class="swiper-pagination"></div>
+                                <br> 
+                            </div>
+                            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                                <a class="BotonEnlaces" type="button" href="vistas/menu.php"> Ver menu </a>
+                            </div>
+                            <br>
+                    </div>
+                    </section>
+                </main>
 
-
-        
-        <!-- Swiper -->
-        <br>
-        <div class="container" data-aos="fade-up">
-            <h1 class="focus-in-expand text-center"> ¡Revisa nuestro menu! </h1>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="imagenes/Comida/Penne_ala_marinera.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mero.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide selected-slide"><img src="imagenes/Comida/Pollo_relleno.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Candita_de_lambi.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mofonguitos.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/filete2.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mariscos.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Carbonada.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Canasticas1.webp" class="img-fluid" alt=""></div>
-                    <div class="swiper-slide"><img src="imagenes/Comida/Mofongo.webp" class="img-fluid" alt=""></div>
-                </div>
-                <br>
-                <br>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-                <a class="BotonEnlaces" type="button" href="vistas/menu.php"> Ver menu </a>
-            </div>
-            <br>
-        </div>
+        <!-- Enlaza la librería de Swiper -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+            <script>
+                const swiper = new Swiper(".swiper-slider", {
+                centeredSlides: true,
+                slidesPerView: 1,
+                grabCursor: true,
+                freeMode: false,
+                loop: true,
+                mousewheel: false,
+                keyboard: {
+                    enabled: true
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    dynamicBullets: false,
+                    clickable: true
+                },
+                breakpoints: {
+                    640: {
+                    slidesPerView: 1.25,
+                    spaceBetween: 20
+                    },
+                    1024: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                    }
+                }
+                });
+            </script>
 
             <div style="background-color: black; color:white">
                 <div class="container text-center">
@@ -140,13 +170,12 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <img src="imagenes/Local/Privado2.webp" class="img-fluid" alt="">
+                            <img src="imagenes/Local/Privado2.webp" class="img-fluid mb-3 rounded" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-        <div>
-
+        
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
@@ -154,53 +183,25 @@
                         <h1 class="focus-in-expand text-center color-white"> ¡Contáctate con nosotros!</h1>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-5">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15154.1395834592!2d-70.3335576!3d18.2771309!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea54f0ac5c34d01%3A0x6f86dcf823593705!2sDo%C3%B1a%20Hilda%20Tapas%20%26%20Grill!5e0!3m2!1ses!2sdo!4v1695340721703!5m2!1ses!2sdo" frameborder="0" style="border:0; width: 100%; height: 290px; border-radius: 15px;" allowfullscreen></iframe>
                     </div>
+
                     <div class="col-md-7" style="font-size: 40px">
-                        <br>
-                        Estamos Ubicados en la calle Santome, esquina 16 de agosto.
-                        <br>
-                        Baní Provincia Peravia.
                         <div style="font-size: 15px">
                             <br>
                             <a class="BotonEnlaces" type="button" href="vistas/contacto.php"> Contáctate Ahora </a>
                         </div>
+                        <p style="color: black;">
+                            Estamos Ubicados en la calle Santome, esquina 16 de agosto.
+                            Baní, provincia Peravia.
+                        </p>
                     </div>
                 </div>
             </div>
             <br>
-
-        <!-- Swiper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
-        <!-- Initialize Swiper -->
-        <script>
-            var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 5,
-            spaceBetween: 10,
-            freeMode: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            on: {
-                slideChange: function () {
-                    var slides = document.querySelectorAll('.swiper-slide');
-                    slides.forEach(function(slide) {
-                        slide.classList.remove('selected-slide');
-                    });
-                    
-                    // Añade la clase 'selected-slide' a la diapositiva en el centro de la vista
-                    var centerIndex = Math.floor(swiper.realIndex) + 2;
-                    slides[centerIndex].classList.add('selected-slide');
-                },
-            },
-        });
-
-        </script>
-
 
         <!-- Footer -->
         <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
