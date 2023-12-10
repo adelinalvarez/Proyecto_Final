@@ -274,122 +274,122 @@ error_reporting(0);
             });
         </script>
         
-        <div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirmar Compra</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div id="canva-modal"></div>
-                            <form action="../funciones/funciones.php" method="POST" id="validar_compras" onsubmit="return validar_compras()">
-                                <div class="row">
-                                    <div class="col-12 text-center">
-                                        <label for="fecha" class="css-label">Fecha:
-                                            <?php
-                                                date_default_timezone_set('America/Santo_Domingo');
-                                                $currentDateTime = new DateTime('now');
-                                                $currentDate = $currentDateTime->format('d-m-Y h:i:s');
-                                                echo $currentDate;
-                                            ?>
-                                        </label>
-                                    </div>
-                                    <div class="col-6"> 
-                                        <label for="nombre" class="css-label">Nombre:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="nombre" name="nombre">
-
-                                        <label for="correo" class="css-label">Correo:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="correo" name="correo">
-
-                                        <label for="celular" class="css-label">Celular:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="celular" name="celular">
-
-                                        <label for="DireccionEnvio" class="css-label">Direccion de Envio:</label>
-                                        <br>
-                                        <input type="text" class="css-input" id="DireccionEnvio" name="DireccionEnvio">
-                                    </div>
-                                    <div class="col-6">
-
-                                    </div>
-                                </div>
-                                <input type="hidden" name="accion" value="validar_compras">
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
-                            <button type="submit" class="btn btn-primary" form="validar_compras">Confirmar Compra</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
+                <div class="modal-content" style="border-radius: 15px; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);">
+                    <div class="modal-header" style="background-color: #f8f673; border-radius: 15px 15px 0 0;">
+                        <h5 class="modal-title text-center text-dark" id="exampleModalLabel" style="font-size: 24px;">Confirmar Compra</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+                        <div id="canva-modal"></div>
+                        <form action="../funciones/funciones.php" method="POST" id="validar_compras" onsubmit="return validar_compras()">
+                            <div class="row">
+                                <div class="col-12 text-center mb-3">
+                                    <label for="fecha" class="css-label">Fecha:
+                                        <?php
+                                            date_default_timezone_set('America/Santo_Domingo');
+                                            $currentDateTime = new DateTime('now');
+                                            $currentDate = $currentDateTime->format('d-m-Y h:i:s');
+                                            echo $currentDate;
+                                        ?>
+                                    </label>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <!-- Labels e Inputs -->
+                                        <label for="nombre" class="css-label">Nombre:</label>
+                                        <input type="text" class="form-control border border-dark" style="border-radius: 0.1;" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+" title="Ingrese solo letras y espacios" placeholder="Ingrese su nombre completo" id="nombre" name="nombre" required>
 
-                    <div class="modal-body" id="detalleProductoBody">
+                                        <label for="correo" class="css-label">Correo:</label>
+                                        <input type="email" class="form-control border border-dark" style="border-radius: 0.1;" placeholder="Ingrese su correo" id="correo" name="correo" required>
 
+                                        <label for="celular" class="css-label">Celular:</label>
+                                        <input type="tel" class="form-control border border-dark" style="border-radius: 0.1;" pattern="[0-9]+" title="Ingrese solo números" placeholder="Ingrese su Celular" id="celular" name="celular" required>
+
+                                        <label for="DireccionEnvio" class="css-label">Direccion de Envio:</label>
+                                        <textarea class="form-control border border-dark" style="border-radius: 0.1;" placeholder="Dirección de Envío" id="DireccionEnvio" name="DireccionEnvio" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="accion" value="validar_compras">
+                        </form>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <div class="modal-footer d-flex justify-content-center" style="border-radius: 0 0 15px 15px;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #f8f673; color: #000;">Ver Carrito</button>
+                        <button type="submit" class="btn btn-primary" form="validar_compras" style="background-color: #f8f673; color: #000;">Confirmar Compra</button>
                     </div>
-
                 </div>
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            var myModal = new bootstrap.Modal(document.getElementById('detalleProductoModal'));
+        
 
-            document.querySelectorAll('.mostrar-producto').forEach(function (boton) {
-                boton.addEventListener('click', function () {
-                    var idProducto = this.getAttribute('data-producto-id');
+        <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-                    fetch('../funciones/funciones.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: new URLSearchParams({
-                            'id': idProducto
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            console.error('Error en la respuesta del servidor:', data.error);
-                        } else {
-                            var detalleProductoHTML = `
-                                <p><strong>ID:</strong> ${data.IdProducto}</p>
-                                <p><strong>Nombre:</strong> ${data.nombre}</p>
-                                <p><strong>Descripción:</strong> ${data.descripcion}</p>
-                                <p><strong>Categoría:</strong> ${data.categoria}</p>
-                                <p><strong>Precio:</strong> ${data.precio}</p>
-                            `;
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-                            document.getElementById('detalleProductoBody').innerHTML = detalleProductoHTML;
-                            myModal.show();
-                        }
-                    })
-                    .catch(error => console.error('Error en la solicitud:', error));
-                });
+            <div class="modal-body" id="detalleProductoBody">
+                <img id="imagenProducto" src="" alt="Imagen del producto" style="max-width: 100%; height: auto;">
+                <p><strong>ID:</strong> <span id="idProducto"></span></p>
+                <p><strong>Nombre:</strong> <span id="nombreProducto"></span></p>
+                <p><strong>Descripción:</strong> <span id="descripcionProducto"></span></p>
+                <p><strong>Categoría:</strong> <span id="categoriaProducto"></span></p>
+                <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var myModal = new bootstrap.Modal(document.getElementById('detalleProductoModal'));
+
+        document.querySelectorAll('.mostrar-producto').forEach(function (boton) {
+            boton.addEventListener('click', function () {
+                var idProducto = this.getAttribute('data-producto-id');
+
+                fetch('../funciones/funciones.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'id': idProducto
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Error en la respuesta del servidor:', data.error);
+                    } else {
+                        document.getElementById('idProducto').innerText = data.IdProducto;
+                        document.getElementById('nombreProducto').innerText = data.nombre;
+                        document.getElementById('descripcionProducto').innerText = data.descripcion;
+                        document.getElementById('categoriaProducto').innerText = data.categoria;
+                        document.getElementById('precioProducto').innerText = data.precio;
+
+                        document.getElementById('imagenProducto').src = data.imagen;
+                        myModal.show();
+                    }
+                })
+                .catch(error => console.error('Error en la solicitud:', error));
             });
         });
-        </script>
+    });
+</script>
+
 
         <!-- Footer -->
         <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
