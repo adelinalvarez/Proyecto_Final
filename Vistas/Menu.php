@@ -9,24 +9,18 @@ error_reporting(0);
 <html lang="en">
 
     <head>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
-        <!-- carousel -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
-
-        <!-- Link Swiper's CSS -->
         <title>Doña Hilda Tapas and Grill</title>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <style>
             @media (max-width: 576px) {
                 .nav-items-responsive{
@@ -230,14 +224,10 @@ error_reporting(0);
                             <button class="button-count btn btn-primary" style="background-color: #f1e645; color: black;" type="button" id="boton_restar">-</button>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <a
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#MostrarModal"
-                                    data-id="<?php echo $fila['IdProducto']?>"  
-                                    href="#"                                  
-                                >
-                                <img src="../imagenes/Menu/eye.svg" alt="eye" style="width: 40px; height: 40px;">
+                            <a href="#" class="mostrar-producto" data-bs-toggle="modal" data-bs-target="#detalleProductoModal" data-producto-id="<?php echo $fila['IdProducto']; ?>">
+                                <img src="../imagenes/Menu/eye.svg" style="width: 40px; height: 40px;" alt="cart">
                             </a>
+
                             <a href="#" id="carrito-add">
                                 <img src="../imagenes/Menu/cart-check-fill.svg" style="width: 40px; height: 40px;" alt="cart" id="<?php echo $fila['IdProducto'] ?>">
                             </a>
@@ -284,7 +274,6 @@ error_reporting(0);
             });
         </script>
         
-        <!-- ======= Modal Ordenar ======= -->
         <div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -340,48 +329,67 @@ error_reporting(0);
 
         </div>
 
-        <div>
-            <div class="modal fade" id="MostrarModal" tabindex="-1" aria-labelledby="MostrarModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="MostrarModalLabel">Detalles del producto</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div id="canva-modal"></div>
+        <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <label for="producto" class="css-label">Producto</label>
-                                    <br>
-
-                                    <label for="nombre" class="css-label">Nombre:</label>
-                                    <br>
-
-                                    <label for="descripcion" class="css-label">Descripción:</label>
-                                    <br>
-
-                                    <label for="categoria" class="css-label">Categoria:</label>
-                                    <br>
-
-                                    <label for="precio" class="css-label">Precio:</label>
-                                    <br>
-                                </div>
-                                
-                                <div class="col-6">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ver Carrito</button>
-                            <button type="submit" class="btn btn-primary" form="validar_compras">Confirmar Compra</button>
-                        </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
+                    <div class="modal-body" id="detalleProductoBody">
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+
                 </div>
             </div>
-
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            var myModal = new bootstrap.Modal(document.getElementById('detalleProductoModal'));
+
+            document.querySelectorAll('.mostrar-producto').forEach(function (boton) {
+                boton.addEventListener('click', function () {
+                    var idProducto = this.getAttribute('data-producto-id');
+
+                    fetch('../funciones/funciones.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                            'id': idProducto
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error('Error en la respuesta del servidor:', data.error);
+                        } else {
+                            var detalleProductoHTML = `
+                                <p><strong>ID:</strong> ${data.IdProducto}</p>
+                                <p><strong>Nombre:</strong> ${data.nombre}</p>
+                                <p><strong>Descripción:</strong> ${data.descripcion}</p>
+                                <p><strong>Categoría:</strong> ${data.categoria}</p>
+                                <p><strong>Precio:</strong> ${data.precio}</p>
+                            `;
+
+                            document.getElementById('detalleProductoBody').innerHTML = detalleProductoHTML;
+                            myModal.show();
+                        }
+                    })
+                    .catch(error => console.error('Error en la solicitud:', error));
+                });
+            });
+        });
+        </script>
 
         <!-- Footer -->
         <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
@@ -749,6 +757,61 @@ error_reporting(0);
         </script>
         
     </body>
+
+    <script>
+        $(document).ready(function () {
+            $('.btn-view').on('click', function () {
+                const IdProducto = $(this).data('id');
+
+                $.ajax({
+                    type: "POST",
+                    url: "../funciones/funciones.php", // Cambia esto a la ruta correcta
+                    data: {
+                        id: IdProducto,
+                        accion: 'mostrar_productos'
+                    },
+                    success: function (response) {
+                        const productosData = JSON.parse(response);
+
+                        if (productosData) {
+                            Swal.fire({
+                                title: 'Datos del producto:',
+                                html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
+                                       <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
+                                       <p class="css-label">categoria: </p> <p>${productosData.NombreCategoria}</p>
+                                       <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
+                            });
+                        } else {
+                            Swal.fire('Error', 'No se pudo cargar los datos del producto', 'error');
+                        }
+                    },
+                    error: function () {
+                        Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                    }
+                });
+            });
+        });
+    </script>
+
+<style>
+        .column {
+            width: 40%;
+            display: inline-block;
+            vertical-align: top;
+            border-right: 1px solid #ccc; /* Línea divisoria entre las columnas */
+            padding-right: 10px; /* Espacio a la derecha de la línea divisoria */
+        }
+
+        .divider {
+            width: 4%;
+            display: inline-block;
+        }
+
+        /* Establece un ancho personalizado para el modal */
+        .swal2-popup {
+            width: 80%; /* Ancho personalizado */
+        }
+    </style>
 
 </html>
 

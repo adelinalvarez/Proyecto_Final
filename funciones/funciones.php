@@ -880,6 +880,8 @@ function editar_productos() {
 }
 
 function mostrar_productos() {
+    header('Content-Type: application/json'); // Asegurarse de que el contenido se interprete como JSON
+
     if (isset($_POST['id'])) {
         $IdProducto = $_POST['id'];
         $conexion = $GLOBALS['conex'];
@@ -887,13 +889,23 @@ function mostrar_productos() {
 
         if ($consulta) {
             $producto = mysqli_fetch_assoc($consulta);
-            echo json_encode($producto);
+            if ($producto) {
+                echo json_encode($producto);
+            } else {
+                echo json_encode(["error" => "No se encontraron datos para el ID del producto proporcionado."]);
+            }
         } else {
-            echo "Error en la consulta SQL";
+            echo json_encode(["error" => "Error en la consulta SQL: " . mysqli_error($conexion)]);
         }
     } else {
-        echo "ID del producto no proporcionado";
+        echo json_encode(["error" => "ID del producto no proporcionado"]);
     }
+}
+
+// Llamar a la función si se está haciendo una solicitud POST para mostrar los detalles del producto
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    mostrar_productos();
+    exit(); // Asegurarse de que no haya más salida después de la respuesta JSON
 }
 
 //casos de ORDENES
