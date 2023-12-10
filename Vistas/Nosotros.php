@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../imagenes/Logo.png">
+        <link rel="icon" href="../imagenes/Logo.webp">
 
         <!-- Bootstrap 4 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -38,7 +38,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-black nav-height">
             <div class="container">
                 <a class="navbar-brand me-2" href="../Index.php">
-                    <img src="../imagenes/Logo-Hilda.png" height="40" style="margin-top: -1px;">
+                    <img src="../imagenes/Logo-Hilda.webp" height="40" style="margin-top: -1px;">
                     <a class="nav-link" href="../Index.php" style="color: white">Doña Hilda Tapas and Grill</a>
                 </a>
                 <button class="navbar-toggler" 
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-md-5 col-12">
                     <!-- Imagen -->
-                    <img src="../imagenes/Logo.png" height="500" class="animated-image img-fluid" alt="Logo">
+                    <img src="../imagenes/Logo.webp" height="500" class="animated-image img-fluid" alt="Logo">
                 </div>
             </div>
         </div>
@@ -102,47 +102,47 @@
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Privado2.jpg" class="card-img-top" alt="Imagen 1">
+                            <img src="../imagenes/Local/Privado2.webp" class="card-img-top" alt="Imagen 1">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Salon_Vip.jpg" class="card-img-top" alt="Imagen 2">
+                            <img src="../imagenes/Local/Salon_Vip3.webp" class="card-img-top" alt="Imagen 2">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Hilda_Express12.jpg" class="card-img-top" alt="Imagen 3">
+                            <img src="../imagenes/Local/Hilda_Express12.webp" class="card-img-top" alt="Imagen 3">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Terraza_Mural1.jpg" class="card-img-top" alt="Imagen 5">
+                            <img src="../imagenes/Local/Terraza_Mural1.webp" class="card-img-top" alt="Imagen 5">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Terraza4.jpg" class="card-img-top" alt="Imagen 6">
+                            <img src="../imagenes/Local/Terraza4.webp" class="card-img-top" alt="Imagen 6">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Bar3.jpg" class="card-img-top" alt="Imagen 4">
+                            <img src="../imagenes/Local/Bar3.webp" class="card-img-top" alt="Imagen 4">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Terraza3.jpg" class="card-img-top" alt="Imagen 7">
+                            <img src="../imagenes/Local/Terraza3.webp" class="card-img-top" alt="Imagen 7">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Local2.jpg" class="card-img-top" alt="Imagen 8">
+                            <img src="../imagenes/Local/Local2.webp" class="card-img-top" alt="Imagen 8">
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
                         <div class="custom-card">
-                            <img src="../imagenes/Local/Local_por_fuera.jpg" class="card-img-top" alt="Imagen 9">
+                            <img src="../imagenes/Local/Local_por_fuera.webp" class="card-img-top" alt="Imagen 9">
                         </div>
                     </div>
                 </div>

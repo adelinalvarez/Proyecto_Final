@@ -7,7 +7,7 @@ error_reporting(0);
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="../imagenes/Logo.png">
+        <link rel="icon" href="../imagenes/Logo.webp">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../css/style.css" rel="stylesheet">
         <title>Login - Doña Hilda Tapas and Grill</title>
@@ -18,7 +18,7 @@ error_reporting(0);
         <div class="contenedor container-fluid d-flex justify-content-center">
             <div class="login-container">
                 <a href="../index.php">
-                    <img src="../imagenes/Logo.png" width="100px" alt="">
+                    <img src="../imagenes/Logo.webp" width="100px" alt="">
                 </a>
                 <h2>Iniciar Sesión</h2>
                 <form action="../funciones/funciones.php" method="POST" >

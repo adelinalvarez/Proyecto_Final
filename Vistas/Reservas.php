@@ -9,7 +9,7 @@ error_reporting(0);
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="../imagenes/Logo.png">
+        <link rel="icon" href="../imagenes/Logo.webp">
 
         <!-- MDB - Nav -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
@@ -44,7 +44,7 @@ error_reporting(0);
             <div class="container">
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="../Index.php">
-                    <img src="../imagenes/Logo-Hilda.png" height="40"style="margin-top: -1px;"/>
+                    <img src="../imagenes/Logo-Hilda.webp" height="40"style="margin-top: -1px;"/>
                     <a class="nav-link" href="../Index.php" style= "color: white">Doña Hilda Tapas and Grill</a>
                 </a>
 
@@ -95,23 +95,27 @@ error_reporting(0);
                                 <label for="nombre" class="css-label"> Nombre Completo:</label>
                                 <input type="text" name="nombre" class="css-input" id="nombre" required Placeholder="Ingrese su nombre">
                             </div>
+
                             <div class="form-group col-md-4">
                                 <label for="correo" class="css-label"> Correo Electrónico: </label>
-                                <input type="email" class="css-input" name="correo" id="correo" required Placeholder="Ingrese su correo electronico">
+                                <input type="email" class="css-input" name="correo" id="correo" required Placeholder="Ingrese su correo electrónico" title="Por favor, incluya el símbolo '@' en su dirección de correo">
                             </div>
+
                             <div class="form-group col-md-4">
                                 <label for="celular" class="css-label"> Celular: </label>
-                                <input type="text" class="css-input" name="celular" id="celular" required  Placeholder="Ingresar numero de celular">
+                                <input type="text" class="css-input" name="celular" id="celular" required pattern="[0-9-]+" Placeholder="Ingresar número de celular" title="Por favor, ingrese solo números y guiones">
                             </div>
+
                             <div class="form-group col-md-4">
                                 <label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>
-                                <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required  Placeholder="Ingresar cantidad de personas">
+                                <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required min="1" max="50" Placeholder="Ingresar cantidad de personas">
                             </div>
+
                             <div class="form-group col-md-4">
-                                <label for="fecha" class="css-label"> Fecha: </label>
-                                <input type="date" class="css-input" name="fecha" id="fecha" required  Placeholder="dd/mm/aa">
-                                
+                            <label for="fecha" class="css-label"> Fecha: </label>
+                                <input type="date" class="css-input" name="fecha" id="fecha" required min="<?php echo date('Y-m-d'); ?>" Placeholder="dd/mm/aa">
                             </div>
+
                             <div class="form-group col-md-4">
                                 <label for="hora" class="css-label"> Hora: </label>
                                 <select class=" css-input" name="hora" id="hora" required>
@@ -130,8 +134,8 @@ error_reporting(0);
                                     <option value="09:00 PM">09:00 PM </option >
                                     <option value="10:00 PM">10:00 PM </option >
                                 </select>
-
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="evento" class="css-label"> Tipo de Evento: </label>
                                 <br>
@@ -144,6 +148,7 @@ error_reporting(0);
                                     <option value="Reunion">Otro</option >
                                 </select>
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="area" class="css-label"> Area de reservacion: </label>
                                 <br>
@@ -151,19 +156,20 @@ error_reporting(0);
                                     <option value="">Seleccione area de reservacion</option>
                                     <option value="Sala VIP" >Sala VIP </option>
                                     <option value="Terraza">Terraza</option>
-
                                 </select>
                             </div>
+
                             <div class="form-group col-md-12">
                                 <label for="descripcion" class="css-label"> Descripcion de la reservacion</label>
                                 <br>
-                                <textarea id="descripcion" name="descripcion" rows="10"  style="width: 100%;" class="css-input" required> </textarea>
+                                <textarea id="descripcion" name="descripcion" rows="10" style="width: 100%;" class="css-input" required placeholder="Ingrese detalles adicionales sobre la reserva"></textarea>
                                 <br>
                             </div>
                             
                             <br>
                             <input type="hidden" name="accion" value="validar_reservas_normal">
-                            <button type="submit" class="btn-guardar">Enviar</button>
+                            <button type="submit" class="btn-guardar" onclick="enviarPorWhatsApp()">Enviar</button>
+   
                         </form>
 
                      </div>
@@ -172,6 +178,48 @@ error_reporting(0);
             </div>
             <br>
         </div>
+        <script>
+            function enviarPorWhatsApp() {
+                // Obtener los valores del formulario de reservas
+                const nombre = document.getElementById('nombre').value;
+                const correo = document.getElementById('correo').value;
+                const celular = document.getElementById('celular').value;
+                const cantidadPersonas = document.getElementById('cantidadPersonas').value;
+                const fecha = document.getElementById('fecha').value;
+                const hora = document.getElementById('hora').value;
+                const evento = document.getElementById('evento').value;
+                const area = document.getElementById('area').value;
+                const descripcion = document.getElementById('descripcion').value;
+
+                // Crear el mensaje con los datos del formulario de reservas
+                const mensajeWhatsApp = `Nueva reserva:
+                Nombre: ${nombre}
+                Correo: ${correo}
+                Celular: ${celular}
+                Cantidad de Personas: ${cantidadPersonas}
+                Fecha: ${fecha}
+                Hora: ${hora}
+                Tipo de Evento: ${evento}
+                Área de Reservación: ${area}
+                Descripción: ${descripcion}`;
+
+                // Codificar el mensaje para ser parte del enlace de WhatsApp
+                const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+
+                // Crear el enlace de WhatsApp con el mensaje
+                const enlaceWhatsApp = `https://wa.me/+18295330410?text=${mensajeCodificado}`;
+
+                // Abrir una nueva ventana para redirigir a WhatsApp
+                window.open(enlaceWhatsApp, '_blank');
+            } else {
+            // Mostrar un mensaje de error o tomar alguna acción adicional si no se llenaron todos los campos
+            alert('Por favor, completa todos los campos obligatorios antes de enviar la reserva.');
+        
+            }
+        </script>
+
+
+
 
             <!-- Footer -->
             <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
