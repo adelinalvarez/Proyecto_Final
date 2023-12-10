@@ -20,7 +20,6 @@ error_reporting(0);
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
         <title>Doña Hilda Tapas and Grill</title>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <style>
             @media (max-width: 576px) {
                 .nav-items-responsive{
@@ -52,6 +51,14 @@ error_reporting(0);
                 height: 100%;
             }
         </style>
+        <style>
+            #cart-content thead tr th {
+                padding: 20px;
+                text-align: center;
+            }
+        </style>
+
+
         
     </head>
 
@@ -150,7 +157,7 @@ error_reporting(0);
                             <thead>
                             <tr class="p-2 align-items-center justify-content-center">
                                 <th class="pl-5 ml-">Imagen</th>
-                                <th class="pl-4">Nombre</th>
+                                <th class="pl-4" >Nombre</th>
                                 <th class="pl-2">Precio</th>
                                 <th class="pl-2">Cantidad</th>
                                 <th class="pl-2">Total</th>
