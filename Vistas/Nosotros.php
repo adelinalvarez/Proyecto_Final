@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col-md-7 col-12" style="font-size: 20px; text-align: justify">
                     <!-- Contenido de texto -->
-                    Somos Doña Hilda Tapas and Grill, un rincón culinario situado en el corazón de Baní, República Dominicana, donde 
+                    Somos Doña Hilda Tapas and Grill, un rincón culinario situado en el corazón de la Ciudad de Baní, República Dominicana, donde 
                     convergen los sabores auténticos de la cocina dominicana con influencias españolas. Nuestra historia es una fusión 
                     de tradición y pasión por la gastronomía, inspirada por las enseñanzas culinarias de la inolvidable "Doña Hilda". 
                     <br> <br> Enclavados en un espacio que ha sido testigo de glorias culinarias pasadas, buscamos revivir y elevar esa 
@@ -174,7 +174,7 @@
                             <i class="bi bi-info-circle-fill icon-help"></i> 
                             <a data-toggle="collapse" href="#faq-list-3" class="collapsed">¿Dónde está ubicado el restaurante? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></a>
                             <div id="faq-list-3" class="collapse">
-                                <p>Está ubicado en la calle 16 de agosto, esquina Santomé, cuidad de Baní, provincia, Peravia, República Dominicana.</p>
+                                <p>Está ubicado en la calle 16 de agosto, esquina Santomé, Ciudad de Baní, provincia, Peravia, República Dominicana.</p>
                             </div>
                         </li>
                     </ul>

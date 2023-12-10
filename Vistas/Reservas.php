@@ -20,21 +20,39 @@ error_reporting(0);
         <link href="../css/style.css" rel="stylesheet">
         <title>Doña Hilda Tapas and Grill</title>
         <style>
-        /* Estilos para hacer el formulario más responsive */
+
+   
         @media screen and (max-width: 768px) {
-            .css-label,
-            .css-input,
-            .btn-guardar {
-                font-size: 14px;
-            }
+        /* Asegurar que los elementos se coloquen en columnas */
+        .row.align-items-stretch {
+            display: flex;
+            flex-direction: column;
         }
 
-        @media screen and (max-width: 576px) {
-            .form-group {
-                margin-bottom: 15px;
-            }
+        /* Ajustar el ancho y alinear los label */
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
         }
-    </style>
+
+        /* Ajustar el ancho de los input */
+        .css-input {
+            width: 100%;
+            border-bottom: 1px solid #ccc; /* Línea que separa los campos */
+            padding: 5px 0; /* Ajuste del padding para mejorar el aspecto visual */
+            margin-bottom: 10px; /* Espacio entre campos */
+        }
+
+        /* Estilo para el label */
+        .css-label {
+            margin-bottom: 5px; /* Espacio entre el label y el input */
+        }
+    }
+    }
+</style>
+
     </head>
 
     <body>
@@ -93,27 +111,27 @@ error_reporting(0);
                         <div class="row align-items-stretch">
                             <div class="form-group col-md-4">
                                 <label for="nombre" class="css-label"> Nombre Completo:</label>
-                                <input type="text" name="nombre" class="css-input" id="nombre" required Placeholder="Ingrese su nombre">
+                                <input type="text" name="nombre" class="css-input" id="nombre" required Placeholder=" Ingrese su nombre">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="correo" class="css-label"> Correo Electrónico: </label>
-                                <input type="email" class="css-input" name="correo" id="correo" required Placeholder="Ingrese su correo electrónico" title="Por favor, incluya el símbolo '@' en su dirección de correo">
+                                <input type="email" class="css-input" name="correo" id="correo" required Placeholder=" Ingrese su correo electrónico" title="Por favor, incluya el símbolo '@' en su dirección de correo">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="celular" class="css-label"> Celular: </label>
-                                <input type="text" class="css-input" name="celular" id="celular" required pattern="[0-9-]+" Placeholder="Ingresar número de celular" title="Por favor, ingrese solo números y guiones">
+                                <input type="text" class="css-input" name="celular" id="celular" required pattern="[0-9-]+" Placeholder=" Ingresar número de celular" title="Por favor, ingrese solo números y guiones">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>
-                                <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required min="1" max="50" Placeholder="Ingresar cantidad de personas">
+                                <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required min="1" max="50" Placeholder=" Ingresar cantidad de personas">
                             </div>
 
                             <div class="form-group col-md-4">
                             <label for="fecha" class="css-label"> Fecha: </label>
-                                <input type="date" class="css-input" name="fecha" id="fecha" required min="<?php echo date('Y-m-d'); ?>" Placeholder="dd/mm/aa">
+                                <input type="date" class="css-input" name="fecha" id="fecha" required min="<?php echo date('Y-m-d'); ?>" Placeholder="  dd/mm/aa">
                             </div>
 
                             <div class="form-group col-md-4">
