@@ -56,10 +56,15 @@ error_reporting(0);
                 padding: 20px;
                 text-align: center;
             }
+            .button-count {
+                border: none;
+                padding: 10px;
+                width: 35px;
+                height: 35px;
+                border-radius: 100%;
+            }
         </style>
 
-
-        
     </head>
 
     <body>
@@ -226,15 +231,12 @@ error_reporting(0);
                             <p class="card-text" id="precio<?php echo $fila['IdProducto'] ?>">$<?php echo $fila['precio'] ?></p>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="button-count btn" style="background-color: #f1e645; color: black;" type="button" id="button_sum">+</button>
-                            <input type="number" id="valor<?php echo $fila['IdProducto'] ?>" value="1" name="Cantidad" class="ml-2 mr-2" required style="width: 40px" disabled>
-                            <button class="button-count btn btn-primary" style="background-color: #f1e645; color: black;" type="button" id="boton_restar">-</button>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center">
                             <a href="#" class="mostrar-producto" data-bs-toggle="modal" data-bs-target="#detalleProductoModal" data-producto-id="<?php echo $fila['IdProducto']; ?>">
                                 <img src="../imagenes/Menu/eye.svg" style="width: 40px; height: 40px;" alt="cart">
                             </a>
-
+                            <button class="button-count btn" style="background-color: #f1e645; color: black;" type="button" id="button_sum">+</button>
+                            <input type="number" id="valor<?php echo $fila['IdProducto'] ?>" value="1" name="Cantidad" class="ml-2 mr-2" required style="width: 40px" disabled>
+                            <button class="button-count btn btn-primary" style="background-color: #f1e645; color: black;" type="button" id="boton_restar">-</button>
                             <a href="#" id="carrito-add">
                                 <img src="../imagenes/Menu/cart-check-fill.svg" style="width: 40px; height: 40px;" alt="cart" id="<?php echo $fila['IdProducto'] ?>">
                             </a>
@@ -330,72 +332,70 @@ error_reporting(0);
             </div>
         </div>
 
-        
-
         <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" id="detalleProductoBody">
+                        <img id="imagenProducto" src="" alt="Imagen del producto" style="max-width: 100%; height: auto;">
+                        <p><strong>ID:</strong> <span id="idProducto"></span></p>
+                        <p><strong>Nombre:</strong> <span id="nombreProducto"></span></p>
+                        <p><strong>Descripción:</strong> <span id="descripcionProducto"></span></p>
+                        <p><strong>Categoría:</strong> <span id="categoriaProducto"></span></p>
+                        <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+
+                </div>
             </div>
-
-            <div class="modal-body" id="detalleProductoBody">
-                <img id="imagenProducto" src="" alt="Imagen del producto" style="max-width: 100%; height: auto;">
-                <p><strong>ID:</strong> <span id="idProducto"></span></p>
-                <p><strong>Nombre:</strong> <span id="nombreProducto"></span></p>
-                <p><strong>Descripción:</strong> <span id="descripcionProducto"></span></p>
-                <p><strong>Categoría:</strong> <span id="categoriaProducto"></span></p>
-                <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-
         </div>
-    </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var myModal = new bootstrap.Modal(document.getElementById('detalleProductoModal'));
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var myModal = new bootstrap.Modal(document.getElementById('detalleProductoModal'));
 
-        document.querySelectorAll('.mostrar-producto').forEach(function (boton) {
-            boton.addEventListener('click', function () {
-                var idProducto = this.getAttribute('data-producto-id');
+                document.querySelectorAll('.mostrar-producto').forEach(function (boton) {
+                    boton.addEventListener('click', function () {
+                        var idProducto = this.getAttribute('data-producto-id');
 
-                fetch('../funciones/funciones.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        'id': idProducto
-                    }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        console.error('Error en la respuesta del servidor:', data.error);
-                    } else {
-                        document.getElementById('idProducto').innerText = data.IdProducto;
-                        document.getElementById('nombreProducto').innerText = data.nombre;
-                        document.getElementById('descripcionProducto').innerText = data.descripcion;
-                        document.getElementById('categoriaProducto').innerText = data.categoria;
-                        document.getElementById('precioProducto').innerText = data.precio;
+                        fetch('../funciones/funciones.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: new URLSearchParams({
+                                'id': idProducto
+                            }),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                console.error('Error en la respuesta del servidor:', data.error);
+                            } else {
+                                document.getElementById('idProducto').innerText = data.IdProducto;
+                                document.getElementById('nombreProducto').innerText = data.nombre;
+                                document.getElementById('descripcionProducto').innerText = data.descripcion;
+                                document.getElementById('categoriaProducto').innerText = data.categoria;
+                                document.getElementById('precioProducto').innerText = data.precio;
 
-                        document.getElementById('imagenProducto').src = data.imagen;
-                        myModal.show();
-                    }
-                })
-                .catch(error => console.error('Error en la solicitud:', error));
+                                document.getElementById('imagenProducto').src = data.imagen;
+                                myModal.show();
+                            }
+                        })
+                        .catch(error => console.error('Error en la solicitud:', error));
+                    });
+                });
             });
-        });
-    });
-</script>
+        </script>
 
 
         <!-- Footer -->

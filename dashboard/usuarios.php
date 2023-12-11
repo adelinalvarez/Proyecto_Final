@@ -107,7 +107,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                     <i class='bx bxs-trash-alt'></i>
                                                 </a>
                                             </td>
-
                                         </tr>
                                     <?php endwhile; ?>
                                 </tbody>
