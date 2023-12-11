@@ -2,26 +2,25 @@
    
 require_once ("_db.php");
 
-if (isset($_POST['accion'])){ 
-    switch ($_POST['accion']){
+if (isset($_POST['accion'])) { 
+    switch ($_POST['accion']) {
         //casos de registros
-        case 'acceso_user';
+        case 'acceso_user':
             acceso_user();
-        break;
+            break;
 
-        case 'mostrar_productos_Menu';
-            mostrar_productos_Menu();
-        break;
-
-	}
-
+        case 'mostrar_productos':
+            mostrar_productos();
+            break;
+    }
 }
 
 function acceso_user() {
+    session_start();
+    
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
 
-    session_start();
     $_SESSION['correo'] = $correo;
 
     $conexion = $GLOBALS['conex']; 
@@ -36,22 +35,22 @@ function acceso_user() {
 
         $_SESSION['correo'] = $correo;
 
-        if($filas['correo'] == $correo && $filas['contraseña'] == $contraseña){ //admin
-
+        if ($filas['correo'] == $correo && $filas['contraseña'] == $contraseña) { //admin
             header('Location: ../dashboard/index.php');
-    
-        }else{
+            exit;
+        } else {
             header("location: ../vistas/login.php?fallo=true");
             session_destroy();
-    
+            exit;
         }
     } else {
         header("location: ../vistas/login.php?fallo=true");
         session_destroy();
+        exit;
     }
 }
 
-function mostrar_productos_Menu() {
+function mostrar_productos() {
     header('Content-Type: application/json'); // Asegurarse de que el contenido se interprete como JSON
 
     if (isset($_POST['id'])) {
@@ -76,6 +75,7 @@ function mostrar_productos_Menu() {
 
 // Llamar a la función si se está haciendo una solicitud POST para mostrar los detalles del producto
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    mostrar_productos_Menu();
-    exit(); // Asegurarse de que no haya más salida después de la respuesta JSON
+    mostrar_productos();
+    exit; // Asegurarse de que no haya más salida después de la respuesta JSON
 }
+?>

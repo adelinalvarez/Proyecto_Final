@@ -772,33 +772,40 @@ error_reporting(0);
 
                 $.ajax({
                     type: "POST",
-                    url: "../funciones/mostrar_producto_Menu.php", // Cambia esto a la ruta correcta
+                    url: "../funciones/mostrar_productos.php",
                     data: {
                         id: IdProducto,
-                        accion: 'mostrar_productos_Menu'
+                        accion: 'mostrar_productos'
                     },
                     success: function (response) {
-                        const productosData = JSON.parse(response);
+                        try {
+                            const productosData = JSON.parse(response);
 
-                        if (productosData) {
-                            Swal.fire({
-                                title: 'Datos del producto:',
-                                html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
-                                       <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
-                                       <p class="css-label">categoria: </p> <p>${productosData.NombreCategoria}</p>
-                                       <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
-                            });
-                        } else {
-                            Swal.fire('Error', 'No se pudo cargar los datos del producto', 'error');
+                            if (productosData) {
+                                Swal.fire({
+                                    title: 'Datos del producto:',
+                                    html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
+                                        <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
+                                        <p class="css-label">categoria: </p> <p>${productosData.NombreCategoria}</p>
+                                        <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
+                                });
+                            } else {
+                                Swal.fire('Error', 'No se pudo cargar los datos del producto', 'error');
+                            }
+                        } catch (error) {
+                            console.error('Error al parsear JSON:', error);
+                            Swal.fire('Error', 'Hubo un error al procesar los datos del servidor', 'error');
                         }
                     },
-                    error: function () {
+                    error: function (xhr, status, error) {
+                        console.error('Error en la solicitud AJAX:', error);
                         Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
                     }
                 });
             });
         });
-    </script>
+        </script>
+
 
 <style>
         .column {
