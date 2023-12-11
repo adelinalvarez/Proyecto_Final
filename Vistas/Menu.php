@@ -772,10 +772,10 @@ error_reporting(0);
 
                 $.ajax({
                     type: "POST",
-                    url: "../funciones/funciones.php", // Cambia esto a la ruta correcta
+                    url: "../funciones/mostrar_producto_Menu.php", // Cambia esto a la ruta correcta
                     data: {
                         id: IdProducto,
-                        accion: 'mostrar_productos'
+                        accion: 'mostrar_productos_Menu'
                     },
                     success: function (response) {
                         const productosData = JSON.parse(response);

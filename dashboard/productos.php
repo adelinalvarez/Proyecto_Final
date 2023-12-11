@@ -323,7 +323,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
                 $.ajax({
                     type: "POST",
-                    url: "../funciones/funciones.php", // Cambia esto a la ruta correcta
+                    url: "../funciones/funciones.php", 
                     data: {
                         id: IdProducto,
                         accion: 'mostrar_productos'
