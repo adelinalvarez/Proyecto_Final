@@ -77,12 +77,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             </a>
                             </div>
                             <div class="table-responsive">
-                            <table id="example" style="width:100%" class="table table-striped table-bordered">
+                            <table id="example" style="width:100%" class="table table-striped table-bordered text-center">
                                 <thead class="text-center" style="background-color: black; color:white;">
                                     <tr>
                                         <th>Nombre</th>
                                         <th>Correo</th>
-                                        <th>Contraseña</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -95,7 +94,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                         <tr>
                                             <td><?php echo $fila['nombre']; ?></td>
                                             <td><?php echo $fila['correo']; ?></td>
-                                            <td><?php echo $fila['contraseña']; ?></td>
                                             <td class="text-center align-middle">
                                                 <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdUsuario'] ?>">
                                                     <i class='bx bxs-user-detail'></i>
@@ -143,8 +141,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const correo = $('#correo').val();
                         const contraseña = $('#contraseña').val();
                         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        const nameRegex = /^[a-zA-Z\s]*$/;
-
+                        const nameRegex = /^[A-Za-z\s]+$/;
+                        
                         if (!nombre || !correo || !contraseña) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                             return false; // Evita que se cierre el modal si falta información

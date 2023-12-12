@@ -76,7 +76,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         </a>
                     </div>
                     <div class="table-responsive">
-                        <table id="example" style="width:100%" class="table table-striped table-bordered">
+                        <table id="example" style="width:100%" class="table table-striped table-bordered text-center">
                             <thead class="text-center" style="background-color: black; color:white;">
                                 <tr>
                                     <th>Nombre Categoria</th>

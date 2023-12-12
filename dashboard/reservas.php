@@ -77,42 +77,46 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             </a>
                             </div>
                             <div class="table-responsive">
-                                <table id="example" style="width:100%" class="table table-striped table-bordered">
-                                    <thead class="text-center" style="background-color: black; color:white;">
+                                
+                                <table id="example" style="width:100%" class="table table-striped table-bordered text-center">
+                                    <thead style="background-color: black; color:white;">
                                         <tr>
-                                            <th>Id cliente</th>
-                                            <th>Cantidad de Personas</th>
-                                            <th>Fecha</th>
-                                            <th>Hora</th>
-                                            <th>Evento</th>
-                                            <th>Area</th>
-                                            <th>Acciones</th>
+                                            <th class="align-middle">Id cliente</th>
+                                            <th class="align-middle">Cantidad de<br>Personas</th>
+                                            <th class="align-middle">Fecha</th>
+                                            <th class="align-middle">Evento</th>
+                                            <th class="align-middle">Area</th>
+                                            <th class="align-middle">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $conexion=$GLOBALS['conex']; 
-                                            $SQL=mysqli_query($conexion," SELECT reservas.IdCliente, reservas.IdReservas, reservas.cantidadPersonas, reservas.fecha, reservas.hora, reservas.evento, reservas.area, reservas.descripcion FROM reservas");
-                                            while($fila=mysqli_fetch_assoc($SQL)):
+                                        $conexion=$GLOBALS['conex']; 
+                                        $SQL=mysqli_query($conexion," SELECT reservas.IdCliente, reservas.IdReservas, reservas.cantidadPersonas, reservas.fecha, reservas.hora, reservas.evento, reservas.area, reservas.descripcion FROM reservas");
+                                        while($fila=mysqli_fetch_assoc($SQL)):
                                         ?>
                                         <tr>
-                                            <td><?php echo $fila['IdCliente']; ?></td>
-                                            <td><?php echo $fila['cantidadPersonas']; ?></td>
-                                            <td><?php echo $fila['fecha']; ?></td>
-                                            <td><?php echo $fila['hora']; ?></td>
-                                            <td><?php echo $fila['evento']; ?></td>
-                                            <td><?php echo $fila['area']; ?></td>
-                                            <td class="text-center align-middle">
+                                            <td class="align-middle"><?php echo $fila['IdCliente']; ?></td>
+                                            <td class="align-middle">
+                                                <!-- La clase 'd-flex flex-column flex-sm-row' maneja el diseño responsivo -->
+                                                <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-center">
+                                                    <span class="mr-sm-2"><?php echo $fila['cantidadPersonas']; ?></span>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle"><?php echo $fila['fecha']; ?></td>
+                                            <td class="align-middle"><?php echo $fila['evento']; ?></td>
+                                            <td class="align-middle"><?php echo $fila['area']; ?></td>
+                                            <td class="align-middle">
                                             <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
-                                                <i class='bx bxs-user-detail'></i>
-                                            </a>
-                                            <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
-                                                <i class='bx bxs-edit'></i>
-                                            </a>
-                                            <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
-                                                <i class='bx bxs-trash-alt'></i>
-                                            </a>
-                                        </td>
+                                             <i class='bx bxs-user-detail'></i>
+                                               </a>
+                                                 <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
+                                                 <i class='bx bxs-edit'></i>
+                                                 </a>
+                                                 <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdReservas'] ?>">
+                                                 <i class='bx bxs-trash-alt'></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         <?php endwhile;?>
                                     </tbody>
@@ -123,75 +127,71 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 </div>
             </div>
         </div>
-
     </body>
-
     
-
     <script>
         $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
                 e.preventDefault();
-
                 Swal.fire({
                     title: '<h2> Agregar nueva reserva </h2>',
-                    html: '<div class="column">' +
-                        '<label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>' +
-                        '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
-                        '<br>' +
-                        '<label for="correo" class="css-label">Correo: </label>' +
-                        '<br>' +
-                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
-                        '<br>' +
-                        '<label for="fecha" class="css-label"> Fecha: </label>' +
-                        '<br>' +
-                        '<input id="fecha" class="swal2-input css-input" type="date"> ' +
-                        '<br>' +
-                        '<label for="hora" class="css-label"> Hora: </label>' +
-                        '<br>'+
-                        '<select class="swal2-input css-input" name="hora" id="hora" required   >' +
-                            '<option value="">Seleccione la hora</option>' +
-                            '<option value="10:00 AM">10:00 AM</option>' +
-                            '<option value="11:00 AM">11:00 AM</option>' +
-                            '<option value="12:00 PM">12:00 PM</option>' +
-                            '<option value="01:00 PM">01:00 PM</option>' +
-                            '<option value="02:00 PM">02:00 PM</option>' +
-                            '<option value="03:00 PM">03:00 PM</option>' +
-                            '<option value="04:00 PM">04:00 PM</option>' +
-                            '<option value="05:00 PM">05:00 PM</option>' +
-                            '<option value="06:00 PM">06:00 PM</option>' +
-                            '<option value="07:00 PM">07:00 PM</option>' +
-                            '<option value="08:00 PM">08:00 PM</option>' +
-                            '<option value="09:00 PM">09:00 PM</option>' +
-                            '<option value="10:00 PM">10:00 PM</option>' +
-                        '</select>' +
-                        '<br>'+
-                        '</div>' +
-                        '<div class="divider"></div>' +
-                        '<div class="column">' +
-                        '<label for="evento" class="css-label"> Seleccion el tipo de evento: </label>' +
-                        '<br>' +
-                        '<select class="swal2-input css-input" name="evento" id="evento" required>' +
-                            '<option value="">Seleccione el tipo de evento</option>' +
-                            '<option value="Reservar normal">Reservar normal</option>' +
-                            '<option value="Cumpleaños">Cumpleaños</option>' +
-                            '<option value="Boda">Boda</option>' +
-                            '<option value="Reunion">Reunion</option>' +
-                        '</select>' +
-                        '<br>'+
-                        '<br>'+
-                        '<label for="area" class="css-label"> Seleccione area de reservacion: </label>' +
-                        '<br>' +
-                        '<select class="swal2-input css-input" name="area" id="area" required>' +
-                            '<option value="">Seleccione area de reservacion</option>' +
-                            '<option value="Sala VIP">Sala VIP</option>' +
-                            '<option value="Terraza">Terraza</option>' +
-                        '</select>' +      
-                        '<br>'+            
-                        '<br>'+
-                        '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<textarea id="descripcion" name="descripcion" rows="17" class="swal2-input css-input" style="width: 80%; height: 200px" required></textarea>'+
-                        '</div>',
+                    html: '<div class="row">' +
+                                '<div class="col-md-6 mt-3">' +
+                                    '<label for="cantidadPersonas" class="css-label">Cantidad de personas:</label>' +
+                                    '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value="">' +
+                                    '<br>' +
+                                    '<label for="correo" class="css-label">Correo:</label>' +
+                                    '<br>' +
+                                    '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value="">' +
+                                    '<br>' +
+                                    '<label for="fecha" class="css-label">Fecha:</label>' +
+                                    '<br>' +
+                                    '<input id="fecha" class="swal2-input css-input" type="date">' +
+                                    '<br>' +
+                                    '<label for="hora" class="css-label">Hora:</label>' +
+                                    '<br>' +
+                                    '<select class="swal2-input css-input" name="hora" id="hora" required>' +
+                                        '<option value="">Seleccione la hora</option>' +
+                                        '<option value="10:00 AM">10:00 AM</option>' +
+                                        '<option value="11:00 AM">11:00 AM</option>' +
+                                        '<option value="12:00 PM">12:00 PM</option>' +
+                                        '<option value="01:00 PM">01:00 PM</option>' +
+                                        '<option value="02:00 PM">02:00 PM</option>' +
+                                        '<option value="03:00 PM">03:00 PM</option>' +
+                                        '<option value="04:00 PM">04:00 PM</option>' +
+                                        '<option value="05:00 PM">05:00 PM</option>' +
+                                        '<option value="06:00 PM">06:00 PM</option>' +
+                                        '<option value="07:00 PM">07:00 PM</option>' +
+                                        '<option value="08:00 PM">08:00 PM</option>' +
+                                        '<option value="09:00 PM">09:00 PM</option>' +
+                                        '<option value="10:00 PM">10:00 PM</option>' +
+                                    '</select>' +
+                                '</div>' +
+                                '<div class="col-md-6 mt-3">' +
+                                    '<label for="evento" class="css-label">Selecciona el tipo de evento:</label>' +
+                                    '<br>' +
+                                    '<select class="swal2-input css-input" name="evento" id="evento" required>' +
+                                        '<option value="">Seleccione el tipo de evento</option>' +
+                                        '<option value="Reservar normal">Reservar normal</option>' +
+                                        '<option value="Cumpleaños">Cumpleaños</option>' +
+                                        '<option value="Boda">Boda</option>' +
+                                        '<option value="Reunion">Reunion</option>' +
+                                    '</select>' +
+                                    '<br>' +
+                                    '<br>' +
+                                    '<label for="area" class="css-label">Seleccione área de reservación:</label>' +
+                                    '<br>' +
+                                    '<select class="swal2-input css-input" name="area" id="area" required>' +
+                                        '<option value="">Seleccione área de reservación</option>' +
+                                        '<option value="Sala VIP">Sala VIP</option>' +
+                                        '<option value="Terraza">Terraza</option>' +
+                                    '</select>' +
+                                    '<br>' +
+                                    '<br>' +
+                                    '<label for="descripcion" class="css-label">Descripción:</label>' +
+                                    '<textarea id="descripcion" name="descripcion" rows="17" class="swal2-input css-input" style="width: 100%; height: 200px" required></textarea>' +
+                                '</div>' +
+                            '</div>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
@@ -241,87 +241,84 @@ if( $validarusuarios == null || $validarusuarios = ''){
     </script>
 
     <script>
-        $(document).ready(function() {
+            $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
                 const IdReservas = $(this).data('id');
 
                 Swal.fire({
                     title: '<h2> Editar reserva </h2>',
-                    html:'<div class="column">' +
-                        '<label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>' +
-                        '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value=""> ' +
-                        '<br>' +
-                        '<label for="correo" class="css-label">Correo: </label>' +
-                        '<br>' +
-                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
-                        '<br>' +
-                        '<label for="fecha" class="css-label"> Fecha: </label>' +
-                        '<br>' +
-                        '<input id="fecha" class="swal2-input css-input" type="date"> ' +
-                        '<br>' +
-                        '<label for="hora" class="css-label"> Hora: </label>' +
-                        '<br>'+
-                        '<select class="swal2-input css-input" name="hora" id="hora" required   >' +
-                            '<option value="">Seleccione la hora</option>' +
-                            '<option value="10:00 AM">10:00 AM</option>' +
-                            '<option value="11:00 AM">11:00 AM</option>' +
-                            '<option value="12:00 PM">12:00 PM</option>' +
-                            '<option value="01:00 PM">01:00 PM</option>' +
-                            '<option value="02:00 PM">02:00 PM</option>' +
-                            '<option value="03:00 PM">03:00 PM</option>' +
-                            '<option value="04:00 PM">04:00 PM</option>' +
-                            '<option value="05:00 PM">05:00 PM</option>' +
-                            '<option value="06:00 PM">06:00 PM</option>' +
-                            '<option value="07:00 PM">07:00 PM</option>' +
-                            '<option value="08:00 PM">08:00 PM</option>' +
-                            '<option value="09:00 PM">09:00 PM</option>' +
-                            '<option value="10:00 PM">10:00 PM</option>' +
-                        '</select>' +
-                        '<br>'+
-                        '</div>' +
-                        '<div class="divider"></div>' +
-                        '<div class="column">' +
-                        '<label for="evento" class="css-label"> Seleccion el tipo de evento: </label>' +
-                        '<br>' +
-                        '<select class="swal2-input css-input" name="evento" id="evento" required>' +
-                            '<option value="">Seleccione el tipo de evento</option>' +
-                            '<option value="Reservar normal">Reservar normal</option>' +
-                            '<option value="Cumpleaños">Cumpleaños</option>' +
-                            '<option value="Boda">Boda</option>' +
-                            '<option value="Reunion">Reunion</option>' +
-                        '</select>' +
-                        '<br>'+
-                        '<br>'+
-                        '<label for="area" class="css-label"> Seleccione area de reservacion: </label>' +
-                        '<br>' +
-                        '<select class="swal2-input css-input" name="area" id="area" required>' +
-                            '<option value="">Seleccione area de reservacion</option>' +
-                            '<option value="Sala VIP">Sala VIP</option>' +
-                            '<option value="Terraza">Terraza</option>' +
-                        '</select>' +      
-                        '<br>'+            
-                        '<br>'+
-                        '<label for="descripcion" class="css-label"> Descripcion: </label>' +
-                        '<textarea id="descripcion" name="descripcion" rows="17" class="swal2-input css-input" style="width: 80%; height: 200px" required></textarea>'+
-                        '</div>',
+                    html: '<div class="row">' +
+                                '<div class="col-md-6 mt-3">' +
+                                    '<label for="cantidadPersonas" class="css-label">Cantidad de personas:</label>' +
+                                    '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value="">' +
+                                    '<br>' +
+                                    '<label for="correo" class="css-label">Correo:</label>' +
+                                    '<br>' +
+                                    '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value="">' +
+                                    '<br>' +
+                                    '<label for="fecha" class="css-label">Fecha:</label>' +
+                                    '<br>' +
+                                    '<input id="fecha" class="swal2-input css-input" type="date">' +
+                                    '<br>' +
+                                    '<label for="hora" class="css-label">Hora:</label>' +
+                                    '<br>' +
+                                    '<select class="swal2-input css-input" name="hora" id="hora" required>' +
+                                        '<option value="">Seleccione la hora</option>' +
+                                        '<option value="10:00 AM">10:00 AM</option>' +
+                                        '<option value="11:00 AM">11:00 AM</option>' +
+                                        '<option value="12:00 PM">12:00 PM</option>' +
+                                        '<option value="01:00 PM">01:00 PM</option>' +
+                                        '<option value="02:00 PM">02:00 PM</option>' +
+                                        '<option value="03:00 PM">03:00 PM</option>' +
+                                        '<option value="04:00 PM">04:00 PM</option>' +
+                                        '<option value="05:00 PM">05:00 PM</option>' +
+                                        '<option value="06:00 PM">06:00 PM</option>' +
+                                        '<option value="07:00 PM">07:00 PM</option>' +
+                                        '<option value="08:00 PM">08:00 PM</option>' +
+                                        '<option value="09:00 PM">09:00 PM</option>' +
+                                        '<option value="10:00 PM">10:00 PM</option>' +
+                                    '</select>' +
+                                '</div>' +
+                                '<div class="col-md-6 mt-3">' +
+                                    '<label for="evento" class="css-label">Selecciona el tipo de evento:</label>' +
+                                    '<br>' +
+                                    '<select class="swal2-input css-input" name="evento" id="evento" required>' +
+                                        '<option value="">Seleccione el tipo de evento</option>' +
+                                        '<option value="Reservar normal">Reservar normal</option>' +
+                                        '<option value="Cumpleaños">Cumpleaños</option>' +
+                                        '<option value="Boda">Boda</option>' +
+                                        '<option value="Reunion">Reunion</option>' +
+                                    '</select>' +
+                                    '<br>' +
+                                    '<br>' +
+                                    '<label for="area" class="css-label">Seleccione área de reservación:</label>' +
+                                    '<br>' +
+                                    '<select class="swal2-input css-input" name="area" id="area" required>' +
+                                        '<option value="">Seleccione área de reservación</option>' +
+                                        '<option value="Sala VIP">Sala VIP</option>' +
+                                        '<option value="Terraza">Terraza</option>' +
+                                    '</select>' +
+                                    '<br>' +
+                                    '<br>' +
+                                    '<label for="descripcion" class="css-label">Descripción:</label>' +
+                                    '<textarea id="descripcion" name="descripcion" rows="17" class="swal2-input css-input" style="width: 100%; height: 200px" required></textarea>' +
+                                '</div>' +
+                            '</div>',
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     didOpen: () => {
-                        // Realiza una solicitud AJAX para cargar los datos de la reserva y mostrarlos en el formulario
                         $.ajax({
                             type: "POST",
                             url: "../funciones/funciones.php",
                             data: {
-                                idReservas: IdReservas, // Cambiado el nombre del campo a idReservas
+                                idReservas: IdReservas,
                                 accion: 'mostrar_reservas'
                             },
                             success: function(response) {
-                                console.log(response); // Verifica si los datos se están recibiendo
                                 const reservasData = JSON.parse(response);
                                 if (reservasData) {
-                                    $('#IdCliente').val(reservasData.IdCliente);
                                     $('#cantidadPersonas').val(reservasData.cantidadPersonas);
                                     $('#fecha').val(reservasData.fecha);
                                     $('#hora').val(reservasData.hora);
@@ -336,19 +333,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         });
                     },
                     preConfirm: () => {
-                        const IdCliente = $('#IdCliente').val();
-                        let cantidadPersonas = $('#cantidadPersonas').val();
+                        const cantidadPersonas = $('#cantidadPersonas').val();
                         const fecha = $('#fecha').val();
                         const hora = $('#hora').val();
                         const evento = $('#evento').val();
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
-                    if (parseInt(cantidadPersonas) < 1) {
-                        Swal.showValidationMessage('La cantidad de personas no puede ser menor a 1');
-                        return false; // Detiene el proceso de confirmación
-                    }
 
-                        if (!IdCliente || !cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
+                        if (parseInt(cantidadPersonas) < 1) {
+                            Swal.showValidationMessage('La cantidad de personas no puede ser menor a 1');
+                            return false;
+                        }
+
+                        if (!cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
@@ -356,7 +353,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 url: "../funciones/funciones.php",
                                 data: {
                                     idReservas: IdReservas,
-                                    IdCliente: IdCliente,
                                     cantidadPersonas: cantidadPersonas,
                                     fecha: fecha,
                                     hora: hora,
@@ -368,7 +364,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 success: function(response) {
                                     Swal.fire('Éxito', 'La reserva ha sido actualizada.', 'success').then((result) => {
                                         if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
+                                            location.reload();
                                         }
                                     });
                                 },
@@ -390,9 +386,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
             Swal.fire({
                 title: 'Datos de la reserva',
+                width: 600,
                 didOpen: () => {
-
-                    // Realiza una solicitud AJAX para cargar los detalles del contacto
                     $.ajax({
                         type: "POST",
                         url: "../funciones/funciones.php",
@@ -404,19 +399,28 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             const userData = JSON.parse(response);
 
                             if (userData) {
+                                const formattedData = `
+                                    <div style="display: flex;">
+                                        <div style="flex: 0 0 50%; padding-right: 20px;">
+                                            <p style="text-align: left;"><strong>Id Cliente:</strong><br>${userData.IdCliente}</p>
+                                            <p style="text-align: left;"><strong>Nombre:</strong><br>${userData.nombre}</p>
+                                            <p style="text-align: left;"><strong>Correo:</strong><br>${userData.correo}</p>
+                                            <p style="text-align: left;"><strong>Celular:</strong><br>${userData.celular}</p>
+                                            <p style="text-align: left;"><strong>Dirección:</strong><br>${userData.direccion}</p>
+                                            <p style="text-align: left;"><strong>Cantidad de Personas:</strong><br>${userData.cantidadPersonas}</p>
+                                        </div>
+                                        <div style="flex: 0 0 50%;">
+                                            <p style="text-align: left;"><strong>Fecha:</strong><br>${userData.fecha}</p>
+                                            <p style="text-align: left;"><strong>Hora:</strong><br>${userData.hora}</p>
+                                            <p style="text-align: left;"><strong>Evento:</strong><br>${userData.evento}</p>
+                                            <p style="text-align: left;"><strong>Área:</strong><br>${userData.area}</p>
+                                            <p style="text-align: left;"><strong>Descripción:</strong><br>${userData.descripcion}</p>
+                                        </div>
+                                    </div>
+                                `;
+
                                 Swal.update({
-                                    html: `
-                                        <p class="css-label">Id Cliente: ${userData.IdCliente}</p>
-                                        <p class="css-label">nombre: ${userData.nombre}</p>
-                                        <p class="css-label">correo: ${userData.correo}</p>
-                                        <p class="css-label">celular: ${userData.celular}</p>
-                                        <p class="css-label">direccion: ${userData.direccion}</p>
-                                        <p class="css-label">cantidadPersonas: ${userData.cantidadPersonas}</p>
-                                        <p class="css-label">fecha: ${userData.fecha}</p>
-                                        <p class="css-label">hora: ${userData.hora}</p>
-                                        <p class="css-label">evento: ${userData.evento}</p>
-                                        <p class="css-label">area: ${userData.area}</p>
-                                        <p class="css-label">descripcion: ${userData.descripcion}</p>`
+                                    html: formattedData
                                 });
                             } else {
                                 Swal.fire({
@@ -437,6 +441,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 }
             });
         });
+
     </script>
 
     <script>
