@@ -1,29 +1,27 @@
 <?php
-   
 require_once ("_db.php");
 
-if (isset($_POST['accion'])) { 
+if (isset($_POST['accion'])) {
     switch ($_POST['accion']) {
         //casos de registros
         case 'acceso_user':
             acceso_user();
             break;
 
-        case 'mostrar_productos':
-            mostrar_productos();
+        case 'mostrar_producto':
+            mostrar_producto();
             break;
     }
 }
 
 function acceso_user() {
-    session_start();
-    
     $correo = $_POST['correo'];
     $contraseña = $_POST['contraseña'];
 
+    session_start();
     $_SESSION['correo'] = $correo;
 
-    $conexion = $GLOBALS['conex']; 
+    $conexion = $GLOBALS['conex'];
     $consulta = "SELECT * FROM usuarios WHERE correo='$correo' AND contraseña='$contraseña'";
     $resultado = mysqli_query($conexion, $consulta);
 
@@ -37,22 +35,17 @@ function acceso_user() {
 
         if ($filas['correo'] == $correo && $filas['contraseña'] == $contraseña) { //admin
             header('Location: ../dashboard/index.php');
-            exit;
         } else {
             header("location: ../vistas/login.php?fallo=true");
             session_destroy();
-            exit;
         }
     } else {
         header("location: ../vistas/login.php?fallo=true");
         session_destroy();
-        exit;
     }
 }
 
-function mostrar_productos() {
-    header('Content-Type: application/json'); // Asegurarse de que el contenido se interprete como JSON
-
+function mostrar_producto() {
     if (isset($_POST['id'])) {
         $IdProducto = $_POST['id'];
         $conexion = $GLOBALS['conex'];
@@ -60,22 +53,16 @@ function mostrar_productos() {
 
         if ($consulta) {
             $producto = mysqli_fetch_assoc($consulta);
-            if ($producto) {
-                echo json_encode($producto);
-            } else {
-                echo json_encode(["error" => "No se encontraron datos para el ID del producto proporcionado."]);
-            }
+            
+            // Convertir el resultado a JSON y enviarlo como respuesta
+            header('Content-Type: application/json'); // Establecer el tipo de contenido como JSON
+            echo json_encode($producto);
         } else {
-            echo json_encode(["error" => "Error en la consulta SQL: " . mysqli_error($conexion)]);
+            echo json_encode(["error" => "Error al obtener los datos del producto"]);
         }
     } else {
         echo json_encode(["error" => "ID del producto no proporcionado"]);
     }
 }
 
-// Llamar a la función si se está haciendo una solicitud POST para mostrar los detalles del producto
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    mostrar_productos();
-    exit; // Asegurarse de que no haya más salida después de la respuesta JSON
-}
 ?>

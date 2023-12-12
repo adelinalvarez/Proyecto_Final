@@ -20,6 +20,8 @@ error_reporting(0);
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="../css/style.css" rel="stylesheet">
         <title>Doña Hilda Tapas and Grill</title>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
         <style>
             @media (max-width: 576px) {
                 .nav-items-responsive{
@@ -335,12 +337,10 @@ error_reporting(0);
         <div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Detalles del Producto</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
                     <div class="modal-body" id="detalleProductoBody">
                         <img id="imagenProducto" src="" alt="Imagen del producto" style="max-width: 100%; height: auto;">
                         <p><strong>ID:</strong> <span id="idProducto"></span></p>
@@ -349,14 +349,13 @@ error_reporting(0);
                         <p><strong>Categoría:</strong> <span id="categoriaProducto"></span></p>
                         <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
-
                 </div>
             </div>
         </div>
+
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
@@ -367,7 +366,7 @@ error_reporting(0);
                     boton.addEventListener('click', function () {
                         var idProducto = this.getAttribute('data-producto-id');
 
-                        fetch('../funciones/funciones.php', {
+                        fetch('../funciones/mostrar_productos.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -381,13 +380,15 @@ error_reporting(0);
                             if (data.error) {
                                 console.error('Error en la respuesta del servidor:', data.error);
                             } else {
+                                // Insertar datos en los elementos del modal
                                 document.getElementById('idProducto').innerText = data.IdProducto;
                                 document.getElementById('nombreProducto').innerText = data.nombre;
                                 document.getElementById('descripcionProducto').innerText = data.descripcion;
                                 document.getElementById('categoriaProducto').innerText = data.categoria;
                                 document.getElementById('precioProducto').innerText = data.precio;
-
                                 document.getElementById('imagenProducto').src = data.imagen;
+
+                                // Mostrar el modal
                                 myModal.show();
                             }
                         })
@@ -396,6 +397,7 @@ error_reporting(0);
                 });
             });
         </script>
+
 
 
         <!-- Footer -->
@@ -765,49 +767,8 @@ error_reporting(0);
         
     </body>
 
-    <script>
-        $(document).ready(function () {
-            $('.btn-view').on('click', function () {
-                const IdProducto = $(this).data('id');
 
-                $.ajax({
-                    type: "POST",
-                    url: "../funciones/mostrar_productos.php",
-                    data: {
-                        id: IdProducto,
-                        accion: 'mostrar_productos'
-                    },
-                    success: function (response) {
-                        try {
-                            const productosData = JSON.parse(response);
-
-                            if (productosData) {
-                                Swal.fire({
-                                    title: 'Datos del producto:',
-                                    html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
-                                        <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
-                                        <p class="css-label">categoria: </p> <p>${productosData.NombreCategoria}</p>
-                                        <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
-                                });
-                            } else {
-                                Swal.fire('Error', 'No se pudo cargar los datos del producto', 'error');
-                            }
-                        } catch (error) {
-                            console.error('Error al parsear JSON:', error);
-                            Swal.fire('Error', 'Hubo un error al procesar los datos del servidor', 'error');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error en la solicitud AJAX:', error);
-                        Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
-                    }
-                });
-            });
-        });
-        </script>
-
-
-<style>
+    <style>
         .column {
             width: 40%;
             display: inline-block;
