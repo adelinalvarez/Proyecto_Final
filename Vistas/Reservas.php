@@ -107,95 +107,118 @@ error_reporting(0);
             <h1 class="focus-in-expand text-center color-white"> Reservar </h1>
             <div class="row">
                 <div class="info">
-                    <form  action="../funciones/funciones.php" method="POST">
+                    <form action="../funciones/funciones.php" method="POST" onsubmit="return validarFormulario()">
                         <div class="row align-items-stretch">
-                            <div class="form-group col-md-4">
-                                <label for="nombre" class="css-label"> Nombre Completo:</label>
-                                <input type="text" name="nombre" class="css-input" id="nombre" required Placeholder=" Ingrese su nombre">
-                            </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="nombre" class="css-label"> Nombre Completo:</label>
+                                        <input type="text" name="nombre" class="css-input" id="nombre" required placeholder=" Ingrese su nombre">
+                                    </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="correo" class="css-label"> Correo Electrónico: </label>
-                                <input type="email" class="css-input" name="correo" id="correo" required Placeholder=" Ingrese su correo electrónico" title="Por favor, incluya el símbolo '@' en su dirección de correo">
-                            </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="correo" class="css-label"> Correo Electrónico: </label>
+                                        <input type="email" class="css-input" name="correo" id="correo" required placeholder=" Ingrese su correo electrónico">
+                                    </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="celular" class="css-label"> Celular: </label>
-                                <input type="text" class="css-input" name="celular" id="celular" required pattern="[0-9-]+" Placeholder=" Ingresar número de celular" title="Por favor, ingrese solo números y guiones">
-                            </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="celular" class="css-label"> Celular: </label>
+                                        <input type="text" class="css-input" name="celular" id="celular" required placeholder=" Ingresar número de celular">
+                                    </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>
-                                <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required min="1" max="50" Placeholder=" Ingresar cantidad de personas">
-                            </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="cantidadPersonas" class="css-label">Cantidad de personas: </label>
+                                        <input type="number" class="css-input" name="cantidadPersonas" id="cantidadPersonas" required min="1" max="50" Placeholder=" Ingresar cantidad de personas">
+                                    </div>
 
-                            <div class="form-group col-md-4">
-                            <label for="fecha" class="css-label"> Fecha: </label>
-                                <input type="date" class="css-input" name="fecha" id="fecha" required min="<?php echo date('Y-m-d'); ?>" Placeholder="  dd/mm/aa">
-                            </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="fecha" class="css-label"> Fecha: </label>
+                                        <input type="date" class="css-input" name="fecha" id="fecha" required min="<?php echo date('Y-m-d'); ?>" Placeholder="  dd/mm/aa">
+                                    </div>
 
-                            <div class="form-group col-md-4">
-                                <label for="hora" class="css-label"> Hora: </label>
-                                <select class=" css-input" name="hora" id="hora" required>
-                                    <option value="" >Seleccione la hora</option >
-                                    <option value="10:00 AM" >10:00 AM </option >
-                                    <option value="11:00 AM">11:00 AM </option >
-                                    <option value="12:00 PM">12:00 PM </option >
-                                    <option value="01:00 PM">01:00 PM </option >
-                                    <option value="02:00 PM">02:00 PM </option >
-                                    <option value="03:00 PM">03:00 PM </option >
-                                    <option value="04:00 PM">04:00 PM </option >
-                                    <option value="05:00 PM">05:00 PM </option >
-                                    <option value="06:00 PM">06:00 PM </option >
-                                    <option value="07:00 PM">07:00 PM </option >
-                                    <option value="08:00 PM">08:00 PM </option >
-                                    <option value="09:00 PM">09:00 PM </option >
-                                    <option value="10:00 PM">10:00 PM </option >
-                                </select>
-                            </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="hora" class="css-label"> Hora: </label>
+                                        <select class="css-input" name="hora" id="hora" required>
+                                            <option value="" >Seleccione la hora</option >
+                                            <option value="10:00 AM" >10:00 AM </option >
+                                            <option value="11:00 AM">11:00 AM </option >
+                                            <option value="12:00 PM">12:00 PM </option >
+                                            <option value="01:00 PM">01:00 PM </option >
+                                            <option value="02:00 PM">02:00 PM </option >
+                                            <option value="03:00 PM">03:00 PM </option >
+                                            <option value="04:00 PM">04:00 PM </option >
+                                            <option value="05:00 PM">05:00 PM </option >
+                                            <option value="06:00 PM">06:00 PM </option >
+                                            <option value="07:00 PM">07:00 PM </option >
+                                            <option value="08:00 PM">08:00 PM </option >
+                                            <option value="09:00 PM">09:00 PM </option >
+                                            <option value="10:00 PM">10:00 PM </option >
+                                        </select>
+                                    </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="evento" class="css-label"> Tipo de Evento: </label>
-                                <br>
-                                <select class="css-input" name="evento" id="evento" required>
-                                    <option value="" >Seleccione el tipo de evento</option>
-                                    <option value="Reservar normal" >Reservar normal </option>
-                                    <option value="Cumpleaños">Cumpleaños </option>
-                                    <option value="Boda">Boda </option>
-                                    <option value="Reunion">Reunion</option >
-                                    <option value="Reunion">Otro</option >
-                                </select>
-                            </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="evento" class="css-label"> Tipo de Evento: </label>
+                                         <br>
+                                        <select class="css-input" name="evento" id="evento" required>
+                                            <option value="" >Seleccione el tipo de evento</option>
+                                                <option value="Reservar normal" >Reservar normal </option>
+                                                <option value="Cumpleaños">Cumpleaños </option>
+                                                <option value="Boda">Boda </option>
+                                                <option value="Reunion">Reunion</option >
+                                                <option value="Reunion">Otro</option >
+                                        </select>
+                                    </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="area" class="css-label"> Area de reservacion: </label>
-                                <br>
-                                <select class="css-input" name="area" id="area" required>
-                                    <option value="">Seleccione area de reservacion</option>
-                                    <option value="Sala VIP" >Sala VIP </option>
-                                    <option value="Terraza">Terraza</option>
-                                </select>
-                            </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="area" class="css-label"> Area de reservacion: </label>
+                                        <br>
+                                        <select class="css-input" name="area" id="area" required>
+                                            <option value="">Seleccione area de reservacion</option>
+                                            <option value="Sala VIP" >Sala VIP </option>
+                                            <option value="Terraza">Terraza</option>
+                                        </select>
+                                    </div>
 
-                            <div class="form-group col-md-12">
-                                <label for="descripcion" class="css-label"> Descripcion de la reservacion</label>
-                                <br>
-                                <textarea id="descripcion" name="descripcion" rows="10" style="width: 100%;" class="css-input" required placeholder="Ingrese detalles adicionales sobre la reserva"></textarea>
-                                <br>
-                            </div>
-                            
-                            <br>
+                                    <div class="form-group col-md-12">
+                                        <label for="descripcion" class="css-label"> Descripcion de la reservacion</label>
+                                        <br>
+                                        <textarea id="descripcion" name="descripcion" rows="10" style="width: 100%;" class="css-input" required placeholder="Ingrese detalles adicionales sobre la reserva"></textarea>
+                                        <br>
+                                    </div>
+
                             <input type="hidden" name="accion" value="validar_reservas_normal">
-                            <button type="submit" class="btn-guardar" onclick="enviarPorWhatsApp()">Enviar</button>
-                        </form>
-                     </div>
+                            <button type="submit" class="btn-guardar">Enviar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <br>
         </div>
+
         <script>
+            function validarFormulario() {
+                var nombre = document.getElementById("nombre").value;
+                var correo = document.getElementById("correo").value;
+                var celular = document.getElementById("celular").value;
+                var letras = /^[A-Za-z\s]+$/;
+                var formatoCorreo = /\S+@\S+\.\S+/;
+                var formatoCelular = /^[0-9-]+$/;
+                if (!nombre.match(letras)) {
+                    alert("Por favor, ingrese un nombre válido (solo letras).");
+                    return false;
+                }
+
+                if (!correo.match(formatoCorreo)) {
+                    alert("Por favor, ingrese un correo electrónico válido.");
+                    return false;
+                }
+                if (!celular.match(formatoCelular)) {
+                    alert("Por favor, ingrese un número de celular válido (solo números y guiones).");
+                    return false;
+                }
+                 enviarPorWhatsApp(); // Llamar a la función de WhatsApp aquí si la validación es exitosa
+                return true;
+            }
             function enviarPorWhatsApp() {
-                // Obtener los valores del formulario de reservas
+                 // Obtener los valores del formulario de reservas
                 const nombre = document.getElementById('nombre').value;
                 const correo = document.getElementById('correo').value;
                 const celular = document.getElementById('celular').value;
@@ -205,35 +228,37 @@ error_reporting(0);
                 const evento = document.getElementById('evento').value;
                 const area = document.getElementById('area').value;
                 const descripcion = document.getElementById('descripcion').value;
+                   // Verificar si todos los campos obligatorios están llenos
+                  if (nombre && correo && celular && cantidadPersonas && fecha && hora && evento && area && descripcion) {
+                        // Crear el mensaje con los datos del formulario de reservas
+                       const mensajeWhatsApp = 
+                        `Quiero realizar una nueva reserva:\n` +
+                          `Nombre: ${nombre}\n` +
+                            `Correo: ${correo}\n` +
+                            `Celular: ${celular}\n` +
+                            `Cantidad de Personas: ${cantidadPersonas}\n` +
+                            `Fecha: ${fecha}\n` +
+                            `Hora: ${hora}\n` +
+                            `Tipo de Evento: ${evento}\n` +
+                            `Área de Reservación: ${area}\n` +
+                            `Descripción: ${descripcion}`;
 
-                // Verificar si todos los campos obligatorios están llenos
-                if (nombre && correo && celular && cantidadPersonas && fecha && hora && evento && area && descripcion) {
-                    // Crear el mensaje con los datos del formulario de reservas
-                    const mensajeWhatsApp = 
-                    `Quiero realizar una nueva reserva:\n` +
-                    `Nombre: ${nombre}\n` +
-                    `Correo: ${correo}\n` +
-                    `Celular: ${celular}\n` +
-                    `Cantidad de Personas: ${cantidadPersonas}\n` +
-                    `Fecha: ${fecha}\n` +
-                    `Hora: ${hora}\n` +
-                    `Tipo de Evento: ${evento}\n` +
-                    `Área de Reservación: ${area}\n` +
-                    `Descripción: ${descripcion}`;
+                            // Codificar el mensaje para ser parte del enlace de WhatsApp
+                            const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
 
-                    // Codificar el mensaje para ser parte del enlace de WhatsApp
-                    const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+                            // Crear el enlace de WhatsApp con el mensaje
+                            const enlaceWhatsApp = `https://wa.me/+18295330410?text=${mensajeCodificado}`;
 
-                    // Crear el enlace de WhatsApp con el mensaje
-                    const enlaceWhatsApp = `https://wa.me/+18295330410?text=${mensajeCodificado}`;
-
-                    // Abrir una nueva ventana para redirigir a WhatsApp
-                    window.open(enlaceWhatsApp, '_blank');
-                } else {
-                    // Mostrar un mensaje de error o tomar alguna acción adicional si no se llenaron todos los campos
-                    alert('Por favor, completa todos los campos obligatorios antes de enviar la reserva.');
+                            // Abrir una nueva ventana para redirigir a WhatsApp
+                            window.open(enlaceWhatsApp, '_blank');
+                    } else {
+                            // Mostrar un mensaje de error o tomar alguna acción adicional si no se llenaron todos los campos
+                            alert('Por favor, completa todos los campos obligatorios antes de enviar la reserva.');
+                    }
                 }
-            }
+        </script>
+
+           
     </script>
 
             <!-- Footer -->
