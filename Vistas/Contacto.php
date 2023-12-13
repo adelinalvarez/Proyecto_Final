@@ -95,7 +95,7 @@
                         <form  action="../funciones/funciones.php" method="POST">
                             <div>
                                 <label for="nombre" class="css-label"> Nombre Completo: </label>  
-                                <input type="text" id="nombre" name="nombre" class="css-input" style= " display: block; width: 100%; border: 2px solid #AEB6BF;" required Placeholder="Ingrese su nombre">
+                                <input type="text" id="nombre" name="nombre" class="css-input" style= " display: block; width: 100%; border: 2px solid #AEB6BF;" required  pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+" Placeholder="Ingrese su nombre">
                             </div>
                             
                             <div>
