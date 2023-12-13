@@ -151,8 +151,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const correo = $('#correo').val();
                         const celular = $('#celular').val();
                         const direccion = $('#direccion').val();
+                        
 
-                        if (!nombre || !correo || !celular || !direccion) {
+                        const nombreRegex = /^[A-Za-z\s]+$/;
+                        const correoRegex = /\S+@\S+\.\S+/;
+                        const celularRegex = /^[0-9]+$/;
+
+                        if (!nombreRegex.test(nombre)) {
+                            Swal.showValidationMessage('El nombre no puede contener números');
+                        } else if (!correoRegex.test(correo)) {
+                            Swal.showValidationMessage('Por favor, ingrese un correo válido');
+                        } else if (!celularRegex.test(celular)) {
+                            Swal.showValidationMessage('El número de celular no puede contener letras');
+                        } else if (!nombre || !correo || !celular || !direccion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
@@ -213,33 +224,43 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const correo = $('#correo').val();
                         const celular = $('#celular').val();
                         const direccion = $('#direccion').val();
+                        
+                        const nombreRegex = /^[A-Za-z\s]+$/;
+                        const correoRegex = /\S+@\S+\.\S+/;
+                        const celularRegex = /^[0-9]+$/;
 
-                        if (!nombre || !correo || !celular || !direccion) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    id: IdCliente,
-                                    nombre: nombre,
-                                    correo: correo,
-                                    celular: celular,
-                                    direccion: direccion,
-                                    accion: 'editar_clientes'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'El cliente ha sido actualizado.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al editar el cliente: ' + error, 'error');
-                                }
-                            });
+                        if (!nombreRegex.test(nombre)) {
+                            return Swal.showValidationMessage('El nombre no puede contener números');
+                        } else if (!correoRegex.test(correo)) {
+                            return Swal.showValidationMessage('Por favor, ingrese un correo válido');
+                        } else if (!celularRegex.test(celular)) {
+                            return Swal.showValidationMessage('El número de celular no puede contener letras');
+                        } else if (!nombre || !correo || !celular || !direccion) {
+                            return Swal.showValidationMessage('Por favor, completa todos los campos');
                         }
+                        // Si pasa las validaciones, envía la solicitud AJAX para editar el cliente
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                id: IdCliente,
+                                nombre: nombre,
+                                correo: correo,
+                                celular: celular,
+                                direccion: direccion,
+                                accion: 'editar_clientes'
+                            },
+                            success: function(response) {
+                                Swal.fire('Éxito', 'El cliente ha sido actualizado.', 'success').then((result) => {
+                                    if (result.isConfirmed) {
+                                        location.reload(); // Recarga la página
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al editar el cliente: ' + error, 'error');
+                            }
+                        });
                     }
                 });
 
