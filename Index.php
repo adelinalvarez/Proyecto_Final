@@ -190,14 +190,14 @@
                     </div>
 
                     <div class="col-md-7" style="font-size: 40px">
-                        <div style="font-size: 15px">
-                            <br>
-                            <a class="BotonEnlaces" type="button" href="vistas/contacto.php"> Contáctate Ahora </a>
-                        </div>
                         <p style="color: black;">
                             Estamos Ubicados en la calle Santome, esquina 16 de agosto.
                             Baní, provincia Peravia.
                         </p>
+                        <div style="font-size: 15px">
+                            <br>
+                            <a class="BotonEnlaces" type="button" href="vistas/contacto.php"> Contáctate Ahora </a>
+                        </div>
                     </div>
                 </div>
             </div>
