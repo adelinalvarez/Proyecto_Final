@@ -120,9 +120,10 @@ if( $validarusuarios == null || $validarusuarios = ''){
     </body>
    
     <script>
-       $(document).ready(function() {
+        $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
                 e.preventDefault();
+
 
                 Swal.fire({
                     title: '<h2> Agregar nuevo contacto </h2>',
@@ -136,33 +137,32 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         '<input id="asunto" class="swal2-input css-input" placeholder="Ingrese el asunto" value=""> ' +
                         '<br>' +
                         '<label for="mensaje" class="css-label"> Mensaje: </label>' +
-                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese una mensaje" value="">',
+                        '<input id="mensaje" class="swal2-input css-input" placeholder="Ingrese un mensaje" value="">',
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
-                        const IdCliente = $('#IdCliente').val();
+                        const correo = $('#correo').val();
                         const asunto = $('#asunto').val();
                         const mensaje = $('#mensaje').val();
 
-                        if (!IdCliente || !asunto || !mensaje) {
+
+                        if (!correo || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
-                            // Realizar una consulta AJAX para verificar si el IdCliente existe
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    IdCliente: IdCliente,
+                                    correo: correo,
                                     accion: 'verificar_cliente'
                                 },
                                 success: function(response) {
                                     if (response === 'existe_cliente') {
-                                        // El IdCliente existe, continuar con la lógica de guardar el contacto
                                         $.ajax({
                                             type: "POST",
                                             url: "../funciones/funciones.php",
                                             data: {
-                                                IdCliente: IdCliente,
+                                                correo: correo,
                                                 asunto: asunto,
                                                 mensaje: mensaje,
                                                 accion: 'validar_contactos'
@@ -170,7 +170,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             success: function(response) {
                                                 Swal.fire('Éxito', 'El nuevo contacto ha sido agregado.', 'success').then((result) => {
                                                     if (result.isConfirmed) {
-                                                        location.reload(); // Recarga la página
+                                                        location.reload();
                                                     }
                                                 });
                                             },
@@ -179,15 +179,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             }
                                         });
                                     } else {
-                                      
                                         Swal.fire({
                                             title: '<h2> Agregar nuevo cliente </h2>',
                                             html:
                                                 '<label for="nombreCliente" class="css-label"> Nombre Cliente: </label>' +
                                                 '<input id="nombreCliente" class="swal2-input css-input" placeholder="Ingrese el nombre del cliente" value=""> ' +
                                                 '<br>' +
-                                                '<label for "correoCliente" class="css-label"> Correo Cliente: </label>' +
-                                                '<input id="correoCliente" class="swal2-input css-input" placeholder="Ingrese el correo del cliente" value=""> ' +
                                                 '<label for="celularCliente" class="css-label"> Celular Cliente: </label>' +
                                                 '<input id="celularCliente" class="swal2-input css-input" placeholder="Ingrese el celular del cliente" value=""> ' +
                                                 '<br>' +
@@ -197,20 +194,18 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                             cancelButtonText: 'Cancelar',
                                             preConfirm: () => {
                                                 const nombreCliente = $('#nombreCliente').val();
-                                                const correoCliente = $('#correoCliente').val();
                                                 const celularCliente = $('#celularCliente').val();
                                                 const direccionCliente = $('#direccionCliente').val();
 
-                                                
+
                                                 $.ajax({
                                                     type: "POST",
                                                     url: "../funciones/funciones.php",
                                                     data: {
-                                                        IdCliente: IdCliente,
+                                                        correo: correo,
                                                         asunto: asunto,
                                                         mensaje: mensaje,
                                                         nombreCliente: nombreCliente,
-                                                        correoCliente: correoCliente,
                                                         celularCliente: celularCliente,
                                                         direccionCliente: direccionCliente,
                                                         accion: 'validar_contactos'
@@ -218,7 +213,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                     success: function(response) {
                                                         Swal.fire('Éxito', 'El nuevo contacto ha sido agregado.', 'success').then((result) => {
                                                             if (result.isConfirmed) {
-                                                                location.reload(); // Recarga la página
+                                                                location.reload();
                                                             }
                                                         });
                                                     },
@@ -231,7 +226,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     }
                                 },
                                 error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al verificar el IdCliente: ' + error, 'error');
+                                    Swal.fire('Error', 'Hubo un error al verificar el cliente: ' + error, 'error');
                                 }
                             });
                         }
@@ -241,11 +236,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
+<script>
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
                 const IdContacto = $(this).data('id');
+
 
                 Swal.fire({
                     title: '<h2> Editar contacto </h2>',
@@ -263,20 +259,46 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
+                    didOpen: () => {
+                        // Realiza una solicitud AJAX para cargar los datos del contacto y mostrarlos en el formulario
+                        $.ajax({
+                            type: "POST",
+                            url: "../funciones/funciones.php",
+                            data: {
+                                idContacto: IdContacto,
+                                accion: 'mostrar_contactos'
+                            },
+                            success: function(response) {
+                                const contactData = JSON.parse(response);
+
+
+                                if (contactData) {
+                                    $('#correo').val(contactData.correo);
+                                    $('#asunto').val(contactData.asunto);
+                                    $('#mensaje').val(contactData.mensaje);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire('Error', 'Hubo un error al cargar los datos del contacto: ' + error, 'error');
+                            }
+                        });
+                    },
                     preConfirm: () => {
-                        const IdCliente = $('#IdCliente').val();
+                        const correo = $('#correo').val();
                         const asunto = $('#asunto').val();
                         const mensaje = $('#mensaje').val();
 
-                        if (!IdCliente || !asunto || !mensaje) {
+
+                        if (!correo || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
+                            // Realiza una solicitud AJAX para editar el contacto
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    idContacto: IdContacto, // Cambiado el nombre del campo a idContacto
-                                    IdCliente: IdCliente,
+                                    idContacto: IdContacto,
+                                    correo: correo,
                                     asunto: asunto,
                                     mensaje: mensaje,
                                     accion: 'editar_contactos'
@@ -295,31 +317,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         }
                     }
                 });
-
-                // Realiza una solicitud AJAX para cargar los datos del contacto y mostrarlos en el formulario
-                $.ajax({
-                    type: "POST",
-                    url: "../funciones/funciones.php",
-                    data: {
-                        idContacto: IdContacto, // Cambiado el nombre del campo a idContacto
-                        accion: 'mostrar_contactos'
-                    },
-                    success: function(response) {
-                        const userData = JSON.parse(response);
-
-                        if (userData) {
-                            $('#IdCliente').val(userData.IdCliente);
-                            $('#asunto').val(userData.asunto);
-                            $('#mensaje').val(userData.mensaje);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos del contacto: ' + error, 'error');
-                    }
-                });
             });
         });
     </script>
+
+
 
     <script>
         $('.btn-view').on('click', function(e) {
