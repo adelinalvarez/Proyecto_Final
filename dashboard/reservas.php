@@ -137,12 +137,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     title: '<h2> Agregar nueva reserva </h2>',
                     html: '<div class="row">' +
                                 '<div class="col-md-6 mt-3">' +
-                                    '<label for="cantidadPersonas" class="css-label">Cantidad de personas:</label>' +
-                                    '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value="">' +
-                                    '<br>' +
                                     '<label for="correo" class="css-label">Correo:</label>' +
                                     '<br>' +
                                     '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value="">' +
+                                    '<br>' +
+                                    '<label for="cantidadPersonas" class="css-label">Cantidad de personas:</label>' +
+                                    '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value="">' +
                                     '<br>' +
                                     '<label for="fecha" class="css-label">Fecha:</label>' +
                                     '<br>' +
@@ -196,25 +196,21 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
-                        const IdCliente = $('#IdCliente').val();
-                        let cantidadPersonas = $('#cantidadPersonas').val();
+                        const correo = $('#correo').val();
+                        const cantidadPersonas = $('#cantidadPersonas').val();
                         const fecha = $('#fecha').val();
                         const hora = $('#hora').val();
                         const evento = $('#evento').val();
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
-                        if (parseInt(cantidadPersonas) < 1) {
-                            Swal.showValidationMessage('La cantidad de personas no puede ser menor a 1');
-                            return false; // Detiene el proceso de confirmación
-                        }
-                        if (!IdCliente|| !cantidadPersonas|| !fecha|| !hora || !evento || !area || !descripcion) {
+                        if (!correo|| !cantidadPersonas|| !fecha|| !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
                                 data: {
-                                    IdCliente: IdCliente,
+                                    correo: correo,
                                     cantidadPersonas: cantidadPersonas,
                                     hora: hora,
                                     evento: evento,
@@ -240,22 +236,24 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
+
     <script>
-            $(document).ready(function() {
+        $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
                 const IdReservas = $(this).data('id');
+
 
                 Swal.fire({
                     title: '<h2> Editar reserva </h2>',
                     html: '<div class="row">' +
                                 '<div class="col-md-6 mt-3">' +
-                                    '<label for="cantidadPersonas" class="css-label">Cantidad de personas:</label>' +
-                                    '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value="">' +
-                                    '<br>' +
                                     '<label for="correo" class="css-label">Correo:</label>' +
                                     '<br>' +
                                     '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value="">' +
+                                    '<br>' +
+                                    '<label for="cantidadPersonas" class="css-label">Cantidad de personas:</label>' +
+                                    '<input type="number" id="cantidadPersonas" class="swal2-input css-input" placeholder="Ingrese la cantidad" value="">' +
                                     '<br>' +
                                     '<label for="fecha" class="css-label">Fecha:</label>' +
                                     '<br>' +
@@ -319,6 +317,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             success: function(response) {
                                 const reservasData = JSON.parse(response);
                                 if (reservasData) {
+                                    $('#correo').val(reservasData.correo);
                                     $('#cantidadPersonas').val(reservasData.cantidadPersonas);
                                     $('#fecha').val(reservasData.fecha);
                                     $('#hora').val(reservasData.hora);
@@ -333,6 +332,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         });
                     },
                     preConfirm: () => {
+                        const correo = $('#correo').val();
                         const cantidadPersonas = $('#cantidadPersonas').val();
                         const fecha = $('#fecha').val();
                         const hora = $('#hora').val();
@@ -340,12 +340,14 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
 
+
                         if (parseInt(cantidadPersonas) < 1) {
                             Swal.showValidationMessage('La cantidad de personas no puede ser menor a 1');
                             return false;
                         }
 
-                        if (!cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
+
+                        if (!correo || !cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
                         } else {
                             $.ajax({
@@ -353,6 +355,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 url: "../funciones/funciones.php",
                                 data: {
                                     idReservas: IdReservas,
+                                    correo: correo,
                                     cantidadPersonas: cantidadPersonas,
                                     fecha: fecha,
                                     hora: hora,
@@ -378,6 +381,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
             });
         });
     </script>
+
 
     <script>
         $('.btn-view').on('click', function(e) {
