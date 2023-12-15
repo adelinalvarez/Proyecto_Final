@@ -177,6 +177,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         $('#errorPrecio').text('Solo se permiten números en el campo de precio.');
                         return false;
                     }
+                    if (isNaN(precio) || parseFloat(precio) < 1) {
+                        $('#errorPrecio').text('Ingrese un precio válido (mayor o igual a 1).');
+                        return false;
+                    }
+
+                    // Verificar si el nombre contiene números
+                    if (/\d/.test(nombre)) {
+                        $('#nombre').val('');
+                        $('#nombre').focus();
+                        Swal.showValidationMessage('El nombre no puede contener números.');
+                        return false;
+                    }
+
 
                     if (!nombre || !precio) {
                         Swal.showValidationMessage('Por favor, completa todos los campos');
@@ -266,6 +279,23 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const NombreCategoria = $('#NombreCategoria').val();
                         const precio = $('#precio').val();
                         const imagen = $('#imagen').val();
+                    // Verificar si el valor del precio es un número
+                    if (isNaN(precio)) {
+                        $('#errorPrecio').text('Solo se permiten números en el campo de precio.');
+                        return false;
+                    }
+                    if (isNaN(precio) || parseFloat(precio) < 1) {
+                        $('#errorPrecio').text('Ingrese un precio válido (mayor o igual a 1).');
+                        return false;
+                    }
+
+                    // Verificar si el nombre contiene números
+                    if (/\d/.test(nombre)) {
+                        $('#nombre').val('');
+                        $('#nombre').focus();
+                        Swal.showValidationMessage('El nombre no puede contener números.');
+                        return false;
+                    }
 
                         if (!validateNombre(nombre) || !validatePrecio()) {
                             Swal.showValidationMessage('Por favor, completa el campo de Nombre y asegúrate de ingresar un precio válido.');

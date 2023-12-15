@@ -145,6 +145,10 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const asunto = $('#asunto').val();
                         const mensaje = $('#mensaje').val();
 
+                        if (!/@/.test(correo)) {
+                            Swal.showValidationMessage('Por favor, ingresa un correo válido.');
+                            return false;
+                        }
 
                         if (!correo || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
@@ -196,6 +200,24 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                 const nombreCliente = $('#nombreCliente').val();
                                                 const celularCliente = $('#celularCliente').val();
                                                 const direccionCliente = $('#direccionCliente').val();
+
+                                                // Validación del nombre del cliente (solo letras)
+                                                if (!/^[a-zA-Z\s]+$/.test(nombreCliente)) {
+                                                    Swal.showValidationMessage('El nombre del cliente solo debe contener letras.');
+                                                    return false;
+                                                }
+
+                                                // Validación del celular (solo números)
+                                                if (!/^\d+$/.test(celularCliente)) {
+                                                    Swal.showValidationMessage('El celular debe contener solo números.');
+                                                    return false;
+                                                }
+
+                                                // Validación de campos vacíos
+                                                if ( !nombreCliente || !celularCliente || !direccionCliente) {
+                                                    Swal.showValidationMessage('Por favor, completa todos los campos');
+                                                    return false;
+                                                }
 
 
                                                 $.ajax({
@@ -287,7 +309,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const correo = $('#correo').val();
                         const asunto = $('#asunto').val();
                         const mensaje = $('#mensaje').val();
-
+                        
+                        if (!/@/.test(correo)) {
+                            Swal.showValidationMessage('Por favor, ingresa un correo válido.');
+                            return false;
+                        }
 
                         if (!correo || !asunto || !mensaje) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
