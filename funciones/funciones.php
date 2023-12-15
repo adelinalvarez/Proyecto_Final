@@ -576,9 +576,11 @@ function editar_contactos(){
     $idContacto = $_POST['idContacto'];
     $correo = $_POST['correo'];
     $asunto = $_POST['asunto'];
-    $mensaje = $_POST['mensaje']
+    $mensaje = $_POST['mensaje'];
+
 
     $conexion = $GLOBALS['conex'];
+
 
     // Obtener el IdCliente basado en el correo
     $consulta_id_cliente = "SELECT IdCliente FROM clientes WHERE correo = ?";

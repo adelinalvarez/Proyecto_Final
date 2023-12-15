@@ -123,6 +123,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
                 e.preventDefault();
+
+
                 Swal.fire({
                     title: '<h2> Agregar nuevo contacto </h2>',
                     html:
@@ -234,7 +236,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
+<script>
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
@@ -318,6 +320,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
             });
         });
     </script>
+
+
 
     <script>
         $('.btn-view').on('click', function(e) {
