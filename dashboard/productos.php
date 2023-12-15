@@ -186,7 +186,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         formData.append('descripcion', descripcion);
                         formData.append('NombreCategoria', NombreCategoria);
                         formData.append('precio', precio);
-                        formData.append('accion', 'validar_productos');
+                        formData.append('accion', 'editar_productos');
 
                         $.ajax({
                             type: "POST",
@@ -197,7 +197,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             success: function(response) {
                                 Swal.fire('Éxito', 'El nuevo producto ha sido agregado.', 'success').then((result) => {
                                     if (result.isConfirmed) {
-                                        location.reload(); // Recarga la página
+                                        //location.reload(); // Recarga la página
+                                        console.log(formData)
                                     }
                                 });
                             },
@@ -222,50 +223,68 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 Swal.fire({
                     title: 'Editar Producto',
                     html: `
-                        <label for="nombre" class="css-label"> Nombre: </label>
-                        <input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value="">
+                        <form action="../funciones/funciones.php" method="POST" enctype="multipart/form-data">
+                        <div class="column">
+                            <img id="imagenActual" src="" alt="Imagen del producto" style="max-width: 100px; hei">
+                            <br>
+                            <label class="css-label" for="customFile">Agregar imagen</label>
+                            <input type="file" name="imagen" id="imagen" class="css-input" style="display: none;" required />
+                            <input type="file" name="imagen" id="imagen" class="css-input" style="display: block; width: 100%;" />
+                            <br>
+                            <label for="Nombre" class="css-label"> Nombre: </label>
+                            <input type="text" id="nombre" name="nombre" class="css-input" style="display: block; width: 100%;" required>
+                            <br>
+                            <label for "Categoria" class="css-label">Categoria:</label>
+                            <select name="NombreCategoria" id="NombreCategoria" class="css-input" style="display: block; width: 100%;" required>
+                                <?php $conexion = $GLOBALS['conex'];
+                                    $SQL = mysqli_query($conexion, "SELECT categorias.NombreCategoria FROM categorias");
+                                    while ($row = mysqli_fetch_assoc($SQL)) {
+                                        echo "<option value='" . $row['NombreCategoria'] . "'>" . $row['NombreCategoria'] . "</option>";
+                                    }
+                                    ?>
+                            </select>
+                            <br>
+                            <label for="Precio" class="css-label">Precio:</label>
+                            <input type="number" id="precio" name="precio" class="css-input" style="display: block; width: 100%;" required>
+                            <br>
+                            <p id="errorPrecio" style="color: red;"></p>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="column">
+                            <label for="Descripcion" class="css-label"> Descripcion:</label>
+                            <textarea id="descripcion" name="descripcion" rows="14"  style="width: 100%;" class="css-input" required> </textarea>
+                        </div>
                         <br>
-                        <label for="descripcion" class="css-label"> Descripción: </label>
-                        <input id="descripcion" class="swal2-input css-input" placeholder="Ingrese la descripción" value="">
-                        <br>
-                        <label for="NombreCategoria" class="css-label"> Categoria: </label>
-                        <select name="NombreCategoria" id="NombreCategoria" class="css-input">
-                            <?php
-                                $conexion = $GLOBALS['conex'];                
-                                $SQL = mysqli_query($conexion, "SELECT categorias.NombreCategoria FROM categorias");
-                                while ($row = mysqli_fetch_assoc($SQL)) {
-                                    echo "<option value='" . $row['NombreCategoria'] . "'>" . $row['NombreCategoria'] . "</option>";
-                                }
-                            ?>
-                        </select>
-                        <br>
-                        <label for="precio" class="css-label"> Precio: </label>
-                        <input id="precio" class="swal2-input css-input" placeholder="Ingrese el precio" value="" oninput="validatePrecio()">
-                    `,
+                    </form>`,
                     focusConfirm: false,
                     showCancelButton: true,
                     cancelButtonText: 'Cancelar',
                     preConfirm: () => {
+                        const formData = new FormData(document.querySelector('form'));
                         const nombre = $('#nombre').val();
                         const descripcion = $('#descripcion').val();
                         const NombreCategoria = $('#NombreCategoria').val();
                         const precio = $('#precio').val();
+                        const imagen = $('#imagen').val();
 
                         if (!validateNombre(nombre) || !validatePrecio()) {
                             Swal.showValidationMessage('Por favor, completa el campo de Nombre y asegúrate de ingresar un precio válido.');
                             return false;
                         } else {
+                            formData.append('id', IdProducto);
+                            formData.append('nombre', nombre);
+                            formData.append('imagen', imagen);
+                            formData.append('descripcion', descripcion);
+                            formData.append('NombreCategoria', NombreCategoria);
+                            formData.append('precio', precio);
+                            formData.append('accion', 'editar_productos');
+
                             $.ajax({
                                 type: "POST",
                                 url: "../funciones/funciones.php",
-                                data: {
-                                    id: IdProducto,
-                                    nombre: nombre,
-                                    descripcion: descripcion,
-                                    NombreCategoria: NombreCategoria,
-                                    precio: precio,
-                                    accion: 'editar_productos'
-                                },
+                                data: formData,
+                                processData: false,
+                                contentType: false,
                                 success: function(response) {
                                     Swal.fire('Éxito', 'El producto ha sido actualizado.', 'success').then((result) => {
                                         if (result.isConfirmed) {
@@ -297,6 +316,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             $('#descripcion').val(productoData.descripcion);
                             $('#NombreCategoria').val(productoData.categoria);
                             $('#precio').val(productoData.precio);
+                            $('#imagenActual').attr('src', '../product_images/' + productoData.imagen);
                         }
                     },
                     error: function(xhr, status, error) {

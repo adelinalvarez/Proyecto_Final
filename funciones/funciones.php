@@ -849,9 +849,19 @@ function editar_productos() {
         $NombreCategoria = $_POST['NombreCategoria'];
         $precio = $_POST['precio'];
 
+        $imagen = null;
+
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK){
+            $typeImage = exif_imagetype($_FILES["imagen"]["tmp_name"]);
+            $name_generated =  generateNameImage($typeImage);
+            move_uploaded_file($_FILES["imagen"]["tmp_name"], '../product_images/' . $name_generated);
+            $imagen = $name_generated;
+        }
+
         // Validación de datos (puedes personalizar esto según tus requerimientos)
         if (empty($nombre) || empty($descripcion) || empty($NombreCategoria) || empty($precio)) {
             echo "Por favor, completa todos los campos.";
+
             return;
         }
 
@@ -860,9 +870,17 @@ function editar_productos() {
 
         // Consulta preparada para evitar SQL injection
         $actualizacion = "UPDATE productos SET nombre = ?, descripcion = ?, categoria = ?, precio = ? WHERE IdProducto = ?";
-        if ($stmt = mysqli_prepare($conexion, $actualizacion)) {
-            mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $descripcion, $NombreCategoria, $precio, $IdProducto);
 
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK){
+            $actualizacion = "UPDATE productos SET nombre = ?, descripcion = ?, categoria = ?, precio = ?, imagen = ? WHERE IdProducto = ?";
+        }
+
+        if ($stmt = mysqli_prepare($conexion, $actualizacion)) {
+            if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK){
+                mysqli_stmt_bind_param($stmt, "sssssi", $nombre, $descripcion, $NombreCategoria, $precio, $imagen, $IdProducto);
+            }else{
+                mysqli_stmt_bind_param($stmt, "ssssi", $nombre, $descripcion, $NombreCategoria, $precio, $IdProducto);
+            }
             // Ejecutar la consulta
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_close($stmt);
@@ -882,7 +900,7 @@ function mostrar_productos() {
     if (isset($_POST['id'])) {
         $IdProducto = $_POST['id'];
         $conexion = $GLOBALS['conex'];
-        $consulta = mysqli_query($conexion, "SELECT IdProducto, nombre, descripcion, categoria, precio FROM productos WHERE IdProducto = '$IdProducto'");
+        $consulta = mysqli_query($conexion, "SELECT IdProducto, nombre, descripcion, categoria, precio, imagen FROM productos WHERE IdProducto = '$IdProducto'");
 
         if ($consulta) {
             $producto = mysqli_fetch_assoc($consulta);
