@@ -133,6 +133,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-add').on('click', function(e) {
                 e.preventDefault();
+                const hoy = new Date().toISOString().split('T')[0];
                 Swal.fire({
                     title: '<h2> Agregar nueva reserva </h2>',
                     html: '<div class="row">' +
@@ -203,8 +204,26 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const evento = $('#evento').val();
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
+
+                    if (!/@/.test(correo)) {
+                        Swal.showValidationMessage('Por favor, ingresa un correo válido.');
+                        return false;
+                    }
+
+                        // Validación de cantidad
+                    if (cantidadPersonas <= 0) {
+                        Swal.showValidationMessage('La cantidad de personas debe ser mayor a 0.');
+                        return false;
+                    }
+                    if (fecha <= hoy) {
+                        Swal.showValidationMessage('La fecha debe ser posterior a la actual.');
+                        return false;
+                    }
+          
+                       // Verificación de campos vacíos
                         if (!correo|| !cantidadPersonas|| !fecha|| !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
+                            return false;
                         } else {
                             $.ajax({
                                 type: "POST",
@@ -212,6 +231,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 data: {
                                     correo: correo,
                                     cantidadPersonas: cantidadPersonas,
+                                    fecha: fecha,
                                     hora: hora,
                                     evento: evento,
                                     area: area,
@@ -228,8 +248,8 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                 error: function(xhr, status, error) {
                                     Swal.fire('Error', 'Hubo un error al agregar el cliente: ' + error, 'error');
                                 }
-                            });
-                        }
+                            }); 
+                        } 
                     }
                 });
             });
@@ -241,6 +261,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
+                const hoy = new Date().toISOString().split('T')[0];
                 const IdReservas = $(this).data('id');
 
 
@@ -340,12 +361,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const area = $('#area').val();
                         const descripcion = $('#descripcion').val();
 
+                        if (!/@/.test(correo)) {
+                            Swal.showValidationMessage('Por favor, ingresa un correo válido.');
+                            return false;
+                        }
 
                         if (parseInt(cantidadPersonas) < 1) {
                             Swal.showValidationMessage('La cantidad de personas no puede ser menor a 1');
                             return false;
                         }
-
+                        if (fecha <= hoy) {
+                            Swal.showValidationMessage('La fecha debe ser posterior a la actual.');
+                            return false;
+                        }
 
                         if (!correo || !cantidadPersonas || !fecha || !hora || !evento || !area || !descripcion) {
                             Swal.showValidationMessage('Por favor, completa todos los campos');
