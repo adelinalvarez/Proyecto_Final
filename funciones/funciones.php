@@ -311,7 +311,6 @@ function validar_reservas_normal(){
     $nombre = $_POST['nombre'];
     $correo = $_POST['correo'];
     $celular = $_POST['celular'];
-
     $cantidadPersonas = $_POST['cantidadPersonas'];
     $fecha = $_POST['fecha'];
     $hora = $_POST['hora'];
