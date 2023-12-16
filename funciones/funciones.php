@@ -472,14 +472,14 @@ function validar_contactos() {
         $idCliente = $fila['IdCliente'];
     } else {
         // El cliente no existe, lo insertamos en la tabla "clientes".
-        $nombreCliente = $_POST['nombreCliente'];  // Agregado
-        $celularCliente = $_POST['celularCliente'];  // Agregado
-        $direccionCliente = $_POST['direccionCliente'];  // Agregado
+        $nombre = $_POST['nombre'];  // Agregado
+        $celular = $_POST['celular'];  // Agregado
+        $direccion = $_POST['direccion'];  // Agregado
 
 
         $consulta_insertar_cliente = "INSERT INTO clientes (correo, nombre, celular, direccion) VALUES (?, ?, ?, ?)";
         $stmt_insertar_cliente = mysqli_prepare($conexion, $consulta_insertar_cliente);
-        mysqli_stmt_bind_param($stmt_insertar_cliente, "ssss", $correo, $nombreCliente, $celularCliente, $direccionCliente);
+        mysqli_stmt_bind_param($stmt_insertar_cliente, "ssss", $correo, $nombre, $celular, $direccion);
         mysqli_stmt_execute($stmt_insertar_cliente);
 
 

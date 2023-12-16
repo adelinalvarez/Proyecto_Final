@@ -199,7 +199,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         formData.append('descripcion', descripcion);
                         formData.append('NombreCategoria', NombreCategoria);
                         formData.append('precio', precio);
-                        formData.append('accion', 'editar_productos');
+                        formData.append('accion', 'validar_productos');
 
                         $.ajax({
                             type: "POST",
@@ -210,8 +210,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             success: function(response) {
                                 Swal.fire('Éxito', 'El nuevo producto ha sido agregado.', 'success').then((result) => {
                                     if (result.isConfirmed) {
-                                        //location.reload(); // Recarga la página
-                                        console.log(formData)
+                                        location.reload(); 
                                     }
                                 });
                             },
