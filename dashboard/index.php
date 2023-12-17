@@ -1,82 +1,117 @@
 <?php
-require_once ("../funciones/_db.php");
+require_once("../funciones/_db.php");
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
 
 $validarusuarios = $_SESSION['correo'];
 
-if ($validarusuarios == null || $validarusuarios = '') {
+if ($validarusuarios == null || $validarusuarios == '') {
     header("Location: ../index.php");
     die();
 }
 
-// Conexión a la base de datos (reemplaza los datos con los tuyos)
-$conexion = mysqli_connect("localhost", "root", "", "hilda");
+// Consulta para obtener la cantidad de usuarios
+$sqlUsuarios = "SELECT COUNT(*) as cantidad_usuarios FROM usuarios";
+$resultadoUsuarios = $conex->query($sqlUsuarios);
 
-if (!$conexion) {
-    die("Error de conexión: " . mysqli_connect_error());
+if ($resultadoUsuarios) {
+    $filaUsuarios = $resultadoUsuarios->fetch_assoc();
+    $totalUsuarios = $filaUsuarios['cantidad_usuarios'];
+} else {
+    echo "Error en la consulta de usuarios: " . $conex->error;
 }
 
-// Consulta para obtener la cantidad de usuarios
-$sqlUsuarios = "SELECT COUNT(*) AS totalUsuarios FROM usuarios";
-$resultUsuarios = mysqli_query($conexion, $sqlUsuarios);
-$rowUsuarios = mysqli_fetch_assoc($resultUsuarios);
-$totalUsuarios = $rowUsuarios['totalUsuarios'];
+// Consulta para obtener la cantidad de productos
+$sqlProductos = "SELECT COUNT(*) as cantidad_productos FROM productos";
+$resultadoProductos = $conex->query($sqlProductos);
 
-$sqlCategorias = "SELECT COUNT(*) AS totalCategorias FROM categorias";
-$resultCategorias = mysqli_query($conexion, $sqlCategorias);
-$rowCategorias = mysqli_fetch_assoc($resultCategorias);
-$totalCategorias = $rowCategorias['totalCategorias'];
+if ($resultadoProductos) {
+    $filaProductos = $resultadoProductos->fetch_assoc();
+    $totalProductos = $filaProductos['cantidad_productos'];
+} else {
+    echo "Error en la consulta de productos: " . $conex->error;
+}
 
-$sqlProductos = "SELECT COUNT(*) AS totalProductos FROM productos";
-$resultProductos = mysqli_query($conexion, $sqlProductos);
-$rowProductos = mysqli_fetch_assoc($resultProductos);
-$totalProductos = $rowProductos['totalProductos'];
+// Consulta para obtener la cantidad de categorías
+$sqlCategorias = "SELECT COUNT(*) as cantidad_categorias FROM categorias";
+$resultadoCategorias = $conex->query($sqlCategorias);
 
-$sqlReservas = "SELECT COUNT(*) AS totalReservas FROM reservas";
-$resultReservas = mysqli_query($conexion, $sqlReservas);
-$rowReservas = mysqli_fetch_assoc($resultReservas);
-$totalReservas = $rowReservas['totalReservas'];
+if ($resultadoCategorias) {
+    $filaCategorias = $resultadoCategorias->fetch_assoc();
+    $totalCategorias = $filaCategorias['cantidad_categorias'];
+} else {
+    echo "Error en la consulta de categorías: " . $conex->error;
+}
 
-$sqlContactos = "SELECT COUNT(*) AS totalContactos FROM contactos";
-$resultContactos = mysqli_query($conexion, $sqlContactos);
-$rowContactos = mysqli_fetch_assoc($resultContactos);
-$totalContactos = $rowContactos['totalContactos'];
+// Consulta para obtener la cantidad de reservas
+$sqlReservas = "SELECT COUNT(*) as cantidad_reservas FROM reservas";
+$resultadoReservas = $conex->query($sqlReservas);
 
-$sqlClientes = "SELECT COUNT(*) AS totalClientes FROM clientes";
-$resultClientes = mysqli_query($conexion, $sqlClientes);
-$rowClientes = mysqli_fetch_assoc($resultClientes);
-$totalClientes = $rowClientes['totalClientes'];
+if ($resultadoReservas) {
+    $filaReservas = $resultadoReservas->fetch_assoc();
+    $totalReservas = $filaReservas['cantidad_reservas'];
+} else {
+    echo "Error en la consulta de reservas: " . $conex->error;
+}
 
-$sqlOrdenes = "SELECT COUNT(*) AS totalOrdenes FROM ordenes";
-$resultOrdenes = mysqli_query($conexion, $sqlOrdenes);
-$rowOrdenes = mysqli_fetch_assoc($resultOrdenes);
-$totalOrdenes = $rowUsuarios['totalOrdenes'];
+// Consulta para obtener la cantidad de contactos
+$sqlContactos = "SELECT COUNT(*) as cantidad_contactos FROM contactos";
+$resultadoContactos = $conex->query($sqlContactos);
+
+if ($resultadoContactos) {
+    $filaContactos = $resultadoContactos->fetch_assoc();
+    $totalContactos = $filaContactos ['cantidad_contactos'];
+} else {
+    echo "Error en la consulta de contactos: " . $conex->error;
+}
+
+// Consulta para obtener la cantidad de clientes
+$sqlClientes = "SELECT COUNT(*) as cantidad_clientes FROM clientes";
+$resultadoClientes = $conex->query($sqlClientes);
+
+if ($resultadoClientes) {
+    $filaClientes = $resultadoClientes->fetch_assoc();
+    $totalClientes = $filaClientes ['cantidad_clientes'];
+} else {
+    echo "Error en la consulta de clientes: " . $conex->error;
+}
+
+// Consulta para obtener la cantidad de ordenes
+$sqlOrdenes = "SELECT COUNT(*) as cantidad_ordenes FROM orden";
+$resultadoOrdenes = $conex->query($sqlOrdenes);
+
+if ($resultadoOrdenes) {
+    $filaOrdenes = $resultadoOrdenes->fetch_assoc();
+    $totalOrdenes = $filaOrdenes ['cantidad_ordenes'];
+} else {
+    echo "Error en la consulta de ordenes: " . $conex->error;
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../imagenes/Logo.png">
-        <title> Dashboard - Doña Hilda Tapas and Grill</title>
+        <title>Dashboard - Doña Hilda Tapas and Grill</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"> </script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"> </script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="css/dashboard.css">
-        <script type="text/javascript" src="js/dashboard.js"> </script>
+        <script type="text/javascript" src="js/dashboard.js"></script>
     </head>
 
     <body id="body-pd">
+
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <div style= "color:white"> <?php echo $_SESSION['correo']; ?></div>
+            <div style="color:white"> <?php echo $_SESSION['correo']; ?></div>
             <div> <a class="header_toggle" href="../funciones/cerrarSesion.php"> <i class='bx bx-log-out'></i> </a> </div>
         </header>
+
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
@@ -93,10 +128,13 @@ $totalOrdenes = $rowUsuarios['totalOrdenes'];
                 </div>
             </nav>
         </div>
-        <div class="height-100 bg-light">
-        <h4>Panel Administrativo</h4>
 
-        <!-- Tarjetas para mostrar la cantidad de elementos en cada tabla -->
+        <div class="height-100 bg-light">
+            <br>
+            <h4 class="text-center"> Panel Administrativo </h4>
+            <br>
+
+            <!-- Tarjetas para mostrar la cantidad de elementos en cada tabla -->
             <div class="row">
                 <div class="col-sm-4 mb-3">
                     <div class="card">
