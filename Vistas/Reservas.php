@@ -229,33 +229,33 @@ error_reporting(0);
                 const area = document.getElementById('area').value;
                 const descripcion = document.getElementById('descripcion').value;
                    // Verificar si todos los campos obligatorios están llenos
-                  if (nombre && correo && celular && cantidadPersonas && fecha && hora && evento && area && descripcion) {
-                        // Crear el mensaje con los datos del formulario de reservas
-                       const mensajeWhatsApp = 
-                        `Quiero realizar una nueva reserva:\n` +
-                          `Nombre: ${nombre}\n` +
-                            `Correo: ${correo}\n` +
-                            `Celular: ${celular}\n` +
-                            `Cantidad de Personas: ${cantidadPersonas}\n` +
-                            `Fecha: ${fecha}\n` +
-                            `Hora: ${hora}\n` +
-                            `Tipo de Evento: ${evento}\n` +
-                            `Área de Reservación: ${area}\n` +
-                            `Descripción: ${descripcion}`;
+                if (nombre && correo && celular && cantidadPersonas && fecha && hora && evento && area && descripcion) {
+                    // Crear el mensaje con los datos del formulario de reservas
+                    const mensajeWhatsApp = 
+                    `Quiero realizar una nueva reserva:\n` +
+                        `Nombre: ${nombre}\n` +
+                        `Correo: ${correo}\n` +
+                        `Celular: ${celular}\n` +
+                        `Cantidad de Personas: ${cantidadPersonas}\n` +
+                        `Fecha: ${fecha}\n` +
+                        `Hora: ${hora}\n` +
+                        `Tipo de Evento: ${evento}\n` +
+                        `Área de Reservación: ${area}\n` +
+                        `Descripción: ${descripcion}`;
 
-                            // Codificar el mensaje para ser parte del enlace de WhatsApp
-                            const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+                        // Codificar el mensaje para ser parte del enlace de WhatsApp
+                        const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
 
-                            // Crear el enlace de WhatsApp con el mensaje
-                            const enlaceWhatsApp = `https://wa.me/+18295330410?text=${mensajeCodificado}`;
+                        // Crear el enlace de WhatsApp con el mensaje
+                        const enlaceWhatsApp = `https://wa.me/+18295330410?text=${mensajeCodificado}`;
 
-                            // Abrir una nueva ventana para redirigir a WhatsApp
-                            window.open(enlaceWhatsApp, '_blank');
-                    } else {
-                            // Mostrar un mensaje de error o tomar alguna acción adicional si no se llenaron todos los campos
-                            alert('Por favor, completa todos los campos obligatorios antes de enviar la reserva.');
-                    }
+                        // Abrir una nueva ventana para redirigir a WhatsApp
+                        window.open(enlaceWhatsApp, '_blank');
+                } else {
+                    // Mostrar un mensaje de error o tomar alguna acción adicional si no se llenaron todos los campos
+                    alert('Por favor, completa todos los campos obligatorios antes de enviar la reserva.');
                 }
+            }
         </script>
 
            

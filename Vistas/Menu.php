@@ -335,7 +335,7 @@ error_reporting(0);
                     </div>
                     <div class="modal-footer d-flex justify-content-center" style="border-radius: 0 0 15px 15px;">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #f8f673; color: #000;">Ver Carrito</button>
-                        <button type="submit" class="btn btn-primary" form="validar_compras" style="background-color: #f8f673; color: #000;">Confirmar Compra</button>
+                        <button type="submit" class="btn btn-primary" form="validar_compras" style="background-color: #f8f673; color: #000;" onclick="enviarPorWhatsAppCompra()">Confirmar Compra</button>
                     </div>
                 </div>
             </div>
@@ -684,7 +684,43 @@ error_reporting(0);
                 document.getElementById('validar_compras').appendChild(carritoInput);
             }
 
+            function enviarPorWhatsAppCompra() {
+                // Obtener los productos seleccionados
+                const lsContent = getLSContent();
+
+                // Verificar si hay productos seleccionados
+                if (lsContent.length > 0) {
+                    // Crear el mensaje con los datos de los productos y el total
+                    let mensajeWhatsApp = "Mi compra:\n";
+
+                    let totalPrice = 0;
+
+                    for (let product of lsContent) {
+                        const subtotal = product.quantity * product.price;
+                        totalPrice += subtotal;
+
+                        mensajeWhatsApp += `${product.name} - Cantidad: ${product.quantity} - Precio: $${product.price * product.quantity}\n`;
+                    }
+
+                    // Agregar el total al mensaje
+                    mensajeWhatsApp += `\nTotal: $${totalPrice}`;
+
+                    // Codificar el mensaje para ser parte del enlace de WhatsApp
+                    const mensajeCodificado = encodeURIComponent(mensajeWhatsApp);
+
+                    // Crear el enlace de WhatsApp con el mensaje
+                    const enlaceWhatsApp = `https://wa.me/+18295330410?text=${mensajeCodificado}`;
+
+                    // Abrir una nueva ventana para redirigir a WhatsApp
+                    window.open(enlaceWhatsApp, '_blank');
+                } else {
+                    // Mostrar un mensaje de error si no hay productos seleccionados
+                    alert('No hay productos seleccionados para comprar.');
+                }
+            }
         </script>
+
+        
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script>
@@ -705,6 +741,8 @@ error_reporting(0);
             openModal(productId);
             });
         </script>
+
+
         
     </body>
 

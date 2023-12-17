@@ -144,170 +144,82 @@ if( $validarusuarios == null || $validarusuarios = ''){
     </script>
 
     <script>
-        $(document).ready(function() {
-            $('.btn-edit').on('click', function(e) {
-                e.preventDefault();
-                const IdOrden = $(this).data('id');
+        $('.btn-view').on('click', function(e) {
+            e.preventDefault();
+            const IdOrden = $(this).data('id');
+            console.log('ID de la orden enviado:', IdOrden);
 
-                Swal.fire({
-                    title: '<h2> Editar usuario <h2>',
-                    html:
-                        '<label for="nombre" class="css-label"> Nombre completo: </label>' +
-                        '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
-                        '<br>' +
-                        '<label for="correo" class="css-label"> Correo: </label>' +
-                        '<br>' +
-                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
-                        '<br>' +
-                        '<label for="celular" class="css-label"> Celular: </label>' +
-                        '<br>'+
-                        '<input id="celular" class="swal2-input css-input" placeholder="Ingrese su número de celular" value="">'+
-                        '<br>'+
-                        '<label for="direccion" class="css-label"> Direccion: </label>' +
-                        '<input id="direccion" class="swal2-input css-input" placeholder="Ingrese su direccion" value="">',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                        const nombre = $('#nombre').val();
-                        const correo = $('#correo').val();
-                        const celular = $('#celular').val();
-                        const direccion = $('#direccion').val();
+            Swal.fire({
+                didOpen: () => {
+                    $.ajax({
+                        type: "POST",
+                        url: "../funciones/funciones.php",
+                        data: {
+                            id: IdOrden,
+                            accion: 'mostrar_ordenes'
+                        },
+                        success: function(response) {
+                            console.log('Respuesta completa del servidor:', response);
 
-                        if (!nombre || !correo || !celular || !direccion) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    id: IdOrden,
-                                    nombre: nombre,
-                                    correo: correo,
-                                    celular: celular,
-                                    direccion: direccion,
-                                    accion: 'editar_orden'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'El cliente ha sido actualizado.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al editar el cliente: ' + error, 'error');
+                            try {
+                                if (response.trim() !== '') {
+                                    const ordenData = JSON.parse(response);
+
+                                    if (!ordenData.error) {
+                                        const idOrden = ordenData.IdOrden;
+                                        const idCliente = ordenData.IdCliente;
+                                        const fecha = ordenData.Fecha;
+                                        const idProducto = ordenData.IdProducto;
+                                        const cantidad = ordenData.Cantidad;
+                                        const precio = ordenData.Precio;
+
+                                        Swal.update({
+                                            title: 'Datos de la orden:',
+                                            html: `<p class="css-label">ID de la orden: </p> <p>${idOrden}</p>
+                                                    <p class="css-label">ID del cliente: </p> <p> ${idCliente}</p>
+                                                    <p class="css-label">Fecha: </p> <p>${fecha}</p>
+                                                    <p class="css-label">ID del producto: </p> <p>${idProducto}</p>
+                                                    <p class="css-label">Cantidad: </p> <p>${cantidad}</p>
+                                                    <p class="css-label">Precio: </p> <p>${precio}</p>`,
+                                        });
+                                    } else {
+                                        console.error('Error en la respuesta del servidor:', ordenData.error);
+                                        Swal.fire(
+                                            'Error',
+                                            'Hubo un error al cargar los datos de la orden: ' + ordenData.error,
+                                            'error'
+                                        );
+                                    }
+                                } else {
+                                    console.error('La respuesta del servidor está vacía o incompleta.');
+                                    Swal.fire(
+                                        'Error',
+                                        'La respuesta del servidor está vacía o incompleta.',
+                                        'error'
+                                    );
                                 }
-                            });
-                        }
-                    }
-                });
-
-                // Realiza una solicitud AJAX para cargar los datos del usuario y mostrarlos en el formulario
-                $.ajax({
-                    type: "POST",
-                    url: "../funciones/funciones.php",
-                    data: {
-                        id: IdOrden,
-                        accion: 'mostrar_clientes'
-                    },
-                    success: function(response) {
-                        const clienteData = JSON.parse(response);
-
-                        if (clienteData) {
-                            $('#nombre').val(clienteData.nombre);
-                            $('#correo').val(clienteData.correo);
-                            $('#celular').val(clienteData.celular);
-                            $('#direccion').val(clienteData.direccion);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire('Error', 'Hubo un error al cargar los datos del cliente: ' + error, 'error');
-                    }
-                });
-            });
-        });
-    </script>
-
-<script>
-$('.btn-view').on('click', function(e) {
-    e.preventDefault();
-    const IdOrden = $(this).data('id');
-    console.log('ID de la orden enviado:', IdOrden);
-
-    Swal.fire({
-        didOpen: () => {
-            $.ajax({
-                type: "POST",
-                url: "../funciones/funciones.php",
-                data: {
-                    id: IdOrden,
-                    accion: 'mostrar_ordenes'
-                },
-                success: function(response) {
-                    console.log('Respuesta completa del servidor:', response);
-
-                    try {
-                        if (response.trim() !== '') {
-                            const ordenData = JSON.parse(response);
-
-                            if (!ordenData.error) {
-                                const idOrden = ordenData.IdOrden;
-                                const idCliente = ordenData.IdCliente;
-                                const fecha = ordenData.Fecha;
-                                const idProducto = ordenData.IdProducto;
-                                const cantidad = ordenData.Cantidad;
-                                const precio = ordenData.Precio;
-
-                                Swal.update({
-                                    title: 'Datos de la orden:',
-                                    html: `<p class="css-label">ID de la orden: </p> <p>${idOrden}</p>
-                                            <p class="css-label">ID del cliente: </p> <p> ${idCliente}</p>
-                                            <p class="css-label">Fecha: </p> <p>${fecha}</p>
-                                            <p class="css-label">ID del producto: </p> <p>${idProducto}</p>
-                                            <p class="css-label">Cantidad: </p> <p>${cantidad}</p>
-                                            <p class="css-label">Precio: </p> <p>${precio}</p>`,
-                                });
-                            } else {
-                                console.error('Error en la respuesta del servidor:', ordenData.error);
+                            } catch (error) {
+                                console.error('Error al analizar la respuesta JSON:', error);
                                 Swal.fire(
                                     'Error',
-                                    'Hubo un error al cargar los datos de la orden: ' + ordenData.error,
+                                    'Hubo un error al cargar los datos de la orden.',
                                     'error'
                                 );
                             }
-                        } else {
-                            console.error('La respuesta del servidor está vacía o incompleta.');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error en la solicitud AJAX:', error);
                             Swal.fire(
                                 'Error',
-                                'La respuesta del servidor está vacía o incompleta.',
+                                'Hubo un error en la solicitud AJAX: ' + error,
                                 'error'
                             );
                         }
-                    } catch (error) {
-                        console.error('Error al analizar la respuesta JSON:', error);
-                        Swal.fire(
-                            'Error',
-                            'Hubo un error al cargar los datos de la orden.',
-                            'error'
-                        );
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error en la solicitud AJAX:', error);
-                    Swal.fire(
-                        'Error',
-                        'Hubo un error en la solicitud AJAX: ' + error,
-                        'error'
-                    );
+                    });
                 }
             });
-        }
-    });
-});
-</script>
-
-
+        });
+    </script>
 
     <script>
         $('.btn-del').on('click', function(e){
