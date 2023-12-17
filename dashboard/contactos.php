@@ -186,35 +186,35 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                         Swal.fire({
                                             title: '<h2> Agregar nuevo cliente </h2>',
                                             html:
-                                                '<label for="nombreCliente" class="css-label"> Nombre Cliente: </label>' +
-                                                '<input id="nombreCliente" class="swal2-input css-input" placeholder="Ingrese el nombre del cliente" value=""> ' +
+                                                '<label for="nombre" class="css-label"> Nombre Cliente: </label>' +
+                                                '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre del cliente" value=""> ' +
                                                 '<br>' +
-                                                '<label for="celularCliente" class="css-label"> Celular Cliente: </label>' +
-                                                '<input id="celularCliente" class="swal2-input css-input" placeholder="Ingrese el celular del cliente" value=""> ' +
+                                                '<label for="celular" class="css-label"> Celular Cliente: </label>' +
+                                                '<input id="celular" class="swal2-input css-input" placeholder="Ingrese el celular del cliente" value=""> ' +
                                                 '<br>' +
-                                                '<label for="direccionCliente" class="css-label"> Direccion Cliente: </label>' +
-                                                '<input id="direccionCliente" class="swal2-input css-input" placeholder="Ingrese la direccion del cliente" value=""> ',
+                                                '<label for="direccion" class="css-label"> Direccion Cliente: </label>' +
+                                                '<input id="direccion" class="swal2-input css-input" placeholder="Ingrese la direccion del cliente" value=""> ',
                                             showCancelButton: true,
                                             cancelButtonText: 'Cancelar',
                                             preConfirm: () => {
-                                                const nombreCliente = $('#nombreCliente').val();
-                                                const celularCliente = $('#celularCliente').val();
-                                                const direccionCliente = $('#direccionCliente').val();
+                                                const nombre = $('#nombre').val();
+                                                const celular = $('#celular').val();
+                                                const direccion = $('#direccion').val();
 
                                                 // Validación del nombre del cliente (solo letras)
-                                                if (!/^[a-zA-Z\s]+$/.test(nombreCliente)) {
+                                                if (!/^[a-zA-Z\s]+$/.test(nombre)) {
                                                     Swal.showValidationMessage('El nombre del cliente solo debe contener letras.');
                                                     return false;
                                                 }
 
                                                 // Validación del celular (solo números)
-                                                if (!/^\d+$/.test(celularCliente)) {
+                                                if (!/^\d+$/.test(celular)) {
                                                     Swal.showValidationMessage('El celular debe contener solo números.');
                                                     return false;
                                                 }
 
                                                 // Validación de campos vacíos
-                                                if ( !nombreCliente || !celularCliente || !direccionCliente) {
+                                                if ( !nombre || !celular || !direccion) {
                                                     Swal.showValidationMessage('Por favor, completa todos los campos');
                                                     return false;
                                                 }
@@ -227,9 +227,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                         correo: correo,
                                                         asunto: asunto,
                                                         mensaje: mensaje,
-                                                        nombreCliente: nombreCliente,
-                                                        celularCliente: celularCliente,
-                                                        direccionCliente: direccionCliente,
+                                                        nombre: nombre,
+                                                        celular: celular,
+                                                        direccion: direccion,
                                                         accion: 'validar_contactos'
                                                     },
                                                     success: function(response) {
@@ -258,12 +258,11 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-<script>
+    <script>
         $(document).ready(function() {
             $('.btn-edit').on('click', function(e) {
                 e.preventDefault();
                 const IdContacto = $(this).data('id');
-
 
                 Swal.fire({
                     title: '<h2> Editar contacto </h2>',
@@ -346,8 +345,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
             });
         });
     </script>
-
-
 
     <script>
         $('.btn-view').on('click', function(e) {

@@ -423,9 +423,7 @@ function mostrar_reservas() {
     if (isset($_POST['idReservas'])) {
         $IdReservas = $_POST['idReservas'];
 
-
         $conexion = $GLOBALS['conex'];
-
 
         $consulta_reserva = "SELECT r.*, c.correo
                             FROM reservas r

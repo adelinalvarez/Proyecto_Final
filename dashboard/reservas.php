@@ -264,7 +264,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 const hoy = new Date().toISOString().split('T')[0];
                 const IdReservas = $(this).data('id');
 
-
                 Swal.fire({
                     title: '<h2> Editar reserva </h2>',
                     html: '<div class="row">' +
