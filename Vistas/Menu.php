@@ -198,9 +198,16 @@ error_reporting(0);
                 </div>
             </div>
         </div>
+        
+        <script>
+            function recargarPagina() {
+
+            location.reload();
+            }
+        </script>
 
         <div class="container-lg my-15">
-            <h1 class="focus-in-expand text-center color-white">Menu</h1>
+        <h1 class="focus-in-expand text-center color-white" onclick="recargarPagina()">Menu</h1>
             <ul class="nav justify-content-center" id="categorias">
                 <?php
                 $conexion = $GLOBALS['conex'];
