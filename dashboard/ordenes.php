@@ -113,9 +113,6 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                                     <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdOrden']?>" >
                                                         <i class='bx bxs-user-detail'></i>
                                                     </a>
-                                                    <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdOrden']?>">
-                                                        <i class='bx bxs-edit'></i>
-                                                    </a>
                                                     <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdOrden']?>"> <i class='bx bxs-trash-alt'></i> </a>
                                                 </td>
                                             </tr>
