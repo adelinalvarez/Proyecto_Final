@@ -973,7 +973,10 @@ function validar_compras() {
     $correo = $_POST['correo'];
     $celular = $_POST['celular'];
     $direccionEnvio = $_POST['DireccionEnvio'];
-    $fecha = date('Y-m-d H:i:s');
+    date_default_timezone_set('America/Santo_Domingo'); 
+    $currentDateTime = new DateTime('now');
+    $currentDate = $currentDateTime->format('d-m-Y H:i:s');
+    $fecha = $currentDateTime->format('Y-m-d H:i:s');
 
     $stmt = mysqli_prepare($conexion, "SELECT IdCliente FROM clientes WHERE Correo = ?");
     mysqli_stmt_bind_param($stmt, 's', $correo);
