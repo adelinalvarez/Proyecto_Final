@@ -233,6 +233,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
 $('.btn-view').on('click', function(e) {
     e.preventDefault();
     const IdOrden = $(this).data('id');
+    console.log('ID de la orden enviado:', IdOrden);
 
     Swal.fire({
         didOpen: () => {
@@ -244,7 +245,7 @@ $('.btn-view').on('click', function(e) {
                     accion: 'mostrar_ordenes'
                 },
                 success: function(response) {
-                    console.log('Respuesta del servidor:', response);
+                    console.log('Respuesta completa del servidor:', response);
 
                     try {
                         if (response.trim() !== '') {
@@ -296,7 +297,7 @@ $('.btn-view').on('click', function(e) {
                     console.error('Error en la solicitud AJAX:', error);
                     Swal.fire(
                         'Error',
-                        'Hubo un error al cargar los datos de la orden: ' + error,
+                        'Hubo un error en la solicitud AJAX: ' + error,
                         'error'
                     );
                 }
@@ -305,8 +306,6 @@ $('.btn-view').on('click', function(e) {
     });
 });
 </script>
-
-
 
 
 

@@ -1038,22 +1038,10 @@ function mostrar_ordenes() {
     if (isset($_POST['id'])) {
         $IdOrden = $_POST['id'];
         $conexion = $GLOBALS['conex'];
-        $consulta = mysqli_query($conexion, "
-            SELECT 
-                orden.Id AS IdOrden, 
-                orden.IdCliente, 
-                orden.Fecha, 
-                ordendetalle.IdProducto, 
-                ordendetalle.Cantidad, 
-                ordendetalle.Precio 
-            FROM 
-                orden 
-            INNER JOIN 
-                ordendetalle ON orden.Id = ordendetalle.IdOrden
-            WHERE 
-                orden.Id = '$IdOrden'
-        ");
 
+        $consulta = mysqli_query($conexion, "SELECT  orden.Id AS IdOrden, orden.IdCliente, orden.Fecha, ordendetalle.IdProducto, ordendetalle.Cantidad, ordendetalle.Precio FROM orden INNER JOIN ordendetalle ON orden.Id = ordendetalle.IdOrden WHERE orden.Id = '$IdOrden'");
+
+        // Verificar la ejecución de la consulta SQL
         if ($consulta) {
             if ($orden = mysqli_fetch_assoc($consulta)) {
                 // Convertir el resultado a JSON y enviarlo como respuesta
@@ -1062,10 +1050,11 @@ function mostrar_ordenes() {
                 echo json_encode(array('error' => 'Orden no encontrada'));
             }
         } else {
-            echo json_encode(array('error' => 'Error al obtener los datos de la orden: ' . mysqli_error($conexion)));
+            echo json_encode(array('error' => 'Error en la consulta SQL: ' . mysqli_error($conexion)));
         }
     } else {
         echo json_encode(array('error' => 'ID de la orden no proporcionado'));
     }
 }
+
 ?>
