@@ -85,29 +85,41 @@ if( $validarusuarios == null || $validarusuarios = ''){
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $conexion=$GLOBALS['conex'];                
-                                            $SQL=mysqli_query($conexion,"SELECT ordendetalle.IdOrden, ordendetalle.IdProducto, ordendetalle.Cantidad, ordendetalle.Precio FROM ordendetalle");
-                                            $SQL=mysqli_query($conexion,"SELECT orden.fecha, ordendetalle.IdCliente FROM orden");
-                                            while($fila=mysqli_fetch_assoc($SQL)):
+                                            $conexion = $GLOBALS['conex'];                
+                                            $SQL = mysqli_query($conexion, "
+                                                SELECT 
+                                                    orden.Id AS IdOrden, 
+                                                    orden.IdCliente, 
+                                                    orden.Fecha, 
+                                                    ordendetalle.IdProducto, 
+                                                    ordendetalle.Cantidad, 
+                                                    ordendetalle.Precio 
+                                                FROM 
+                                                    orden 
+                                                INNER JOIN 
+                                                    ordendetalle ON orden.Id = ordendetalle.IdOrden
+                                            ");
+
+                                            while ($fila = mysqli_fetch_assoc($SQL)):
                                         ?>
-                                        <tr>
-                                            <td><?php echo $fila['IdOrden']; ?></td>
-                                            <td><?php echo $fila['IdCliente']; ?></td>
-                                            <td><?php echo $fila['fecha']; ?></td>
-                                            <td><?php echo $fila['IdProducto']; ?></td>
-                                            <td><?php echo $fila['Cantidad']; ?></td>
-                                            <td><?php echo $fila['Precio']; ?></td>
-                                            <td>
-                                                <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdOrden']?>" >
-                                                    <i class='bx bxs-user-detail'></i>
-                                                </a>
-                                                <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdOrden']?>">
-                                                    <i class='bx bxs-edit'></i>
-                                                </a>
-                                                <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdOrden']?>"> <i class='bx bxs-trash-alt'></i> </a>
-                                            </td>
-                                        </tr>
-                                        <?php endwhile;?>
+                                            <tr>
+                                                <td><?php echo $fila['IdOrden']; ?></td>
+                                                <td><?php echo $fila['IdCliente']; ?></td>
+                                                <td><?php echo $fila['Fecha']; ?></td>
+                                                <td><?php echo $fila['IdProducto']; ?></td>
+                                                <td><?php echo $fila['Cantidad']; ?></td>
+                                                <td><?php echo $fila['Precio']; ?></td>
+                                                <td>
+                                                    <a class="btn btn-view" href="#" data-id="<?php echo $fila['IdOrden']?>" >
+                                                        <i class='bx bxs-user-detail'></i>
+                                                    </a>
+                                                    <a class="btn btn-edit" href="#" data-id="<?php echo $fila['IdOrden']?>">
+                                                        <i class='bx bxs-edit'></i>
+                                                    </a>
+                                                    <a class="btn btn-del" href="#" data-id="<?php echo $fila['IdOrden']?>"> <i class='bx bxs-trash-alt'></i> </a>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -121,61 +133,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
     <script>
         $(document).ready(function() {
-            $('.btn-add').on('click', function(e) {
-                e.preventDefault();
-
-                Swal.fire({
-                    title: '<h2> Agregar nuevo cliente </h2>',
-                    html:
-                        '<label for="nombre" class="css-label"> Nombre completo: </label>' +
-                        '<input id="nombre" class="swal2-input css-input" placeholder="Ingrese el nombre" value=""> ' +
-                        '<br>' +
-                        '<label for="correo" class="css-label"> Correo: </label>' +
-                        '<br>' +
-                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
-                        '<br>' +
-                        '<label for="celular" class="css-label"> Celular: </label>' +
-                        '<br>'+
-                        '<input id="celular" class="swal2-input css-input" placeholder="Ingrese una celular" value="">'+
-                        '<br>'+
-                        '<label for="direccion" class="css-label"> Direccion: </label>' +
-                        '<input id="direccion" class="swal2-input css-input" placeholder="Ingrese su direccion" value="">',
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                        const nombre = $('#nombre').val();
-                        const correo = $('#correo').val();
-                        const celular = $('#celular').val();
-                        const direccion = $('#direccion').val();
-
-                        if (!nombre || !correo || !celular || !direccion) {
-                            Swal.showValidationMessage('Por favor, completa todos los campos');
-                        } else {
-                            $.ajax({
-                                type: "POST",
-                                url: "../funciones/funciones.php",
-                                data: {
-                                    nombre: nombre,
-                                    correo: correo,
-                                    celular: celular,
-                                    direccion: direccion,
-                                    accion: 'validar_orden'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Éxito', 'El nuevo cliente ha sido agregado.', 'success').then((result) => {
-                                        if (result.isConfirmed) {
-                                            location.reload(); // Recarga la página
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    Swal.fire('Error', 'Hubo un error al agregar el cliente: ' + error, 'error');
-                                }
-                            });
-                        }
-                    }
-                });
+            $('#example').DataTable({
+                "searching": true, 
+                "search": {"regex": true}, 
+                "columnDefs": [
+                    { "searchable": false, "targets": [1, 2, 3, 4, 5, 6] } 
+                ]
             });
         });
     </script>
@@ -266,52 +229,86 @@ if( $validarusuarios == null || $validarusuarios = ''){
         });
     </script>
 
-    <script>
-        $('.btn-view').on('click', function(e) {
-            e.preventDefault();
-            const IdOrden = $(this).data('id');
+<script>
+$('.btn-view').on('click', function(e) {
+    e.preventDefault();
+    const IdOrden = $(this).data('id');
 
-            Swal.fire({
-                didOpen: () => {
-                    $.ajax({
-                        type: "POST",
-                        url: "../funciones/funciones.php",
-                        data: {
-                            id: IdOrden,
-                            accion: 'mostrar_orden'
-                        },
-                        success: function(response) {
-                            // Parse the response from the server, assuming it's in JSON format
-                            const clienteData = JSON.parse(response);
+    Swal.fire({
+        didOpen: () => {
+            $.ajax({
+                type: "POST",
+                url: "../funciones/funciones.php",
+                data: {
+                    id: IdOrden,
+                    accion: 'mostrar_ordenes'
+                },
+                success: function(response) {
+                    console.log('Respuesta del servidor:', response);
 
-                            if (clienteData) {
-                                // Extract and display user information
-                                const name = clienteData.nombre;
-                                const email = clienteData.correo;
-                                const celular = clienteData.celular;
-                                const direccion = clienteData.direccion;
+                    try {
+                        if (response.trim() !== '') {
+                            const ordenData = JSON.parse(response);
+
+                            if (!ordenData.error) {
+                                const idOrden = ordenData.IdOrden;
+                                const idCliente = ordenData.IdCliente;
+                                const fecha = ordenData.Fecha;
+                                const idProducto = ordenData.IdProducto;
+                                const cantidad = ordenData.Cantidad;
+                                const precio = ordenData.Precio;
 
                                 Swal.update({
-                                    title: 'Datos del cliente:',
-                                    html: `<p class="css-label">Nombre: </p> <p>${name}</p>
-                                            <p class="css-label">Correo: </p> <p> ${email}</p>
-                                            <p class="css-label">Celular: </p> <p>${celular}</p>
-                                            <p class="css-label">Direccion: </p> <p>${direccion}</p>`,
+                                    title: 'Datos de la orden:',
+                                    html: `<p class="css-label">ID de la orden: </p> <p>${idOrden}</p>
+                                            <p class="css-label">ID del cliente: </p> <p> ${idCliente}</p>
+                                            <p class="css-label">Fecha: </p> <p>${fecha}</p>
+                                            <p class="css-label">ID del producto: </p> <p>${idProducto}</p>
+                                            <p class="css-label">Cantidad: </p> <p>${cantidad}</p>
+                                            <p class="css-label">Precio: </p> <p>${precio}</p>`,
                                 });
+                            } else {
+                                console.error('Error en la respuesta del servidor:', ordenData.error);
+                                Swal.fire(
+                                    'Error',
+                                    'Hubo un error al cargar los datos de la orden: ' + ordenData.error,
+                                    'error'
+                                );
                             }
-                        },
-                        error: function(xhr, status, error) {
+                        } else {
+                            console.error('La respuesta del servidor está vacía o incompleta.');
                             Swal.fire(
                                 'Error',
-                                'Hubo un error al cargar los datos del cliente: ' + error,
+                                'La respuesta del servidor está vacía o incompleta.',
                                 'error'
                             );
                         }
-                    });
+                    } catch (error) {
+                        console.error('Error al analizar la respuesta JSON:', error);
+                        Swal.fire(
+                            'Error',
+                            'Hubo un error al cargar los datos de la orden.',
+                            'error'
+                        );
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                    Swal.fire(
+                        'Error',
+                        'Hubo un error al cargar los datos de la orden: ' + error,
+                        'error'
+                    );
                 }
             });
-        });
-    </script>
+        }
+    });
+});
+</script>
+
+
+
+
 
     <script>
         $('.btn-del').on('click', function(e){

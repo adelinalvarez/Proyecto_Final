@@ -1033,3 +1033,39 @@ function validar_compras() {
     header("Location: ../vistas/Menu.php");
     exit();
 }
+
+function mostrar_ordenes() {
+    if (isset($_POST['id'])) {
+        $IdOrden = $_POST['id'];
+        $conexion = $GLOBALS['conex'];
+        $consulta = mysqli_query($conexion, "
+            SELECT 
+                orden.Id AS IdOrden, 
+                orden.IdCliente, 
+                orden.Fecha, 
+                ordendetalle.IdProducto, 
+                ordendetalle.Cantidad, 
+                ordendetalle.Precio 
+            FROM 
+                orden 
+            INNER JOIN 
+                ordendetalle ON orden.Id = ordendetalle.IdOrden
+            WHERE 
+                orden.Id = '$IdOrden'
+        ");
+
+        if ($consulta) {
+            if ($orden = mysqli_fetch_assoc($consulta)) {
+                // Convertir el resultado a JSON y enviarlo como respuesta
+                echo json_encode($orden);
+            } else {
+                echo json_encode(array('error' => 'Orden no encontrada'));
+            }
+        } else {
+            echo json_encode(array('error' => 'Error al obtener los datos de la orden: ' . mysqli_error($conexion)));
+        }
+    } else {
+        echo json_encode(array('error' => 'ID de la orden no proporcionado'));
+    }
+}
+?>
