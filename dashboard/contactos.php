@@ -369,13 +369,12 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             if (userData) {
                                 Swal.update({
                                     html: `
-                                        <p class="css-label">Id Cliente: ${userData.IdCliente}</p>
-                                        <p class="css-label">nombre: ${userData.nombre}</p>
-                                        <p class="css-label">correo: ${userData.correo}</p>
-                                        <p class="css-label">celular: ${userData.celular}</p>
-                                        <p class="css-label">direccion: ${userData.direccion}</p>
-                                        <p class="css-label">Asunto: ${userData.asunto}</p>
-                                        <p class="css-label">Mensaje: ${userData.mensaje}</p>`
+                                    <p><strong>Nombre:</strong><br> ${userData.nombre}</p>
+                                    <p><strong>Correo:</strong><br> ${userData.correo}</p>
+                                    <p><strong>Celular:</strong><br> ${userData.celular}</p>
+                                    <p><strong>Dirección:</strong><br> ${userData.direccion}</p>
+                                    <p><strong>Asunto:</strong><br> ${userData.asunto}</p>
+                                    <p><strong>Mensaje:</strong><br> ${userData.mensaje}</p>`
                                 });
                             } else {
                                 Swal.fire({
