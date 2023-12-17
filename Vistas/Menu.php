@@ -233,7 +233,7 @@ error_reporting(0);
                             <p class="card-text" id="precio<?php echo $fila['IdProducto'] ?>">$<?php echo $fila['precio'] ?></p>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="mostrar-producto" data-bs-toggle="modal" data-bs-target="#detalleProductoModal" data-producto-id="<?php echo $fila['IdProducto']; ?>">
+                            <a href="mostrar.php?id=<?php echo $fila['IdProducto']; ?>" class="mostrar-producto">
                                 <img src="../imagenes/Menu/eye.svg" style="width: 40px; height: 40px;" alt="cart">
                             </a>
                             <button class="button-count btn" style="background-color: #f1e645; color: black;" type="button" id="button_sum">+</button>
@@ -333,7 +333,6 @@ error_reporting(0);
                 </div>
             </div>
         </div>
-
 
         <!-- Footer -->
         <footer class="text-center text-lg-start bg-black text-muted p-1"  >         
