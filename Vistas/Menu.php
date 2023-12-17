@@ -685,13 +685,22 @@ error_reporting(0);
             }
 
             function enviarPorWhatsAppCompra() {
+                // Obtener la información del modal
+                const nombre = document.getElementById('nombre').value;
+                const correo = document.getElementById('correo').value;
+                const celular = document.getElementById('celular').value;
+                const direccionEnvio = document.getElementById('DireccionEnvio').value;
+
+                // Crear el mensaje con la información del modal
+                let mensajeWhatsApp = `Información de Envío:\nNombre: ${nombre}\nCorreo: ${correo}\nCelular: ${celular}\nDirección de Envío: ${direccionEnvio}\n\n`;
+
                 // Obtener los productos seleccionados
                 const lsContent = getLSContent();
 
                 // Verificar si hay productos seleccionados
                 if (lsContent.length > 0) {
-                    // Crear el mensaje con los datos de los productos y el total
-                    let mensajeWhatsApp = "Mi compra:\n";
+                    // Agregar la información de los productos y el total al mensaje
+                    mensajeWhatsApp += "Mi compra:\n";
 
                     let totalPrice = 0;
 
@@ -718,6 +727,7 @@ error_reporting(0);
                     alert('No hay productos seleccionados para comprar.');
                 }
             }
+
         </script>
 
         
