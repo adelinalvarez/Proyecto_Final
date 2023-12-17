@@ -102,6 +102,11 @@ if ($resultadoOrdenes) {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="css/dashboard.css">
         <script type="text/javascript" src="js/dashboard.js"></script>
+        <style>
+            .custom-card {
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            }
+        </style>
     </head>
 
     <body id="body-pd">
@@ -135,61 +140,61 @@ if ($resultadoOrdenes) {
             <br>
 
             <!-- Tarjetas para mostrar la cantidad de elementos en cada tabla -->
-            <div class="row">
+            <div class="row justify-content-center text-center">
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Usuarios</h5>
+                            <h5 class="card-title"> Cantidad de Usuarios</h5>
                             <p class="card-text"><?php echo $totalUsuarios; ?></p>
                         </div>
                     </div>
                 </div>
                 <!-- Repite esta estructura para cada tabla -->
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Productos</h5>
+                            <h5 class="card-title">Cantidad de Productos</h5>
                             <p class="card-text"><?php echo $totalProductos; ?></p>
                         </div>
                     </div>
                 </div>
                 <!-- ... Repite esta estructura para cada tabla -->
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Categorías</h5>
+                            <h5 class="card-title"> Cantidad de Categorías</h5>
                             <p class="card-text"><?php echo $totalCategorias; ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Reservas</h5>
+                            <h5 class="card-title"> Cantidad de Reservas</h5>
                             <p class="card-text"><?php echo $totalReservas; ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Contactos</h5>
+                            <h5 class="card-title"> Cantidad de Contactos</h5>
                             <p class="card-text"><?php echo $totalContactos; ?></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 mb-3">
-                    <div class="card">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Clientes</h5>
+                            <h5 class="card-title"> Cantidad de Clientes</h5>
                             <p class="card-text"><?php echo $totalClientes; ?></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3">
-                    <div class="card">
+                <div class="col-sm-6 mb-3">
+                    <div class="card custom-card">
                         <div class="card-body">
-                            <h5 class="card-title">Ordenes</h5>
+                            <h5 class="card-title"> Cantidad de Ordenes</h5>
                             <p class="card-text"><?php echo $totalOrdenes; ?></p>
                         </div>
                     </div>
