@@ -5,13 +5,56 @@ error_reporting(0);
 
 $validarusuarios = $_SESSION['correo'];
 
-if( $validarusuarios == null || $validarusuarios = ''){
-
-  header("Location: ../index.php");
-  die();
-  
+if ($validarusuarios == null || $validarusuarios = '') {
+    header("Location: ../index.php");
+    die();
 }
+
+// Conexión a la base de datos (reemplaza los datos con los tuyos)
+$conexion = mysqli_connect("localhost", "root", "", "hilda");
+
+if (!$conexion) {
+    die("Error de conexión: " . mysqli_connect_error());
+}
+
+// Consulta para obtener la cantidad de usuarios
+$sqlUsuarios = "SELECT COUNT(*) AS totalUsuarios FROM usuarios";
+$resultUsuarios = mysqli_query($conexion, $sqlUsuarios);
+$rowUsuarios = mysqli_fetch_assoc($resultUsuarios);
+$totalUsuarios = $rowUsuarios['totalUsuarios'];
+
+$sqlCategorias = "SELECT COUNT(*) AS totalCategorias FROM categorias";
+$resultCategorias = mysqli_query($conexion, $sqlCategorias);
+$rowCategorias = mysqli_fetch_assoc($resultCategorias);
+$totalCategorias = $rowCategorias['totalCategorias'];
+
+$sqlProductos = "SELECT COUNT(*) AS totalProductos FROM productos";
+$resultProductos = mysqli_query($conexion, $sqlProductos);
+$rowProductos = mysqli_fetch_assoc($resultProductos);
+$totalProductos = $rowProductos['totalProductos'];
+
+$sqlReservas = "SELECT COUNT(*) AS totalReservas FROM reservas";
+$resultReservas = mysqli_query($conexion, $sqlReservas);
+$rowReservas = mysqli_fetch_assoc($resultReservas);
+$totalReservas = $rowReservas['totalReservas'];
+
+$sqlContactos = "SELECT COUNT(*) AS totalContactos FROM contactos";
+$resultContactos = mysqli_query($conexion, $sqlContactos);
+$rowContactos = mysqli_fetch_assoc($resultContactos);
+$totalContactos = $rowContactos['totalContactos'];
+
+$sqlClientes = "SELECT COUNT(*) AS totalClientes FROM clientes";
+$resultClientes = mysqli_query($conexion, $sqlClientes);
+$rowClientes = mysqli_fetch_assoc($resultClientes);
+$totalClientes = $rowClientes['totalClientes'];
+
+$sqlOrdenes = "SELECT COUNT(*) AS totalOrdenes FROM ordenes";
+$resultOrdenes = mysqli_query($conexion, $sqlOrdenes);
+$rowOrdenes = mysqli_fetch_assoc($resultOrdenes);
+$totalOrdenes = $rowUsuarios['totalOrdenes'];
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,12 +93,70 @@ if( $validarusuarios == null || $validarusuarios = ''){
                 </div>
             </nav>
         </div>
-        <!--Container Main start-->
         <div class="height-100 bg-light">
-            <h4> Panel Administrativo </h4>
+        <h4>Panel Administrativo</h4>
 
-            
+        <!-- Tarjetas para mostrar la cantidad de elementos en cada tabla -->
+            <div class="row">
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Usuarios</h5>
+                            <p class="card-text"><?php echo $totalUsuarios; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repite esta estructura para cada tabla -->
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Productos</h5>
+                            <p class="card-text"><?php echo $totalProductos; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- ... Repite esta estructura para cada tabla -->
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Categorías</h5>
+                            <p class="card-text"><?php echo $totalCategorias; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Reservas</h5>
+                            <p class="card-text"><?php echo $totalReservas; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Contactos</h5>
+                            <p class="card-text"><?php echo $totalContactos; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Clientes</h5>
+                            <p class="card-text"><?php echo $totalClientes; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ordenes</h5>
+                            <p class="card-text"><?php echo $totalOrdenes; ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-       
     </body>
 </html>

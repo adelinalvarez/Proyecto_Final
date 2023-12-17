@@ -39,13 +39,16 @@ if (isset($_GET['id'])) {
                     <div class="card custom-card">
                         <img src="/Proyecto_Final/product_images/<?php echo $producto['imagen']; ?>" class="card-img-top" alt="Imagen del Producto">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $producto['nombre']; ?></h5>
-                            <p class="card-text">ID del Producto: <?php echo $producto['IdProducto']; ?></p>
-                            <p class="card-text">Descripción: <?php echo $producto['descripcion']; ?></p>
-                            <p class="card-text">Categoría: <?php echo $producto['categoria']; ?></p>
-                            <p class="card-text">Precio: <?php echo $producto['precio']; ?></p>
+                        <h5 class="card-title text-center mb-4" style="font-size: 24px; font-weight: bold;"><?php echo $producto['nombre']; ?></h5>
+                            <p class="card-text"><strong>Descripción:</strong> <?php echo $producto['descripcion']; ?></p>
+                            <p class="card-text"><strong>Categoría:</strong> <?php echo $producto['categoria']; ?></p>
+                            <p class="card-text"><strong>Precio:</strong> <?php echo $producto['precio']; ?></p>
+                            <div style="text-align: center; margin-top: 20px;">
+                                <a href="Menu.php" class="btn btn-secondary">Volver al Menú</a>
+                            </div>
                         </div>
                     </div>
+
                 </body>
                 </html>
                 <?php
