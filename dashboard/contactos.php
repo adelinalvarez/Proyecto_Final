@@ -269,7 +269,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                     html:
                         '<label for="correo" class="css-label">Correo: </label>' +
                         '<br>' +
-                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value=""> ' +
+                        '<input id="correo" class="swal2-input css-input" placeholder="Ingrese el correo" value="" disabled> ' +
                         '<br>' +
                         '<label for="asunto" class="css-label"> Asunto: </label>' +
                         '<br>' +
@@ -292,9 +292,9 @@ if( $validarusuarios == null || $validarusuarios = ''){
                             success: function(response) {
                                 const contactData = JSON.parse(response);
 
-
                                 if (contactData) {
-                                    $('#correo').val(contactData.correo);
+                                    // Establece el valor y deshabilita el campo de correo
+                                    $('#correo').val(contactData.correo).prop('disabled', true);
                                     $('#asunto').val(contactData.asunto);
                                     $('#mensaje').val(contactData.mensaje);
                                 }
