@@ -341,6 +341,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         const productoData = JSON.parse(response);
 
                         if (productoData) {
+                            
                             $('#nombre').val(productoData.nombre);
                             $('#descripcion').val(productoData.descripcion);
                             $('#NombreCategoria').val(productoData.categoria);
@@ -372,7 +373,7 @@ if( $validarusuarios == null || $validarusuarios = ''){
 
                 $.ajax({
                     type: "POST",
-                    url: "../funciones/funciones.php", 
+                    url: "../funciones/funciones.php",
                     data: {
                         id: IdProducto,
                         accion: 'mostrar_productos'
@@ -383,10 +384,19 @@ if( $validarusuarios == null || $validarusuarios = ''){
                         if (productosData) {
                             Swal.fire({
                                 title: 'Datos del producto:',
-                                html: `<p class="css-label">nombre: </p> <p>${productosData.nombre}</p>
-                                       <p class="css-label">descripcion: </p> <p>${productosData.descripcion}</p>
-                                       <p class="css-label">categoria: </p> <p>${productosData.NombreCategoria}</p>
-                                       <p class="css-label">precio: </p> <p>${productosData.precio}</p>`,
+                                html: `
+                                    <p class="css-label">Nombre: </p><p>${productosData.nombre}</p>
+                                    <p class="css-label">Descripción: </p><p>${productosData.descripcion}</p>
+                                    <p class="css-label">Categoría: </p><p>${productosData.NombreCategoria}</p>
+                                    <p class="css-label">Precio: </p><p>${productosData.precio}</p>
+                                    <img src="../product_images/${productosData.imagen}" alt="Imagen del producto" style="max-width: 200px; height: auto; margin-top: 10px;">`,
+                                    width: '400px', // Ancho del modal
+                                    padding: '2em', // Ajuste de padding
+                                    customClass: {
+                                        title: 'my-custom-title-class',
+                                        htmlContainer: 'my-custom-htmlContainer-class',
+                                        popup: 'my-custom-popup-class'
+                                    }
                             });
                         } else {
                             Swal.fire('Error', 'No se pudo cargar los datos del producto', 'error');
