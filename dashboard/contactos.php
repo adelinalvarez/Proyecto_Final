@@ -38,6 +38,15 @@ if( $validarusuarios == null || $validarusuarios = ''){
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"> </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <style> 
+            .dataTables_wrapper .dataTables_length select,
+            .dataTables_wrapper .dataTables_filter input {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-right: 10px;
+            }
+        </style>
+
     </head>
 
     <body id="body-pd">
@@ -438,6 +447,28 @@ if( $validarusuarios == null || $validarusuarios = ''){
             });
             }
         });
+        });
+    </script>
+
+<script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "lengthMenu": [5, 10, 25, 50],
+                "pageLength": 10,
+                "searching": true,
+                "dom": '<"top"lfr>t<"bottom"ip>',
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
         });
     </script>
 
